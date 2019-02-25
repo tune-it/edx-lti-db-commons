@@ -7,72 +7,81 @@
         <password>demo</password>
     </connection>
     <tables>
-        <table sql-name="aircrafts" name="воздушные судна">
-            <column sql-name="aircraft_code" name=""/>
-            <column sql-name="model" name=""/>
-            <column sql-name="range" name=""/>
+        <table sql-name="aircrafts" name="воздушные судна" name-rpl="воздушных судов">
+            <column sql-name="aircraft_code" name="код" name-pl="коды"/>
+            <column sql-name="model" name="модель" name-pl="модели"/>
+            <column sql-name="range" name="максимально возможная дистанция" name-pl="максимально возможные дистанции"/>
         </table>
-        <table sql-name="airports" name="аэропорты">
-            <column sql-name="airport_code" name=""/>
-            <column sql-name="airport_name" name=""/>
-            <column sql-name="city" name=""/>
-            <column sql-name="coordinates" name=""/>
-            <column sql-name="timezone" name=""/>
+        <table sql-name="airports" name="аэропорты" name-rpl="аэропортов">
+            <column sql-name="airport_code" name="код" name-pl="коды"/>
+            <column sql-name="airport_name" name="имя" name-pl="имена"/>
+            <column sql-name="city" name="город" name-pl="города"/>
+            <column sql-name="coordinates" name="координаты" name-pl="координаты"/>
+            <column sql-name="timezone" name="временная зона" name-pl="временные зоны"/>
         </table>
-        <table sql-name="boarding_passes" name="посадочный талон">
-            <column sql-name="ticket_no" name=""/>
-            <column sql-name="flight_id" name=""/>
-            <column sql-name="boarding_no" name=""/>
-            <column sql-name="seat_no" name=""/>
+        <table sql-name="boarding_passes" name="посадочный талон" name-rpl="посадочных талонов">
+            <column sql-name="ticket_no" name="номер билета" name-pl="номера билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
+            <column sql-name="boarding_no" name="номер" name-pl="номера"/>
+            <column sql-name="seat_no" name="номер места" name-pl="номера мест"/>
         </table>
-        <table sql-name="bookings" name="бронирование">
-            <column sql-name="book_ref" name=""/>
-            <column sql-name="book_date" name=""/>
-            <column sql-name="total_amount" name=""/>
+        <table sql-name="bookings" name="бронирование" name-rpl="бронирования">
+            <column sql-name="book_ref" name="код" name-pl="коды"/>
+            <column sql-name="book_date" name="дата"  name-pl="даты"/>
+            <column sql-name="total_amount" name="сумма"  name-pl="сумму"/>
         </table>    
-        <table sql-name="flights" name="полет воздушного судна">
-            <column sql-name="flight_id" name=""/>
-            <column sql-name="flight_no" name=""/>
-            <column sql-name="scheduled_departure" name=""/>
-            <column sql-name="scheduled_arrival" name=""/>
-            <column sql-name="departure_airport" name=""/>
-            <column sql-name="arrival_airport" name=""/>
-            <column sql-name="status" name=""/>
-            <column sql-name="aircraft_code" name=""/>
-            <column sql-name="actual_departure" name=""/>
-            <column sql-name="actual_arrival" name=""/>
+        <table sql-name="flights" name="рейс воздушного судна" name-rpl="рейсов воздушного судна">
+            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
+            <column sql-name="flight_no" name="номер рейса" name-pl="номера рейсов"/>
+            <column sql-name="scheduled_departure" name="время планируемого отправления" name-pl="времена планируемых отправлений"/>
+            <column sql-name="scheduled_arrival" name="время планируемого прибытия" name-pl="времена планируемых прибытий"/>
+            <column sql-name="departure_airport" name="аэропорт отправления" name-pl="аэропорты отправления"/>
+            <column sql-name="arrival_airport" name="аэропорт прибытия" name-pl="аэропорты прибытия"/>
+            <column sql-name="status" name="статус" name-pl="статусы"/>
+            <column sql-name="aircraft_code" name="код воздушного судна" name-pl="коды воздушных судов"/>
+            <column sql-name="actual_departure" name="время отправления" name-pl="времена отправлений"/>
+            <column sql-name="actual_arrival" name="время прибытия" name-pl="времена прибытий"/>
         </table> 
-        <table sql-name="seats" name="посадочное место">
-            <column sql-name="aircraft_code" name=""/>
-            <column sql-name="seat_no" name=""/>
-            <column sql-name="fare_conditions" name=""/>
+        <table sql-name="seats" name="посадочное место" name-rpl="посадочных мест">
+            <column sql-name="aircraft_code" name="код воздушного судна" name-pl="коды воздушных судов"/>
+            <column sql-name="seat_no" name="номер места" name-pl="номера мест"/>
+            <column sql-name="fare_conditions" name="тариф" name-pl="тарифы"/>
         </table>
-        <table sql-name="ticket_flights" name="полеты по билету">
-            <column sql-name="ticket_no" name=""/>
-            <column sql-name="flight_id" name=""/>
-            <column sql-name="fare_conditions" name=""/>
-            <column sql-name="amount" name=""/>
+        <table sql-name="ticket_flights" name="состоявшийся полет" name-rpl="состоявшихся полетов">
+            <column sql-name="ticket_no" name="номер билета" name-pl="номера билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
+            <column sql-name="fare_conditions" name="тариф" name-pl="тарифы"/>
+            <column sql-name="amount" name="сумма" name-pl="сумму"/>
         </table> 
-        <table sql-name="tickets" name="проданный билет">
-            <column sql-name="ticket_no" name=""/>
-            <column sql-name="book_ref" name=""/>
-            <column sql-name="passenger_id" name=""/>
-            <column sql-name="passenger_name" name=""/>
-            <column sql-name="contact_data" name=""/>
+        <table sql-name="tickets" name="проданный билет" name-rpl="проданных билетов">
+            <column sql-name="ticket_no" name="номер" name-pl="номера"/>
+            <column sql-name="book_ref" name="код бронирования" name-pl="коды бронирования"/>
+            <column sql-name="passenger_id" name="идентификатор пассажира" name-pl="идентификаторы пассажиров"/>
+            <column sql-name="passenger_name" name="имя пассажира" name-pl="имена пассажиров"/>
+            <column sql-name="contact_data" name="контактная информация" name-pl="контактную информацию"/>
         </table>       
     </tables>
     <labs-config>
-        <lab02 id="lab02" description="простая выборка из таблицы">
-            <task01 id="task01" description="none">
+        <lab02 id="lab02" description="Простая выборка из таблицы">
+            <task01 id="task01" description="Выборка всех столбцов таблицы">
                 <prolog>Выведите содержимое всех столбцов таблицы </prolog>
                 <epilog>.</epilog>
-                <!-- <forbiden-table>ticket_flights</forbiden-table> -->
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task01>
-            <task02 id="task02" description="none">
+            <task02 id="task02" description="Выборка заданных столбцов таблицы">
                 <prolog>Выведите содержимое столбца(столбцов) </prolog>
                 <epilog> для таблицы </epilog>
-                <!-- <forbiden-table>ticket_flights</forbiden-table> -->
             </task02>
+            <task03 id="task03" description="Выборка значений столбцов по имени">
+                <prolog>Выведите все </prolog>
+                <epilog> для </epilog>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task03>
+            <task04 id="task04" description="Выборка уникальных значений столбцов по имени">
+                <prolog>Выведите все уникальные </prolog>
+                <epilog> для </epilog>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task04>
         </lab02>
     </labs-config>
 </schema>

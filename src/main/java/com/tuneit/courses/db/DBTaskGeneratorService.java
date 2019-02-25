@@ -82,8 +82,18 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                     LabTaskQA ltqa = ctask.generate(s, t);
                     SelectProcessor tester = new SelectProcessor();
                     String answer_md5 = tester.execute_select(s, t.getAnswer(), 5, null);
+                    //System.out.println("Answer MD5="+answer_md5+" "+t.getAnswer());
                     String correct_md5 = tester.execute_select(s, ltqa.getCorrectAnswer(), 5, null);
-                    t.setRating(answer_md5.equalsIgnoreCase(correct_md5) ? 1.0f : 0.0f);
+                    //System.out.println("Correct MD5="+correct_md5+" "+ltqa.getCorrectAnswer());
+                    if (answer_md5.startsWith("SQLState")) {
+                        //incorrect on too long sql query
+                        //TODO should we distinguish it?
+                        t.setRating(0.01f);
+                    } else {
+                        t.setRating(correct_md5.equalsIgnoreCase(answer_md5) ? 1.0f : 0.0f);
+                        TokenSQLSimilarity sm = new TokenSQLSimilarity(t.getAnswer(), ltqa.getCorrectAnswer());
+                        System.out.println(sm);
+                    }
                     //TODO Check SQL correctness via AST or StringTokenizer
                 } catch (Exception e) {
                     e.printStackTrace();

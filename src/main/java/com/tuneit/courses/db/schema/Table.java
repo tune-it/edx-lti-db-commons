@@ -12,6 +12,8 @@ public class Table {
     
     @XmlAttribute(name="sql-name") private String sqlName;
     @XmlAttribute(name="name") private String name;
+    @XmlAttribute(name="name-rpl") private String nameRPL; //род.падеж мн.ч.
+    @XmlTransient boolean sqlNameInUpperCase = false;
     
     @XmlElement(name="column")
     private List<Column> columns;
@@ -22,11 +24,15 @@ public class Table {
     }
 
     public String getTableName() {
+        if (!sqlNameInUpperCase) {
+            sqlName = sqlName.toUpperCase().trim();
+        }
         return sqlName;
     }
 
     public void setTableName(String sqlName) {
-        this.sqlName = sqlName;
+        this.sqlName = sqlName.toUpperCase().trim();
+        sqlNameInUpperCase = true;
     }
 
     public String getName() {
@@ -35,6 +41,14 @@ public class Table {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNameRPL() {
+        return nameRPL;
+    }
+
+    public void setNameRPL(String nameRPL) {
+        this.nameRPL = nameRPL;
     }
 
     public List<Column> getColumns() {

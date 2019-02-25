@@ -1,7 +1,11 @@
 package com.tuneit.courses.db;
 
 import com.tuneit.courses.Task;
+import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.db.schema.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -51,6 +55,33 @@ public abstract class LabTask {
     public void setEpilog(String epilog) {
         this.epilog = epilog;
     }
+    
+    protected static List<Table> removeForbidenElements(Schema s, List<String> forbidenElements) {
+        ArrayList<Table> allowed = new ArrayList<>();
+        for(Table t : s.getTables()) {
+            if (!forbidenElements.stream().filter(str -> str.equalsIgnoreCase(t.getTableName())).findFirst().isPresent()) {
+                Table allowed_table = new Table();
+                //ACHTUNG govnogod
+                allowed_table.setName(t.getName());
+                allowed_table.setNameRPL(t.getNameRPL());
+                allowed_table.setTableName(t.getTableName());
+                allowed_table.setColumns(new ArrayList<>());
+                for(Column c:t.getColumns()) {
+                    String slist = t.getTableName()+":"+c.getColumnName();
+                    if (!forbidenElements.stream().filter(str -> str.equalsIgnoreCase(t.getTableName())).findFirst().isPresent()) {
+                        Column allowed_column = new Column();
+                        //ACHTUNG govnogod
+                        allowed_column.setColumnName(c.getColumnName());
+                        allowed_column.setName(c.getName());
+                        allowed_column.setNamePL(c.getNamePL());
+                        allowed_table.getColumns().add(allowed_column);
+                    }
+                }
+                allowed.add(allowed_table);
+            }
+        }
+        return allowed;
+    }
 
 
     @Override
@@ -58,8 +89,6 @@ public abstract class LabTask {
         return "LabTask{" + "description=" + description + ", id=" + id + 
                 ", prolog=" + prolog + ", epilog=" + epilog + '}';
     }
-    
-
     
     public Random getRandom (Task t) {     
         int seed = t.getId().toUpperCase().hashCode();

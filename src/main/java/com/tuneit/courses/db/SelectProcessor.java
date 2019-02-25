@@ -34,6 +34,8 @@ public class SelectProcessor {
         Task tasks[] = ds.getTasks("serge@cs.ifmo.ru", "lab02", "00", 0);
         tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
         tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports;").setComplete(true);
+        tasks[2].setAnswer("select range, model from aircrafts;").setComplete(true);
+        tasks[3].setAnswer("select distinct assenger_name from tickets;").setComplete(true);
         ds.checkTasks(tasks);
         for (Task t : tasks) {
             System.out.println(t);
@@ -144,6 +146,9 @@ public class SelectProcessor {
             } else {
                 ho.append("</table>\n");
             }
+        }
+        if (query_exception != null) {
+            return "SQLState: "+query_exception.getSQLState()+"    Message: "+query_exception.getMessage().replace('\n', ' ');
         }
         return query_md5;
     }
