@@ -33,7 +33,7 @@ public class SelectProcessor {
         DBTaskGeneratorService ds = new DBTaskGeneratorService();
         Task tasks[] = ds.getTasks("serge@cs.ifmo.ru", "lab02", "00", 0);
         tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
-        tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports;").setComplete(true);
+        tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports where city like 'ru%';").setComplete(true);
         tasks[2].setAnswer("select range, model from aircrafts;").setComplete(true);
         tasks[3].setAnswer("select distinct assenger_name from tickets;").setComplete(true);
         ds.checkTasks(tasks);

@@ -85,16 +85,26 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                     //System.out.println("Answer MD5="+answer_md5+" "+t.getAnswer());
                     String correct_md5 = tester.execute_select(s, ltqa.getCorrectAnswer(), 5, null);
                     //System.out.println("Correct MD5="+correct_md5+" "+ltqa.getCorrectAnswer());
+                    //
+                    //compute student rating, based on 80+20 priciple
+                    //80 if result is correct
+                    //0-20 - if systax is similar to generated
+                    //OLD style: t.setRating(correct_md5.equalsIgnoreCase(answer_md5) ? 1.0f : 0.0f);
+                    //
                     if (answer_md5.startsWith("SQLState")) {
                         //incorrect on too long sql query
                         //TODO should we distinguish it?
-                        t.setRating(0.01f);
+                        t.setRating(0.001f);
                     } else {
-                        t.setRating(correct_md5.equalsIgnoreCase(answer_md5) ? 1.0f : 0.0f);
-                        TokenSQLSimilarity sm = new TokenSQLSimilarity(t.getAnswer(), ltqa.getCorrectAnswer());
-                        System.out.println(sm);
+                        float rating = 0.0f;
+                        if (correct_md5.equalsIgnoreCase(answer_md5)) {
+                            rating = 0.8f;
+                            TokenSQLSimilarity sm = new TokenSQLSimilarity(t.getAnswer(), ltqa.getCorrectAnswer());
+                            rating += 0.2f*sm.calculate();
+                            //System.out.println(sm.calculate()+"   "+sm);
+                        }
+                        t.setRating(rating);
                     }
-                    //TODO Check SQL correctness via AST or StringTokenizer
                 } catch (Exception e) {
                     e.printStackTrace();
                     t.setRating(0.0f);
