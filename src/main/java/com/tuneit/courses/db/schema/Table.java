@@ -67,11 +67,20 @@ public class Table implements Cloneable {
             tableClone.setName(name);
             tableClone.setNameRPL(nameRPL);
             tableClone.setTableName(getTableName());
-            tableClone.setColumns(new ArrayList<>());
+            tableClone.setColumns(copyColumn(this.columns));
             return tableClone;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private List<Column> copyColumn(List<Column> columns) {
+        ArrayList<Column> columnsClone = new ArrayList<>();
+        for (Column column : columns) {
+            columnsClone.add(column.clone());
+        }
+
+        return columnsClone;
     }
 }
