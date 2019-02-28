@@ -1,7 +1,7 @@
 package com.tuneit.courses.db;
 
-import com.tuneit.courses.TaskGeneratorService;
 import com.tuneit.courses.Task;
+import com.tuneit.courses.TaskGeneratorService;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
 import org.springframework.context.annotation.Profile;

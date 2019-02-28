@@ -1,7 +1,7 @@
 package com.tuneit.courses.example;
 
-import com.tuneit.courses.TaskGeneratorService;
 import com.tuneit.courses.Task;
+import com.tuneit.courses.TaskGeneratorService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 

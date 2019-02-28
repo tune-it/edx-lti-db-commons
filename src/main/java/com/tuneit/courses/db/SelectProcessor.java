@@ -4,17 +4,12 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
 
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.DatatypeConverter;
-
 
 
 /**
@@ -23,7 +18,6 @@ import javax.xml.bind.DatatypeConverter;
 public class SelectProcessor {
 
 
-    
     public static void main(String[] args) throws Exception {
         SelectProcessor st = new SelectProcessor();
         Schema s = SchemaLoader.getSchema(0);
@@ -47,45 +41,44 @@ public class SelectProcessor {
         //System.out.println("query md5 = "+st.execute_select(s,"select * from airports", -1, sb));
         //System.out.println(sb);
     }
-    
+
     //private static ResultsHashStore results = new ResultsHashStore();;
-    private static String session_timeout_command = 
+    private static String session_timeout_command =
             "SET statement_timeout = 10000;";
-    
-    
+
+
     public String execute_select(Schema schema, String sql) {
-            return execute_select(schema,sql,100,null);
+        return execute_select(schema, sql, 100, null);
     }
-    
+
     private static final String TABLE_CLASSES = "dummy-table";
     private static final String ROW_CLASSES = "dummy-row";
     private static final String CELL_CLASSES = "dummy-cell";
     private static final String HEADER_CLASSES = "dummy-header";
+
     /**
-     * 
-     * @param schema - schema name to generate queries
-     * @param sql - sql to execute
+     * @param schema    - schema name to generate queries
+     * @param sql       - sql to execute
      * @param row_limit Limits row in output, 0 - zero rows, -1 unlimited
-     * @param ho - html_output pass new StringBuilder to fill up with html elements
+     * @param ho        - html_output pass new StringBuilder to fill up with html elements
      * @return result's md5 hash in string representation
      */
-    public String execute_select(Schema schema, String sql, int row_limit, StringBuilder ho ) {
-        
+    public String execute_select(Schema schema, String sql, int row_limit, StringBuilder ho) {
+
         //TODO error sign is null;
         //String query_md5 = "Error at executing query";
         String query_md5 = null;
         boolean do_html_output = false;
-        if (ho !=null) {
+        if (ho != null) {
             do_html_output = true;
             ho.append("<table id=sqlresult class=\"").append(TABLE_CLASSES).append("\">\n");
         }
-        
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet rset = null;
         SQLException query_exception = null;
-        try 
-        {
+        try {
             // we are count only first five rows in select
             int row_counter = row_limit;
             // TODO probably should change in future on quicker alg or on procedure in DB
@@ -104,22 +97,22 @@ public class SelectProcessor {
             //headers
             if (do_html_output) {
                 ho.append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for(int i=1;i<=numcols;i++) {
+                for (int i = 1; i <= numcols; i++) {
                     String fieldLabel = rsmd.getColumnLabel(i);
                     ho.append("<th class=\"").append(HEADER_CLASSES).append("\">")
-                      .append(fieldLabel).append("</th>");
+                            .append(fieldLabel).append("</th>");
                 }
                 ho.append("</tr>\n");
             }
-            while(rset.next() && row_counter-- != 0 ) {
-                if (do_html_output) 
+            while (rset.next() && row_counter-- != 0) {
+                if (do_html_output)
                     ho.append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for(int i=1;i<=numcols;i++) {
+                for (int i = 1; i <= numcols; i++) {
                     String field = rset.getString(i);
                     md.update(field.getBytes());
-                    if (do_html_output) 
+                    if (do_html_output)
                         ho.append("<td class=\"").append(CELL_CLASSES).append("\">")
-                          .append(field).append("</td>");
+                                .append(field).append("</td>");
                     //System.out.print("\t" + field);
                 }
                 if (do_html_output)
@@ -128,16 +121,25 @@ public class SelectProcessor {
             }
             byte[] digest = md.digest();
             query_md5 = DatatypeConverter.printHexBinary(digest).toUpperCase();
-            
-        } catch(SQLException e) {
+
+        } catch (SQLException e) {
             query_exception = e;
             //Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, null, e);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
+            try {
+                if (rset != null) rset.close();
+            } catch (Exception e) {
+            }
+            try {
+                if (stmt != null) stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+            }
         }
         if (do_html_output) {
             if (query_exception != null) {
@@ -148,11 +150,10 @@ public class SelectProcessor {
             }
         }
         if (query_exception != null) {
-            return "SQLState: "+query_exception.getSQLState()+"    Message: "+query_exception.getMessage().replace('\n', ' ');
+            return "SQLState: " + query_exception.getSQLState() + "    Message: " + query_exception.getMessage().replace('\n', ' ');
         }
         return query_md5;
     }
-    
 
 
 }

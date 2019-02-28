@@ -1,19 +1,15 @@
 package com.tuneit.courses.db;
 
 import com.tuneit.courses.Task;
-import static com.tuneit.courses.db.LabTask.removeForbidenElements;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
