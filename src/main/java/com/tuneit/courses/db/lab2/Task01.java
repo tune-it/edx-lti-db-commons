@@ -19,10 +19,10 @@ class Task01 extends LabTask {
     }
 
     @Override
-    public LabTaskQA generate(Schema s, Task t) {
-        Table table = getRandomTable(s).clone();
+    public LabTaskQA generate(Schema schema, Task task) {
+        Table table = getRandomTable(schema, task).clone();
 
-        return new LabTaskQA(t.getId(), getProlog() + table.getTableName() + getEpilog(),
+        return new LabTaskQA(task.getId(), getProlog() + table.getTableName() + getEpilog(),
                 "SELECT * FROM " + table.getTableName() + ";");
     }
 }

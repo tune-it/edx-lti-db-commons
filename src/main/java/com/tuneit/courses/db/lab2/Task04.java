@@ -1,24 +1,17 @@
 package com.tuneit.courses.db.lab2;
 
+import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Table;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.NONE)
 class Task04 extends LabTask {
-    @XmlElement(name = "forbidden-list")
-    protected List<String> forbiddenList = new ArrayList<>();
-    @XmlTransient
-    static HashMap<String,List<Table>> allowed = new HashMap<>();
-
     public List<String> getForbiddenList() {
         return forbiddenList;
     }
@@ -32,15 +25,26 @@ class Task04 extends LabTask {
         return "Task01{" + super.toString()+ ", forbiddenList=" + forbiddenList + '}';
     }
 
-    protected void updateAnswer(Table table) {
+    @Override
+    protected void updateAnswer(Table table, Task task) {
         List<Column> columns = table.getColumns();
+        Collections.shuffle(columns, getRandom(task));
+
         answer.append("SELECT DISTINCT ");
-        readColumnFromTable(answer, columns);
+        answer.append(columns.get(getRandom(task).nextInt(columns.size())).getColumnName());
         answer.append(" FROM ").append(table.getTableName()).append(';');
     }
 
-    protected void updateQuery(Table table) {
-        updateQueryPL(table);
+    @Override
+    protected void updateQuery(Table table, Task task) {
+        updateQueryPL(table, task);
     }
 
+    @Override
+    protected void updateQueryPL(Table table, Task task) {
+        List<Column> columns = table.getColumns();
+        query.append(getProlog());
+        query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePL());
+        query.append(getEpilog()).append(table.getNameRPL()).append('.');
+    }
 }

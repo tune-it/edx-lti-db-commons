@@ -88,62 +88,71 @@ public abstract class LabTask {
                 ", prolog=" + prolog + ", epilog=" + epilog + '}';
     }
 
-    public LabTaskQA generate(Schema s, Task t) {
-        Table table = getRandomTable(s).clone();
+    public LabTaskQA generate(Schema schema, Task task) {
+        query = new StringBuilder();
+        answer = new StringBuilder();
 
-        Collections.shuffle(table.getColumns());
+        Table table = getRandomTable(schema, task).clone();
 
-        updateQuery(table);
+        Collections.shuffle(table.getColumns(), getRandom(task));
 
-        updateAnswer(table);
+        updateQuery(table, task);
 
-        return new LabTaskQA(t.getId(), query.toString(), answer.toString());
+        updateAnswer(table, task);
+
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 
-    protected void updateQuery(Table table) {
+    protected void updateQuery(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
-        readColumnFromTable(query, columns);
+        writeColumnFromTable(query, columns, task);
         query.append(getEpilog()).append(table.getTableName()).append('.');
     }
 
-    protected void updateQueryPL(Table table) {
+    protected void updateQueryPL(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
-        readColumnFromTablePL(query, columns);
+        writeColumnFromTablePL(query, columns, task);
         query.append(getEpilog()).append(table.getNameRPL()).append('.');
     }
 
-    protected void updateAnswer(Table table) {
+    protected void updateAnswer(Table table, Task task) {
         List<Column> columns = table.getColumns();
         answer.append("SELECT ");
-        readColumnFromTable(answer, columns);
+        writeColumnFromTable(answer, columns, task);
         answer.append(" FROM ").append(table.getTableName()).append(';');
     }
 
-    protected void readColumnFromTable(StringBuilder string, List<Column> columns) {
+    protected void writeColumnFromTable(StringBuilder string, List<Column> columns, Task task) {
+        Collections.shuffle(columns, getRandom(task));
         string.append(columns.get(0).getColumnName());
-        for (int i = 1; i < columns.size(); i++) {
+        for (int i = 1; i < getRandom(task).nextInt(columns.size()); i++) {
             string.append(", ").append(columns.get(i).getColumnName());
         }
     }
 
-    protected void readColumnFromTablePL(StringBuilder string, List<Column> columns) {
+    protected void writeColumnFromTablePL(StringBuilder string, List<Column> columns, Task task) {
+        Collections.shuffle(columns, getRandom(task));
         string.append(columns.get(0).getNamePL());
-        for (int i = 1; i < columns.size(); i++) {
+        for (int i = 1; i < getRandom(task).nextInt(columns.size()); i++) {
             string.append(", ").append(columns.get(i).getNamePL());
         }
     }
 
-    protected Table getRandomTable(Schema s) {
-        if (!allowed.containsKey(s.getName())) {
-            allowed.put(s.getName(), removeForbidenElements(s, forbiddenList));
+    protected Table getRandomTable(Schema schema, Task task) {
+        if (!allowed.containsKey(schema.getName())) {
+            allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
         }
 
-        List<Table> tables = allowed.get(s.getName());
-        return tables.get(new Random().nextInt(tables.size()));
+        List<Table> tables = allowed.get(schema.getName());
+        return tables.get(getRandom(task).nextInt(tables.size()));
     }
 
+    protected Random getRandom(Task task) {
+        int seed = task.getId().toUpperCase().hashCode();
+        return new Random(seed);
+    }
     
 }
 
