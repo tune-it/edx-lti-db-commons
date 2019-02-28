@@ -1,7 +1,7 @@
 package com.tuneit.courses.db.schema;
 
 import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.db.Lab02;
+import com.tuneit.courses.db.lab2.Lab02;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
