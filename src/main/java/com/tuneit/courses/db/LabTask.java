@@ -5,13 +5,8 @@ import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javax.xml.bind.annotation.*;
+import java.util.*;
 
 /**
  *
@@ -19,11 +14,20 @@ import java.util.Random;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class LabTask {
-    @XmlAttribute(name="description") protected String description;    
+    protected StringBuilder query = new StringBuilder();
+    protected StringBuilder answer = new StringBuilder();
+
+    @XmlAttribute(name = "description")
+    protected String description;
     @XmlAttribute(name="id") protected String id;
     
     @XmlElement(name="prolog") protected String prolog;
     @XmlElement(name="epilog") protected String epilog;
+
+    @XmlElement(name = "forbidden-list")
+    protected List<String> forbiddenList = new ArrayList<>();
+    @XmlTransient
+    static HashMap<String, List<Table>> allowed = new HashMap<>();
 
     public String getDescription() {
         return description;
@@ -63,16 +67,19 @@ public abstract class LabTask {
             if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
                 Table allowedTable = table.clone();
 
-                for (Column column : table.getColumns()) {
-                    if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
-                        Column allowed_column = column.clone();
-                        allowedTable.getColumns().add(allowed_column);
-                    }
-                }
                 allowed.add(allowedTable);
             }
         }
         return allowed;
+    }
+
+
+    public List<String> getForbiddenList() {
+        return forbiddenList;
+    }
+
+    public void setForbiddenList(List<String> forbiddenList) {
+        this.forbiddenList = forbiddenList;
     }
 
     @Override
@@ -80,13 +87,62 @@ public abstract class LabTask {
         return "LabTask{" + "description=" + description + ", id=" + id + 
                 ", prolog=" + prolog + ", epilog=" + epilog + '}';
     }
-    
-    public Random getRandom (Task t) {     
-        int seed = t.getId().toUpperCase().hashCode();
-        return new Random(seed);
+
+    public LabTaskQA generate(Schema s, Task t) {
+        Table table = getRandomTable(s).clone();
+
+        Collections.shuffle(table.getColumns());
+
+        updateQuery(table);
+
+        updateAnswer(table);
+
+        return new LabTaskQA(t.getId(), query.toString(), answer.toString());
     }
-    
-    public abstract LabTaskQA generate(Schema s, Task t);
+
+    protected void updateQuery(Table table) {
+        List<Column> columns = table.getColumns();
+        query.append(getProlog());
+        readColumnFromTable(query, columns);
+        query.append(getEpilog()).append(table.getTableName()).append('.');
+    }
+
+    protected void updateQueryPL(Table table) {
+        List<Column> columns = table.getColumns();
+        query.append(getProlog());
+        readColumnFromTablePL(query, columns);
+        query.append(getEpilog()).append(table.getNameRPL()).append('.');
+    }
+
+    protected void updateAnswer(Table table) {
+        List<Column> columns = table.getColumns();
+        answer.append("SELECT ");
+        readColumnFromTable(answer, columns);
+        answer.append(" FROM ").append(table.getTableName()).append(';');
+    }
+
+    protected void readColumnFromTable(StringBuilder string, List<Column> columns) {
+        string.append(columns.get(0).getColumnName());
+        for (int i = 1; i < columns.size(); i++) {
+            string.append(", ").append(columns.get(i).getColumnName());
+        }
+    }
+
+    protected void readColumnFromTablePL(StringBuilder string, List<Column> columns) {
+        string.append(columns.get(0).getNamePL());
+        for (int i = 1; i < columns.size(); i++) {
+            string.append(", ").append(columns.get(i).getNamePL());
+        }
+    }
+
+    protected Table getRandomTable(Schema s) {
+        if (!allowed.containsKey(s.getName())) {
+            allowed.put(s.getName(), removeForbidenElements(s, forbiddenList));
+        }
+
+        List<Table> tables = allowed.get(s.getName());
+        return tables.get(new Random().nextInt(tables.size()));
+    }
 
     
 }
