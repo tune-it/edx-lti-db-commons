@@ -1,14 +1,15 @@
 package com.tuneit.courses.db.schema;
 
-import java.util.List;
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Table {
+public class Table implements Cloneable {
     
     @XmlAttribute(name="sql-name") private String sqlName;
     @XmlAttribute(name="name") private String name;
@@ -58,8 +59,19 @@ public class Table {
     public void setColumns(List<Column> columns) {
         this.columns = columns;
     }
-    
 
-
-
+    @Override
+    public Table clone() {
+        try {
+            Table tableClone = (Table) super.clone();
+            tableClone.setName(name);
+            tableClone.setNameRPL(nameRPL);
+            tableClone.setTableName(getTableName());
+            tableClone.setColumns(new ArrayList<>());
+            return tableClone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

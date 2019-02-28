@@ -59,31 +59,21 @@ public abstract class LabTask {
     
     protected static List<Table> removeForbidenElements(Schema s, List<String> forbidenElements) {
         ArrayList<Table> allowed = new ArrayList<>();
-        for(Table t : s.getTables()) {
-            if (!forbidenElements.stream().filter(str -> str.equalsIgnoreCase(t.getTableName())).findFirst().isPresent()) {
-                Table allowed_table = new Table();
-                //ACHTUNG govnogod
-                allowed_table.setName(t.getName());
-                allowed_table.setNameRPL(t.getNameRPL());
-                allowed_table.setTableName(t.getTableName());
-                allowed_table.setColumns(new ArrayList<>());
-                for(Column c:t.getColumns()) {
-                    String slist = t.getTableName()+":"+c.getColumnName();
-                    if (!forbidenElements.stream().filter(str -> str.equalsIgnoreCase(t.getTableName())).findFirst().isPresent()) {
-                        Column allowed_column = new Column();
-                        //ACHTUNG govnogod
-                        allowed_column.setColumnName(c.getColumnName());
-                        allowed_column.setName(c.getName());
-                        allowed_column.setNamePL(c.getNamePL());
-                        allowed_table.getColumns().add(allowed_column);
+        for (Table table : s.getTables()) {
+            if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
+                Table allowedTable = table.clone();
+
+                for (Column column : table.getColumns()) {
+                    if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
+                        Column allowed_column = column.clone();
+                        allowedTable.getColumns().add(allowed_column);
                     }
                 }
-                allowed.add(allowed_table);
+                allowed.add(allowedTable);
             }
         }
         return allowed;
     }
-
 
     @Override
     public String toString() {

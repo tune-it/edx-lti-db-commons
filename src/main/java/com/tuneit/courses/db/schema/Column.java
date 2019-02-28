@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Column {
+public class Column implements Cloneable {
     
     @XmlAttribute(name="sql-name") private String sqlName;
     @XmlAttribute(name="name") private String name;
@@ -49,5 +49,18 @@ public class Column {
     public void setNamePL(String namePL) {
         this.namePL = namePL;
     }
-        
+
+    @Override
+    public Column clone() {
+        try {
+            Column columnClone = (Column) super.clone();
+            columnClone.setColumnName(getColumnName());
+            columnClone.setName(name);
+            columnClone.setNamePL(namePL);
+            return columnClone;
+        } catch (CloneNotSupportedException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
