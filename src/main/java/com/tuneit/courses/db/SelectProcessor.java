@@ -25,7 +25,7 @@ public class SelectProcessor {
             System.out.println(t);
         }
         DBTaskGeneratorService ds = new DBTaskGeneratorService();
-        Task tasks[] = ds.getTasks("serge@cs.ifmo.ru", "lab02", "00", 0);
+        Task[] tasks = ds.getTasks("serge@cs.ifmo.ru", "lab02", "00", 0);
         tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
         tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports where city like 'ru%';").setComplete(true);
         tasks[2].setAnswer("select range, model from aircrafts;").setComplete(true);
@@ -38,7 +38,7 @@ public class SelectProcessor {
         //    System.out.println(t);
         //}
         //StringBuilder sb = new StringBuilder();
-        //System.out.println("query md5 = "+st.execute_select(s,"select * from airports", -1, sb));
+        //System.out.println("query md5 = "+st.executeSelect(s,"select * from airports", -1, sb));
         //System.out.println(sb);
     }
 
@@ -47,8 +47,8 @@ public class SelectProcessor {
             "SET statement_timeout = 10000;";
 
 
-    public String execute_select(Schema schema, String sql) {
-        return execute_select(schema, sql, 100, null);
+    public String executeSelect(Schema schema, String sql) {
+        return executeSelect(schema, sql, 100, null);
     }
 
     private static final String TABLE_CLASSES = "dummy-table";
@@ -63,7 +63,7 @@ public class SelectProcessor {
      * @param ho        - html_output pass new StringBuilder to fill up with html elements
      * @return result's md5 hash in string representation
      */
-    public String execute_select(Schema schema, String sql, int row_limit, StringBuilder ho) {
+    public String executeSelect(Schema schema, String sql, int row_limit, StringBuilder ho) {
 
         //TODO error sign is null;
         //String query_md5 = "Error at executing query";
