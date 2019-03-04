@@ -1,6 +1,7 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.db.parser;
 
 import com.tuneit.courses.Task;
+import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
@@ -26,16 +27,12 @@ public abstract class LabTask {
 
     @XmlElement(name = "forbidden-list")
     protected List<String> forbiddenList = new ArrayList<>();
+
+    @XmlElement(name = "type")
+    protected List<Type> types = new ArrayList<>();
+
     @XmlTransient
     static HashMap<String, List<Table>> allowed = new HashMap<>();
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getId() {
         return id;
@@ -71,15 +68,6 @@ public abstract class LabTask {
             }
         }
         return allowed;
-    }
-
-
-    public List<String> getForbiddenList() {
-        return forbiddenList;
-    }
-
-    public void setForbiddenList(List<String> forbiddenList) {
-        this.forbiddenList = forbiddenList;
     }
 
     @Override
@@ -153,19 +141,5 @@ public abstract class LabTask {
         int seed = task.getId().toUpperCase().hashCode();
         return new Random(seed);
     }
-    
+
 }
-
-
-// old style seed generation. hashCode is much more simply
-// keep it hear for posibility to use in future
-//        long seed = 120483;
-//        try {
-//            MessageDigest md = MessageDigest.getInstance("MD5");            
-//            md.update(t.getId().toUpperCase().getBytes());
-//            String md5 = DatatypeConverter.printHexBinary(md.digest()).toUpperCase();
-//            seed = Long.parseUnsignedLong(md5.substring(0, 16), 16);
-//            
-//        } catch (NoSuchAlgorithmException|NumberFormatException ex) {
-//            Logger.getLogger(SchemaLoader.class.getName()).log(Level.SEVERE, null, ex);
-//        }

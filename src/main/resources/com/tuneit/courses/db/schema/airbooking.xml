@@ -82,6 +82,111 @@
                 <epilog> для </epilog>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task04>
+            <task05 id="task05" description="Выборка вычисляемых значений">
+                <prolog>Вычислить</prolog>
+                <type>
+                    <table>bookings</table>
+                    <column1>NOW</column1>
+                    <column2>DATE</column2>
+                    <description>
+                        количество времени прошедшее с брони билета
+                    </description>
+                    <subtype>
+                        <time>DAY</time>
+                        <value>в днях</value>
+                    </subtype>
+                    <subtype>
+                        <time>HOUR</time>
+                        <value>в часах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MINUTE</time>
+                        <value>в минутах</value>
+                    </subtype>
+                    <subtype>
+                        <time>SECOND</time>
+                        <value>в секундах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MILLISECONDS</time>
+                        <value>в милисекундах</value>
+                    </subtype>
+                </type>
+                <type>
+                    <table>flights</table>
+                    <column1>scheduled_departure</column1>
+                    <column2>scheduled_arrival</column2>
+                    <description>
+                        время планируемого полёта воздушного судна
+                    </description>
+                    <subtype>
+                        <time>DAY</time>
+                        <value>в днях</value>
+                    </subtype>
+                    <subtype>
+                        <time>HOUR</time>
+                        <value>в часах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MINUTE</time>
+                        <value>в минутах</value>
+                    </subtype>
+                    <subtype>
+                        <time>SECOND</time>
+                        <value>в секундах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MILLISECONDS</time>
+                        <value>в милисекундах</value>
+                    </subtype>
+                </type>
+                <type>
+                    <description>
+                        реальное время полёта воздушного судна
+                    </description>
+                    <table>flights</table>
+                    <column1>actual_departure</column1>
+                    <column2>actual_arrival</column2>
+                    <subtype>
+                        <time>DAY</time>
+                        <value>в днях</value>
+                    </subtype>
+                    <subtype>
+                        <time>HOUR</time>
+                        <value>в часах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MINUTE</time>
+                        <value>в минутах</value>
+                    </subtype>
+                    <subtype>
+                        <time>SECOND</time>
+                        <value>в секундах</value>
+                    </subtype>
+                    <subtype>
+                        <time>MILLISECONDS</time>
+                        <value>в милисекундах</value>
+                    </subtype>
+                </type>
+                <epilog/>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task05>
+            <task06 id="task06" description="Преобразование полученных значений">
+                <prolog>Вывести в один столбец</prolog>
+                <epilog/>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task06>
+            <task07 id="task07" description="Выборка значений с условием">
+                <prolog>Вычислить</prolog>
+                <epilog/>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task07>
+            <task08 id="task08" description="Выборка значений с сортировкой">
+                <prolog>Вычислить</prolog>
+                <epilog/>
+                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+            </task08>
+
         </lab02>
     </labs-config>
 </schema>

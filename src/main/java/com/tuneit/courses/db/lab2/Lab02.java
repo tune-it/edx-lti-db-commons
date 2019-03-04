@@ -1,7 +1,7 @@
 package com.tuneit.courses.db.lab2;
 
 import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.db.LabTask;
+import com.tuneit.courses.db.parser.LabTask;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,7 +21,7 @@ public class Lab02 extends Lab {
         @XmlElement(name="task02", type=Task02.class),
         @XmlElement(name="task03", type=Task03.class),
         @XmlElement(name="task04", type=Task04.class),
-
+        @XmlElement(name="task05", type=Task05.class),
     })
     private List<LabTask> labTask = new ArrayList<>();
 

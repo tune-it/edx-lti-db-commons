@@ -30,6 +30,7 @@ public class SelectProcessor {
         tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports where city like 'ru%';").setComplete(true);
         tasks[2].setAnswer("select range, model from aircrafts;").setComplete(true);
         tasks[3].setAnswer("select distinct assenger_name from tickets;").setComplete(true);
+        tasks[4].setAnswer("select extract(minute from actual_departure - actual_arrival) from flights;").setComplete(true);
         ds.checkTasks(tasks);
         for (Task t : tasks) {
             System.out.println(t);
