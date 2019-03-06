@@ -1,7 +1,7 @@
 package com.tuneit.courses.db.lab2;
 
 import com.tuneit.courses.Task;
-import com.tuneit.courses.db.parser.LabTask;
+import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Table;
 

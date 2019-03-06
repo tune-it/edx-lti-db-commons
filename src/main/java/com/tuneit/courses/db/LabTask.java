@@ -1,7 +1,8 @@
-package com.tuneit.courses.db.parser;
+package com.tuneit.courses.db;
 
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.lab2.Task05;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
@@ -28,11 +29,8 @@ public abstract class LabTask {
     @XmlElement(name = "forbidden-list")
     protected List<String> forbiddenList = new ArrayList<>();
 
-    @XmlElement(name = "type")
-    protected List<Type> types = new ArrayList<>();
-
     @XmlTransient
-    static HashMap<String, List<Table>> allowed = new HashMap<>();
+    protected static HashMap<String, List<Table>> allowed = new HashMap<>();
 
     public String getId() {
         return id;
