@@ -13,11 +13,22 @@
             <column sql-name="range" name="максимально возможная дистанция" name-pl="максимально возможные дистанции"/>
         </table>
         <table sql-name="airports" name="аэропорты" name-rpl="аэропортов">
-            <column sql-name="airport_code" name="код" name-pl="коды"/>
-            <column sql-name="airport_name" name="имя" name-pl="имена"/>
-            <column sql-name="city" name="город" name-pl="города"/>
+            <column sql-name="airport_code" name="код" name-pl="коды">
+                <value start="true" end="true">Y</value>
+            </column>
+            <column sql-name="airport_name" name="имя" name-pl="имена">
+                <value start="true" end="false">О</value>
+                <value start="false" end="true">о</value>
+            </column>
+            <column sql-name="city" name="город" name-pl="города">
+                <value start="true" end="false">О</value>
+                <value start="false" end="true">о</value>
+            </column>
             <column sql-name="coordinates" name="координаты" name-pl="координаты"/>
-            <column sql-name="timezone" name="временная зона" name-pl="временные зоны"/>
+            <column sql-name="timezone" name="временная зона" name-pl="временные зоны">
+                <value start="true" end="false">As</value>
+                <value start="false" end="true">sk</value>
+            </column>
         </table>
         <table sql-name="boarding_passes" name="посадочный талон" name-rpl="посадочных талонов">
             <column sql-name="ticket_no" name="номер билета" name-pl="номера билетов"/>
@@ -75,7 +86,7 @@
             <task03 id="task03" description="Выборка значений столбцов по имени">
                 <prolog>Выведите все </prolog>
                 <epilog> для </epilog>
-                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+                <!--<forbidden-list>ticket_flights:ticket_no</forbidden-list>-->
             </task03>
             <task04 id="task04" description="Выборка уникальных значений столбцов по имени">
                 <prolog>Выведите все уникальные </prolog>
@@ -84,304 +95,292 @@
             </task04>
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
-                <type>
-                    <table>bookings</table>
-                    <column1>NOW</column1>
-                    <column2>DATE</column2>
-                    <description>
-                        количество времени прошедшее с брони билета
-                    </description>
-                    <subtype>
+                <subtask table="bookings" column1="NOW" column2="DATE"
+                         description="количество времени прошедшее с брони билета">
+                    <option>
                         <time>DAY</time>
                         <value>в днях</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>HOUR</time>
                         <value>в часах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MINUTE</time>
                         <value>в минутах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>SECOND</time>
                         <value>в секундах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MILLISECONDS</time>
                         <value>в милисекундах</value>
-                    </subtype>
-                </type>
-                <type>
-                    <table>flights</table>
-                    <column1>scheduled_departure</column1>
-                    <column2>scheduled_arrival</column2>
-                    <description>
-                        время планируемого полёта воздушного судна
-                    </description>
-                    <subtype>
+                    </option>
+                </subtask>
+                <subtask table="flights" column1="scheduled_departure" column2="scheduled_arrival" description="время планируемого полёта воздушного судна">
+                    <option>
                         <time>DAY</time>
                         <value>в днях</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>HOUR</time>
                         <value>в часах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MINUTE</time>
                         <value>в минутах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>SECOND</time>
                         <value>в секундах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MILLISECONDS</time>
                         <value>в милисекундах</value>
-                    </subtype>
-                </type>
-                <type>
-                    <description>
-                        реальное время полёта воздушного судна
-                    </description>
-                    <table>flights</table>
-                    <column1>actual_departure</column1>
-                    <column2>actual_arrival</column2>
-                    <subtype>
+                    </option>
+                </subtask>
+                <subtask table="flights" column1="actual_departure" column2="actual_arrival" description="реальное время полёта воздушного судна">
+                    <option>
                         <time>DAY</time>
                         <value>в днях</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>HOUR</time>
                         <value>в часах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MINUTE</time>
                         <value>в минутах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>SECOND</time>
                         <value>в секундах</value>
-                    </subtype>
-                    <subtype>
+                    </option>
+                    <option>
                         <time>MILLISECONDS</time>
                         <value>в милисекундах</value>
-                    </subtype>
-                </type>
+                    </option>
+                </subtask>
                 <epilog/>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task05>
             <task06 id="task06" description="Преобразование полученных значений">
                 <prolog>Вывести в один столбец текст, содержащий такие параметры как:</prolog>
                 <epilog>'</epilog>
-                <query>
-                    <table>aircrafts</table>
-                    <description>самолётов в формате 'Я самолётик</description>
-                    <query-column>
-                        <name>модель</name>
-                        <kind>
-                            <query-kind>Боинг</query-kind>
-                            <answer-kind>split_part(model, ' ', 0)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>БОИНГ</query-kind>
-                            <answer-kind>upper(split_part(model, ' ', 0))</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>боинг</query-kind>
-                            <answer-kind>lower(split_part(model, ' ', 0))</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>Боинг 777-300</query-kind>
-                            <answer-kind>model</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>боинг 777-300</query-kind>
-                            <answer-kind>lower(model)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>БОИНГ 777-300</query-kind>
-                            <answer-kind>upper(model)</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>максимально возможная дистанция</name>
-                        <kind>
-                            <query-kind>11100</query-kind>
-                            <answer-kind>range</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>11100км</query-kind>
-                            <answer-kind>range || "км"</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>11100 км</query-kind>
-                            <answer-kind>range || " км"</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>код</name>
-                        <kind>
-                            <query-kind>773</query-kind>
-                            <answer-kind>aircraft_code</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>№773</query-kind>
-                            <answer-kind>"№" || aircraft_code</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>№ 773</query-kind>
-                            <answer-kind>"№ " || aircraft_code</answer-kind>
-                        </kind>
-                    </query-column>
-                </query>
-                <query>
-                    <table>airports</table>
-                    <description>аэропортов в формате 'Я портик</description>
-                    <query-column>
-                        <name>код</name>
-                        <kind>
-                            <query-kind>YKS</query-kind>
-                            <answer-kind>airport_code</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>yks</query-kind>
-                            <answer-kind>lower(airport_code)</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>имя</name>
-                        <kind>
-                            <query-kind>Якутск</query-kind>
-                            <answer-kind>airport_name</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>аэропорт Якутск</query-kind>
-                            <answer-kind>"аэропорт " || airport_name</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>ЯКУТСК</query-kind>
-                            <answer-kind>upper(airport_name)</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>город</name>
-                        <kind>
-                            <query-kind>г.Якутск</query-kind>
-                            <answer-kind>"г." || city</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>г. Якутск</query-kind>
-                            <answer-kind>"г. " || city</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>город Якутск</query-kind>
-                            <answer-kind>"город" || city</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>временная зона</name>
-                        <kind>
-                            <query-kind>Asia/Yakutsk</query-kind>
-                            <answer-kind>timezone</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>ASIA/YAKUTSK</query-kind>
-                            <answer-kind>upper(timezone)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>временная зона - Asia/Yakutsk</query-kind>
-                            <answer-kind>"временная зона - " || timezone</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>Asia</query-kind>
-                            <answer-kind>split_part(timezone, '/', 0)</answer-kind>
-                        </kind>split_part(
-                        <kind>
-                            <query-kind>временная зона - Asia</query-kind>
-                            <answer-kind>"временная зона - " || split_part(timezone, '/', 0)</answer-kind>
-                        </kind>
-                    </query-column>
-                </query>
-                <query>
-                    <table>tickets</table>
-                    <description>проданных билетов в формате 'Я билетик</description>
-                    <query-column>
-                        <name>номер</name>
-                        <kind>
-                            <query-kind>0005432000987</query-kind>
-                            <answer-kind>ticket_no</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>№0005432000987</query-kind>
-                            <answer-kind>'№' || ticket_no</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>код бронирования</name>
-                        <kind>
-                            <query-kind>06B046</query-kind>
-                            <answer-kind>book_ref</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>ссылка - 06B046</query-kind>
-                            <answer-kind>"ссылка " || book_ref</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>идентификатор пассажира</name>
-                        <kind>
-                            <query-kind>8149 604011</query-kind>
-                            <answer-kind>passenger_id</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>id - 8149 604011</query-kind>
-                            <answer-kind>'id - ' || passenger_id</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>8149</query-kind>
-                            <answer-kind>split_part(passenger_id, ' ', 0)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>id - 8149</query-kind>
-                            <answer-kind>'id - ' || split_part(passenger_id, ' ', 0)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>ид - 8149</query-kind>
-                            <answer-kind>'ид - ' || split_part(passenger_id, ' ', 0)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>айди - 8149</query-kind>
-                            <answer-kind>'айди - ' || split_part(passenger_id, ' ', 0)</answer-kind>
-                        </kind>
-                    </query-column>
-                    <query-column>
-                        <name>имя пассажира</name>
-                        <kind>
-                            <query-kind>VALERIY TIKHONOV</query-kind>
-                            <answer-kind>passenger_name</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>name - VALERIY TIKHONOV</query-kind>
-                            <answer-kind>'name - ' || passenger_name</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>имя фамилия - VALERIY TIKHONOV</query-kind>
-                            <answer-kind>'имя фамилия - ' || passenger_name</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>V. TIKHONOV</query-kind>
-                            <answer-kind>substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)</answer-kind>
-                        </kind>
-                        <kind>
-                            <query-kind>name - V. TIKHONOV</query-kind>
-                            <answer-kind>'name - ' || substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)</answer-kind>
-                        </kind>
-                    </query-column>
-                </query>
+                <subtask table="aircrafts" description="самолётов в формате 'Я самолётик">
+                    <column name="модель">
+                        <option>
+                            <query>Боинг</query>
+                            <answer>split_part(model, ' ', 0)</answer>
+                        </option>
+                        <option>
+                            <query>БОИНГ</query>
+                            <answer>upper(split_part(model, ' ', 0))</answer>
+                        </option>
+                        <option>
+                            <query>боинг</query>
+                            <answer>lower(split_part(model, ' ', 0))</answer>
+                        </option>
+                        <kioptionnd>
+                            <query>Боинг 777-300</query>
+                            <answer>model</answer>
+                        </kioptionnd>
+                        <option>
+                            <query>боинг 777-300</query>
+                            <answer>lower(model)</answer>
+                        </option>
+                        <option>
+                            <query>БОИНГ 777-300</query>
+                            <answer>upper(model)</answer>
+                        </option>
+                    </column>
+                    <column name="максимально возможная дистанция">
+                        <option>
+                            <query>11100</query>
+                            <answer>range</answer>
+                        </option>
+                        <option>
+                            <query>11100км</query>
+                            <answer>range || 'км'</answer>
+                        </option>
+                        <option>
+                            <query>11100 км</query>
+                            <answer>range || ' км'</answer>
+                        </option>
+                    </column>
+                    <column name="код">
+                        <option>
+                            <query>773</query>
+                            <answer>aircraft_code</answer>
+                        </option>
+                        <option>
+                            <query>№773</query>
+                            <answer>"№" || aircraft_code</answer>
+                        </option>
+                        <option>
+                            <query>№ 773</query>
+                            <answer>"№ " || aircraft_code</answer>
+                        </option>
+                    </column>
+                </subtask>
+                <subtask table="airports" description="аэропортов в формате 'Я портик">
+                    <column name="код">
+                        <option>
+                            <query>YKS</query>
+                            <answer>airport_code</answer>
+                        </option>
+                        <option>
+                            <query>yks</query>
+                            <answer>lower(airport_code)</answer>
+                        </option>
+                    </column>
+                    <column name="имя">
+                        <option>
+                            <query>Якутск</query>
+                            <answer>airport_name</answer>
+                        </option>
+                        <option>
+                            <query>аэропорт Якутск</query>
+                            <answer>'аэропорт ' || airport_name</answer>
+                        </option>
+                        <option>
+                            <query>ЯКУТСК</query>
+                            <answer>upper(airport_name)</answer>
+                        </option>
+                    </column>
+                    <column name="город">
+                        <option>
+                            <query>г.Якутск</query>
+                            <answer>'г.' || city</answer>
+                        </option>
+                        <option>
+                            <query>г. Якутск</query>
+                            <answer>'г. ' || city</answer>
+                        </option>
+                        <option>
+                            <query>город Якутск</query>
+                            <answer>'город' || city</answer>
+                        </option>
+                    </column>
+                    <column name="временная зона">
+                        <option>
+                            <query>Asia/Yakutsk</query>
+                            <answer>timezone</answer>
+                        </option>
+                        <option>
+                            <query>ASIA/YAKUTSK</query>
+                            <answer>upper(timezone)</answer>
+                        </option>
+                        <option>
+                            <query>временная зона - Asia/Yakutsk</query>
+                            <answer>'временная зона - ' || timezone</answer>
+                        </option>
+                        <option>
+                            <query>Asia</query>
+                            <answer>split_part(timezone, '/', 0)</answer>
+                        </option>
+                        split_part(
+                        <option>
+                            <query>временная зона - Asia</query>
+                            <answer>'временная зона - ' || split_part(timezone, '/', 0)</answer>
+                        </option>
+                    </column>
+                </subtask>
+                <subtask table="tickets" description="проданных билетов в формате 'Я билетик">
+                    <column name="номер">
+                        <option>
+                            <query>0005432000987</query>
+                            <answer>ticket_no</answer>
+                        </option>
+                        <option>
+                            <query>№0005432000987</query>
+                            <answer>'№' || ticket_no</answer>
+                        </option>
+                    </column>
+                    <column name="код бронирования">
+                        <option>
+                            <query>06B046</query>
+                            <answer>book_ref</answer>
+                        </option>
+                        <option>
+                            <query>ссылка - 06B046</query>
+                            <answer>'ссылка ' || book_ref</answer>
+                        </option>
+                    </column>
+                    <column name="идентификатор пассажира">
+                        <option>
+                            <query>8149 604011</query>
+                            <answer>passenger_id</answer>
+                        </option>
+                        <option>
+                            <query>id - 8149 604011</query>
+                            <answer>'id - ' || passenger_id</answer>
+                        </option>
+                        <option>
+                            <query>8149</query>
+                            <answer>split_part(passenger_id, ' ', 0)</answer>
+                        </option>
+                        <option>
+                            <query>id - 8149</query>
+                            <answer>'id - ' || split_part(passenger_id, ' ', 0)</answer>
+                        </option>
+                        <option>
+                            <query>ид - 8149</query>
+                            <answer>'ид - ' || split_part(passenger_id, ' ', 0)</answer>
+                        </option>
+                        <option>
+                            <query>айди - 8149</query>
+                            <answer>'айди - ' || split_part(passenger_id, ' ', 0)</answer>
+                        </option>
+                    </column>
+                    <column name="имя пассажира">
+                        <option>
+                            <query>VALERIY TIKHONOV</query>
+                            <answer>passenger_name</answer>
+                        </option>
+                        <option>
+                            <query>name - VALERIY TIKHONOV</query>
+                            <answer>'name - ' || passenger_name</answer>
+                        </option>
+                        <option>
+                            <query>имя фамилия - VALERIY TIKHONOV</query>
+                            <answer>'имя фамилия - ' || passenger_name</answer>
+                        </option>
+                        <option>
+                            <query>V. TIKHONOV</query>
+                            <answer>substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)</answer>
+                        </option>
+                        <option>
+                            <query>name - V. TIKHONOV</query>
+                            <answer>'name - ' || substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)
+                            </answer>
+                        </option>
+                    </column>
+                </subtask>
             </task06>
             <task07 id="task07" description="Выборка значений с условием">
                 <prolog>Вычислить</prolog>
+                <subtask for="aircrafts:aircraft_code">
+                    <left-position>3</left-position>
+                    <right-position>3</right-position>
+                </subtask>
+                <subtask for="aircrafts:model">
+                    <left-position>Бо</left-position>
+                </subtask>
+                <subtask for="aircrafts:range">
+                    <left-position>2</left-position>
+                </subtask>
+                <subtask for="airports:airport_code">
+                    <left-position>3</left-position>
+                    <right-position>3</right-position>
+                </subtask>
+                <subtask for="airports:airport_name">
+                    <left-position>Бо</left-position>
+                </subtask>
+                <subtask for="airports:city">
+                    <left-position>2</left-position>
+                </subtask>
                 <epilog/>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task07>
@@ -390,7 +389,6 @@
                 <epilog/>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task08>
-
         </lab02>
     </labs-config>
 </schema>
