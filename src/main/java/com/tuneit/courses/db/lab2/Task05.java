@@ -4,96 +4,71 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.schema.Table;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "task05")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Task05 extends LabTask {
-    @XmlElement(name = "type")
-    private List<Type> types = new ArrayList<>();
+    @XmlElement(name = "subtask05", required = true)
+    private List<Subtask05> subtasks05 = new ArrayList<>();
 
     @Override
     protected void updateAnswer(Table table, Task task) {
-        Type type = getRandomType(task);
-        Subtype subtype = getRandomSubtype(task, type);
+        Subtask05 subtask05 = getRandomType(task);
+        Option05 option05 = getRandomSubtype(task, subtask05);
 
         answer.append("SELECT EXTRACT(")
-                .append(subtype.getTime().trim())
+                .append(option05.getTime().trim())
                 .append(" FROM ")
-                .append(type.getColumn1().trim())
+                .append(subtask05.getColumn1().trim())
                 .append(" - ")
-                .append(type.getColumn2().trim())
+                .append(subtask05.getColumn2().trim())
                 .append(") FROM ")
-                .append(type.getTable().trim())
+                .append(subtask05.getTable().trim())
                 .append(";");
     }
 
     @Override
     protected void updateQuery(Table table, Task task) {
-        Type type = getRandomType(task);
-        Subtype subtype = getRandomSubtype(task, type);
+        Subtask05 subtask05 = getRandomType(task);
+        Option05 option05 = getRandomSubtype(task, subtask05);
 
         query.append(prolog.trim())
                 .append(" ")
-                .append(type.getDescription().trim())
+                .append(subtask05.getDescription().trim())
                 .append(" ")
-                .append(subtype.getValue().trim());
+                .append(option05.getValue().trim());
     }
 
-    private Type getRandomType(Task task) {
-        int typeRandomIndex = getRandom(task).nextInt(types.size());
-        return types.get(typeRandomIndex);
+    private Subtask05 getRandomType(Task task) {
+        int typeRandomIndex = getRandom(task).nextInt(subtasks05.size());
+        return subtasks05.get(typeRandomIndex);
     }
 
-    private Subtype getRandomSubtype(Task task, Type type) {
-        int timeRandomIndex = getRandom(task).nextInt(type.getSubtypes().size());
-        return type.getSubtypes().get(timeRandomIndex);
+    private Option05 getRandomSubtype(Task task, Subtask05 subtask05) {
+        int timeRandomIndex = getRandom(task).nextInt(subtask05.getOptions05().size());
+        return subtask05.getOptions05().get(timeRandomIndex);
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    private static class Subtype {
-        @XmlElement(name = "time")
-        private String time;
 
-        @XmlElement(name = "value")
-        private String value;
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-    }
-
-    @XmlAccessorType(XmlAccessType.NONE)
-    private static class Type {
-        @XmlElement(name = "table")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Subtask05 {
+        @XmlAttribute(name = "table")
         private String table;
 
-        @XmlElement(name = "column1")
+        @XmlAttribute(name = "column1")
         private String column1;
 
-        @XmlElement(name = "column2")
+        @XmlAttribute(name = "column2")
         private String column2;
 
-        @XmlElement(name = "description")
+        @XmlAttribute(name = "description")
         private String description;
 
-        @XmlElement(name = "subtype")
-        private List<Subtype> subtypes = new ArrayList<>();
+        @XmlElement(name = "option05", required = true)
+        private List<Option05> options05;
 
         public String getTable() {
             return table;
@@ -119,12 +94,12 @@ public class Task05 extends LabTask {
             this.column2 = column2;
         }
 
-        public List<Subtype> getSubtypes() {
-            return subtypes;
+        public List<Option05> getOptions05() {
+            return options05;
         }
 
-        public void setSubtypes(List<Subtype> subtypes) {
-            this.subtypes = subtypes;
+        public void setOptions05(List<Option05> options05) {
+            this.options05 = options05;
         }
 
         public String getDescription() {
@@ -133,6 +108,32 @@ public class Task05 extends LabTask {
 
         public void setDescription(String description) {
             this.description = description;
+        }
+
+    }
+
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Option05 {
+        @XmlElement(name = "time")
+        private String time;
+
+        @XmlElement(name = "value")
+        private String value;
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
         }
 
     }

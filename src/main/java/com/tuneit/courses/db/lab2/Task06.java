@@ -5,63 +5,61 @@ import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import java.util.*;
 
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "task06")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Task06 extends LabTask {
-    @XmlElement(name = "query")
-    private List<Query> queries;
-
+    @XmlElement(name = "subtask06", required = true)
+    private List<Subtask06> subtasks06;
 
     @Override
     protected void updateAnswer(Table table, Task task) {
-        Query randomQuery = queries.get(getRandom(task).nextInt(queries.size())).clone();
+        Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
 
-        Collections.shuffle(randomQuery.queryColumns, getRandom(task));
+        Collections.shuffle(randomSubtask06.columns06, getRandom(task));
 
         answer.append("Select ");
 
         Random randomForKind = getRandom(task);
-        for (int i = 0; i < randomQuery.queryColumns.size(); i++) {
-            List<Kind> kinds = randomQuery.queryColumns.get(i).kinds;
-            Kind kind = kinds.get(randomForKind.nextInt(kinds.size()));
-            answer.append(kind.answerType.trim());
-            if (i != randomQuery.queryColumns.size() - 1) {
+        for (int i = 0; i < randomSubtask06.columns06.size(); i++) {
+            List<Option06> options06 = randomSubtask06.columns06.get(i).options06;
+            Option06 option06 = options06.get(randomForKind.nextInt(options06.size()));
+            answer.append(option06.answer.trim());
+            if (i != randomSubtask06.columns06.size() - 1) {
                 answer.append(" || ");
             }
         }
 
 
-        answer.append(" FROM " + table.getTableName() + ";");
+        answer.append(" FROM ").append(table.getTableName()).append(";");
     }
 
     @Override
     protected void updateQuery(Table table, Task task) {
-        Query randomQuery = queries.get(getRandom(task).nextInt(queries.size())).clone();
+        Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
 
-        Collections.shuffle(randomQuery.queryColumns, getRandom(task));
+        Collections.shuffle(randomSubtask06.columns06, getRandom(task));
 
         query.append(prolog.trim())
                 .append(" ");
 
-        for (int i = 0; i < randomQuery.queryColumns.size(); i++) {
-            query.append(randomQuery.queryColumns.get(i).name.trim());
-            if (i != randomQuery.queryColumns.size() - 1) {
+        for (int i = 0; i < randomSubtask06.columns06.size(); i++) {
+            query.append(randomSubtask06.columns06.get(i).name.trim());
+            if (i != randomSubtask06.columns06.size() - 1) {
                 query.append(", ");
             }
         }
 
-        query.append(" ").append(randomQuery.description.trim()).append(" ");
+        query.append(" ").append(randomSubtask06.description.trim()).append(" ");
 
         Random randomForKind = getRandom(task);
-        for (int i = 0; i < randomQuery.queryColumns.size(); i++) {
-            List<Kind> kinds = randomQuery.queryColumns.get(i).kinds;
-            Kind kind = kinds.get(randomForKind.nextInt(kinds.size()));
-            query.append(kind.queryType.trim());
-            if (i != randomQuery.queryColumns.size() - 1) {
+        for (int i = 0; i < randomSubtask06.columns06.size(); i++) {
+            List<Option06> options06 = randomSubtask06.columns06.get(i).options06;
+            Option06 option06 = options06.get(randomForKind.nextInt(options06.size()));
+            query.append(option06.query.trim());
+            if (i != randomSubtask06.columns06.size() - 1) {
                 query.append(" ");
             }
         }
@@ -74,8 +72,8 @@ public class Task06 extends LabTask {
             allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
         }
 
-        Query randomQuery = queries.get(getRandom(task).nextInt(queries.size())).clone();
-        String tableName = randomQuery.table.trim();
+        Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
+        String tableName = randomSubtask06.table.trim();
 
         List<Table> tables = allowed.get(schema.getName());
         Optional<Table> tableOptional = tables.stream()
@@ -88,81 +86,83 @@ public class Task06 extends LabTask {
         }
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    private static class Query implements Cloneable {
-        @XmlElement(name = "table")
+
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Subtask06 implements Cloneable {
+        @XmlAttribute(name = "table")
         String table;
-        @XmlElement(name = "description")
+        @XmlAttribute(name = "description")
         String description;
-        @XmlElement(name = "query-column")
-        private List<QueryColumn> queryColumns = new ArrayList<>();
+        @XmlElement(name = "column06", required = true)
+        List<Column06> columns06 = new ArrayList<>();
 
         @Override
-        public Query clone() {
+        public Subtask06 clone() {
             try {
-                Query queryCopy = (Query) super.clone();
-                queryCopy.table = table;
-                queryCopy.description = description;
-                queryCopy.queryColumns = copyQueryColumns();
-                return queryCopy;
+                Subtask06 subtask06Copy = (Subtask06) super.clone();
+                subtask06Copy.table = table;
+                subtask06Copy.description = description;
+                subtask06Copy.columns06 = copyColumns();
+                return subtask06Copy;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
                 return null;
             }
         }
 
-        public List<QueryColumn> copyQueryColumns() {
-            List<QueryColumn> copyQueryColumns = new ArrayList<>();
-            for (QueryColumn queryColumn : queryColumns) {
-                copyQueryColumns.add(queryColumn.clone());
+        List<Column06> copyColumns() {
+            List<Column06> copyColumns06 = new ArrayList<>();
+            for (Column06 column06 : columns06) {
+                copyColumns06.add(column06.clone());
             }
-            return copyQueryColumns;
+            return copyColumns06;
         }
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    private static class QueryColumn implements Cloneable {
-        @XmlElement(name = "name")
+
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Column06 implements Cloneable {
+        @XmlAttribute(name = "name")
         String name;
-        @XmlElement(name = "kind")
-        List<Kind> kinds;
+        @XmlElement(name = "option06", required = true)
+        List<Option06> options06;
 
         @Override
-        public QueryColumn clone() {
+        public Column06 clone() {
             try {
-                QueryColumn queryColumnCopy = (QueryColumn) super.clone();
-                queryColumnCopy.name = name;
-                queryColumnCopy.kinds = copyKinds();
-                return queryColumnCopy;
+                Column06 column06Copy = (Column06) super.clone();
+                column06Copy.name = name;
+                column06Copy.options06 = copyOption();
+                return column06Copy;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
                 return null;
             }
         }
 
-        public List<Kind> copyKinds() {
-            List<Kind> copyKinds = new ArrayList<>();
-            for (Kind kind : kinds) {
-                copyKinds.add(kind.clone());
+        List<Option06> copyOption() {
+            List<Option06> copyOptions06 = new ArrayList<>();
+            for (Option06 option06 : options06) {
+                copyOptions06.add(option06.clone());
             }
-            return copyKinds;
+            return copyOptions06;
         }
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    private static class Kind implements Cloneable {
-        @XmlElement(name = "query-kind")
-        String queryType;
-        @XmlElement(name = "answer-kind")
-        String answerType;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Option06 implements Cloneable {
+        @XmlElement(name = "query")
+        String query;
+        @XmlElement(name = "answer")
+        String answer;
 
         @Override
-        public Kind clone() {
+        public Option06 clone() {
             try {
-                Kind kindCopy = (Kind) super.clone();
-                kindCopy.queryType = queryType;
-                kindCopy.answerType = answerType;
-                return kindCopy;
+                Option06 copyOption06 = (Option06) super.clone();
+                copyOption06.query = query;
+                copyOption06.answer = answer;
+                return copyOption06;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
                 return null;
