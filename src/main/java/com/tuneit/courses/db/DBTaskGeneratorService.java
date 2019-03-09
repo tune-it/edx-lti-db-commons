@@ -81,23 +81,23 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                     //based on t.getId();
                     LabTaskQA ltqa = ctask.generate(s, t);
                     SelectProcessor tester = new SelectProcessor();
-                    String answer_md5 = tester.execute_select(s, t.getAnswer(), 5, null);
-                    //System.out.println("Answer MD5="+answer_md5+" "+t.getAnswer());
-                    String correct_md5 = tester.execute_select(s, ltqa.getCorrectAnswer(), 5, null);
-                    //System.out.println("Correct MD5="+correct_md5+" "+ltqa.getCorrectAnswer());
+                    SelectResult answer = tester.execute_select(s, t.getAnswer(), 5, false);
+                    System.out.println("Answer= "+answer+" "+t.getAnswer());
+                    SelectResult correct = tester.execute_select(s, ltqa.getCorrectAnswer(), 5, false);
+                    System.out.println("Correct= "+correct+" "+ltqa.getCorrectAnswer());
                     //
                     //compute student rating, based on 80+20 priciple
                     //80 if result is correct
                     //0-20 - if systax is similar to generated
                     //OLD style: t.setRating(correct_md5.equalsIgnoreCase(answer_md5) ? 1.0f : 0.0f);
                     //
-                    if (answer_md5.startsWith("SQLState")) {
-                        //incorrect on too long sql query
+                    if (answer.getResultCode() != SelectResult.OK) {
+                        //incorrect or too long sql query
                         //TODO should we distinguish it?
                         t.setRating(0.001f);
                     } else {
                         float rating = 0.0f;
-                        if (correct_md5.equalsIgnoreCase(answer_md5)) {
+                        if (correct.getResultCheckSum().equalsIgnoreCase(answer.getResultCheckSum())) {
                             rating = 0.8f;
                             TokenSQLSimilarity sm = new TokenSQLSimilarity(t.getAnswer(), ltqa.getCorrectAnswer());
                             rating += 0.2f*sm.calculate();
