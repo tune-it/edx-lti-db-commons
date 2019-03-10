@@ -82,9 +82,9 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                     LabTaskQA ltqa = ctask.generate(s, t);
                     SelectProcessor tester = new SelectProcessor();
                     SelectResult answer = tester.execute_select(s, t.getAnswer(), 5, false);
-                    System.out.println("Answer= "+answer+" "+t.getAnswer());
+                    //System.out.println("Answer= "+answer+" "+t.getAnswer());
                     SelectResult correct = tester.execute_select(s, ltqa.getCorrectAnswer(), 5, false);
-                    System.out.println("Correct= "+correct+" "+ltqa.getCorrectAnswer());
+                    //System.out.println("Correct= "+correct+" "+ltqa.getCorrectAnswer());
                     //
                     //compute student rating, based on 80+20 priciple
                     //80 if result is correct
