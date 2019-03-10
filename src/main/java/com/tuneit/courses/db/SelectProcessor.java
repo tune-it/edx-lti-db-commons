@@ -120,7 +120,7 @@ public class SelectProcessor {
             //if it can run over given millisecond do not process query
             //to not overload server
             if (sres.getExecutionTime()>(double)timeout_limit) {
-                throw new SQLException("ERROR: proactive canceling statement due to possibleexceeding timeout",
+                throw new SQLException("ERROR: proactive canceling statement due to possible timeout exceeding",
                         Integer.toString(SelectResult.TIMEOUT), SelectResult.TIMEOUT);
             }
             //Finally execute sql statement
