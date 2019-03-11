@@ -384,13 +384,55 @@
                 <subtask07 for="airports:city">
                     <left-position>2</left-position>
                 </subtask07>
-                <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task07>
             <task08 id="task08" description="Выборка значений с сортировкой">
-                <prolog>Вычислить</prolog>
+                <prolog>Выдать</prolog>
                 <epilog/>
-                <!--<forbidden-list>ticket_flights</forbidden-list>-->
+                <subtask08 for="aircrafts:aircraft_code">
+                    <left-position>3</left-position>
+                    <right-position>4</right-position>
+                </subtask08>
+                <subtask08 for="aircrafts:model">
+                    <left-position>Бо</left-position>
+                </subtask08>
+                <subtask08 for="aircrafts:range">
+                    <left-position>2</left-position>
+                </subtask08>
+                <subtask08 for="airports:airport_code">
+                    <left-position>3</left-position>
+                    <right-position>3</right-position>
+                </subtask08>
+                <subtask08 for="airports:airport_name">
+                    <left-position>Бо</left-position>
+                </subtask08>
+                <subtask08 for="airports:city">
+                    <left-position>2</left-position>
+                </subtask08>
             </task08>
+            <task09 id="task09" description="Выборка значений с сортировкой">
+                <prolog>Выдать</prolog>
+                <epilog/>
+                <subtask09 for="aircrafts:aircraft_code">
+                    <left-position>3</left-position>
+                    <right-position>4</right-position>
+                </subtask09>
+                <subtask09 for="aircrafts:model">
+                    <left-position>Бо</left-position>
+                </subtask09>
+                <subtask09 for="aircrafts:range">
+                    <left-position>2</left-position>
+                </subtask09>
+                <subtask09 for="airports:airport_code">
+                    <left-position>3</left-position>
+                    <right-position>6</right-position>
+                </subtask09>
+                <subtask09 for="airports:airport_name">
+                    <left-position>Бо</left-position>
+                </subtask09>
+                <subtask09 for="airports:city">
+                    <left-position>2</left-position>
+                </subtask09>
+            </task09>
         </lab02>
     </labs-config>
 </schema>

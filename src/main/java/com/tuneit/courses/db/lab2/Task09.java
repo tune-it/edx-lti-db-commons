@@ -1,6 +1,5 @@
 package com.tuneit.courses.db.lab2;
 
-
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.schema.Schema;
@@ -10,34 +9,25 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlAccessorType(XmlAccessType.NONE)
-public class Task07 extends LabTask {
-    @XmlElement(name = "subtask07")
-    private List<Subtask07> subtasks07;
+public class Task09 extends LabTask {
+    @XmlElement(name = "subtask09")
+    private List<Subtask09> subtasks09;
 
 
     @Override
     protected void updateAnswer(Table table, Task task) {
-        Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+        Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
 
         answer.append("SELECT ");
 
-        String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+        String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
 
         table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
 
         writeColumnFromTable(answer, table.getColumns(), task);
 
-        int randomLeftOrRightPosition = getRandom(task).nextInt(2);
-
-        String position;
-        if (randomLeftOrRightPosition == 1) {
-            int randomLeftPosition = getRandom(task).nextInt(randomSubtask06.leftPosition.size());
-            position = randomSubtask06.leftPosition.get(randomLeftPosition);
-        } else {
-            int randomRightPosition = getRandom(task).nextInt(randomSubtask06.rightPosition.size());
-            position = randomSubtask06.rightPosition.get(randomRightPosition);
-        }
+        int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
+        String position = randomSubtask09.rightPosition.get(randomPosition);
 
         answer.append(", ")
                 .append(columnName)
@@ -47,18 +37,18 @@ public class Task07 extends LabTask {
                 .append(columnName)
                 .append(" LIKE \'%")
                 .append(position)
-                .append("%\'.");
+                .append("\'.");
         System.out.println(answer);
     }
 
     @Override
     protected void updateQuery(Table table, Task task) {
-        Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+        Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
 
         query.append(prolog.trim())
                 .append(" ");
 
-        String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+        String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
 
         String columnNamePL = table.getColumns().stream()
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
@@ -71,7 +61,7 @@ public class Task07 extends LabTask {
         query.append(", ")
                 .append(columnNamePL)
                 .append(", содержащих в названии \'")
-                .append(randomSubtask06.leftPosition.get(0))
+                .append(randomSubtask09.leftPosition.get(0))
                 .append("\'.");
     }
 
@@ -81,14 +71,14 @@ public class Task07 extends LabTask {
             allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
         }
 
-        Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
-        String tableName = randomSubtask07.tableAndColumn.trim().split(":")[0];
+        Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
+        String tableName = randomSubtask09.tableAndColumn.trim().split(":")[0];
 
         return findAllowedTable(schema, tableName);
     }
 
     @XmlAccessorType(XmlAccessType.FIELD)
-    private static class Subtask07 implements Cloneable {
+    private static class Subtask09 implements Cloneable {
         @XmlAttribute(name = "for")
         private String tableAndColumn;
 
@@ -102,9 +92,9 @@ public class Task07 extends LabTask {
         private List<String> rightPosition;
 
         @Override
-        protected Subtask07 clone() {
+        protected Subtask09 clone() {
             try {
-                Subtask07 subtaskClone07 = (Subtask07) super.clone();
+                Subtask09 subtaskClone07 = (Subtask09) super.clone();
                 subtaskClone07.tableAndColumn = tableAndColumn;
                 subtaskClone07.leftPosition = copyPosition(leftPosition);
                 subtaskClone07.rightPosition = copyPosition(rightPosition);
