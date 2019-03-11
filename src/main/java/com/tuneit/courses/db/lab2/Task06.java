@@ -75,15 +75,7 @@ public class Task06 extends LabTask {
         Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
         String tableName = randomSubtask06.table.trim();
 
-        List<Table> tables = allowed.get(schema.getName());
-        Optional<Table> tableOptional = tables.stream()
-                .filter(table -> table.getTableName().equalsIgnoreCase(tableName)).findFirst();
-
-        if (tableOptional.isPresent()) {
-            return tableOptional.get();
-        } else {
-            throw new IllegalArgumentException("Table with name \"" + tableName + "\" don't found.");
-        }
+        return findAllowedTable(schema, tableName);
     }
 
 

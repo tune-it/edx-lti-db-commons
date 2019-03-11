@@ -169,7 +169,7 @@
             </task05>
             <task06 id="task06" description="Преобразование полученных значений">
                 <prolog>Вывести в один столбец текст, содержащий такие параметры как:</prolog>
-                <epilog>'</epilog>
+                <epilog>'.</epilog>
                 <subtask06 table="aircrafts" description="самолётов в формате 'Я самолётик">
                     <column06 name="модель">
                         <option06>
@@ -362,28 +362,28 @@
                 </subtask06>
             </task06>
             <task07 id="task07" description="Выборка значений с условием">
-                <prolog>Вычислить</prolog>
-                <subtask05 for="aircrafts:aircraft_code">
-                    <left-position>3</left-position>
-                    <right-position>3</right-position>
-                </subtask05>
-                <subtask05 for="aircrafts:model">
-                    <left-position>Бо</left-position>
-                </subtask05>
-                <subtask05 for="aircrafts:range">
-                    <left-position>2</left-position>
-                </subtask05>
-                <subtask05 for="airports:airport_code">
-                    <left-position>3</left-position>
-                    <right-position>3</right-position>
-                </subtask05>
-                <subtask05 for="airports:airport_name">
-                    <left-position>Бо</left-position>
-                </subtask05>
-                <subtask05 for="airports:city">
-                    <left-position>2</left-position>
-                </subtask05>
+                <prolog>Выдать</prolog>
                 <epilog/>
+                <subtask07 for="aircrafts:aircraft_code">
+                    <left-position>3</left-position>
+                    <right-position>3</right-position>
+                </subtask07>
+                <subtask07 for="aircrafts:model">
+                    <left-position>Бо</left-position>
+                </subtask07>
+                <subtask07 for="aircrafts:range">
+                    <left-position>2</left-position>
+                </subtask07>
+                <subtask07 for="airports:airport_code">
+                    <left-position>3</left-position>
+                    <right-position>3</right-position>
+                </subtask07>
+                <subtask07 for="airports:airport_name">
+                    <left-position>Бо</left-position>
+                </subtask07>
+                <subtask07 for="airports:city">
+                    <left-position>2</left-position>
+                </subtask07>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task07>
             <task08 id="task08" description="Выборка значений с сортировкой">

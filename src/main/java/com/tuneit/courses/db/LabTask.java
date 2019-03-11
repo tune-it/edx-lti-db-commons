@@ -135,6 +135,18 @@ public abstract class LabTask {
         return tables.get(getRandom(task).nextInt(tables.size()));
     }
 
+    protected Table findAllowedTable(Schema schema, String tableName){
+        List<Table> tables = allowed.get(schema.getName());
+        Optional<Table> tableOptional = tables.stream()
+                .filter(table -> table.getTableName().equalsIgnoreCase(tableName)).findFirst();
+
+        if (tableOptional.isPresent()) {
+            return tableOptional.get();
+        } else {
+            throw new IllegalArgumentException("Table with name \"" + tableName + "\" don't found.");
+        }
+    }
+
     protected Random getRandom(Task task) {
         int seed = task.getId().toUpperCase().hashCode();
         return new Random(seed);
