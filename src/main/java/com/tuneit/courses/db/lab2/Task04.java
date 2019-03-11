@@ -20,7 +20,6 @@ class Task04 extends LabTask {
     @Override
     protected void updateAnswer(Table table, Task task) {
         List<Column> columns = table.getColumns();
-        Collections.shuffle(columns, getRandom(task));
 
         answer.append("SELECT DISTINCT ");
         answer.append(columns.get(getRandom(task).nextInt(columns.size())).getColumnName());

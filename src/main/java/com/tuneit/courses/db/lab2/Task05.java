@@ -39,7 +39,8 @@ public class Task05 extends LabTask {
                 .append(" ")
                 .append(subtask05.getDescription().trim())
                 .append(" ")
-                .append(option05.getValue().trim());
+                .append(option05.getValue().trim())
+                .append(".");
     }
 
     private Subtask05 getRandomType(Task task) {

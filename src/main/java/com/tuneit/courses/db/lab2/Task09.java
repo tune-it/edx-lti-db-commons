@@ -38,7 +38,6 @@ public class Task09 extends LabTask {
                 .append(" LIKE \'%")
                 .append(position)
                 .append("\' ORDER BY 1, 2;");
-        System.out.println(answer);
     }
 
     @Override

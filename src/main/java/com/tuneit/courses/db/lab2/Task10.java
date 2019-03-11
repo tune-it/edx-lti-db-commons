@@ -43,8 +43,6 @@ public class Task10 extends LabTask {
             }
         }
         answer.append("\';");
-
-        System.out.println(answer);
     }
 
     private List<String> getRandomOptions(List<String> options, Task task) {

@@ -92,7 +92,7 @@ public abstract class LabTask {
     protected void updateQuery(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
-        writeColumnFromTable(query, columns, task);
+        writeColumnFromTablePL(query, columns, task);
         query.append(getEpilog()).append(table.getTableName()).append('.');
     }
 

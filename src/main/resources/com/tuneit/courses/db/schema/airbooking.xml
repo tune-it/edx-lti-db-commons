@@ -2,7 +2,7 @@
 
 <schema name="Airbookings">
     <connection>
-        <uri>jdbc:postgresql://localhost/demo</uri>
+        <uri>jdbc:postgresql://localhost:5432/demo</uri>
         <username>airdemo</username>
         <password>demo</password>
     </connection>
@@ -39,7 +39,7 @@
         <table sql-name="bookings" name="бронирование" name-rpl="бронирования">
             <column sql-name="book_ref" name="код" name-pl="коды"/>
             <column sql-name="book_date" name="дата"  name-pl="даты"/>
-            <column sql-name="total_amount" name="сумма"  name-pl="сумму"/>
+            <column sql-name="total_amount" name="сумма"  name-pl="суммы"/>
         </table>    
         <table sql-name="flights" name="рейс воздушного судна" name-rpl="рейсов воздушного судна">
             <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
@@ -170,7 +170,7 @@
             <task06 id="task06" description="Преобразование полученных значений">
                 <prolog>Вывести в один столбец текст, содержащий такие параметры как:</prolog>
                 <epilog>'.</epilog>
-                <subtask06 table="aircrafts" description="самолётов в формате 'Я самолётик">
+                <subtask06 table="aircrafts" description="Я самолётик">
                     <column06 name="модель">
                         <option06>
                             <query>Боинг</query>
@@ -218,15 +218,15 @@
                         </option06>
                         <option06>
                             <query>№773</query>
-                            <answer>"№" || aircraft_code</answer>
+                            <answer>" №" || aircraft_code</answer>
                         </option06>
                         <option06>
                             <query>№ 773</query>
-                            <answer>"№ " || aircraft_code</answer>
+                            <answer>" № " || aircraft_code</answer>
                         </option06>
                     </column06>
                 </subtask06>
-                <subtask06 table="airports" description="аэропортов в формате 'Я портик">
+                <subtask06 table="airports" description="Я портик">
                     <column06 name="код">
                         <option06>
                             <query>YKS</query>
@@ -244,7 +244,7 @@
                         </option06>
                         <option06>
                             <query>аэропорт Якутск</query>
-                            <answer>'аэропорт ' || airport_name</answer>
+                            <answer>' аэропорт ' || airport_name</answer>
                         </option06>
                         <option06>
                             <query>ЯКУТСК</query>
@@ -254,15 +254,15 @@
                     <column06 name="город">
                         <option06>
                             <query>г.Якутск</query>
-                            <answer>'г.' || city</answer>
+                            <answer>' г.' || city</answer>
                         </option06>
                         <option06>
                             <query>г. Якутск</query>
-                            <answer>'г. ' || city</answer>
+                            <answer>' г. ' || city</answer>
                         </option06>
                         <option06>
                             <query>город Якутск</query>
-                            <answer>'город' || city</answer>
+                            <answer>' город' || city</answer>
                         </option06>
                     </column06>
                     <column06 name="временная зона">
@@ -276,7 +276,7 @@
                         </option06>
                         <option06>
                             <query>временная зона - Asia/Yakutsk</query>
-                            <answer>'временная зона - ' || timezone</answer>
+                            <answer>' временная зона - ' || timezone</answer>
                         </option06>
                         <option06>
                             <query>Asia</query>
@@ -285,11 +285,11 @@
                         split_part(
                         <option06>
                             <query>временная зона - Asia</query>
-                            <answer>'временная зона - ' || split_part(timezone, '/', 0)</answer>
+                            <answer>' временная зона - ' || split_part(timezone, '/', 0)</answer>
                         </option06>
                     </column06>
                 </subtask06>
-                <subtask06 table="tickets" description="проданных билетов в формате 'Я билетик">
+                <subtask06 table="tickets" description="Я билетик">
                     <column06 name="номер">
                         <option06>
                             <query>0005432000987</query>
@@ -297,7 +297,7 @@
                         </option06>
                         <option06>
                             <query>№0005432000987</query>
-                            <answer>'№' || ticket_no</answer>
+                            <answer>' №' || ticket_no</answer>
                         </option06>
                     </column06>
                     <column06 name="код бронирования">
@@ -306,8 +306,8 @@
                             <answer>book_ref</answer>
                         </option06>
                         <option06>
-                            <query>ссылка - 06B046</query>
-                            <answer>'ссылка ' || book_ref</answer>
+                            <query>код брони - 06B046</query>
+                            <answer>' код брони - ' || book_ref</answer>
                         </option06>
                     </column06>
                     <column06 name="идентификатор пассажира">
@@ -317,7 +317,7 @@
                         </option06>
                         <option06>
                             <query>id - 8149 604011</query>
-                            <answer>'id - ' || passenger_id</answer>
+                            <answer>' id - ' || passenger_id</answer>
                         </option06>
                         <option06>
                             <query>8149</query>
@@ -325,15 +325,15 @@
                         </option06>
                         <option06>
                             <query>id - 8149</query>
-                            <answer>'id - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>' id - ' || split_part(passenger_id, ' ', 0)</answer>
                         </option06>
                         <option06>
                             <query>ид - 8149</query>
-                            <answer>'ид - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>' ид - ' || split_part(passenger_id, ' ', 0)</answer>
                         </option06>
                         <option06>
                             <query>айди - 8149</query>
-                            <answer>'айди - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>' айди - ' || split_part(passenger_id, ' ', 0)</answer>
                         </option06>
                     </column06>
                     <column06 name="имя пассажира">
@@ -343,11 +343,11 @@
                         </option06>
                         <option06>
                             <query>name - VALERIY TIKHONOV</query>
-                            <answer>'name - ' || passenger_name</answer>
+                            <answer>' name - ' || passenger_name</answer>
                         </option06>
                         <option06>
                             <query>имя фамилия - VALERIY TIKHONOV</query>
-                            <answer>'имя фамилия - ' || passenger_name</answer>
+                            <answer>' имя фамилия - ' || passenger_name</answer>
                         </option06>
                         <option06>
                             <query>V. TIKHONOV</query>
@@ -355,7 +355,7 @@
                         </option06>
                         <option06>
                             <query>name - V. TIKHONOV</query>
-                            <answer>'name - ' || substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)
+                            <answer>' name - ' || substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)
                             </answer>
                         </option06>
                     </column06>

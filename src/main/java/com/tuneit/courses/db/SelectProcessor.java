@@ -3,9 +3,9 @@ package com.tuneit.courses.db;
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
-import java.nio.ByteBuffer;
 
 import javax.xml.bind.DatatypeConverter;
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.bind.DatatypeConverter;
 
 
 /**
@@ -23,28 +22,26 @@ public class SelectProcessor {
 
 
     public static void main(String[] args) throws Exception {
-        SelectProcessor st = new SelectProcessor();
         Schema s = SchemaLoader.getSchema(0);
         for (Lab t : s.getLabs()) {
             System.out.println(t);
         }
         DBTaskGeneratorService ds = new DBTaskGeneratorService();
-        Task[] tasks = ds.getTasks("serge@cs.ifmo.ru", "lab02", "03", 0);
-        tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
-        tasks[1].setAnswer("select timezone, airport_code, city, airport_name from airports where city like 'ru%';").setComplete(true);
-        tasks[2].setAnswer("select range, model from aircrafts;").setComplete(true);
-        tasks[3].setAnswer("select distinct assenger_name from tickets;").setComplete(true);
-        tasks[4].setAnswer("select extract(minute from actual_departure - actual_arrival) from flights;").setComplete(true);
+        Task[] tasks = ds.getTasks("serge@cs.ifmo.ru", "lab02", "01", 0);
+        tasks[0].setAnswer("select * from ticket_flights;").setComplete(false);
+        tasks[1].setAnswer("select fare_conditions from seats;").setComplete(false);
+        tasks[2].setAnswer("select aircraft_code, seat_no from seats;").setComplete(false);
+        tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(false);
+        tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(false);
+        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' id - ' || passenger_id || ' имя фамилия - ' || passenger_name || ' код брони - ' || book_ref from tickets").setComplete(false);
+        tasks[6].setAnswer("select timezone, airport_code from airports where airport_code like '%3%'").setComplete(true);
+        System.out.println(tasks[6].getAnswer());
         ds.checkTasks(tasks);
         for (Task t : tasks) {
-            System.out.println(t);
+            if (t.isComplete()) {
+                System.out.println(t);
+            }
         }
-        //for (Table t : s.getTables()) {
-        //    System.out.println(t);
-        //}
-        //StringBuilder sb = new StringBuilder();
-        //System.out.println("query md5 = "+st.executeSelect(s,"select * from airports", -1, sb));
-        //System.out.println(sb);
     }
     
     static Pattern rowcount_pattern = Pattern.compile("<Actual-Rows>(.*?)</Actual-Rows>");
@@ -95,6 +92,7 @@ public class SelectProcessor {
             md = MessageDigest.getInstance("MD5");
             conn = schema.getConnection();
             stmt = conn.createStatement();
+            stmt.setMaxRows(5);
             // setup hard limit timeout
             stmt.execute(session_timeout_command);
             //fetch row count and execution time for query

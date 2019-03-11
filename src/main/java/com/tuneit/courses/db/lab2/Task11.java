@@ -36,8 +36,6 @@ public class Task11 extends LabTask {
                 .append("\' GROUP BY ")
                 .append(columnName)
                 .append(";");
-
-        System.out.println(answer);
     }
 
     @Override

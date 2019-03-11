@@ -6,7 +6,10 @@ import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 @XmlRootElement(name = "task06")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,7 +23,9 @@ public class Task06 extends LabTask {
 
         Collections.shuffle(randomSubtask06.columns06, getRandom(task));
 
-        answer.append("Select ");
+        answer.append("SELECT \'")
+                .append(randomSubtask06.description.trim())
+                .append(" \' || ");
 
         Random randomForKind = getRandom(task);
         for (int i = 0; i < randomSubtask06.columns06.size(); i++) {
@@ -52,7 +57,11 @@ public class Task06 extends LabTask {
             }
         }
 
-        query.append(" ").append(randomSubtask06.description.trim()).append(" ");
+        query.append(" ")
+                .append(table.getNameRPL())
+                .append(" в формате \'")
+                .append(randomSubtask06.description.trim())
+                .append(" ");
 
         Random randomForKind = getRandom(task);
         for (int i = 0; i < randomSubtask06.columns06.size(); i++) {

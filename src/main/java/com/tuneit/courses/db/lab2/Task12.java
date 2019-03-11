@@ -36,8 +36,6 @@ public class Task12 extends LabTask {
         } else {
             answer.append(") DESC LIMIT 5;");
         }
-
-        System.out.println(answer);
     }
 
     @Override
