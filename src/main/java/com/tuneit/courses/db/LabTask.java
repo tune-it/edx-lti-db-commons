@@ -82,9 +82,9 @@ public abstract class LabTask {
 
         Collections.shuffle(table.getColumns(), getRandom(task));
 
-        updateQuery(table, task);
+        updateQuery(table.clone(), task);
 
-        updateAnswer(table, task);
+        updateAnswer(table.clone(), task);
 
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }

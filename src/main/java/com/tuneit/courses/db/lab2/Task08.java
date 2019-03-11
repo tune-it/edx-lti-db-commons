@@ -22,7 +22,7 @@ public class Task08 extends LabTask {
 
         String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
 
-        table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTable(answer, table.getColumns(), task);
 
@@ -37,7 +37,9 @@ public class Task08 extends LabTask {
                 .append(columnName)
                 .append(" LIKE \'")
                 .append(position)
-                .append("%\';");
+                .append("%\' ORDER BY ")
+                .append(columnName)
+                .append(";");
         System.out.println(answer);
     }
 
@@ -58,10 +60,16 @@ public class Task08 extends LabTask {
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 
+
+        int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
+        String position = randomSubtask08.leftPosition.get(randomPosition);
+
         query.append(", ")
                 .append(columnNamePL)
-                .append(", содержащих в названии \'")
-                .append(randomSubtask08.leftPosition.get(0))
+                .append(", начинающихся на \'")
+                .append(position)
+                .append("\', отсортированные по столбцу \'")
+                .append(columnNamePL)
                 .append("\'.");
     }
 

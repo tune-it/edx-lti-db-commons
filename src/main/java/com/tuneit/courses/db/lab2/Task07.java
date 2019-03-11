@@ -24,7 +24,7 @@ public class Task07 extends LabTask {
 
         String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
 
-        table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTable(answer, table.getColumns(), task);
 
