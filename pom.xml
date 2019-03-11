@@ -41,6 +41,14 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus.tune-it</id>
+            <name>Public tune-it repository</name>
+            <url>https://nexus.tune-it.ru/repository/tuneit-public-repo/</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
 
         <dependency>
