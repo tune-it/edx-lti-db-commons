@@ -477,6 +477,16 @@
                     <option>5d</option>
                 </subtask11>
             </task11>
+            <task12 id="task12" description="Агрегирование данных">
+                <prolog>Вывести количество различных</prolog>
+                <epilog/>
+                <subtask12 for="aircrafts:aircraft_code"/>
+                <subtask12 for="aircrafts:model"/>
+                <subtask12 for="aircrafts:range"/>
+                <subtask12 for="airports:airport_code"/>
+                <subtask12 for="airports:airport_name"/>
+                <subtask12 for="airports:city"/>
+            </task12>
         </lab02>
     </labs-config>
 </schema>

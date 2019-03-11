@@ -28,6 +28,7 @@ public class Lab02 extends Lab {
         @XmlElement(name="task09", type=Task09.class),
         @XmlElement(name="task10", type=Task10.class),
         @XmlElement(name="task11", type=Task11.class),
+        @XmlElement(name="task12", type=Task12.class)
     })
     private List<LabTask> labTask = new ArrayList<>();
 
