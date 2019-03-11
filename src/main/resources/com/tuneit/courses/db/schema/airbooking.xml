@@ -433,6 +433,50 @@
                     <left-position>2</left-position>
                 </subtask09>
             </task09>
+            <task10 id="task10" description="Выборка с использованием фразы WHERE">
+                <prolog>Вывести</prolog>
+                <epilog/>
+                <subtask10 for="aircrafts:aircraft_code">
+                    <option>3</option>
+                </subtask10>
+                <subtask10 for="aircrafts:model">
+                    <option>3 6</option>
+                </subtask10>
+                <subtask10 for="aircrafts:range">
+                    <option>3 4 5</option>
+                </subtask10>
+                <subtask10 for="airports:airport_code">
+                    <option>5</option>
+                </subtask10>
+                <subtask10 for="airports:airport_name">
+                    <option>5d</option>
+                </subtask10>
+                <subtask10 for="airports:city">
+                    <option>5d</option>
+                </subtask10>
+            </task10>
+            <task11 id="task11" description="Агрегирование данных">
+                <prolog>Вывести</prolog>
+                <epilog/>
+                <subtask10 for="aircrafts:aircraft_code">
+                    <option>3</option>
+                </subtask10>
+                <subtask10 for="aircrafts:model">
+                    <option>3 6</option>
+                </subtask10>
+                <subtask10 for="aircrafts:range">
+                    <option>3 4 5</option>
+                </subtask10>
+                <subtask10 for="airports:airport_code">
+                    <option>5</option>
+                </subtask10>
+                <subtask10 for="airports:airport_name">
+                    <option>5d</option>
+                </subtask10>
+                <subtask10 for="airports:city">
+                    <option>5d</option>
+                </subtask10>
+            </task11>
         </lab02>
     </labs-config>
 </schema>

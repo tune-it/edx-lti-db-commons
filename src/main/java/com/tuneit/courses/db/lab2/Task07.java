@@ -47,7 +47,7 @@ public class Task07 extends LabTask {
                 .append(columnName)
                 .append(" LIKE \'%")
                 .append(position)
-                .append("%\'.");
+                .append("%\';");
         System.out.println(answer);
     }
 
