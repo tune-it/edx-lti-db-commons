@@ -38,6 +38,7 @@ public class Task09 extends LabTask {
                 .append(" LIKE \'%")
                 .append(position)
                 .append("\' ORDER BY 1, 2;");
+        System.out.println(answer);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Task09 extends LabTask {
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                 .findFirst().get().getNamePL();
 
-        table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 

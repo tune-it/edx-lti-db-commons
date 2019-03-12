@@ -40,7 +40,6 @@ public class Task08 extends LabTask {
                 .append("%\' ORDER BY ")
                 .append(columnName)
                 .append(";");
-        System.out.println(answer);
     }
 
     @Override

@@ -36,7 +36,8 @@ public class SelectProcessor {
         tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' id - ' || passenger_id || ' имя фамилия - ' || passenger_name || ' код брони - ' || book_ref from tickets").setComplete(false);
         tasks[6].setAnswer("select coordinates, city, airport_name, airport_code from airports where airport_code like '%3%'").setComplete(false);
         tasks[7].setAnswer("select aircraft_code, model from aircrafts where model like 'Бо%' order by model;").setComplete(false);
-        tasks[8].setAnswer("select aircraft_code, model from aircrafts where model like 'Бо%' order by model;").setComplete(true);
+        tasks[8].setAnswer("select model, aircraft_code from aircrafts where aircraft_code like '%4' order by 1, 2;").setComplete(false);
+        tasks[9].setAnswer("select model, aircraft_code from aircrafts where aircraft_code like '%4' order by 1, 2;").setComplete(true);
         System.out.println(tasks[8].getAnswer());
         ds.checkTasks(tasks);
         for (Task t : tasks) {
