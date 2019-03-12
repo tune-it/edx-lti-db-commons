@@ -48,7 +48,6 @@ public class Task07 extends LabTask {
                 .append(" LIKE \'%")
                 .append(position)
                 .append("%\';");
-        System.out.println(answer);
     }
 
     @Override

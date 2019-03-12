@@ -40,6 +40,7 @@ public class Task08 extends LabTask {
                 .append("%\' ORDER BY ")
                 .append(columnName)
                 .append(";");
+        System.out.println(answer);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class Task08 extends LabTask {
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                 .findFirst().get().getNamePL();
 
-        table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 
