@@ -1,8 +1,6 @@
 package com.tuneit.courses.db;
 
 import com.tuneit.courses.Task;
-import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.db.lab2.Task05;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
@@ -100,7 +98,7 @@ public abstract class LabTask {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
         writeColumnFromTablePL(query, columns, task);
-        query.append(getEpilog()).append(table.getNameRPL()).append('.');
+        query.append(getEpilog()).append(table.getNameGenitive()).append('.');
     }
 
     protected void updateAnswer(Table table, Task task) {
@@ -120,9 +118,9 @@ public abstract class LabTask {
 
     protected void writeColumnFromTablePL(StringBuilder string, List<Column> columns, Task task) {
         Collections.shuffle(columns, getRandom(task));
-        string.append(columns.get(0).getNamePL());
+        string.append(columns.get(0).getNamePlural());
         for (int i = 1; i < getRandom(task).nextInt(columns.size()); i++) {
-            string.append(", ").append(columns.get(i).getNamePL());
+            string.append(", ").append(columns.get(i).getNamePlural());
         }
     }
 

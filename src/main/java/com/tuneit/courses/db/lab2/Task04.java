@@ -7,7 +7,6 @@ import com.tuneit.courses.db.schema.Table;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import java.util.Collections;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -35,7 +34,7 @@ class Task04 extends LabTask {
     protected void updateQueryPL(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
-        query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePL());
-        query.append(getEpilog()).append(table.getNameRPL()).append('.');
+        query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePlural());
+        query.append(getEpilog()).append(table.getNameGenitive()).append('.');
     }
 }

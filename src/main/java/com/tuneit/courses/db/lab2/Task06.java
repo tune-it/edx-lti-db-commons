@@ -23,9 +23,9 @@ public class Task06 extends LabTask {
 
         Collections.shuffle(randomSubtask06.columns06, getRandom(task));
 
-        answer.append("SELECT \'")
+        answer.append("SELECT '")
                 .append(randomSubtask06.description.trim())
-                .append(" \' || ");
+                .append(" ' || ");
 
         Random randomForKind = getRandom(task);
         for (int i = 0; i < randomSubtask06.columns06.size(); i++) {
@@ -33,12 +33,13 @@ public class Task06 extends LabTask {
             Option06 option06 = options06.get(randomForKind.nextInt(options06.size()));
             answer.append(option06.answer.trim());
             if (i != randomSubtask06.columns06.size() - 1) {
-                answer.append(" || ");
+                answer.append(" || ' ' || ");
             }
         }
 
 
         answer.append(" FROM ").append(table.getTableName()).append(";");
+        System.out.println(answer);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class Task06 extends LabTask {
         }
 
         query.append(" ")
-                .append(table.getNameRPL())
+                .append(table.getNameGenitive())
                 .append(" в формате \'")
                 .append(randomSubtask06.description.trim())
                 .append(" ");

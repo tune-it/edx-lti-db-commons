@@ -66,14 +66,14 @@ public class Task10 extends LabTask {
 
         String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
 
-        String columnNamePL = table.getColumns().stream()
+        String columnNameCreative = table.getColumns().stream()
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                .findFirst().get().getName();
+                .findFirst().get().getNameCreativePlural();
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 
         query.append(" c ")
-                .append(columnNamePL)
+                .append(columnNameCreative)
                 .append(" ");
 
         List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);

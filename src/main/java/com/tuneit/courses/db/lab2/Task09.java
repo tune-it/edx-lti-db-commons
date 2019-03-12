@@ -22,8 +22,6 @@ public class Task09 extends LabTask {
 
         String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
 
-        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
         writeColumnFromTable(answer, table.getColumns(), task);
 
         int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
@@ -51,21 +49,19 @@ public class Task09 extends LabTask {
 
         String columnNamePL = table.getColumns().stream()
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                .findFirst().get().getNamePL();
+                .findFirst().get().getNamePlural();
 
-        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTablePL(query, table.getColumns(), task);
-
 
         int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
         String position = randomSubtask09.rightPosition.get(randomPosition);
 
         query.append(", ")
                 .append(columnNamePL)
-                .append(", заканчивающихся на \'")
+                .append(" которых заканчиваются на \'")
                 .append(position)
-                .append("\', отсортированные по столбцам 1, 2.");
+                .append("\', отсортированные по столбцу 1.");
     }
 
     @Override
