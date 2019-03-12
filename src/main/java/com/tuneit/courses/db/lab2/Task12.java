@@ -36,6 +36,7 @@ public class Task12 extends LabTask {
         } else {
             answer.append(") DESC LIMIT 5;");
         }
+
     }
 
     @Override
@@ -43,15 +44,15 @@ public class Task12 extends LabTask {
         Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
 
         String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-        String columnNamePL = table.getColumns().stream()
+        String columnNameGenitivePlural = table.getColumns().stream()
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                .findFirst().get().getName();
+                .findFirst().get().getNameGenitivePlural();
 
         query.append(prolog.trim())
                 .append(" ")
-                .append(columnNamePL)
+                .append(columnNameGenitivePlural)
                 .append(" ")
-                .append(table.getNameRPL())
+                .append(table.getNameGenitive())
                 .append(". Результат ");
         if (getRandom(task).nextBoolean()) {
             query.append("расположить по возрастанию. ");

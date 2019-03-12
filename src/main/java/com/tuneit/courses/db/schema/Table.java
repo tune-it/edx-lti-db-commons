@@ -13,7 +13,7 @@ public class Table implements Cloneable {
     
     @XmlAttribute(name="sql-name") private String sqlName;
     @XmlAttribute(name="name") private String name;
-    @XmlAttribute(name="name-rpl") private String nameRPL; //род.падеж мн.ч.
+    @XmlAttribute(name="name-genitive") private String nameGenitive; //род.падеж мн.ч.
     @XmlTransient boolean sqlNameInUpperCase = false;
     
     @XmlElement(name="column")
@@ -44,12 +44,12 @@ public class Table implements Cloneable {
         this.name = name;
     }
 
-    public String getNameRPL() {
-        return nameRPL;
+    public String getNameGenitive() {
+        return nameGenitive;
     }
 
-    public void setNameRPL(String nameRPL) {
-        this.nameRPL = nameRPL;
+    public void setNameGenitive(String nameGenitive) {
+        this.nameGenitive = nameGenitive;
     }
 
     public List<Column> getColumns() {
@@ -65,7 +65,7 @@ public class Table implements Cloneable {
         try {
             Table tableClone = (Table) super.clone();
             tableClone.setName(name);
-            tableClone.setNameRPL(nameRPL);
+            tableClone.setNameGenitive(nameGenitive);
             tableClone.setTableName(getTableName());
             tableClone.setColumns(copyColumn(this.columns));
             return tableClone;

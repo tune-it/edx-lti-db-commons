@@ -42,14 +42,15 @@ public class Task10 extends LabTask {
                 answer.append(" OR ");
             }
         }
-        answer.append("\';");
+        answer.append(";");
     }
 
     private List<String> getRandomOptions(List<String> options, Task task) {
         Collections.shuffle(options, getRandom(task));
 
         List<String> randomOption = new ArrayList<>();
-        for (int i = 0; i < getRandom(task).nextInt(options.size()); i++) {
+        randomOption.add(options.get(0));
+        for (int i = 1; i < getRandom(task).nextInt(options.size()); i++) {
             randomOption.add(options.get(i));
         }
 
@@ -71,7 +72,7 @@ public class Task10 extends LabTask {
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 
-        query.append(" где ")
+        query.append(" c ")
                 .append(columnNamePL)
                 .append(" ");
 

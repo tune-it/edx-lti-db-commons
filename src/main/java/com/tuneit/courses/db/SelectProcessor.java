@@ -37,8 +37,9 @@ public class SelectProcessor {
         tasks[6].setAnswer("select coordinates, city, airport_name, airport_code from airports where airport_code like '%3%'").setComplete(false);
         tasks[7].setAnswer("select aircraft_code, model from aircrafts where model like 'Бо%' order by model;").setComplete(false);
         tasks[8].setAnswer("select model, aircraft_code from aircrafts where aircraft_code like '%4' order by 1, 2;").setComplete(false);
-        tasks[9].setAnswer("select model, aircraft_code from aircrafts where aircraft_code like '%4' order by 1, 2;").setComplete(true);
-        System.out.println(tasks[8].getAnswer());
+        tasks[9].setAnswer("select airport_code, airport_name, city, coordinates from airports where airport_code = '5';").setComplete(false);
+        tasks[10].setAnswer("select '3' || ' = ' || count(model) from aircrafts where model = '3' group by model;").setComplete(false);
+        tasks[11].setAnswer("select count(city) from airports group by city order by count(city) asc limit 5;").setComplete(false);
         ds.checkTasks(tasks);
         for (Task t : tasks) {
             if (t.isComplete()) {

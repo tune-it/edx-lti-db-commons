@@ -14,12 +14,14 @@ public class Column implements Cloneable {
     
     @XmlAttribute(name="sql-name") private String sqlName;
     @XmlAttribute(name="name") private String name;
-    @XmlAttribute(name="name-pl") private String namePL; //род.падеж
+    @XmlAttribute(name="name-plural") private String namePlural; //мн. ч
+    @XmlAttribute(name="name-genitive-plural") private String nameGenitivePlural; //род. падеж, мн. ч
+    @XmlAttribute(name="name-creative-plural") private String nameCreativePlural; //твор. падеж, мн. ч
     @XmlTransient boolean sqlNameInUpperCase = false;
 
     @Override
     public String toString() {
-        return "Column{" + "sqlName=" + sqlName + ", name=" + name + ", namePL=" + namePL+'}';
+        return "Column{" + "sqlName=" + sqlName + ", name=" + name + ", namePlural=" + namePlural +'}';
     }
 
     public String getColumnName() {
@@ -42,12 +44,12 @@ public class Column implements Cloneable {
         this.name = name;
     }
 
-    public String getNamePL() {
-        return namePL;
+    public String getNamePlural() {
+        return namePlural;
     }
 
-    public void setNamePL(String namePL) {
-        this.namePL = namePL;
+    public void setNamePlural(String namePlural) {
+        this.namePlural = namePlural;
     }
 
     @Override
@@ -56,11 +58,27 @@ public class Column implements Cloneable {
             Column columnClone = (Column) super.clone();
             columnClone.setColumnName(getColumnName());
             columnClone.setName(name);
-            columnClone.setNamePL(namePL);
+            columnClone.setNamePlural(namePlural);
             return columnClone;
         } catch (CloneNotSupportedException e){
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getNameGenitivePlural() {
+        return nameGenitivePlural;
+    }
+
+    public void setNameGenitivePlural(String nameGenitivePlural) {
+        this.nameGenitivePlural = nameGenitivePlural;
+    }
+
+    public String getNameCreativePlural() {
+        return nameCreativePlural;
+    }
+
+    public void setNameCreativePlural(String nameCreativePlural) {
+        this.nameCreativePlural = nameCreativePlural;
     }
 }

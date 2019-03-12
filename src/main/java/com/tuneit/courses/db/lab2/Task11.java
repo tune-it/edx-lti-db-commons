@@ -43,9 +43,9 @@ public class Task11 extends LabTask {
         Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
 
         String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-        String columnNamePL = table.getColumns().stream()
+        String columnNameCreativePlural = table.getColumns().stream()
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                .findFirst().get().getName();
+                .findFirst().get().getNameCreativePlural();
 
 
         int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
@@ -53,10 +53,10 @@ public class Task11 extends LabTask {
 
         query.append(prolog.trim())
                 .append(" ")
-                .append(table.getNameRPL())
-                .append(" где ")
-                .append(columnNamePL)
-                .append(" равен \'")
+                .append(table.getNameGenitive())
+                .append(" c ")
+                .append(columnNameCreativePlural)
+                .append(" \'")
                 .append(option)
                 .append("\'. Ответ выдать в виде \'")
                 .append(option)

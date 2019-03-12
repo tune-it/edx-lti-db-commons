@@ -7,69 +7,94 @@
         <password>demo</password>
     </connection>
     <tables>
-        <table sql-name="aircrafts" name="воздушные судна" name-rpl="воздушных судов">
-            <column sql-name="aircraft_code" name="код" name-pl="коды"/>
-            <column sql-name="model" name="модель" name-pl="модели"/>
-            <column sql-name="range" name="максимально возможная дистанция" name-pl="максимально возможные дистанции"/>
+        <table sql-name="aircrafts" name="воздушные судна" name-genitive="воздушных судов">
+            <column sql-name="aircraft_code" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="model" name="модель" name-plural="модели" name-genitive-plural="моделей"
+                    name-creative-plural="моделями"/>
+            <column sql-name="range" name="максимально возможная дистанция"
+                    name-plural="максимально возможные дистанции" name-genitive-plural="максимально возможных дистанций"
+                    name-creative-plural="максимально возможными дистанциями"/>
         </table>
-        <table sql-name="airports" name="аэропорты" name-rpl="аэропортов">
-            <column sql-name="airport_code" name="код" name-pl="коды">
-                <value start="true" end="true">Y</value>
-            </column>
-            <column sql-name="airport_name" name="имя" name-pl="имена">
-                <value start="true" end="false">О</value>
-                <value start="false" end="true">о</value>
-            </column>
-            <column sql-name="city" name="город" name-pl="города">
-                <value start="true" end="false">О</value>
-                <value start="false" end="true">о</value>
-            </column>
-            <column sql-name="coordinates" name="координаты" name-pl="координаты"/>
-            <column sql-name="timezone" name="временная зона" name-pl="временные зоны">
-                <value start="true" end="false">As</value>
-                <value start="false" end="true">sk</value>
-            </column>
+        <table sql-name="airports" name="аэропорты" name-genitive="аэропортов">
+            <column sql-name="airport_code" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="airport_name" name="имя" name-plural="имена" name-genitive-plural="имён"
+                    name-creative-plural="именами"/>
+            <column sql-name="city" name="город" name-plural="города" name-genitive-plural="городов" name-creative-plural="городами"/>
+            <column sql-name="coordinates" name="координаты" name-plural="координаты" name-genitive-plural="координат"
+                    name-creative-plural="координатами"/>
+            <column sql-name="timezone" name="временная зона" name-plural="временные зоны"
+                    name-genitive-plural="временных зон" name-creative-plural="временными зонами"/>
         </table>
-        <table sql-name="boarding_passes" name="посадочный талон" name-rpl="посадочных талонов">
-            <column sql-name="ticket_no" name="номер билета" name-pl="номера билетов"/>
-            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
-            <column sql-name="boarding_no" name="номер" name-pl="номера"/>
-            <column sql-name="seat_no" name="номер места" name-pl="номера мест"/>
+        <table sql-name="boarding_passes" name="посадочный талон" name-genitive="посадочных талонов">
+            <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
+                    name-genitive-plural="номеров билетов" name-creative-plural="номерами билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="boarding_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
+                    name-creative-plural="номерами"/>
+            <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
+                    name-creative-plural="номерами мест"/>
         </table>
-        <table sql-name="bookings" name="бронирование" name-rpl="бронирования">
-            <column sql-name="book_ref" name="код" name-pl="коды"/>
-            <column sql-name="book_date" name="дата"  name-pl="даты"/>
-            <column sql-name="total_amount" name="сумма"  name-pl="суммы"/>
-        </table>    
-        <table sql-name="flights" name="рейс воздушного судна" name-rpl="рейсов воздушного судна">
-            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
-            <column sql-name="flight_no" name="номер рейса" name-pl="номера рейсов"/>
-            <column sql-name="scheduled_departure" name="время планируемого отправления" name-pl="времена планируемых отправлений"/>
-            <column sql-name="scheduled_arrival" name="время планируемого прибытия" name-pl="времена планируемых прибытий"/>
-            <column sql-name="departure_airport" name="аэропорт отправления" name-pl="аэропорты отправления"/>
-            <column sql-name="arrival_airport" name="аэропорт прибытия" name-pl="аэропорты прибытия"/>
-            <column sql-name="status" name="статус" name-pl="статусы"/>
-            <column sql-name="aircraft_code" name="код воздушного судна" name-pl="коды воздушных судов"/>
-            <column sql-name="actual_departure" name="время отправления" name-pl="времена отправлений"/>
-            <column sql-name="actual_arrival" name="время прибытия" name-pl="времена прибытий"/>
-        </table> 
-        <table sql-name="seats" name="посадочное место" name-rpl="посадочных мест">
-            <column sql-name="aircraft_code" name="код воздушного судна" name-pl="коды воздушных судов"/>
-            <column sql-name="seat_no" name="номер места" name-pl="номера мест"/>
-            <column sql-name="fare_conditions" name="тариф" name-pl="тарифы"/>
+        <table sql-name="bookings" name="бронирование" name-genitive="бронирования">
+            <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов" name-creative-plural="кодами"/>
+            <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат" name-creative-plural="датами"/>
+            <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
+                    name-creative-plural="суммами"/>
         </table>
-        <table sql-name="ticket_flights" name="состоявшийся полет" name-rpl="состоявшихся полетов">
-            <column sql-name="ticket_no" name="номер билета" name-pl="номера билетов"/>
-            <column sql-name="flight_id" name="идентификатор рейса" name-pl="идентификаторы рейсов"/>
-            <column sql-name="fare_conditions" name="тариф" name-pl="тарифы"/>
-            <column sql-name="amount" name="сумма" name-pl="сумму"/>
-        </table> 
-        <table sql-name="tickets" name="проданный билет" name-rpl="проданных билетов">
-            <column sql-name="ticket_no" name="номер" name-pl="номера"/>
-            <column sql-name="book_ref" name="код бронирования" name-pl="коды бронирования"/>
-            <column sql-name="passenger_id" name="идентификатор пассажира" name-pl="идентификаторы пассажиров"/>
-            <column sql-name="passenger_name" name="имя пассажира" name-pl="имена пассажиров"/>
-            <column sql-name="contact_data" name="контактная информация" name-pl="контактную информацию"/>
+        <table sql-name="flights" name="рейс воздушного судна" name-genitive="рейсов воздушного судна">
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="flight_no" name="номер рейса" name-plural="номера рейсов"
+                    name-genitive-plural="номеров рейсов" name-creative-plural="номерами рейсов"/>
+            <column sql-name="scheduled_departure" name="время планируемого отправления"
+                    name-plural="времена планируемых отправлений" name-genitive-plural="времен планируемых отправлений"
+                    name-creative-plural="временами планируемых отправлений"/>
+            <column sql-name="scheduled_arrival" name="время планируемого прибытия"
+                    name-plural="времена планируемых прибытий" name-genitive-plural="времен планируемых прибытий"
+                    name-creative-plural="временами планируемых прибытий"/>
+            <column sql-name="departure_airport" name="аэропорт отправления" name-plural="аэропорты отправления"
+                    name-genitive-plural="аэропортов отправлений" name-creative-plural="аэропортами отправления"/>
+            <column sql-name="arrival_airport" name="аэропорт прибытия" name-plural="аэропорты прибытия"
+                    name-genitive-plural="аэропортов прибытий" name-creative-plural="аэропортами прибытия"/>
+            <column sql-name="status" name="статус" name-plural="статусы" name-genitive-plural="статусов"
+                    name-creative-plural="статусами"/>
+            <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
+                    name-genitive-plural="кодов воздушных судов" name-creative-plural="кодами воздушных судов"/>
+            <column sql-name="actual_departure" name="время отправления" name-plural="времена отправлений"
+                    name-genitive-plural="времён отправлений" name-creative-plural="временами отправлений"/>
+            <column sql-name="actual_arrival" name="время прибытия" name-plural="времена прибытий"
+                    name-genitive-plural="времён отправлений" name-creative-plural="временами прибытий"/>
+        </table>
+        <table sql-name="seats" name="посадочное место" name-genitive="посадочных мест">
+            <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
+                    name-genitive-plural="кодов воздушных судов" name-creative-plural="кодами воздушных судов"/>
+            <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
+                    name-creative-plural="номерами мест"/>
+            <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
+                    name-creative-plural="тарифами"/>
+        </table>
+        <table sql-name="ticket_flights" name="состоявшийся полет" name-genitive="состоявшихся полетов">
+            <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
+                    name-genitive-plural="номеров билетов" name-creative-plural="номерами билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
+                    name-creative-plural="тарифами"/>
+            <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм" name-creative-plural="суммами"/>
+        </table>
+        <table sql-name="tickets" name="проданный билет" name-genitive="проданных билетов">
+            <column sql-name="ticket_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
+                    name-creative-plural="номерами"/>
+            <column sql-name="book_ref" name="код бронирования" name-plural="коды бронирования"
+                    name-genitive-plural="кодов бронирования" name-creative-plural="кодами бронирования"/>
+            <column sql-name="passenger_id" name="идентификатор пассажира" name-plural="идентификаторы пассажиров"
+                    name-genitive-plural="идентификаторов пассажиров" name-creative-plural="идентификаторами пассажиров"/>
+            <column sql-name="passenger_name" name="имя пассажира" name-plural="имена пассажиров"
+                    name-genitive-plural="имён пассажиров" name-creative-plural="именами пассажиров"/>
+            <column sql-name="contact_data" name="контактная информация" name-plural="контактные информации"
+                    name-genitive-plural="контактных информаций" name-creative-plural="контактными информациями"/>
         </table>       
     </tables>
     <labs-config>
@@ -95,8 +120,8 @@
             </task04>
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
-                <subtask05 table="bookings" column1="NOW" column2="DATE"
-                         description="количество времени прошедшее с брони билета">
+                <subtask05 table="bookings" column1="NOW()" column2="BOOK_DATE"
+                           description="количество времени прошедшее с брони билета">
                     <option05>
                         <time>DAY</time>
                         <value>в днях</value>
@@ -174,15 +199,15 @@
                     <column06 name="модель">
                         <option06>
                             <query>Боинг</query>
-                            <answer>split_part(model, ' ', 0)</answer>
+                            <answer>split_part(model, ' ', 1)</answer>
                         </option06>
                         <option06>
                             <query>БОИНГ</query>
-                            <answer>upper(split_part(model, ' ', 0))</answer>
+                            <answer>upper(split_part(model, ' ', 1))</answer>
                         </option06>
                         <option06>
                             <query>боинг</query>
-                            <answer>lower(split_part(model, ' ', 0))</answer>
+                            <answer>lower(split_part(model, ' ', 1))</answer>
                         </option06>
                         <option06>
                             <query>Боинг 777-300</query>
@@ -218,11 +243,11 @@
                         </option06>
                         <option06>
                             <query>№773</query>
-                            <answer>" №" || aircraft_code</answer>
+                            <answer>'№' || aircraft_code</answer>
                         </option06>
                         <option06>
                             <query>№ 773</query>
-                            <answer>" № " || aircraft_code</answer>
+                            <answer>'№ ' || aircraft_code</answer>
                         </option06>
                     </column06>
                 </subtask06>
@@ -244,7 +269,7 @@
                         </option06>
                         <option06>
                             <query>аэропорт Якутск</query>
-                            <answer>' аэропорт ' || airport_name</answer>
+                            <answer>'аэропорт ' || airport_name</answer>
                         </option06>
                         <option06>
                             <query>ЯКУТСК</query>
@@ -254,15 +279,15 @@
                     <column06 name="город">
                         <option06>
                             <query>г.Якутск</query>
-                            <answer>' г.' || city</answer>
+                            <answer>'г.' || city</answer>
                         </option06>
                         <option06>
                             <query>г. Якутск</query>
-                            <answer>' г. ' || city</answer>
+                            <answer>'г. ' || city</answer>
                         </option06>
                         <option06>
                             <query>город Якутск</query>
-                            <answer>' город' || city</answer>
+                            <answer>'город' || city</answer>
                         </option06>
                     </column06>
                     <column06 name="временная зона">
@@ -276,16 +301,15 @@
                         </option06>
                         <option06>
                             <query>временная зона - Asia/Yakutsk</query>
-                            <answer>' временная зона - ' || timezone</answer>
+                            <answer>'временная зона - ' || timezone</answer>
                         </option06>
                         <option06>
                             <query>Asia</query>
-                            <answer>split_part(timezone, '/', 0)</answer>
+                            <answer>split_part(timezone, '/', 1)</answer>
                         </option06>
-                        split_part(
                         <option06>
                             <query>временная зона - Asia</query>
-                            <answer>' временная зона - ' || split_part(timezone, '/', 0)</answer>
+                            <answer>'временная зона - ' || split_part(timezone, '/', 1)</answer>
                         </option06>
                     </column06>
                 </subtask06>
@@ -297,7 +321,7 @@
                         </option06>
                         <option06>
                             <query>№0005432000987</query>
-                            <answer>' №' || ticket_no</answer>
+                            <answer>'№' || ticket_no</answer>
                         </option06>
                     </column06>
                     <column06 name="код бронирования">
@@ -307,7 +331,7 @@
                         </option06>
                         <option06>
                             <query>код брони - 06B046</query>
-                            <answer>' код брони - ' || book_ref</answer>
+                            <answer>'код брони - ' || book_ref</answer>
                         </option06>
                     </column06>
                     <column06 name="идентификатор пассажира">
@@ -317,23 +341,23 @@
                         </option06>
                         <option06>
                             <query>id - 8149 604011</query>
-                            <answer>' id - ' || passenger_id</answer>
+                            <answer>'id - ' || passenger_id</answer>
                         </option06>
                         <option06>
                             <query>8149</query>
-                            <answer>split_part(passenger_id, ' ', 0)</answer>
+                            <answer>split_part(passenger_id, ' ', 1)</answer>
                         </option06>
                         <option06>
                             <query>id - 8149</query>
-                            <answer>' id - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>'id - ' || split_part(passenger_id, ' ', 1)</answer>
                         </option06>
                         <option06>
                             <query>ид - 8149</query>
-                            <answer>' ид - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>'ид - ' || split_part(passenger_id, ' ', 1)</answer>
                         </option06>
                         <option06>
                             <query>айди - 8149</query>
-                            <answer>' айди - ' || split_part(passenger_id, ' ', 0)</answer>
+                            <answer>'айди - ' || split_part(passenger_id, ' ', 1)</answer>
                         </option06>
                     </column06>
                     <column06 name="имя пассажира">
@@ -343,19 +367,20 @@
                         </option06>
                         <option06>
                             <query>name - VALERIY TIKHONOV</query>
-                            <answer>' name - ' || passenger_name</answer>
+                            <answer>'name - ' || passenger_name</answer>
                         </option06>
                         <option06>
                             <query>имя фамилия - VALERIY TIKHONOV</query>
-                            <answer>' имя фамилия - ' || passenger_name</answer>
+                            <answer>'имя фамилия - ' || passenger_name</answer>
                         </option06>
                         <option06>
                             <query>V. TIKHONOV</query>
-                            <answer>substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)</answer>
+                            <answer>substr(passenger_name, 0, 0) || '. ' || split_part(passenger_name, ' ', 2)</answer>
                         </option06>
                         <option06>
                             <query>name - V. TIKHONOV</query>
-                            <answer>' name - ' || substr(passenger_name, 0, 0) || '. ' || split(passenger_name, ' ', 1)
+                            <answer>'name - ' || substr(passenger_name, 0, 0) || '. ' || split_part(passenger_name, ' ',
+                                2)
                             </answer>
                         </option06>
                     </column06>
@@ -418,9 +443,11 @@
                 </subtask09>
                 <subtask09 for="aircrafts:model">
                     <left-position>Бо</left-position>
+                    <right-position>Бо</right-position>
                 </subtask09>
                 <subtask09 for="aircrafts:range">
                     <left-position>2</left-position>
+                    <right-position>2</right-position>
                 </subtask09>
                 <subtask09 for="airports:airport_code">
                     <left-position>3</left-position>
@@ -428,9 +455,10 @@
                 </subtask09>
                 <subtask09 for="airports:airport_name">
                     <left-position>Бо</left-position>
+                    <right-position>Бо</right-position>
                 </subtask09>
                 <subtask09 for="airports:city">
-                    <left-position>2</left-position>
+                    <right-position>2</right-position>
                 </subtask09>
             </task09>
             <task10 id="task10" description="Выборка с использованием фразы WHERE">
