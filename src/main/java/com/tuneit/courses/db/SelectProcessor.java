@@ -34,7 +34,7 @@ public class SelectProcessor {
         tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(false);
         tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(false);
         tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' id - ' || passenger_id || ' имя фамилия - ' || passenger_name || ' код брони - ' || book_ref from tickets").setComplete(false);
-        tasks[6].setAnswer("select timezone, airport_code from airports where airport_code like '%3%'").setComplete(true);
+        tasks[6].setAnswer("select coordinates, city, airport_name, airport_code from airports where airport_code like '%3%'").setComplete(true);
         System.out.println(tasks[6].getAnswer());
         ds.checkTasks(tasks);
         for (Task t : tasks) {

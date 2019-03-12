@@ -64,7 +64,7 @@ public class Task07 extends LabTask {
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                 .findFirst().get().getNamePL();
 
-        table.getColumns().removeIf(column -> column.getName().equalsIgnoreCase(columnName));
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 
