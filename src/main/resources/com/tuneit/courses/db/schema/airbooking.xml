@@ -389,131 +389,276 @@
             <task07 id="task07" description="Выборка значений с условием">
                 <prolog>Выдать</prolog>
                 <epilog/>
-                <subtask07 for="aircrafts:aircraft_code">
-                    <left-position>3</left-position>
-                    <right-position>3</right-position>
-                </subtask07>
                 <subtask07 for="aircrafts:model">
-                    <left-position>Бо</left-position>
+                    <left-position>Бо Боинг Аэро Аэробус</left-position>
+                    <right-position>100 300 00 200</right-position>
                 </subtask07>
-                <subtask07 for="aircrafts:range">
-                    <left-position>2</left-position>
-                </subtask07>
-                <subtask07 for="airports:airport_code">
-                    <left-position>3</left-position>
-                    <right-position>3</right-position>
-                </subtask07>
+
                 <subtask07 for="airports:airport_name">
-                    <left-position>Бо</left-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
                 </subtask07>
                 <subtask07 for="airports:city">
-                    <left-position>2</left-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
+                </subtask07>
+                <subtask07 for="airports:timezone">
+                    <left-position>Asia Europe</left-position>
+                    <right-position>ow burg grad</right-position>
+                </subtask07>
+
+                <subtask07 for="boarding_passes:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask07>
+
+                <subtask07 for="flights:status">
+                    <left-position>Arr Schedul De On Cancel</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask07>
+
+                <subtask07 for="seats:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask07>
+                <subtask07 for="seats:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask07>
+
+                <subtask07 for="ticket_flights:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask07>
+
+                <subtask07 for="tickets:passenger_name">
+                    <left-position>ALEKS AL VIK VI VA TATY TA TAM SVET</left-position>
+                    <right-position>OVA EVA ROV DEV</right-position>
                 </subtask07>
             </task07>
             <task08 id="task08" description="Выборка значений с сортировкой">
                 <prolog>Выдать</prolog>
                 <epilog/>
-                <subtask08 for="aircrafts:aircraft_code">
-                    <left-position>3</left-position>
-                    <right-position>4</right-position>
-                </subtask08>
                 <subtask08 for="aircrafts:model">
-                    <left-position>Бо</left-position>
+                    <left-position>Бо Боинг Аэро Аэробус</left-position>
+                    <right-position>100 300 00 200</right-position>
                 </subtask08>
-                <subtask08 for="aircrafts:range">
-                    <left-position>2</left-position>
-                </subtask08>
-                <subtask08 for="airports:airport_code">
-                    <left-position>3</left-position>
-                    <right-position>3</right-position>
-                </subtask08>
+
                 <subtask08 for="airports:airport_name">
-                    <left-position>Бо</left-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
                 </subtask08>
                 <subtask08 for="airports:city">
-                    <left-position>2</left-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
+                </subtask08>
+                <subtask08 for="airports:timezone">
+                    <left-position>Asia Europe</left-position>
+                    <right-position>ow burg grad</right-position>
+                </subtask08>
+
+                <subtask08 for="boarding_passes:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask08>
+
+                <subtask08 for="flights:status">
+                    <left-position>Arr Schedul De On Cancel</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask08>
+
+                <subtask08 for="seats:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask08>
+                <subtask08 for="seats:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask08>
+
+                <subtask08 for="ticket_flights:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask08>
+
+                <subtask08 for="tickets:passenger_name">
+                    <left-position>ALEKS AL VIK VI VA TATY TA TAM SVET</left-position>
+                    <right-position>OVA EVA ROV DEV</right-position>
                 </subtask08>
             </task08>
             <task09 id="task09" description="Выборка значений с сортировкой">
                 <prolog>Выдать</prolog>
                 <epilog/>
-                <subtask09 for="aircrafts:aircraft_code">
-                    <left-position>3</left-position>
-                    <right-position>4</right-position>
-                </subtask09>
                 <subtask09 for="aircrafts:model">
-                    <left-position>Бо</left-position>
-                    <right-position>Бо</right-position>
+                    <left-position>Бо Боинг Аэро Аэробус</left-position>
+                    <right-position>100 300 00 200</right-position>
                 </subtask09>
-                <subtask09 for="aircrafts:range">
-                    <left-position>2</left-position>
-                    <right-position>2</right-position>
-                </subtask09>
-                <subtask09 for="airports:airport_code">
-                    <left-position>3</left-position>
-                    <right-position>6</right-position>
-                </subtask09>
+
                 <subtask09 for="airports:airport_name">
-                    <left-position>Бо</left-position>
-                    <right-position>Бо</right-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
                 </subtask09>
                 <subtask09 for="airports:city">
-                    <right-position>2</right-position>
+                    <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
+                    <right-position>ово ск</right-position>
+                </subtask09>
+                <subtask09 for="airports:timezone">
+                    <left-position>Asia Europe</left-position>
+                    <right-position>ow burg grad</right-position>
+                </subtask09>
+
+                <subtask09 for="boarding_passes:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask09>
+
+                <subtask09 for="flights:status">
+                    <left-position>Arr Schedul De On Cancel</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask09>
+
+                <subtask09 for="seats:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask09>
+                <subtask09 for="seats:seat_no">
+                    <left-position>10 11 12 13 14</left-position>
+                    <right-position>A C D F</right-position>
+                </subtask09>
+
+                <subtask09 for="ticket_flights:fare_conditions">
+                    <left-position>Eco Bus Co</left-position>
+                    <right-position>my ort ess</right-position>
+                </subtask09>
+
+                <subtask09 for="tickets:passenger_name">
+                    <left-position>ALEKS AL VIK VI VA TATY TA TAM SVET</left-position>
+                    <right-position>OVA EVA ROV DEV</right-position>
                 </subtask09>
             </task09>
             <task10 id="task10" description="Выборка с использованием фразы WHERE">
                 <prolog>Вывести</prolog>
                 <epilog/>
-                <subtask10 for="aircrafts:aircraft_code">
-                    <option>3</option>
+                <subtask10 for="boarding_passes:boarding_no">
+                    <option>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20</option>
                 </subtask10>
-                <subtask10 for="aircrafts:model">
-                    <option>3 6</option>
+                <subtask10 for="boarding_passes:seat_no">
+                    <option>10A 10B 10C 10D 10E 10F 11A 11B 11C 11D 11E</option>
                 </subtask10>
-                <subtask10 for="aircrafts:range">
-                    <option>3 4 5</option>
+
+                <subtask10 for="bookings:total_amount">
+                    <option>6400.00 6600.00 7400.00 7500.00 9300.00 10200.00 10300.00 12800.00</option>
                 </subtask10>
-                <subtask10 for="airports:airport_code">
-                    <option>5</option>
+
+                <subtask10 for="flights:flight_no">
+                    <option>PG0611 PG0314 PG0490 PG0201</option>
                 </subtask10>
-                <subtask10 for="airports:airport_name">
-                    <option>5d</option>
+                <subtask10 for="flights:departure_airport">
+                    <option>REN KXK IKT TBW AER NBC KRR PKC EGO</option>
                 </subtask10>
-                <subtask10 for="airports:city">
-                    <option>5d</option>
+                <subtask10 for="flights:arrival_airport">
+                    <option>DME SVO LED VKO OVB KJA SVX ROV</option>
+                </subtask10>
+                <subtask10 for="flights:status">
+                    <option>Departed Arrived Cancelled Delayed Scheduled</option>
+                </subtask10>
+                <subtask10 for="flights:aircraft_code">
+                    <option>CN1 CR2 773 763 319 733 321 SU9</option>
+                </subtask10>
+
+                <subtask10 for="seats:aircraft_code">
+                    <option>CN1 320 CR2 773 763 319 733 321 SU9</option>
+                </subtask10>
+                <subtask10 for="seats:seat_no">
+                    <option>35K 39B 31K 48A 35F 18G 12A 27C 50A</option>
+                </subtask10>
+                <subtask10 for="seats:fare_conditions">
+                    <option>Business Comfort Economy</option>
+                </subtask10>
+
+                <subtask10 for="ticket_flights:flight_id">
+                    <option>292 9924 5291 14547 9890 3495 2354 26172</option>
+                </subtask10>
+                <subtask10 for="ticket_flights:fare_conditions">
+                    <option>Business Comfort Economy</option>
+                </subtask10>
+                <subtask10 for="ticket_flights:amount">
+                    <option>3000.00 3100.00 3200.00 3300.00 3400.00 3500.00 3600.00 3700.00 3800.00 3900.00
+                    </option>
                 </subtask10>
             </task10>
             <task11 id="task11" description="Агрегирование данных">
                 <prolog>Вывести количество</prolog>
                 <epilog/>
-                <subtask11 for="aircrafts:aircraft_code">
-                    <option>3</option>
+                <subtask11 for="boarding_passes:boarding_no">
+                    <option>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20</option>
                 </subtask11>
-                <subtask11 for="aircrafts:model">
-                    <option>3 6</option>
+                <subtask11 for="boarding_passes:seat_no">
+                    <option>10A 10B 10C 10D 10E 10F 11A 11B 11C 11D 11E</option>
                 </subtask11>
-                <subtask11 for="aircrafts:range">
-                    <option>3 4 5</option>
+
+                <subtask11 for="bookings:total_amount">
+                    <option>6400.00 6600.00 7400.00 7500.00 9300.00 10200.00 10300.00 12800.00</option>
                 </subtask11>
-                <subtask11 for="airports:airport_code">
-                    <option>5</option>
+
+                <subtask11 for="flights:flight_no">
+                    <option>PG0611 PG0314 PG0490 PG0201</option>
                 </subtask11>
-                <subtask11 for="airports:airport_name">
-                    <option>5d</option>
+                <subtask11 for="flights:departure_airport">
+                    <option>REN KXK IKT TBW AER NBC KRR PKC EGO</option>
                 </subtask11>
-                <subtask11 for="airports:city">
-                    <option>5d</option>
+                <subtask11 for="flights:arrival_airport">
+                    <option>DME SVO LED VKO OVB KJA SVX ROV</option>
+                </subtask11>
+                <subtask11 for="flights:status">
+                    <option>Departed Arrived Cancelled Delayed Scheduled</option>
+                </subtask11>
+                <subtask11 for="flights:aircraft_code">
+                    <option>CN1 CR2 773 763 319 733 321 SU9</option>
+                </subtask11>
+
+                <subtask11 for="seats:aircraft_code">
+                    <option>CN1 320 CR2 773 763 319 733 321 SU9</option>
+                </subtask11>
+                <subtask11 for="seats:seat_no">
+                    <option>35K 39B 31K 48A 35F 18G 12A 27C 50A</option>
+                </subtask11>
+                <subtask11 for="seats:fare_conditions">
+                    <option>Business Comfort Economy</option>
+                </subtask11>
+
+                <subtask11 for="ticket_flights:flight_id">
+                    <option>292 9924 5291 14547 9890 3495 2354 26172</option>
+                </subtask11>
+                <subtask11 for="ticket_flights:fare_conditions">
+                    <option>Business Comfort Economy</option>
+                </subtask11>
+                <subtask11 for="ticket_flights:amount">
+                    <option>3000.00 3100.00 3200.00 3300.00 3400.00 3500.00 3600.00 3700.00 3800.00 3900.00
+                    </option>
                 </subtask11>
             </task11>
             <task12 id="task12" description="Агрегирование данных">
                 <prolog>Вывести количество различных</prolog>
                 <epilog/>
-                <subtask12 for="aircrafts:aircraft_code"/>
-                <subtask12 for="aircrafts:model"/>
-                <subtask12 for="aircrafts:range"/>
-                <subtask12 for="airports:airport_code"/>
-                <subtask12 for="airports:airport_name"/>
-                <subtask12 for="airports:city"/>
+                <subtask12 for="boarding_passes:boarding_no"/>
+                <subtask12 for="boarding_passes:seat_no"/>
+
+                <subtask12 for="bookings:total_amount"/>
+
+                <subtask12 for="flights:flight_no"/>
+                <subtask12 for="flights:departure_airport"/>
+                <subtask12 for="flights:arrival_airport"/>
+                <subtask12 for="flights:status"/>
+                <subtask12 for="flights:aircraft_code"/>
+
+                <subtask12 for="seats:aircraft_code"/>
+                <subtask12 for="seats:seat_no"/>
+                <subtask12 for="seats:fare_conditions"/>
+
+                <subtask12 for="ticket_flights:flight_id"/>
+                <subtask12 for="ticket_flights:fare_conditions"/>
+                <subtask12 for="ticket_flights:amount"/>
             </task12>
         </lab02>
     </labs-config>

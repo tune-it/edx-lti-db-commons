@@ -39,7 +39,6 @@ public class Task06 extends LabTask {
 
 
         answer.append(" FROM ").append(table.getTableName()).append(";");
-        System.out.println(answer);
     }
 
     @Override

@@ -24,6 +24,8 @@ public class Task07 extends LabTask {
 
         String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
 
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
         writeColumnFromTable(answer, table.getColumns(), task);
 
         int randomLeftOrRightPosition = getRandom(task).nextInt(2);
@@ -37,9 +39,7 @@ public class Task07 extends LabTask {
             position = randomSubtask06.rightPosition.get(randomRightPosition);
         }
 
-        answer.append(", ")
-                .append(columnName)
-                .append(" FROM ")
+        answer.append(" FROM ")
                 .append(table.getTableName())
                 .append(" WHERE ")
                 .append(columnName)
@@ -61,11 +61,13 @@ public class Task07 extends LabTask {
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                 .findFirst().get().getNamePlural();
 
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
         writeColumnFromTablePL(query, table.getColumns(), task);
 
         query.append(", ")
                 .append(columnNamePL)
-                .append(" которых содержащат в названии \'")
+                .append(" которых содержат в названии \'")
                 .append(randomSubtask06.leftPosition.get(0))
                 .append("\'.");
     }

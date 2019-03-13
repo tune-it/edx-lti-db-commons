@@ -22,20 +22,20 @@ public class Task09 extends LabTask {
 
         String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
 
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
         writeColumnFromTable(answer, table.getColumns(), task);
 
         int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
         String position = randomSubtask09.rightPosition.get(randomPosition);
 
-        answer.append(", ")
-                .append(columnName)
-                .append(" FROM ")
+        answer.append(" FROM ")
                 .append(table.getTableName())
                 .append(" WHERE ")
                 .append(columnName)
                 .append(" LIKE \'%")
                 .append(position)
-                .append("\' ORDER BY 1, 2;");
+                .append("\' ORDER BY 1;");
     }
 
     @Override
@@ -51,6 +51,7 @@ public class Task09 extends LabTask {
                 .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                 .findFirst().get().getNamePlural();
 
+        table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
         writeColumnFromTablePL(query, table.getColumns(), task);
 

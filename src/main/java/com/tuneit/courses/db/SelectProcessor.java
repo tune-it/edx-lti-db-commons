@@ -33,17 +33,21 @@ public class SelectProcessor {
         tasks[2].setAnswer("select aircraft_code, seat_no from seats;").setComplete(false);
         tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(false);
         tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(false);
-        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' id - ' || passenger_id || ' имя фамилия - ' || passenger_name || ' код брони - ' || book_ref from tickets").setComplete(false);
-        tasks[6].setAnswer("select coordinates, city, airport_name, airport_code from airports where airport_code like '%3%'").setComplete(false);
-        tasks[7].setAnswer("select aircraft_code, model from aircrafts where model like 'Бо%' order by model;").setComplete(false);
-        tasks[8].setAnswer("select model, aircraft_code from aircrafts where aircraft_code like '%4' order by 1, 2;").setComplete(false);
-        tasks[9].setAnswer("select airport_code, airport_name, city, coordinates from airports where airport_code = '5';").setComplete(false);
-        tasks[10].setAnswer("select '3' || ' = ' || count(model) from aircrafts where model = '3' group by model;").setComplete(false);
-        tasks[11].setAnswer("select count(city) from airports group by city order by count(city) asc limit 5;").setComplete(false);
+        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' ' || 'id - ' || passenger_id || ' ' || 'имя фамилия - ' || passenger_name || ' ' || 'код брони - ' || book_ref from tickets").setComplete(false);
+        tasks[6].setAnswer("select arrival_airport from flights where status like '%Arr%';").setComplete(false);
+        tasks[7].setAnswer("select aircraft_code from seats where seat_no like '12%' order by seat_no;").setComplete(false);
+        tasks[8].setAnswer("select aircraft_code from aircrafts where model like '%100' order by 1;").setComplete(false);
+        tasks[9].setAnswer("select fare_conditions from seats where seat_no = '50A' OR seat_no = '12A' OR seat_no = '27C';").setComplete(false);
+        tasks[10].setAnswer("select '11C' || ' = ' || count(seat_no) from boarding_passes where seat_no = '11C' group by seat_no;").setComplete(false);
+        tasks[11].setAnswer("select count(seat_no) from boarding_passes group by seat_no order by count(seat_no) asc limit 5;").setComplete(true);
         ds.checkTasks(tasks);
         for (Task t : tasks) {
-            if (t.isComplete()) {
-                System.out.println(t);
+//            if (t.isComplete()) {
+//                System.out.println(t.getQuestion());
+//            }
+            if (t.isComplete() && t.getRating() != 1) {
+                System.out.println("INCORRECT " + t);
+//                System.out.println(t.getQuestion());
             }
         }
     }
@@ -96,7 +100,7 @@ public class SelectProcessor {
             md = MessageDigest.getInstance("MD5");
             conn = schema.getConnection();
             stmt = conn.createStatement();
-            stmt.setMaxRows(5);
+            stmt.setMaxRows(row_limit);
             // setup hard limit timeout
             stmt.execute(session_timeout_command);
             //fetch row count and execution time for query
