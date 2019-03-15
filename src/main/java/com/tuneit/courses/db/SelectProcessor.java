@@ -59,10 +59,10 @@ public class SelectProcessor {
     private static final String session_timeout_command = 
                                 "SET statement_timeout = "+timeout_limit+";";
 
-    private static final String TABLE_CLASSES = "dummy-table";
-    private static final String ROW_CLASSES = "dummy-row";
-    private static final String CELL_CLASSES = "dummy-cell";
-    private static final String HEADER_CLASSES = "dummy-header";
+    private static final String TABLE_CLASSES = "table";
+    private static final String ROW_CLASSES = "row";
+    private static final String CELL_CLASSES = "cell";
+    private static final String HEADER_CLASSES = "header";
         
     public SelectResult execute_select(Schema schema, String sql) {
             return execute_select(schema,sql,100,false);
