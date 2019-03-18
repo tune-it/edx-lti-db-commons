@@ -674,7 +674,7 @@ public class Lab02 extends Lab {
                     .append(columnNamePL)
                     .append(" которых заканчиваются на \'")
                     .append(position)
-                    .append("\'. Отсортировать по столбцу 1.");
+                    .append("\'. Отсортировать по столбцу 1 в порядке возрастания.");
         }
 
         @Override

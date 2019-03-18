@@ -105,7 +105,7 @@
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task01>
             <task02 id="task02" description="Выборка заданных столбцов таблицы">
-                <prolog>Выведите содержимое столбца(столбцов) </prolog>
+                <prolog>Выведите содержимое столбца (столбцов) </prolog>
                 <epilog> для таблицы </epilog>
             </task02>
             <task03 id="task03" description="Выборка значений столбцов по имени">
@@ -121,7 +121,7 @@
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
                 <subtask05 table="bookings" column1="NOW()" column2="BOOK_DATE"
-                           description="количество времени, прошедшего с брони билета">
+                           description="количество времени, прошедшего с момента каждой брони билета">
                     <option05>
                         <time>MONTH</time>
                         <value>(в месяцах)</value>
@@ -140,7 +140,7 @@
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="scheduled_departure" column2="scheduled_arrival"
-                         description="время планируемого полёта воздушного судна">
+                         description="время планируемого полёта для каждого воздушного судна">
                     <option05>
                         <time>MONTH</time>
                         <value>(в месяцах)</value>
@@ -159,7 +159,7 @@
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="actual_departure" column2="actual_arrival"
-                         description="реальное время полёта воздушного судна">
+                         description="реальное время полёта для каждого воздушного судна">
                     <option05>
                         <time>MONTH</time>
                         <value>(в месяцах)</value>
