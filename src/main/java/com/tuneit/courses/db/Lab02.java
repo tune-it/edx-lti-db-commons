@@ -668,7 +668,9 @@ public class Lab02 extends Lab {
             int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
             String position = randomSubtask09.rightPosition.get(randomPosition);
 
-            query.append(", ")
+            query.append(" из таблицы ")
+                    .append(table.getNameGenitive())
+                    .append(", ")
                     .append(columnNamePL)
                     .append(" которых заканчиваются на \'")
                     .append(position)
