@@ -93,8 +93,8 @@
                     name-genitive-plural="идентификаторов пассажиров" name-creative-plural="идентификаторами пассажиров"/>
             <column sql-name="passenger_name" name="имя пассажира" name-plural="имена пассажиров"
                     name-genitive-plural="имён пассажиров" name-creative-plural="именами пассажиров"/>
-            <column sql-name="contact_data" name="контактная информация" name-plural="контактные информации"
-                    name-genitive-plural="контактных информаций" name-creative-plural="контактными информациями"/>
+            <column sql-name="contact_data" name="контактная информация" name-plural="контактные данные"
+                    name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
         </table>       
     </tables>
     <labs-config>
