@@ -564,7 +564,7 @@ public class Lab02 extends Lab {
                     .append(columnNamePL)
                     .append(" которых начинаются на \'")
                     .append(position)
-                    .append("\', отсортированные по столбцу \'")
+                    .append("\'. Отсортировать по столбцу \'")
                     .append(columnNamePL)
                     .append("\'.");
         }
@@ -671,7 +671,7 @@ public class Lab02 extends Lab {
                     .append(columnNamePL)
                     .append(" которых заканчиваются на \'")
                     .append(position)
-                    .append("\', отсортированные по столбцу 1.");
+                    .append("\'. Отсортировать по столбцу 1.");
         }
 
         @Override
