@@ -1,9 +1,6 @@
 package com.tuneit.courses.db;
 
 import com.tuneit.courses.Task;
-import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.db.LabTask;
-import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
@@ -50,9 +47,7 @@ public class Lab02 extends Lab {
         return "Lab02{" + super.toString()+", labTask=" + labTask + '}';
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    static
-    class Task01 extends LabTask {
+    public static class Task01 extends LabTask {
 
         @Override
         public String toString() {
@@ -68,300 +63,181 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task11 extends LabTask {
-        @XmlElement(name = "subtask11")
-        private List<Subtask11> subtasks11;
+    public static class Task02 extends LabTask {
+    }
 
+    public static class Task03 extends LabTask {
+        @Override
+        public String toString() {
+            return "Task01{" + super.toString() + ", forbiddenList=" + forbiddenList + '}';
+        }
+
+        @Override
+        protected void updateQuery(Table table, Task task) {
+            updateQueryPL(table, task);
+        }
+
+    }
+
+    public static class Task04 extends LabTask {
+        @Override
+        public String toString() {
+            return "Task01{" + super.toString() + ", forbiddenList=" + forbiddenList + '}';
+        }
 
         @Override
         protected void updateAnswer(Table table, Task task) {
-            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
+            List<Column> columns = table.getColumns();
 
-            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
+            answer.append("SELECT DISTINCT ");
+            answer.append(columns.get(getRandom(task).nextInt(columns.size())).getColumnName());
+            answer.append(" FROM ").append(table.getTableName()).append(';');
+        }
 
-            int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
-            String options = randomSubtask11.options.get(randomPosition);
+        @Override
+        protected void updateQuery(Table table, Task task) {
+            updateQueryPL(table, task);
+        }
 
-            answer.append("SELECT \'")
-                    .append(options)
-                    .append("\' || \' = \' || COUNT(")
-                    .append(columnName)
+        @Override
+        protected void updateQueryPL(Table table, Task task) {
+            List<Column> columns = table.getColumns();
+            query.append(getProlog());
+            query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePlural());
+            query.append(getEpilog()).append(table.getNameGenitive()).append('.');
+        }
+    }
+
+    public static class Task05 extends LabTask {
+        @XmlElement(name = "subtask05", required = true)
+        private List<Subtask05> subtasks05 = new ArrayList<>();
+
+        @Override
+        protected void updateAnswer(Table table, Task task) {
+            Subtask05 subtask05 = getRandomType(task);
+            Option05 option05 = getRandomSubtype(task, subtask05);
+
+            answer.append("SELECT EXTRACT(")
+                    .append(option05.getTime().trim())
+                    .append(" FROM ")
+                    .append(subtask05.getColumn1().trim())
+                    .append(" - ")
+                    .append(subtask05.getColumn2().trim())
                     .append(") FROM ")
-                    .append(table.getTableName())
-                    .append(" WHERE ")
-                    .append(columnName)
-                    .append(" = \'")
-                    .append(options)
-                    .append("\' GROUP BY ")
-                    .append(columnName)
+                    .append(subtask05.getTable().trim())
                     .append(";");
         }
 
         @Override
         protected void updateQuery(Table table, Task task) {
-            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
-
-            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-            String columnNameCreativePlural = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameCreativePlural();
-
-
-            int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
-            String option = randomSubtask11.options.get(randomPosition);
+            Subtask05 subtask05 = getRandomType(task);
+            Option05 option05 = getRandomSubtype(task, subtask05);
 
             query.append(prolog.trim())
                     .append(" ")
-                    .append(table.getNameGenitive())
-                    .append(" c ")
-                    .append(columnNameCreativePlural)
-                    .append(" \'")
-                    .append(option)
-                    .append("\'. Ответ выдать в виде \'")
-                    .append(option)
-                    .append(" = 10\'.");
-        }
-
-        @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
-            }
-
-            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
-            String tableName = randomSubtask11.tableAndColumn.trim().split(":")[0];
-
-            return findAllowedTable(schema, tableName);
-        }
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        private static class Subtask11 implements Cloneable {
-            @XmlAttribute(name = "for")
-            private String tableAndColumn;
-
-            @XmlElement(name = "option")
-            @XmlList
-            private List<String> options;
-
-            @Override
-            protected Subtask11 clone() {
-                try {
-                    Subtask11 subtaskClone07 = (Subtask11) super.clone();
-                    subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.options = copyOption(options);
-                    return subtaskClone07;
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            private List<String> copyOption(List<String> positions) {
-                if (positions != null) {
-                    return new ArrayList<>(positions);
-                } else {
-                    return null;
-                }
-            }
-        }
-    }
-
-    public static class Task09 extends LabTask {
-        @XmlElement(name = "subtask09")
-        private List<Subtask09> subtasks09;
-
-
-        @Override
-        protected void updateAnswer(Table table, Task task) {
-            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
-
-            answer.append("SELECT ");
-
-            String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTable(answer, table.getColumns(), task);
-
-            int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
-            String position = randomSubtask09.rightPosition.get(randomPosition);
-
-            answer.append(" FROM ")
-                    .append(table.getTableName())
-                    .append(" WHERE ")
-                    .append(columnName)
-                    .append(" LIKE \'%")
-                    .append(position)
-                    .append("\' ORDER BY 1;");
-        }
-
-        @Override
-        protected void updateQuery(Table table, Task task) {
-            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
-
-            query.append(prolog.trim())
-                    .append(" ");
-
-            String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
-
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTablePL(query, table.getColumns(), task);
-
-            int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
-            String position = randomSubtask09.rightPosition.get(randomPosition);
-
-            query.append(", ")
-                    .append(columnNamePL)
-                    .append(" которых заканчиваются на \'")
-                    .append(position)
-                    .append("\', отсортированные по столбцу 1.");
-        }
-
-        @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
-            }
-
-            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
-            String tableName = randomSubtask09.tableAndColumn.trim().split(":")[0];
-
-            return findAllowedTable(schema, tableName);
-        }
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        private static class Subtask09 implements Cloneable {
-            @XmlAttribute(name = "for")
-            private String tableAndColumn;
-
-
-            @XmlElement(name = "left-position")
-            @XmlList
-            private List<String> leftPosition;
-
-            @XmlElement(name = "right-position")
-            @XmlList
-            private List<String> rightPosition;
-
-            @Override
-            protected Subtask09 clone() {
-                try {
-                    Subtask09 subtaskClone07 = (Subtask09) super.clone();
-                    subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyPosition(leftPosition);
-                    subtaskClone07.rightPosition = copyPosition(rightPosition);
-                    return subtaskClone07;
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            private List<String> copyPosition(List<String> positions) {
-                if (positions != null) {
-                    return new ArrayList<>(positions);
-                } else {
-                    return null;
-                }
-            }
-        }
-    }
-
-    public static class Task12 extends LabTask {
-        @XmlElement(name = "subtask12")
-        private List<Subtask12> subtasks12;
-
-
-        @Override
-        protected void updateAnswer(Table table, Task task) {
-            Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
-
-            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-
-            answer.append("SELECT COUNT(")
-                    .append(columnName)
-                    .append(") FROM ")
-                    .append(table.getTableName())
-                    .append(" GROUP BY ")
-                    .append(columnName)
-                    .append(" ORDER BY COUNT(")
-                    .append(columnName);
-
-            if (getRandom(task).nextBoolean()) {
-                answer.append(") ASC LIMIT 5;");
-            } else {
-                answer.append(") DESC LIMIT 5;");
-            }
-        }
-
-        @Override
-        protected void updateQuery(Table table, Task task) {
-            Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
-
-            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-            String columnNameGenitivePlural = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameGenitivePlural();
-
-            query.append(prolog.trim())
+                    .append(subtask05.getDescription().trim())
                     .append(" ")
-                    .append(columnNameGenitivePlural)
-                    .append(" ")
-                    .append(table.getNameGenitive())
-                    .append(". Результат ");
-            if (getRandom(task).nextBoolean()) {
-                query.append("расположить по возрастанию. ");
-            } else {
-                query.append("расположить по убыванию. ");
-            }
-
-            query.append("Привести 5");
-
-            if (getRandom(task).nextBoolean()) {
-                query.append(" первых результатов запроса.");
-            } else {
-                query.append(" последних результатов запроса.");
-            }
+                    .append(option05.getValue().trim())
+                    .append(".");
         }
 
-        @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+        private Subtask05 getRandomType(Task task) {
+            int typeRandomIndex = getRandom(task).nextInt(subtasks05.size());
+            return subtasks05.get(typeRandomIndex);
+        }
+
+        private Option05 getRandomSubtype(Task task, Subtask05 subtask05) {
+            int timeRandomIndex = getRandom(task).nextInt(subtask05.getOptions05().size());
+            return subtask05.getOptions05().get(timeRandomIndex);
+        }
+
+
+        @XmlAccessorType(XmlAccessType.FIELD)
+        public static class Subtask05 {
+            @XmlAttribute(name = "table")
+            private String table;
+
+            @XmlAttribute(name = "column1")
+            private String column1;
+
+            @XmlAttribute(name = "column2")
+            private String column2;
+
+            @XmlAttribute(name = "description")
+            private String description;
+
+            @XmlElement(name = "option05", required = true)
+            private List<Option05> options05;
+
+            public String getTable() {
+                return table;
             }
 
-            Subtask12 randomSubtask12 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
-            String tableName = randomSubtask12.tableAndColumn.trim().split(":")[0];
+            public void setTable(String table) {
+                this.table = table;
+            }
 
-            return findAllowedTable(schema, tableName);
+            public String getColumn1() {
+                return column1;
+            }
+
+            public void setColumn1(String column1) {
+                this.column1 = column1;
+            }
+
+            public String getColumn2() {
+                return column2;
+            }
+
+            public void setColumn2(String column2) {
+                this.column2 = column2;
+            }
+
+            public List<Option05> getOptions05() {
+                return options05;
+            }
+
+            public void setOptions05(List<Option05> options05) {
+                this.options05 = options05;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
-        private static class Subtask12 implements Cloneable {
-            @XmlAttribute(name = "for")
-            private String tableAndColumn;
+        public static class Option05 {
+            @XmlElement(name = "time")
+            private String time;
 
-            @Override
-            protected Subtask12 clone() {
-                try {
-                    Subtask12 subtaskClone07 = (Subtask12) super.clone();
-                    subtaskClone07.tableAndColumn = tableAndColumn;
-                    return subtaskClone07;
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+            @XmlElement(name = "value")
+            private String value;
+
+            public String getTime() {
+                return time;
             }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+
+            public String getValue() {
+                return value;
+            }
+
+            public void setValue(String value) {
+                this.value = value;
+            }
+
         }
     }
 
-    @XmlRootElement(name = "task06")
-    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Task06 extends LabTask {
         @XmlElement(name = "subtask06", required = true)
         private List<Subtask06> subtasks06;
@@ -522,6 +398,332 @@ public class Lab02 extends Lab {
 
     }
 
+    public static class Task07 extends LabTask {
+        @XmlElement(name = "subtask07")
+        private List<Subtask07> subtasks07;
+
+
+        @Override
+        protected void updateAnswer(Table table, Task task) {
+            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+
+            answer.append("SELECT ");
+
+            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTable(answer, table.getColumns(), task);
+
+            int randomLeftOrRightPosition = getRandom(task).nextInt(2);
+
+            String position;
+            if (randomLeftOrRightPosition == 1) {
+                int randomLeftPosition = getRandom(task).nextInt(randomSubtask06.leftPosition.size());
+                position = randomSubtask06.leftPosition.get(randomLeftPosition);
+            } else {
+                int randomRightPosition = getRandom(task).nextInt(randomSubtask06.rightPosition.size());
+                position = randomSubtask06.rightPosition.get(randomRightPosition);
+            }
+
+            answer.append(" FROM ")
+                    .append(table.getTableName())
+                    .append(" WHERE ")
+                    .append(columnName)
+                    .append(" LIKE \'%")
+                    .append(position)
+                    .append("%\';");
+        }
+
+        @Override
+        protected void updateQuery(Table table, Task task) {
+            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+
+            query.append(prolog.trim())
+                    .append(" ");
+
+            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+
+            String columnNamePL = table.getColumns().stream()
+                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                    .findFirst().get().getNamePlural();
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTablePL(query, table.getColumns(), task);
+
+            query.append(", ")
+                    .append(columnNamePL)
+                    .append(" которых содержат в названии \'")
+                    .append(randomSubtask06.leftPosition.get(0))
+                    .append("\'.");
+        }
+
+        @Override
+        protected Table getRandomTable(Schema schema, Task task) {
+            if (!allowed.containsKey(schema.getName())) {
+                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+            }
+
+            Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+            String tableName = randomSubtask07.tableAndColumn.trim().split(":")[0];
+
+            return findAllowedTable(schema, tableName);
+        }
+
+        @XmlAccessorType(XmlAccessType.FIELD)
+        private static class Subtask07 implements Cloneable {
+            @XmlAttribute(name = "for")
+            private String tableAndColumn;
+
+
+            @XmlElement(name = "left-position")
+            @XmlList
+            private List<String> leftPosition;
+
+            @XmlElement(name = "right-position")
+            @XmlList
+            private List<String> rightPosition;
+
+            @Override
+            protected Subtask07 clone() {
+                try {
+                    Subtask07 subtaskClone07 = (Subtask07) super.clone();
+                    subtaskClone07.tableAndColumn = tableAndColumn;
+                    subtaskClone07.leftPosition = copyPosition(leftPosition);
+                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    return subtaskClone07;
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            private List<String> copyPosition(List<String> positions) {
+                if (positions != null) {
+                    return new ArrayList<>(positions);
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+
+    public static class Task08 extends LabTask {
+        @XmlElement(name = "subtask08")
+        private List<Subtask08> subtasks08;
+
+
+        @Override
+        protected void updateAnswer(Table table, Task task) {
+            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
+
+            answer.append("SELECT ");
+
+            String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTable(answer, table.getColumns(), task);
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
+            String position = randomSubtask08.leftPosition.get(randomPosition);
+
+            answer.append(" FROM ")
+                    .append(table.getTableName())
+                    .append(" WHERE ")
+                    .append(columnName)
+                    .append(" LIKE \'")
+                    .append(position)
+                    .append("%\' ORDER BY ")
+                    .append(columnName)
+                    .append(";");
+        }
+
+        @Override
+        protected void updateQuery(Table table, Task task) {
+            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
+
+            query.append(prolog.trim())
+                    .append(" ");
+
+            String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
+
+            String columnNamePL = table.getColumns().stream()
+                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                    .findFirst().get().getNamePlural();
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTablePL(query, table.getColumns(), task);
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
+            String position = randomSubtask08.leftPosition.get(randomPosition);
+
+            query.append(", ")
+                    .append(columnNamePL)
+                    .append(" которых начинаются на \'")
+                    .append(position)
+                    .append("\', отсортированные по столбцу \'")
+                    .append(columnNamePL)
+                    .append("\'.");
+        }
+
+        @Override
+        protected Table getRandomTable(Schema schema, Task task) {
+            if (!allowed.containsKey(schema.getName())) {
+                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+            }
+
+            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
+            String tableName = randomSubtask08.tableAndColumn.trim().split(":")[0];
+
+            return findAllowedTable(schema, tableName);
+        }
+
+        @XmlAccessorType(XmlAccessType.FIELD)
+        private static class Subtask08 implements Cloneable {
+            @XmlAttribute(name = "for")
+            private String tableAndColumn;
+
+
+            @XmlElement(name = "left-position")
+            @XmlList
+            private List<String> leftPosition;
+
+            @XmlElement(name = "right-position")
+            @XmlList
+            private List<String> rightPosition;
+
+            @Override
+            protected Subtask08 clone() {
+                try {
+                    Subtask08 subtaskClone07 = (Subtask08) super.clone();
+                    subtaskClone07.tableAndColumn = tableAndColumn;
+                    subtaskClone07.leftPosition = copyPosition(leftPosition);
+                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    return subtaskClone07;
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            private List<String> copyPosition(List<String> positions) {
+                if (positions != null) {
+                    return new ArrayList<>(positions);
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+
+    public static class Task09 extends LabTask {
+        @XmlElement(name = "subtask09")
+        private List<Subtask09> subtasks09;
+
+
+        @Override
+        protected void updateAnswer(Table table, Task task) {
+            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
+
+
+            String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
+            String position = randomSubtask09.rightPosition.get(randomPosition);
+
+            answer.append("SELECT ");
+            writeColumnFromTable(answer, table.getColumns(), task);
+            answer.append(" FROM ")
+                    .append(table.getTableName())
+                    .append(" WHERE ")
+                    .append(columnName)
+                    .append(" LIKE \'%")
+                    .append(position)
+                    .append("\' ORDER BY 1;");
+        }
+
+        @Override
+        protected void updateQuery(Table table, Task task) {
+            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
+
+            query.append(prolog.trim())
+                    .append(" ");
+
+            String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
+
+            String columnNamePL = table.getColumns().stream()
+                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                    .findFirst().get().getNamePlural();
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTablePL(query, table.getColumns(), task);
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
+            String position = randomSubtask09.rightPosition.get(randomPosition);
+
+            query.append(", ")
+                    .append(columnNamePL)
+                    .append(" которых заканчиваются на \'")
+                    .append(position)
+                    .append("\', отсортированные по столбцу 1.");
+        }
+
+        @Override
+        protected Table getRandomTable(Schema schema, Task task) {
+            if (!allowed.containsKey(schema.getName())) {
+                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+            }
+
+            Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
+            String tableName = randomSubtask09.tableAndColumn.trim().split(":")[0];
+
+            return findAllowedTable(schema, tableName);
+        }
+
+        @XmlAccessorType(XmlAccessType.FIELD)
+        private static class Subtask09 implements Cloneable {
+            @XmlAttribute(name = "for")
+            private String tableAndColumn;
+
+
+            @XmlElement(name = "left-position")
+            @XmlList
+            private List<String> leftPosition;
+
+            @XmlElement(name = "right-position")
+            @XmlList
+            private List<String> rightPosition;
+
+            @Override
+            protected Subtask09 clone() {
+                try {
+                    Subtask09 subtaskClone07 = (Subtask09) super.clone();
+                    subtaskClone07.tableAndColumn = tableAndColumn;
+                    subtaskClone07.leftPosition = copyPosition(leftPosition);
+                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    return subtaskClone07;
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            private List<String> copyPosition(List<String> positions) {
+                if (positions != null) {
+                    return new ArrayList<>(positions);
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+
     public static class Task10 extends LabTask {
         @XmlElement(name = "subtask10")
         private List<Subtask10> subtasks10;
@@ -647,232 +849,58 @@ public class Lab02 extends Lab {
         }
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    static
-    class Task02 extends LabTask {
-    }
+    public static class Task11 extends LabTask {
+        @XmlElement(name = "subtask11")
+        private List<Subtask11> subtasks11;
 
-    @XmlRootElement(name = "task05")
-    @XmlAccessorType(XmlAccessType.FIELD)
-    public static class Task05 extends LabTask {
-        @XmlElement(name = "subtask05", required = true)
-        private List<Subtask05> subtasks05 = new ArrayList<>();
 
         @Override
         protected void updateAnswer(Table table, Task task) {
-            Subtask05 subtask05 = getRandomType(task);
-            Option05 option05 = getRandomSubtype(task, subtask05);
+            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
 
-            answer.append("SELECT EXTRACT(")
-                    .append(option05.getTime().trim())
-                    .append(" FROM ")
-                    .append(subtask05.getColumn1().trim())
-                    .append(" - ")
-                    .append(subtask05.getColumn2().trim())
+            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
+            String options = randomSubtask11.options.get(randomPosition);
+
+            answer.append("SELECT \'")
+                    .append(options)
+                    .append("\' || \' = \' || COUNT(")
+                    .append(columnName)
                     .append(") FROM ")
-                    .append(subtask05.getTable().trim())
-                    .append(";");
-        }
-
-        @Override
-        protected void updateQuery(Table table, Task task) {
-            Subtask05 subtask05 = getRandomType(task);
-            Option05 option05 = getRandomSubtype(task, subtask05);
-
-            query.append(prolog.trim())
-                    .append(" ")
-                    .append(subtask05.getDescription().trim())
-                    .append(" ")
-                    .append(option05.getValue().trim())
-                    .append(".");
-        }
-
-        private Subtask05 getRandomType(Task task) {
-            int typeRandomIndex = getRandom(task).nextInt(subtasks05.size());
-            return subtasks05.get(typeRandomIndex);
-        }
-
-        private Option05 getRandomSubtype(Task task, Subtask05 subtask05) {
-            int timeRandomIndex = getRandom(task).nextInt(subtask05.getOptions05().size());
-            return subtask05.getOptions05().get(timeRandomIndex);
-        }
-
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class Subtask05 {
-            @XmlAttribute(name = "table")
-            private String table;
-
-            @XmlAttribute(name = "column1")
-            private String column1;
-
-            @XmlAttribute(name = "column2")
-            private String column2;
-
-            @XmlAttribute(name = "description")
-            private String description;
-
-            @XmlElement(name = "option05", required = true)
-            private List<Option05> options05;
-
-            public String getTable() {
-                return table;
-            }
-
-            public void setTable(String table) {
-                this.table = table;
-            }
-
-            public String getColumn1() {
-                return column1;
-            }
-
-            public void setColumn1(String column1) {
-                this.column1 = column1;
-            }
-
-            public String getColumn2() {
-                return column2;
-            }
-
-            public void setColumn2(String column2) {
-                this.column2 = column2;
-            }
-
-            public List<Option05> getOptions05() {
-                return options05;
-            }
-
-            public void setOptions05(List<Option05> options05) {
-                this.options05 = options05;
-            }
-
-            public String getDescription() {
-                return description;
-            }
-
-            public void setDescription(String description) {
-                this.description = description;
-            }
-
-        }
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class Option05 {
-            @XmlElement(name = "time")
-            private String time;
-
-            @XmlElement(name = "value")
-            private String value;
-
-            public String getTime() {
-                return time;
-            }
-
-            public void setTime(String time) {
-                this.time = time;
-            }
-
-            public String getValue() {
-                return value;
-            }
-
-            public void setValue(String value) {
-                this.value = value;
-            }
-
-        }
-    }
-
-    @XmlAccessorType(XmlAccessType.NONE)
-    static
-    class Task04 extends LabTask {
-        @Override
-        public String toString() {
-            return "Task01{" + super.toString()+ ", forbiddenList=" + forbiddenList + '}';
-        }
-
-        @Override
-        protected void updateAnswer(Table table, Task task) {
-            List<Column> columns = table.getColumns();
-
-            answer.append("SELECT DISTINCT ");
-            answer.append(columns.get(getRandom(task).nextInt(columns.size())).getColumnName());
-            answer.append(" FROM ").append(table.getTableName()).append(';');
-        }
-
-        @Override
-        protected void updateQuery(Table table, Task task) {
-            updateQueryPL(table, task);
-        }
-
-        @Override
-        protected void updateQueryPL(Table table, Task task) {
-            List<Column> columns = table.getColumns();
-            query.append(getProlog());
-            query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePlural());
-            query.append(getEpilog()).append(table.getNameGenitive()).append('.');
-        }
-    }
-
-    public static class Task08 extends LabTask {
-        @XmlElement(name = "subtask08")
-        private List<Subtask08> subtasks08;
-
-
-        @Override
-        protected void updateAnswer(Table table, Task task) {
-            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
-
-            answer.append("SELECT ");
-
-            String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTable(answer, table.getColumns(), task);
-
-            int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
-            String position = randomSubtask08.leftPosition.get(randomPosition);
-
-            answer.append(" FROM ")
                     .append(table.getTableName())
                     .append(" WHERE ")
                     .append(columnName)
-                    .append(" LIKE \'")
-                    .append(position)
-                    .append("%\' ORDER BY ")
+                    .append(" = \'")
+                    .append(options)
+                    .append("\' GROUP BY ")
                     .append(columnName)
                     .append(";");
         }
 
         @Override
         protected void updateQuery(Table table, Task task) {
-            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
+            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
+
+            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
+            String columnNameCreativePlural = table.getColumns().stream()
+                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                    .findFirst().get().getNameCreativePlural();
+
+
+            int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
+            String option = randomSubtask11.options.get(randomPosition);
 
             query.append(prolog.trim())
-                    .append(" ");
-
-            String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
-
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTablePL(query, table.getColumns(), task);
-
-            int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
-            String position = randomSubtask08.leftPosition.get(randomPosition);
-
-            query.append(", ")
-                    .append(columnNamePL)
-                    .append(" которых начинаются на \'")
-                    .append(position)
-                    .append("\', отсортированные по столбцу \'")
-                    .append(columnNamePL)
-                    .append("\'.");
+                    .append(" ")
+                    .append(table.getNameGenitive())
+                    .append(" c ")
+                    .append(columnNameCreativePlural)
+                    .append(" \'")
+                    .append(option)
+                    .append("\'. Ответ выдать в виде \'")
+                    .append(option)
+                    .append(" = 10\'.");
         }
 
         @Override
@@ -881,33 +909,27 @@ public class Lab02 extends Lab {
                 allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
             }
 
-            Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
-            String tableName = randomSubtask08.tableAndColumn.trim().split(":")[0];
+            Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
+            String tableName = randomSubtask11.tableAndColumn.trim().split(":")[0];
 
             return findAllowedTable(schema, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
-        private static class Subtask08 implements Cloneable {
+        private static class Subtask11 implements Cloneable {
             @XmlAttribute(name = "for")
             private String tableAndColumn;
 
-
-            @XmlElement(name = "left-position")
+            @XmlElement(name = "option")
             @XmlList
-            private List<String> leftPosition;
-
-            @XmlElement(name = "right-position")
-            @XmlList
-            private List<String> rightPosition;
+            private List<String> options;
 
             @Override
-            protected Subtask08 clone() {
+            protected Subtask11 clone() {
                 try {
-                    Subtask08 subtaskClone07 = (Subtask08) super.clone();
+                    Subtask11 subtaskClone07 = (Subtask11) super.clone();
                     subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyPosition(leftPosition);
-                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    subtaskClone07.options = copyOption(options);
                     return subtaskClone07;
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
@@ -915,7 +937,7 @@ public class Lab02 extends Lab {
                 }
             }
 
-            private List<String> copyPosition(List<String> positions) {
+            private List<String> copyOption(List<String> positions) {
                 if (positions != null) {
                     return new ArrayList<>(positions);
                 } else {
@@ -925,66 +947,61 @@ public class Lab02 extends Lab {
         }
     }
 
-    @XmlAccessorType(XmlAccessType.NONE)
-    public static class Task07 extends LabTask {
-        @XmlElement(name = "subtask07")
-        private List<Subtask07> subtasks07;
+    public static class Task12 extends LabTask {
+        @XmlElement(name = "subtask12")
+        private List<Subtask12> subtasks12;
 
 
         @Override
         protected void updateAnswer(Table table, Task task) {
-            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+            Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
 
-            answer.append("SELECT ");
+            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
 
-            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+            answer.append("SELECT COUNT(")
+                    .append(columnName)
+                    .append(") FROM ")
+                    .append(table.getTableName())
+                    .append(" GROUP BY ")
+                    .append(columnName)
+                    .append(" ORDER BY COUNT(")
+                    .append(columnName);
 
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTable(answer, table.getColumns(), task);
-
-            int randomLeftOrRightPosition = getRandom(task).nextInt(2);
-
-            String position;
-            if (randomLeftOrRightPosition == 1) {
-                int randomLeftPosition = getRandom(task).nextInt(randomSubtask06.leftPosition.size());
-                position = randomSubtask06.leftPosition.get(randomLeftPosition);
+            if (getRandom(task).nextBoolean()) {
+                answer.append(") ASC LIMIT 5;");
             } else {
-                int randomRightPosition = getRandom(task).nextInt(randomSubtask06.rightPosition.size());
-                position = randomSubtask06.rightPosition.get(randomRightPosition);
+                answer.append(") DESC LIMIT 5;");
             }
-
-            answer.append(" FROM ")
-                    .append(table.getTableName())
-                    .append(" WHERE ")
-                    .append(columnName)
-                    .append(" LIKE \'%")
-                    .append(position)
-                    .append("%\';");
         }
 
         @Override
         protected void updateQuery(Table table, Task task) {
-            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+            Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
+
+            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
+            String columnNameGenitivePlural = table.getColumns().stream()
+                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                    .findFirst().get().getNameGenitivePlural();
 
             query.append(prolog.trim())
-                    .append(" ");
+                    .append(" ")
+                    .append(columnNameGenitivePlural)
+                    .append(" ")
+                    .append(table.getNameGenitive())
+                    .append(". Результат ");
+            if (getRandom(task).nextBoolean()) {
+                query.append("расположить по возрастанию. ");
+            } else {
+                query.append("расположить по убыванию. ");
+            }
 
-            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
+            query.append("Привести 5");
 
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTablePL(query, table.getColumns(), task);
-
-            query.append(", ")
-                    .append(columnNamePL)
-                    .append(" которых содержат в названии \'")
-                    .append(randomSubtask06.leftPosition.get(0))
-                    .append("\'.");
+            if (getRandom(task).nextBoolean()) {
+                query.append(" первых результатов запроса.");
+            } else {
+                query.append(" последних результатов запроса.");
+            }
         }
 
         @Override
@@ -993,63 +1010,29 @@ public class Lab02 extends Lab {
                 allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
             }
 
-            Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
-            String tableName = randomSubtask07.tableAndColumn.trim().split(":")[0];
+            Subtask12 randomSubtask12 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
+            String tableName = randomSubtask12.tableAndColumn.trim().split(":")[0];
 
             return findAllowedTable(schema, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
-        private static class Subtask07 implements Cloneable {
+        private static class Subtask12 implements Cloneable {
             @XmlAttribute(name = "for")
             private String tableAndColumn;
 
-
-            @XmlElement(name = "left-position")
-            @XmlList
-            private List<String> leftPosition;
-
-            @XmlElement(name = "right-position")
-            @XmlList
-            private List<String> rightPosition;
-
             @Override
-            protected Subtask07 clone() {
+            protected Subtask12 clone() {
                 try {
-                    Subtask07 subtaskClone07 = (Subtask07) super.clone();
+                    Subtask12 subtaskClone07 = (Subtask12) super.clone();
                     subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyPosition(leftPosition);
-                    subtaskClone07.rightPosition = copyPosition(rightPosition);
                     return subtaskClone07;
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                     return null;
                 }
             }
-
-            private List<String> copyPosition(List<String> positions) {
-                if (positions != null) {
-                    return new ArrayList<>(positions);
-                } else {
-                    return null;
-                }
-            }
         }
-    }
-
-    @XmlAccessorType(XmlAccessType.NONE)
-    static
-    class Task03 extends LabTask {
-        @Override
-        public String toString() {
-            return "Task01{" + super.toString()+ ", forbiddenList=" + forbiddenList + '}';
-        }
-
-        @Override
-        protected void updateQuery(Table table, Task task) {
-            updateQueryPL(table, task);
-        }
-
     }
 }
 
