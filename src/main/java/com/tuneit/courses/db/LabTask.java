@@ -118,9 +118,13 @@ public abstract class LabTask {
 
     protected void writeColumnFromTablePL(StringBuilder string, List<Column> columns, Task task) {
         Collections.shuffle(columns, getRandom(task));
-        string.append(columns.get(0).getNamePlural());
+        string.append("'")
+                .append(columns.get(0).getNamePlural())
+                .append("'");
         for (int i = 1; i < getRandom(task).nextInt(columns.size()); i++) {
-            string.append(", ").append(columns.get(i).getNamePlural());
+            string.append(", '")
+                    .append(columns.get(i).getNamePlural())
+                    .append("'");
         }
     }
 
