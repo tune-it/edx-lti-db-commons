@@ -4,14 +4,12 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.TaskGeneratorService;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
-@Profile("prod")
 public class DBTaskGeneratorService implements TaskGeneratorService {
 
     @Override
@@ -56,21 +54,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         for (Task task : tasks) {
             Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
 
-            Optional<Lab> optionalLab = schema.getLabs().stream().
-                    filter(lab -> lab.getId().equalsIgnoreCase(task.getLabId().trim())).findFirst();
-            if (!optionalLab.isPresent()) {
-                throw new IllegalArgumentException("Could not find lab with name="
-                        + task.getLabId() + " in schema " + schema.getName());
-            }
-            Lab lab = optionalLab.get();
-
-            Optional<LabTask> optionalLabTask = lab.getLabTask().stream().
-                    filter(labTask -> labTask.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
-            if (!optionalLabTask.isPresent()) {
-                throw new IllegalArgumentException("Could not find lab task with lab name="
-                        + task.getLabId() + " and task " + task.getTaskId() + " in schema " + schema.getName());
-            }
-            LabTask labTask = optionalLabTask.get();
+            LabTask labTask = findLabTask(task);
 
             if (task.isComplete()) {
                 try {
@@ -111,6 +95,26 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         }
 
         return tasks;
+    }
+
+    public LabTask findLabTask(Task task) {
+        Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+
+        Optional<Lab> optionalLab = schema.getLabs().stream().
+                filter(lab -> lab.getId().equalsIgnoreCase(task.getLabId().trim())).findFirst();
+        if (!optionalLab.isPresent()) {
+            throw new IllegalArgumentException("Could not find lab with name="
+                    + task.getLabId() + " in schema " + schema.getName());
+        }
+        Lab lab = optionalLab.get();
+
+        Optional<LabTask> optionalLabTask = lab.getLabTask().stream().
+                filter(labTask -> labTask.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
+        if (!optionalLabTask.isPresent()) {
+            throw new IllegalArgumentException("Could not find lab task with lab name="
+                    + task.getLabId() + " and task " + task.getTaskId() + " in schema " + schema.getName());
+        }
+        return optionalLabTask.get();
     }
 
 }
