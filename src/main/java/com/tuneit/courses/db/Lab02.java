@@ -452,7 +452,9 @@ public class Lab02 extends Lab {
 
             writeColumnFromTablePL(query, table.getColumns(), task);
 
-            query.append(", ")
+            query.append(" для таблицы ")
+                    .append(table.getNameGenitive())
+                    .append(", ")
                     .append(columnNamePL)
                     .append(" которых содержат в названии \'")
                     .append(randomSubtask06.leftPosition.get(0))
@@ -566,7 +568,7 @@ public class Lab02 extends Lab {
                     .append(position)
                     .append("\'. Отсортировать по столбцу \'")
                     .append(columnNamePL)
-                    .append("\'.");
+                    .append("\' в порядке возрастания.");
         }
 
         @Override
