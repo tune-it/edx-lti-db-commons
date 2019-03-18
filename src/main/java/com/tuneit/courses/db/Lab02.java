@@ -1013,7 +1013,7 @@ public class Lab02 extends Lab {
             query.append(prolog.trim())
                     .append(" ")
                     .append(columnNameGenitivePlural)
-                    .append(" ")
+                    .append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(". Результат ");
             if (getRandom(task).nextBoolean()) {
