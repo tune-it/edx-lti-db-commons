@@ -110,7 +110,7 @@
             </task02>
             <task03 id="task03" description="Выборка значений столбцов по имени">
                 <prolog>Выведите все </prolog>
-                <epilog> для </epilog>
+                <epilog> из таблицы </epilog>
                 <!--<forbidden-list>ticket_flights:ticket_no</forbidden-list>-->
             </task03>
             <task04 id="task04" description="Выборка уникальных значений столбцов по имени">
