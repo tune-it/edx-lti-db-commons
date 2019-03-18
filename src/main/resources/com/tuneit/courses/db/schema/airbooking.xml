@@ -37,7 +37,7 @@
             <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
                     name-creative-plural="номерами мест"/>
         </table>
-        <table sql-name="bookings" name="бронирование" name-genitive="бронирования">
+        <table sql-name="bookings" name="бронирование" name-genitive="бронирований">
             <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов" name-creative-plural="кодами"/>
             <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат" name-creative-plural="датами"/>
             <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
