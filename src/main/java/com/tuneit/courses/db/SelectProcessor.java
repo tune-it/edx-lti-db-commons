@@ -143,10 +143,12 @@ public class SelectProcessor {
                     sres.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
                 for(int i=1;i<=numcols;i++) {
                     String field = rset.getString(i);
-                    md.update(field.getBytes());
-                    if (do_html_output) 
-                        sres.getHtmlRows().append("<td class=\"").append(CELL_CLASSES).append("\">")
-                                          .append(field).append("</td>");
+                    if (field != null) {
+                        md.update(field.getBytes());
+                        if (do_html_output)
+                            sres.getHtmlRows().append("<td class=\"").append(CELL_CLASSES).append("\">")
+                                    .append(field).append("</td>");
+                    }
                 }
                 if (do_html_output)
                      sres.getHtmlRows().append("</tr>\n");
