@@ -452,7 +452,7 @@ public class Lab02 extends Lab {
 
             writeColumnFromTablePL(query, table.getColumns(), task);
 
-            query.append(" для таблицы ")
+            query.append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(", ")
                     .append(columnNamePL)
@@ -562,7 +562,9 @@ public class Lab02 extends Lab {
             int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
             String position = randomSubtask08.leftPosition.get(randomPosition);
 
-            query.append(", ")
+            query.append(" из таблицы ")
+                    .append(table.getNameGenitive())
+                    .append(", ")
                     .append(columnNamePL)
                     .append(" которых начинаются на \'")
                     .append(position)
