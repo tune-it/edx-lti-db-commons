@@ -121,60 +121,60 @@
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
                 <subtask05 table="bookings" column1="NOW()" column2="BOOK_DATE"
-                           description="количество времени прошедшее с брони билета">
+                           description="количество времени, прошедшего с брони билета">
                     <option05>
                         <time>MONTH</time>
-                        <value>в месяцах</value>
+                        <value>(в месяцах)</value>
                     </option05>
                     <option05>
                         <time>DAY</time>
-                        <value>в днях</value>
+                        <value>(в днях)</value>
                     </option05>
                     <option05>
                         <time>HOUR</time>
-                        <value>в часах</value>
+                        <value>(в часах)</value>
                     </option05>
                     <option05>
                         <time>MINUTE</time>
-                        <value>в минутах</value>
+                        <value>(в минутах)</value>
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="scheduled_departure" column2="scheduled_arrival"
                          description="время планируемого полёта воздушного судна">
                     <option05>
                         <time>MONTH</time>
-                        <value>в месяцах</value>
+                        <value>(в месяцах)</value>
                     </option05>
                     <option05>
                         <time>DAY</time>
-                        <value>в днях</value>
-                    </option05>                                                            ё
+                        <value>(в днях)</value>
+                    </option05>
                     <option05>
                         <time>HOUR</time>
-                        <value>в часах</value>
+                        <value>(в часах)</value>
                     </option05>
                     <option05>
                         <time>MINUTE</time>
-                        <value>в минутах</value>
+                        <value>(в минутах)</value>
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="actual_departure" column2="actual_arrival"
                          description="реальное время полёта воздушного судна">
                     <option05>
                         <time>MONTH</time>
-                        <value>в месяцах</value>
+                        <value>(в месяцах)</value>
                     </option05>
                     <option05>
                         <time>DAY</time>
-                        <value>в днях</value>
+                        <value>(в днях)</value>
                     </option05>
                     <option05>
                         <time>HOUR</time>
-                        <value>в часах</value>
+                        <value>(в часах)</value>
                     </option05>
                     <option05>
                         <time>MINUTE</time>
-                        <value>в минутах</value>
+                        <value>(в минутах)</value>
                     </option05>
                 </subtask05>
                 <epilog/>
