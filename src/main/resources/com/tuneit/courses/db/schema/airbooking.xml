@@ -7,7 +7,7 @@
         <password>demo</password>
     </connection>
     <tables>
-        <table sql-name="aircrafts" name="воздушные судна" name-genitive="воздушных судов">
+        <table sql-name="aircrafts" name="воздушные суда" name-genitive="воздушных судов">
             <column sql-name="aircraft_code" name="код" name-plural="коды" name-genitive-plural="кодов"
                     name-creative-plural="кодами"/>
             <column sql-name="model" name="модель" name-plural="модели" name-genitive-plural="моделей"
@@ -183,7 +183,7 @@
             <task06 id="task06" description="Преобразование полученных значений">
                 <prolog>Вывести в один столбец следующие параметры:</prolog>
                 <epilog>'.</epilog>
-                <subtask06 table="aircrafts" description="Я самолётик">
+                <subtask06 table="aircrafts" description="Я самолёт">
                     <column06 name="модель">
                         <option06>
                             <query>Боинг</query>
@@ -239,7 +239,7 @@
                         </option06>
                     </column06>
                 </subtask06>
-                <subtask06 table="airports" description="Я портик">
+                <subtask06 table="airports" description="Я аэропорт">
                     <column06 name="код">
                         <option06>
                             <query>YKS</query>
@@ -301,7 +301,7 @@
                         </option06>
                     </column06>
                 </subtask06>
-                <subtask06 table="tickets" description="Я билетик">
+                <subtask06 table="tickets" description="Я билет">
                     <column06 name="номер">
                         <option06>
                             <query>0005432000987</query>
