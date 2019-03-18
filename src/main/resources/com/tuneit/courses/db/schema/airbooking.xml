@@ -181,7 +181,7 @@
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task05>
             <task06 id="task06" description="Преобразование полученных значений">
-                <prolog>Вывести в один столбец текст, содержащий такие параметры как:</prolog>
+                <prolog>Вывести в один столбец следующие параметры:</prolog>
                 <epilog>'.</epilog>
                 <subtask06 table="aircrafts" description="Я самолётик">
                     <column06 name="модель">

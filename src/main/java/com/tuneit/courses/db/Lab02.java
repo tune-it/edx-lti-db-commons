@@ -281,7 +281,7 @@ public class Lab02 extends Lab {
 
             query.append(" ")
                     .append(table.getNameGenitive())
-                    .append(" в формате \'")
+                    .append(". Вывод представить в формате \'")
                     .append(randomSubtask06.description.trim())
                     .append(" ");
 
