@@ -6,10 +6,7 @@ import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  *
@@ -743,6 +740,8 @@ public class Lab02 extends Lab {
 
             writeColumnFromTable(answer, table.getColumns(), task);
 
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
             List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
 
             answer.append(" FROM ")
@@ -763,36 +762,30 @@ public class Lab02 extends Lab {
             answer.append(";");
         }
 
-        private List<String> getRandomOptions(List<String> options, Task task) {
-            Collections.shuffle(options, getRandom(task));
-
-            List<String> randomOption = new ArrayList<>();
-            randomOption.add(options.get(0));
-            for (int i = 1; i < getRandom(task).nextInt(options.size()); i++) {
-                randomOption.add(options.get(i));
-            }
-
-            return randomOption;
-        }
-
         @Override
         protected void updateQuery(Table table, Task task) {
             Subtask10 randomSubtask10 = subtasks10.get(getRandom(task).nextInt(subtasks10.size())).clone();
 
             query.append(prolog.trim())
+                    .append(" из таблицы ")
+                    .append(table.getNameGenitive())
                     .append(" ");
 
             String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
 
             String columnNameCreative = table.getColumns().stream()
                     .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameCreativePlural();
+                    .findFirst().get().getNameCreativePlural().trim();
+
+            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
 
             writeColumnFromTablePL(query, table.getColumns(), task);
 
-            query.append(" c ")
+            query.append(" ")
+                    .append(getWithPreposition(columnNameCreative))
+                    .append(" ")
                     .append(columnNameCreative)
-                    .append(" ");
+                    .append(": ");
 
             List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
             for (int i = 0; i < randomOptions.size(); i++) {
@@ -809,6 +802,26 @@ public class Lab02 extends Lab {
             query.append(".");
         }
 
+        private String getWithPreposition(String word) {
+            boolean rule1 = withPrepositionRuleConsonant(word.charAt(0)) && !isVowel(word.charAt(1));
+            boolean rule2 = word.charAt(0) == 'щ';
+            boolean rule3 = word.toLowerCase().startsWith("ль") && !isVowel(word.charAt(1));
+
+            return rule1 || rule2 || rule3 ? "со" : "с";
+        }
+
+        private List<String> getRandomOptions(List<String> options, Task task) {
+            Collections.shuffle(options, getRandom(task));
+
+            List<String> randomOption = new ArrayList<>();
+            randomOption.add(options.get(0));
+            for (int i = 1; i < getRandom(task).nextInt(options.size()); i++) {
+                randomOption.add(options.get(i));
+            }
+
+            return randomOption;
+        }
+
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
@@ -819,6 +832,16 @@ public class Lab02 extends Lab {
             String tableName = randomSubtask10.tableAndColumn.trim().split(":")[0];
 
             return findAllowedTable(schema, tableName);
+        }
+
+        private boolean isVowel(char letter) {
+            Set<Character> vowelLetters = new HashSet<>(Arrays.asList('а', 'я', 'о', 'ё', 'у', 'ю', 'е', 'э', 'и', 'ы'));
+            return vowelLetters.contains(Character.toLowerCase(letter));
+        }
+
+        private boolean withPrepositionRuleConsonant(char letter) {
+            Set<Character> vowelLetters = new HashSet<>(Arrays.asList('с', 'з', 'ш', 'ж', 'л', 'р', 'м', 'в'));
+            return vowelLetters.contains(Character.toLowerCase(letter));
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
