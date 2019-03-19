@@ -3,6 +3,7 @@ package com.tuneit.courses.db.schema;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -58,6 +59,24 @@ public class Table implements Cloneable {
 
     public void setColumns(List<Column> columns) {
         this.columns = columns;
+    }
+
+    public Column findColumn(String columnName) {
+        Optional<Column> columnOptional = columns.stream()
+                .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
+                .findFirst();
+
+        if (columnOptional.isPresent()) {
+            return columnOptional.get();
+        } else {
+            throw new IllegalArgumentException("Column not found. Maybe mistake in xml.");
+        }
+    }
+
+    public Column findColumnAndDelete(String columnName) {
+        Column column = findColumn(columnName);
+        columns.remove(column);
+        return column;
     }
 
     @Override

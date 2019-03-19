@@ -35,10 +35,6 @@ public class Lab02 extends Lab {
         return labTask;
     }
 
-    public void setLabTask(List<LabTask> labTask) {
-        this.labTask = labTask;
-    }
-
     @Override
     public String toString() {
         return "Lab02{" + super.toString()+", labTask=" + labTask + '}';
@@ -60,7 +56,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task02 extends LabTask {
+    private static class Task02 extends LabTask {
     }
 
     public static class Task03 extends LabTask {
@@ -115,13 +111,13 @@ public class Lab02 extends Lab {
             Option05 option05 = getRandomSubtype(task, subtask05);
 
             answer.append("SELECT EXTRACT(")
-                    .append(option05.getTime().trim())
+                    .append(option05.time.trim())
                     .append(" FROM ")
-                    .append(subtask05.getColumn1().trim())
+                    .append(subtask05.column1.trim())
                     .append(" - ")
-                    .append(subtask05.getColumn2().trim())
+                    .append(subtask05.column2.trim())
                     .append(") FROM ")
-                    .append(subtask05.getTable().trim())
+                    .append(subtask05.table.trim())
                     .append(";");
         }
 
@@ -132,9 +128,9 @@ public class Lab02 extends Lab {
 
             query.append(prolog.trim())
                     .append(" ")
-                    .append(subtask05.getDescription().trim())
+                    .append(subtask05.description.trim())
                     .append(" ")
-                    .append(option05.getValue().trim())
+                    .append(option05.value.trim())
                     .append(".");
         }
 
@@ -144,13 +140,13 @@ public class Lab02 extends Lab {
         }
 
         private Option05 getRandomSubtype(Task task, Subtask05 subtask05) {
-            int timeRandomIndex = getRandom(task).nextInt(subtask05.getOptions05().size());
-            return subtask05.getOptions05().get(timeRandomIndex);
+            int timeRandomIndex = getRandom(task).nextInt(subtask05.options05.size());
+            return subtask05.options05.get(timeRandomIndex);
         }
 
 
         @XmlAccessorType(XmlAccessType.FIELD)
-        public static class Subtask05 {
+        static class Subtask05 {
             @XmlAttribute(name = "table")
             private String table;
 
@@ -166,72 +162,15 @@ public class Lab02 extends Lab {
             @XmlElement(name = "option05", required = true)
             private List<Option05> options05;
 
-            public String getTable() {
-                return table;
-            }
-
-            public void setTable(String table) {
-                this.table = table;
-            }
-
-            public String getColumn1() {
-                return column1;
-            }
-
-            public void setColumn1(String column1) {
-                this.column1 = column1;
-            }
-
-            public String getColumn2() {
-                return column2;
-            }
-
-            public void setColumn2(String column2) {
-                this.column2 = column2;
-            }
-
-            public List<Option05> getOptions05() {
-                return options05;
-            }
-
-            public void setOptions05(List<Option05> options05) {
-                this.options05 = options05;
-            }
-
-            public String getDescription() {
-                return description;
-            }
-
-            public void setDescription(String description) {
-                this.description = description;
-            }
-
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
-        public static class Option05 {
+        static class Option05 {
             @XmlElement(name = "time")
             private String time;
 
             @XmlElement(name = "value")
             private String value;
-
-            public String getTime() {
-                return time;
-            }
-
-            public void setTime(String time) {
-                this.time = time;
-            }
-
-            public String getValue() {
-                return value;
-            }
-
-            public void setValue(String value) {
-                this.value = value;
-            }
-
         }
     }
 
@@ -402,27 +341,15 @@ public class Lab02 extends Lab {
 
         @Override
         protected void updateAnswer(Table table, Task task) {
-            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+            Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+
+            String columnName = randomSubtask07.tableAndColumn.trim().split(":")[1];
+            table.findColumnAndDelete(columnName);
+
+            String position = getRandomPosition(randomSubtask07, task);
 
             answer.append("SELECT ");
-
-            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
             writeColumnFromTable(answer, table.getColumns(), task);
-
-            int randomLeftOrRightPosition = getRandom(task).nextInt(2);
-
-            String position;
-            if (randomLeftOrRightPosition == 1) {
-                int randomLeftPosition = getRandom(task).nextInt(randomSubtask06.leftPosition.size());
-                position = randomSubtask06.leftPosition.get(randomLeftPosition);
-            } else {
-                int randomRightPosition = getRandom(task).nextInt(randomSubtask06.rightPosition.size());
-                position = randomSubtask06.rightPosition.get(randomRightPosition);
-            }
-
             answer.append(" FROM ")
                     .append(table.getTableName())
                     .append(" WHERE ")
@@ -434,28 +361,35 @@ public class Lab02 extends Lab {
 
         @Override
         protected void updateQuery(Table table, Task task) {
-            Subtask07 randomSubtask06 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+            Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
+
+            String columnName = randomSubtask07.tableAndColumn.trim().split(":")[1];
+            String columnNamePL = table.findColumnAndDelete(columnName).getNamePlural();
+
+            String position = getRandomPosition(randomSubtask07, task);
 
             query.append(prolog.trim())
                     .append(" ");
-
-            String columnName = randomSubtask06.tableAndColumn.trim().split(":")[1];
-
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
             writeColumnFromTablePL(query, table.getColumns(), task);
-
             query.append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(", ")
                     .append(columnNamePL)
                     .append(" которых содержат в названии \'")
-                    .append(randomSubtask06.leftPosition.get(0))
+                    .append(position)
                     .append("\'.");
+        }
+
+        private String getRandomPosition(Subtask07 randomSubtask07, Task task) {
+            boolean randomLeftOrRightPosition = getRandom(task).nextBoolean();
+
+            if (randomLeftOrRightPosition) {
+                int randomLeftPosition = getRandom(task).nextInt(randomSubtask07.leftPosition.size());
+                return randomSubtask07.leftPosition.get(randomLeftPosition);
+            } else {
+                int randomRightPosition = getRandom(task).nextInt(randomSubtask07.rightPosition.size());
+                return randomSubtask07.rightPosition.get(randomRightPosition);
+            }
         }
 
         @Override
@@ -517,18 +451,16 @@ public class Lab02 extends Lab {
         protected void updateAnswer(Table table, Task task) {
             Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
 
-            answer.append("SELECT ");
-
             String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
-
+            table.findColumnAndDelete(columnName);
             table.getColumns().removeIf(
                     column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask08.forbidden.contains(column.getColumnName().toLowerCase()));
-
-            writeColumnFromTable(answer, table.getColumns(), task);
 
             int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
             String position = randomSubtask08.leftPosition.get(randomPosition);
 
+            answer.append("SELECT ");
+            writeColumnFromTable(answer, table.getColumns(), task);
             answer.append(" FROM ")
                     .append(table.getTableName())
                     .append(" WHERE ")
@@ -544,23 +476,17 @@ public class Lab02 extends Lab {
         protected void updateQuery(Table table, Task task) {
             Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
 
-            query.append(prolog.trim())
-                    .append(" ");
-
             String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
-
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
+            String columnNamePL = table.findColumnAndDelete(columnName).getNamePlural();
             table.getColumns().removeIf(
-                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask08.forbidden.contains(column.getColumnName().toLowerCase()));
-
-            writeColumnFromTablePL(query, table.getColumns(), task);
+                    column -> randomSubtask08.forbidden.contains(column.getColumnName().toLowerCase()));
 
             int randomPosition = getRandom(task).nextInt(randomSubtask08.leftPosition.size());
             String position = randomSubtask08.leftPosition.get(randomPosition);
 
+            query.append(prolog.trim())
+                    .append(" ");
+            writeColumnFromTablePL(query, table.getColumns(), task);
             query.append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(", ")
@@ -660,23 +586,17 @@ public class Lab02 extends Lab {
         protected void updateQuery(Table table, Task task) {
             Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
 
-            query.append(prolog.trim())
-                    .append(" ");
-
             String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
-
-            String columnNamePL = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNamePlural();
-
+            String columnNamePL = table.findColumnAndDelete(columnName).getNamePlural();
             table.getColumns().removeIf(
-                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask09.forbidden.contains(column.getColumnName().toLowerCase()));
-
-            writeColumnFromTablePL(query, table.getColumns(), task);
+                    column -> randomSubtask09.forbidden.contains(column.getColumnName().toLowerCase()));
 
             int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
             String position = randomSubtask09.rightPosition.get(randomPosition);
 
+            query.append(prolog.trim())
+                    .append(" ");
+            writeColumnFromTablePL(query, table.getColumns(), task);
             query.append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(", ")
@@ -719,12 +639,12 @@ public class Lab02 extends Lab {
             @Override
             protected Subtask09 clone() {
                 try {
-                    Subtask09 subtaskClone07 = (Subtask09) super.clone();
-                    subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyList(leftPosition);
-                    subtaskClone07.rightPosition = copyList(rightPosition);
-                    subtaskClone07.forbidden = copyList(forbidden);
-                    return subtaskClone07;
+                    Subtask09 subtaskClone09 = (Subtask09) super.clone();
+                    subtaskClone09.tableAndColumn = tableAndColumn;
+                    subtaskClone09.leftPosition = copyList(leftPosition);
+                    subtaskClone09.rightPosition = copyList(rightPosition);
+                    subtaskClone09.forbidden = copyList(forbidden);
+                    return subtaskClone09;
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                     return null;
@@ -750,20 +670,16 @@ public class Lab02 extends Lab {
         protected void updateAnswer(Table table, Task task) {
             Subtask10 randomSubtask10 = subtasks10.get(getRandom(task).nextInt(subtasks10.size())).clone();
 
-            answer.append("SELECT ");
-
             String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
-            writeColumnFromTable(answer, table.getColumns(), task);
+            table.findColumnAndDelete(columnName);
 
             List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
 
+            answer.append("SELECT ");
+            writeColumnFromTable(answer, table.getColumns(), task);
             answer.append(" FROM ")
                     .append(table.getTableName())
                     .append(" WHERE ");
-
 
             for (int i = 0; i < randomOptions.size(); i++) {
                 String option = randomOptions.get(i);
@@ -775,6 +691,7 @@ public class Lab02 extends Lab {
                     answer.append(" OR ");
                 }
             }
+
             answer.append(";");
         }
 
@@ -782,28 +699,22 @@ public class Lab02 extends Lab {
         protected void updateQuery(Table table, Task task) {
             Subtask10 randomSubtask10 = subtasks10.get(getRandom(task).nextInt(subtasks10.size())).clone();
 
+            String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
+            String columnNameCreativePlural = table.findColumnAndDelete(columnName).getNameCreativePlural();
+
+            List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
+
             query.append(prolog.trim())
                     .append(" из таблицы ")
                     .append(table.getNameGenitive())
                     .append(" ");
-
-            String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
-
-            String columnNameCreative = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameCreativePlural().trim();
-
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
-
             writeColumnFromTablePL(query, table.getColumns(), task);
-
             query.append(" ")
-                    .append(getWithPreposition(columnNameCreative))
+                    .append(getWithPreposition(columnNameCreativePlural))
                     .append(" ")
-                    .append(columnNameCreative)
+                    .append(columnNameCreativePlural)
                     .append(": ");
 
-            List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
             for (int i = 0; i < randomOptions.size(); i++) {
                 String option = randomOptions.get(i);
                 query.append("\'")
@@ -819,9 +730,9 @@ public class Lab02 extends Lab {
         }
 
         private String getWithPreposition(String word) {
-            boolean rule1 = withPrepositionRuleConsonant(word.charAt(0)) && !isVowel(word.charAt(1));
+            boolean rule1 = withPrepositionRuleConsonant(word.charAt(0)) && isConsonant(word.charAt(1));
             boolean rule2 = word.charAt(0) == 'щ';
-            boolean rule3 = word.toLowerCase().startsWith("ль") && !isVowel(word.charAt(1));
+            boolean rule3 = word.toLowerCase().startsWith("ль") && isConsonant(word.charAt(1));
 
             return rule1 || rule2 || rule3 ? "со" : "с";
         }
@@ -850,9 +761,9 @@ public class Lab02 extends Lab {
             return findAllowedTable(schema, tableName);
         }
 
-        private boolean isVowel(char letter) {
+        private boolean isConsonant(char letter) {
             Set<Character> vowelLetters = new HashSet<>(Arrays.asList('а', 'я', 'о', 'ё', 'у', 'ю', 'е', 'э', 'и', 'ы'));
-            return vowelLetters.contains(Character.toLowerCase(letter));
+            return !vowelLetters.contains(Character.toLowerCase(letter));
         }
 
         private boolean withPrepositionRuleConsonant(char letter) {
@@ -926,10 +837,7 @@ public class Lab02 extends Lab {
             Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
 
             String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-            String columnNameCreativePlural = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameCreativePlural();
-
+            String columnNameCreativePlural = table.findColumn(columnName).getNameCreativePlural();
 
             int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
             String option = randomSubtask11.options.get(randomPosition);
@@ -992,7 +900,7 @@ public class Lab02 extends Lab {
 
     public static class Task12 extends LabTask {
         @XmlElement(name = "subtask12")
-        private List<Subtask12> subtasks12;
+        private List<Subtask12> subtasks12 = new ArrayList<>();
 
 
         @Override
@@ -1001,6 +909,8 @@ public class Lab02 extends Lab {
 
             String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
 
+            String ordering = getRandom(task).nextBoolean() ? ") ASC LIMIT 5;" : ") DESC LIMIT 5;";
+
             answer.append("SELECT COUNT(")
                     .append(columnName)
                     .append(") FROM ")
@@ -1008,43 +918,29 @@ public class Lab02 extends Lab {
                     .append(" GROUP BY ")
                     .append(columnName)
                     .append(" ORDER BY COUNT(")
-                    .append(columnName);
-
-            if (getRandom(task).nextBoolean()) {
-                answer.append(") ASC LIMIT 5;");
-            } else {
-                answer.append(") DESC LIMIT 5;");
-            }
+                    .append(columnName)
+                    .append(ordering);
         }
 
         @Override
         protected void updateQuery(Table table, Task task) {
-            Subtask12 randomSubtask11 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
+            Subtask12 randomSubtask12 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
 
-            String columnName = randomSubtask11.tableAndColumn.trim().split(":")[1];
-            String columnNameGenitivePlural = table.getColumns().stream()
-                    .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
-                    .findFirst().get().getNameGenitivePlural();
+            String columnName = randomSubtask12.tableAndColumn.trim().split(":")[1];
+            String columnNameGenitivePlural = table.findColumn(columnName).getNameGenitivePlural();
+
+            String ordering = getRandom(task).nextBoolean() ?
+                    "расположить по возрастанию. " : "расположить по убыванию. ";
 
             query.append(prolog.trim())
                     .append(" ")
                     .append(columnNameGenitivePlural)
                     .append(" из таблицы ")
                     .append(table.getNameGenitive())
-                    .append(". Результат ");
-            if (getRandom(task).nextBoolean()) {
-                query.append("расположить по возрастанию. ");
-            } else {
-                query.append("расположить по убыванию. ");
-            }
-
-            query.append("Привести 5");
-
-            if (getRandom(task).nextBoolean()) {
-                query.append(" первых результатов запроса.");
-            } else {
-                query.append(" последних результатов запроса.");
-            }
+                    .append(". Результат ")
+                    .append(ordering)
+                    .append("Привести 5")
+                    .append(" первых результатов запроса.");
         }
 
         @Override
