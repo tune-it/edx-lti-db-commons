@@ -54,7 +54,7 @@ public abstract class LabTask {
         this.epilog = epilog;
     }
     
-    protected static List<Table> removeForbidenElements(Schema s, List<String> forbidenElements) {
+    protected static List<Table> removeForbiddenElements(Schema s, List<String> forbidenElements) {
         ArrayList<Table> allowed = new ArrayList<>();
         for (Table table : s.getTables()) {
             if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
@@ -130,7 +130,7 @@ public abstract class LabTask {
 
     protected Table getRandomTable(Schema schema, Task task) {
         if (!allowed.containsKey(schema.getName())) {
-            allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+            allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
         }
 
         List<Table> tables = allowed.get(schema.getName());

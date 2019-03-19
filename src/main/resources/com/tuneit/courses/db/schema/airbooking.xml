@@ -435,14 +435,17 @@
                 <subtask08 for="airports:airport_name">
                     <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
                     <right-position>ово ск</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask08>
                 <subtask08 for="airports:city">
                     <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
                     <right-position>ово ск</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask08>
                 <subtask08 for="airports:timezone">
                     <left-position>Asia Europe</left-position>
                     <right-position>ow burg grad</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask08>
 
                 <subtask08 for="boarding_passes:seat_no">
@@ -485,14 +488,17 @@
                 <subtask09 for="airports:airport_name">
                     <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
                     <right-position>ово ск</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask09>
                 <subtask09 for="airports:city">
                     <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
                     <right-position>ово ск</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask09>
                 <subtask09 for="airports:timezone">
                     <left-position>Asia Europe</left-position>
                     <right-position>ow burg grad</right-position>
+                    <forbidden>coordinates</forbidden>
                 </subtask09>
 
                 <subtask09 for="boarding_passes:seat_no">

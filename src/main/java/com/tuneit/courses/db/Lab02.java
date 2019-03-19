@@ -300,7 +300,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
@@ -461,7 +461,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
@@ -521,7 +521,8 @@ public class Lab02 extends Lab {
 
             String columnName = randomSubtask08.tableAndColumn.trim().split(":")[1];
 
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+            table.getColumns().removeIf(
+                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask08.forbidden.contains(column.getColumnName().toLowerCase()));
 
             writeColumnFromTable(answer, table.getColumns(), task);
 
@@ -552,7 +553,8 @@ public class Lab02 extends Lab {
                     .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                     .findFirst().get().getNamePlural();
 
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+            table.getColumns().removeIf(
+                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask08.forbidden.contains(column.getColumnName().toLowerCase()));
 
             writeColumnFromTablePL(query, table.getColumns(), task);
 
@@ -573,7 +575,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
@@ -596,13 +598,18 @@ public class Lab02 extends Lab {
             @XmlList
             private List<String> rightPosition;
 
+            @XmlElement(name = "forbidden")
+            @XmlList
+            private List<String> forbidden = new ArrayList<>();
+
             @Override
             protected Subtask08 clone() {
                 try {
                     Subtask08 subtaskClone07 = (Subtask08) super.clone();
                     subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyPosition(leftPosition);
-                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    subtaskClone07.leftPosition = copyList(leftPosition);
+                    subtaskClone07.rightPosition = copyList(rightPosition);
+                    subtaskClone07.forbidden = copyList(forbidden);
                     return subtaskClone07;
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
@@ -610,7 +617,7 @@ public class Lab02 extends Lab {
                 }
             }
 
-            private List<String> copyPosition(List<String> positions) {
+            private List<String> copyList(List<String> positions) {
                 if (positions != null) {
                     return new ArrayList<>(positions);
                 } else {
@@ -632,7 +639,8 @@ public class Lab02 extends Lab {
 
             String columnName = randomSubtask09.tableAndColumn.trim().split(":")[1];
 
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+            table.getColumns().removeIf(
+                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask09.forbidden.contains(column.getColumnName().toLowerCase()));
 
             int randomPosition = getRandom(task).nextInt(randomSubtask09.rightPosition.size());
             String position = randomSubtask09.rightPosition.get(randomPosition);
@@ -661,7 +669,8 @@ public class Lab02 extends Lab {
                     .filter(column -> column.getColumnName().equalsIgnoreCase(columnName))
                     .findFirst().get().getNamePlural();
 
-            table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+            table.getColumns().removeIf(
+                    column -> column.getColumnName().equalsIgnoreCase(columnName) || randomSubtask09.forbidden.contains(column.getColumnName().toLowerCase()));
 
             writeColumnFromTablePL(query, table.getColumns(), task);
 
@@ -680,7 +689,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
@@ -703,13 +712,18 @@ public class Lab02 extends Lab {
             @XmlList
             private List<String> rightPosition;
 
+            @XmlElement(name = "forbidden")
+            @XmlList
+            private List<String> forbidden = new ArrayList<>();
+
             @Override
             protected Subtask09 clone() {
                 try {
                     Subtask09 subtaskClone07 = (Subtask09) super.clone();
                     subtaskClone07.tableAndColumn = tableAndColumn;
-                    subtaskClone07.leftPosition = copyPosition(leftPosition);
-                    subtaskClone07.rightPosition = copyPosition(rightPosition);
+                    subtaskClone07.leftPosition = copyList(leftPosition);
+                    subtaskClone07.rightPosition = copyList(rightPosition);
+                    subtaskClone07.forbidden = copyList(forbidden);
                     return subtaskClone07;
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
@@ -717,7 +731,7 @@ public class Lab02 extends Lab {
                 }
             }
 
-            private List<String> copyPosition(List<String> positions) {
+            private List<String> copyList(List<String> positions) {
                 if (positions != null) {
                     return new ArrayList<>(positions);
                 } else {
@@ -740,9 +754,9 @@ public class Lab02 extends Lab {
 
             String columnName = randomSubtask10.tableAndColumn.trim().split(":")[1];
 
-            writeColumnFromTable(answer, table.getColumns(), task);
-
             table.getColumns().removeIf(column -> column.getColumnName().equalsIgnoreCase(columnName));
+
+            writeColumnFromTable(answer, table.getColumns(), task);
 
             List<String> randomOptions = getRandomOptions(randomSubtask10.options, task);
 
@@ -827,7 +841,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask10 randomSubtask10 = subtasks10.get(getRandom(task).nextInt(subtasks10.size())).clone();
@@ -935,7 +949,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
@@ -1036,7 +1050,7 @@ public class Lab02 extends Lab {
         @Override
         protected Table getRandomTable(Schema schema, Task task) {
             if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbidenElements(schema, forbiddenList));
+                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
             }
 
             Subtask12 randomSubtask12 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();

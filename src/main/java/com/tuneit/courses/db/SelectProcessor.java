@@ -43,12 +43,12 @@ public class SelectProcessor {
         ds.checkTasks(tasks);
         for (Task t : tasks) {
 //            if (t.isComplete()) {
+                System.out.println(t.getQuestion());
+//            }
+//            if (t.isComplete() && t.getRating() != 1) {
+//                System.out.println("INCORRECT " + t);
 //                System.out.println(t.getQuestion());
 //            }
-            if (t.isComplete() && t.getRating() != 1) {
-                System.out.println("INCORRECT " + t);
-//                System.out.println(t.getQuestion());
-            }
         }
     }
     
