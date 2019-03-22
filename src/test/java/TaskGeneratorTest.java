@@ -5,8 +5,6 @@ import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -64,5 +62,39 @@ class TaskGeneratorTest {
         tasks[0].setAnswer("select seat_no, aircraft_code from seats");
         taskGeneratorService.checkTasks(tasks);
         assertTrue(tasks[0].getRating() < 0.5);
+    }
+
+    @Test
+    void randomTest() {
+        String variant = "-1";
+        LabTaskQA[] labTaskQAS = getLabTaskQAS(variant);
+
+
+        for (int i = 0; i < 10000; i++) {
+            Task[] tasks = taskGeneratorService.getTasks("student", "lab02", variant, 0);
+            for (int j = 0; j < tasks.length; j++) {
+                Task task = tasks[j];
+
+                Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+                LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema, task);
+
+                assertEquals(labTaskQAS[j].getCorrectAnswer(), labTaskQA.getCorrectAnswer());
+                assertEquals(labTaskQAS[j].getQuestion(), labTaskQA.getQuestion());
+            }
+        }
+    }
+
+    private LabTaskQA[] getLabTaskQAS(String variant) {
+        LabTaskQA[] labTaskQAS = new LabTaskQA[12];
+        Task[] tasks = taskGeneratorService.getTasks("student", "lab02", variant, 0);
+
+        for (int i = 0; i < tasks.length; i++) {
+            Task task = tasks[i];
+            Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+            LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema, task);
+            labTaskQAS[i] = labTaskQA;
+        }
+
+        return labTaskQAS;
     }
 }
