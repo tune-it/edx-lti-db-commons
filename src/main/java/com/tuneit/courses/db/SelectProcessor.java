@@ -4,9 +4,6 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
 
-import javax.xml.bind.DatatypeConverter;
-import java.nio.ByteBuffer;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -165,7 +162,7 @@ public class SelectProcessor {
             selectResult.setErrorMessage("Internal error, cant parse row count or execution time in explain statement");
             selectResult.setResultCode(SelectResult.INTERNAL_ERROR);
             Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage(), en);
-        }  finally {
+        } finally {
             try {
                 if (resultSet != null) resultSet.close();
             } catch (Exception e) {
@@ -186,9 +183,8 @@ public class SelectProcessor {
         if (selectResult.getResultCode() == SelectResult.OK) {
             //update rows checksum with row count
             controlSum += selectResult.getRowCount();
-            byte[] digest = ByteBuffer.allocate(Long.BYTES).putLong(controlSum).array();
             //set checksum in results
-            selectResult.setResultCheckSum(DatatypeConverter.printHexBinary(digest).toUpperCase());
+            selectResult.setResultCheckSum(Long.toString(controlSum));
         }
         if (do_html_output) {
             if (selectResult.getResultCode() != SelectResult.OK) {

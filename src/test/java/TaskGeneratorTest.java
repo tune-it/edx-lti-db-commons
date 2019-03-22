@@ -55,6 +55,10 @@ class TaskGeneratorTest {
         taskGeneratorService.checkTasks(tasks);
         assertTrue(tasks[0].getRating() > 0.5);
 
+        tasks[0].setAnswer("select seat_no seat, aircraft_code air, fare_conditions fare from seats sea");
+        taskGeneratorService.checkTasks(tasks);
+        assertTrue(tasks[0].getRating() > 0.5);
+
 
         //false
         tasks[0].setAnswer("select seat_no, aircraft_code from seats");
