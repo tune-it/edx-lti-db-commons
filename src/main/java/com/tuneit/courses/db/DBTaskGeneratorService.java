@@ -55,33 +55,20 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
             if (task.isComplete()) {
                 try {
-                    //TODO check persistent store of question and answers to avoid excessive generation
-                    //based on t.getId();
                     LabTaskQA labTaskQA = labTask.generate(schema, task);
                     SelectProcessor tester = new SelectProcessor();
-                    SelectResult answer = tester.execute_select(schema, task.getAnswer(), 5, false);
-//                    System.out.println("Answer= " + answer + " " + task.getAnswer());
-                    SelectResult correct = tester.execute_select(schema, labTaskQA.getCorrectAnswer(), 5, false);
-//                    System.out.println("Correct= " + correct + " " + labTaskQA.getCorrectAnswer());
-                    //
-                    //compute student rating, based on 80+20 priciple
-                    //80 if result is correct
-                    //0-20 - if systax is similar to generated
-                    //OLD style: t.setRating(correct_md5.equalsIgnoreCase(answer_md5) ? 1.0f : 0.0f);
-                    //
+
+                    SelectResult answer = tester.executeQuery(schema, task.getAnswer(), 5, false);
+                    SelectResult correct = tester.executeQuery(schema, labTaskQA.getCorrectAnswer(), 5, false);
+
                     if (answer.getResultCode() != SelectResult.OK) {
-                        //incorrect or too long sql query
-                        //TODO should we distinguish it?
-                        task.setRating(0.001f);
+                        task.setRating(0);
                     } else {
-                        float rating = 0.0f;
                         if (correct.getResultCheckSum().equalsIgnoreCase(answer.getResultCheckSum())) {
-                            rating = 0.8f;
-                            TokenSQLSimilarity sm = new TokenSQLSimilarity(task.getAnswer(), labTaskQA.getCorrectAnswer());
-                            rating += 0.2f * sm.calculate();
-                            //System.out.println(sm.calculate()+"   "+sm);
+                            task.setRating(1);
+                        } else {
+                            task.setRating(0.001f);
                         }
-                        task.setRating(rating);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

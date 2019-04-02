@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class SelectProcessor {
 
 
-    private static final long timeout_limit = 10000l;
+    private static final long timeout_limit = 20000l;
     private static final String session_timeout_command =
             "SET statement_timeout = " + timeout_limit + ";";
     private static final String TABLE_CLASSES = "table";
@@ -34,116 +34,85 @@ public class SelectProcessor {
         }
         DBTaskGeneratorService ds = new DBTaskGeneratorService();
         Task[] tasks = ds.getTasks("serge@cs.ifmo.ru", "lab02", "01", 0);
-        tasks[0].setAnswer("select * from ticket_flights;").setComplete(false);
-        tasks[1].setAnswer("select fare_conditions from seats;").setComplete(false);
-        tasks[2].setAnswer("select aircraft_code, seat_no from seats;").setComplete(false);
-        tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(false);
-        tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(false);
-        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' ' || 'id - ' || passenger_id || ' ' || 'имя фамилия - ' || passenger_name || ' ' || 'код брони - ' || book_ref from tickets").setComplete(false);
-        tasks[6].setAnswer("select arrival_airport from flights where status like '%Arr%';").setComplete(false);
-        tasks[7].setAnswer("select aircraft_code from seats where seat_no like '12%' order by seat_no;").setComplete(false);
-        tasks[8].setAnswer("select aircraft_code from aircrafts where model like '%100' order by 1;").setComplete(false);
-        tasks[9].setAnswer("select fare_conditions from seats where seat_no = '50A' OR seat_no = '12A' OR seat_no = '27C';").setComplete(false);
-        tasks[10].setAnswer("select '11C' || ' = ' || count(seat_no) from boarding_passes where seat_no = '11C' group by seat_no;").setComplete(false);
+        tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
+        tasks[1].setAnswer("select fare_conditions from seats;").setComplete(true);
+        tasks[2].setAnswer("select aircraft_code, seat_no from seats;").setComplete(true);
+        tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(true);
+        tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(true);
+        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' ' || 'id - ' || passenger_id || ' ' || 'имя фамилия - ' || passenger_name || ' ' || 'код брони - ' || book_ref from tickets").setComplete(true);
+        tasks[6].setAnswer("select arrival_airport from flights where status like '%Arr%';").setComplete(true);
+        tasks[7].setAnswer("select aircraft_code from seats where seat_no like '12%' order by seat_no;").setComplete(true);
+        tasks[8].setAnswer("select aircraft_code from aircrafts where model like '%100' order by 1;").setComplete(true);
+        tasks[9].setAnswer("select fare_conditions from seats where seat_no = '50A' OR seat_no = '12A' OR seat_no = '27C';").setComplete(true);
+        tasks[10].setAnswer("select '11C' || ' = ' || count(seat_no) from boarding_passes where seat_no = '11C' group by seat_no;").setComplete(true);
         tasks[11].setAnswer("select count(seat_no) from boarding_passes group by seat_no order by count(seat_no) asc limit 5;").setComplete(true);
         ds.checkTasks(tasks);
         for (Task t : tasks) {
-//            if (t.isComplete()) {
-            System.out.println(t.getQuestion());
-//            }
-//            if (t.isComplete() && t.getRating() != 1) {
-//                System.out.println("INCORRECT " + t);
-//                System.out.println(t.getQuestion());
-//            }
+            System.out.println(t.getRating());
         }
     }
 
-    public SelectResult execute_select(Schema schema, String sql) {
-        return execute_select(schema, sql, 100, false);
+    public SelectResult executeQuery(Schema schema, String sql) {
+        return executeQuery(schema, sql, 100, false);
     }
 
     /**
-     * @param schema         - schema name to generate queries
-     * @param sql            - sql to execute
-     * @param row_limit      Limits row in output, 0 - zero rows, -1 unlimited
-     * @param do_html_output - save html output to new StringBuilder in SelectResult
+     * @param schema       - schema name to generate queries
+     * @param query        - sql to execute
+     * @param maxRowLimit  Limits row in output, 0 - zero rows, -1 unlimited
+     * @param doHtmlOutput - save html output to new StringBuilder in SelectResult
      * @return SelectResult - object with encapsulated results
      */
-    public SelectResult execute_select(final Schema schema, final String sql,
-                                       final int row_limit,
-                                       final boolean do_html_output) {
+    public SelectResult executeQuery(final Schema schema, final String query,
+                                     final int maxRowLimit, final boolean doHtmlOutput) {
 
-        //TODO error sign is null;
-        //String query_md5 = "Error at executing query";
         SelectResult selectResult = new SelectResult();
-        if (do_html_output) {
-            selectResult.setHtmlOutput(do_html_output);
+        if (doHtmlOutput) {
+            selectResult.setHtmlOutput(doHtmlOutput);
             selectResult.setHtmlRows(new StringBuilder());
             selectResult.getHtmlRows().append("<table id=sqlresult class=\"").append(TABLE_CLASSES).append("\">\n");
         }
 
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        ResultSet explainSet = null; //explain resultSet
         long controlSum = 0;
-        try {
-            // we are count only first five rows in select
-            int row_counter = row_limit;
-            // TODO probably should change in future on quicker alg or on procedure in DB
-            connection = schema.getConnection();
-            statement = connection.createStatement();
-            statement.setMaxRows(row_limit);
-            // setup hard limit timeout
+
+        ResultSet resultSet = null;
+        try (Connection connection = schema.getConnection();
+             Statement statement = connection.createStatement()
+        ) {
+            statement.setMaxRows(maxRowLimit);
             statement.execute(session_timeout_command);
-            //fetch row count and execution time for query
-            explainSet = statement.executeQuery("EXPLAIN (analyse on, format xml) " + sql);
-            while (explainSet.next()) {
-                String exrow = explainSet.getString(1);
-                //System.out.println("plan  "+exrow);
-                Matcher rowcount_matcher = rowcount_pattern.matcher(exrow);
-                if (rowcount_matcher.find()) {
-                    selectResult.setRowCount(Long.parseLong(rowcount_matcher.group(1)));
-                }
-                Matcher executetime_matcher = executiontime_pattern.matcher(exrow);
-                if (executetime_matcher.find()) {
-                    selectResult.setExecutionTime(Double.parseDouble(executetime_matcher.group(1)));
-                }
-            }
-            //check for possible timeout exceeding 
-            //if it can run over given millisecond do not process query
-            //to not overload server
-            if (selectResult.getExecutionTime() > (double) timeout_limit) {
+
+            if (checkTimeoutByUsingExplain(statement, query, selectResult)) {
                 throw new SQLException("ERROR: proactive canceling statement due to possible timeout exceeding",
                         Integer.toString(SelectResult.TIMEOUT), SelectResult.TIMEOUT);
             }
-            //Finally execute sql statement
-            resultSet = statement.executeQuery(sql);
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            int numcols = rsmd.getColumnCount();
+
+            resultSet = statement.executeQuery(query);
+            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            int numCols = resultSetMetaData.getColumnCount();
             //headers
-            if (do_html_output) {
+            if (doHtmlOutput) {
                 selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for (int i = 1; i <= numcols; i++) {
-                    String fieldLabel = rsmd.getColumnLabel(i);
+                for (int i = 1; i <= numCols; i++) {
+                    String fieldLabel = resultSetMetaData.getColumnLabel(i);
                     selectResult.getHtmlRows().append("<th class=\"").append(HEADER_CLASSES).append("\">")
                             .append(fieldLabel).append("</th>");
                 }
                 selectResult.getHtmlRows().append("</tr>\n");
             }
-            while (resultSet.next() && row_counter-- != 0) {
-                if (do_html_output)
+            while (resultSet.next()) {
+                if (doHtmlOutput)
                     selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for (int i = 1; i <= numcols; i++) {
+                for (int i = 1; i <= numCols; i++) {
                     String field = resultSet.getString(i);
                     if (field != null) {
                         controlSum += field.hashCode();
-                        if (do_html_output)
+                        if (doHtmlOutput)
                             selectResult.getHtmlRows().append("<td class=\"").append(CELL_CLASSES).append("\">")
                                     .append(field).append("</td>");
                     }
                 }
-                if (do_html_output)
+                if (doHtmlOutput)
                     selectResult.getHtmlRows().append("</tr>\n");
             }
             selectResult.setResultCode(SelectResult.OK);
@@ -157,36 +126,26 @@ public class SelectProcessor {
                 selectResult.setErrorMessage("Unparseable SQLState=" + e.getSQLState() + " Message=" + e.getMessage().replace('\n', ' '));
                 Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage(), e);
             }
-            //Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage(), e);
         } catch (NumberFormatException en) {
             selectResult.setErrorMessage("Internal error, cant parse row count or execution time in explain statement");
             selectResult.setResultCode(SelectResult.INTERNAL_ERROR);
             Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage(), en);
         } finally {
             try {
-                if (resultSet != null) resultSet.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (explainSet != null) explainSet.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException ignored) {
             }
         }
+
         if (selectResult.getResultCode() == SelectResult.OK) {
             //update rows checksum with row count
             controlSum += selectResult.getRowCount();
             //set checksum in results
             selectResult.setResultCheckSum(Long.toString(controlSum));
         }
-        if (do_html_output) {
+        if (doHtmlOutput) {
             if (selectResult.getResultCode() != SelectResult.OK) {
                 selectResult.getHtmlRows().delete(0, selectResult.getHtmlRows().length());
                 selectResult.getHtmlRows().append("<H1>").append(selectResult.getErrorMessage()).append("</H1>");
@@ -196,5 +155,23 @@ public class SelectProcessor {
         }
         return selectResult;
     }
+
+    private boolean checkTimeoutByUsingExplain(Statement statement, String sql, SelectResult selectResult) throws SQLException {
+        ResultSet explainSet = statement.executeQuery("EXPLAIN (analyse on, format xml) " + sql);
+        while (explainSet.next()) {
+            String exrow = explainSet.getString(1);
+            Matcher rowcount_matcher = rowcount_pattern.matcher(exrow);
+            if (rowcount_matcher.find()) {
+                selectResult.setRowCount(Long.parseLong(rowcount_matcher.group(1)));
+            }
+            Matcher executetime_matcher = executiontime_pattern.matcher(exrow);
+            if (executetime_matcher.find()) {
+                selectResult.setExecutionTime(Double.parseDouble(executetime_matcher.group(1)));
+            }
+        }
+
+        return selectResult.getExecutionTime() > (double) timeout_limit;
+    }
+
 
 }

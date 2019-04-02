@@ -6,7 +6,6 @@ import com.tuneit.courses.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TaskGeneratorTest {
 
@@ -43,25 +42,25 @@ class TaskGeneratorTest {
         //true
         tasks[0].setAnswer("select * from seats").setComplete(true);
         taskGeneratorService.checkTasks(tasks);
-        assertTrue(tasks[0].getRating() > 0.5);
+        assertEquals(1, tasks[0].getRating());
 
         tasks[0].setAnswer("select aircraft_code, seat_no, fare_conditions from seats");
         taskGeneratorService.checkTasks(tasks);
-        assertTrue(tasks[0].getRating() > 0.5);
+        assertEquals(1, tasks[0].getRating());
 
         tasks[0].setAnswer("select seat_no, aircraft_code, fare_conditions from seats");
         taskGeneratorService.checkTasks(tasks);
-        assertTrue(tasks[0].getRating() > 0.5);
+        assertEquals(1, tasks[0].getRating());
 
         tasks[0].setAnswer("select seat_no seat, aircraft_code air, fare_conditions fare from seats sea");
         taskGeneratorService.checkTasks(tasks);
-        assertTrue(tasks[0].getRating() > 0.5);
+        assertEquals(1, tasks[0].getRating());
 
 
         //false
         tasks[0].setAnswer("select seat_no, aircraft_code from seats");
         taskGeneratorService.checkTasks(tasks);
-        assertTrue(tasks[0].getRating() < 0.5);
+        assertEquals(0, tasks[0].getRating());
     }
 
     @Test
