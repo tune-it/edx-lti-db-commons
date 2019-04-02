@@ -57,18 +57,18 @@ public class SelectProcessor {
     }
 
     /**
-     * @param schema       - schema name to generate queries
-     * @param query        - sql to execute
-     * @param maxRowLimit  Limits row in output, 0 - zero rows, -1 unlimited
-     * @param doHtmlOutput - save html output to new StringBuilder in SelectResult
+     * @param schema        - schema name to generate queries
+     * @param query         - sql to execute
+     * @param maxRowLimit   Limits row in output, 0 - zero rows, -1 unlimited
+     * @param hasHtmlOutput - save html output to new StringBuilder in SelectResult
      * @return SelectResult - object with encapsulated results
      */
     public SelectResult executeQuery(final Schema schema, final String query,
-                                     final int maxRowLimit, final boolean doHtmlOutput) {
+                                     final int maxRowLimit, final boolean hasHtmlOutput) {
 
         SelectResult selectResult = new SelectResult();
-        if (doHtmlOutput) {
-            selectResult.setHtmlOutput(doHtmlOutput);
+        if (hasHtmlOutput) {
+            selectResult.setHtmlOutput(hasHtmlOutput);
             selectResult.setHtmlRows(new StringBuilder());
             selectResult.getHtmlRows().append("<table id=sqlresult class=\"").append(TABLE_CLASSES).append("\">\n");
         }
@@ -88,33 +88,13 @@ public class SelectProcessor {
             }
 
             resultSet = statement.executeQuery(query);
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-            int numCols = resultSetMetaData.getColumnCount();
-            //headers
-            if (doHtmlOutput) {
-                selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for (int i = 1; i <= numCols; i++) {
-                    String fieldLabel = resultSetMetaData.getColumnLabel(i);
-                    selectResult.getHtmlRows().append("<th class=\"").append(HEADER_CLASSES).append("\">")
-                            .append(fieldLabel).append("</th>");
-                }
-                selectResult.getHtmlRows().append("</tr>\n");
+
+            if (hasHtmlOutput) {
+                setHtmlHeaderForSelectResult(selectResult, resultSet);
             }
-            while (resultSet.next()) {
-                if (doHtmlOutput)
-                    selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
-                for (int i = 1; i <= numCols; i++) {
-                    String field = resultSet.getString(i);
-                    if (field != null) {
-                        controlSum += field.hashCode();
-                        if (doHtmlOutput)
-                            selectResult.getHtmlRows().append("<td class=\"").append(CELL_CLASSES).append("\">")
-                                    .append(field).append("</td>");
-                    }
-                }
-                if (doHtmlOutput)
-                    selectResult.getHtmlRows().append("</tr>\n");
-            }
+
+            controlSum += countingControlSum(resultSet, hasHtmlOutput, selectResult);
+
             selectResult.setResultCode(SelectResult.OK);
             selectResult.setErrorMessage("None");
         } catch (SQLException e) {
@@ -145,7 +125,7 @@ public class SelectProcessor {
             //set checksum in results
             selectResult.setResultCheckSum(Long.toString(controlSum));
         }
-        if (doHtmlOutput) {
+        if (hasHtmlOutput) {
             if (selectResult.getResultCode() != SelectResult.OK) {
                 selectResult.getHtmlRows().delete(0, selectResult.getHtmlRows().length());
                 selectResult.getHtmlRows().append("<H1>").append(selectResult.getErrorMessage()).append("</H1>");
@@ -156,21 +136,58 @@ public class SelectProcessor {
         return selectResult;
     }
 
-    private boolean checkTimeoutByUsingExplain(Statement statement, String sql, SelectResult selectResult) throws SQLException {
-        ResultSet explainSet = statement.executeQuery("EXPLAIN (analyse on, format xml) " + sql);
-        while (explainSet.next()) {
-            String exrow = explainSet.getString(1);
-            Matcher rowcount_matcher = rowcount_pattern.matcher(exrow);
-            if (rowcount_matcher.find()) {
-                selectResult.setRowCount(Long.parseLong(rowcount_matcher.group(1)));
+    private void setHtmlHeaderForSelectResult(SelectResult selectResult, ResultSet resultSet) throws SQLException {
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        int numberColumns = resultSetMetaData.getColumnCount();
+
+        selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
+        for (int i = 1; i <= numberColumns; i++) {
+            String fieldLabel = resultSetMetaData.getColumnLabel(i);
+            selectResult.getHtmlRows().append("<th class=\"").append(HEADER_CLASSES).append("\">")
+                    .append(fieldLabel).append("</th>");
+        }
+        selectResult.getHtmlRows().append("</tr>\n");
+    }
+
+    private long countingControlSum(ResultSet resultSet, boolean hasHtmlOutput, SelectResult selectResult) throws SQLException {
+        long controlSum = 0;
+        long numberColumns = resultSet.getMetaData().getColumnCount();
+
+        while (resultSet.next()) {
+            if (hasHtmlOutput)
+                selectResult.getHtmlRows().append("<tr class=\"").append(ROW_CLASSES).append("\">");
+            for (int i = 1; i <= numberColumns; i++) {
+                String field = resultSet.getString(i);
+                if (field != null) {
+                    controlSum += field.hashCode();
+                    if (hasHtmlOutput)
+                        selectResult.getHtmlRows().append("<td class=\"").append(CELL_CLASSES).append("\">")
+                                .append(field).append("</td>");
+                }
             }
-            Matcher executetime_matcher = executiontime_pattern.matcher(exrow);
-            if (executetime_matcher.find()) {
-                selectResult.setExecutionTime(Double.parseDouble(executetime_matcher.group(1)));
-            }
+            if (hasHtmlOutput)
+                selectResult.getHtmlRows().append("</tr>\n");
         }
 
-        return selectResult.getExecutionTime() > (double) timeout_limit;
+        return controlSum;
+    }
+
+    private boolean checkTimeoutByUsingExplain(Statement statement, String sql, SelectResult selectResult) throws SQLException {
+        try (ResultSet explainSet = statement.executeQuery("EXPLAIN (analyse on, format xml) " + sql)) {
+            while (explainSet.next()) {
+                String exrow = explainSet.getString(1);
+                Matcher rowcount_matcher = rowcount_pattern.matcher(exrow);
+                if (rowcount_matcher.find()) {
+                    selectResult.setRowCount(Long.parseLong(rowcount_matcher.group(1)));
+                }
+                Matcher executetime_matcher = executiontime_pattern.matcher(exrow);
+                if (executetime_matcher.find()) {
+                    selectResult.setExecutionTime(Double.parseDouble(executetime_matcher.group(1)));
+                }
+            }
+
+            return selectResult.getExecutionTime() > (double) timeout_limit;
+        }
     }
 
 
