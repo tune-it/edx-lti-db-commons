@@ -256,10 +256,6 @@
                             <answer>airport_name</answer>
                         </option06>
                         <option06>
-                            <query>аэропорт Якутск</query>
-                            <answer>'аэропорт ' || airport_name</answer>
-                        </option06>
-                        <option06>
                             <query>ЯКУТСК</query>
                             <answer>upper(airport_name)</answer>
                         </option06>
