@@ -17,6 +17,22 @@ public class TaskData {
 
     //
 
+    static String[] getQueryTask10() {
+        String queryVariant0 = "Вывести из таблицы посадочных мест коды воздушных судов с тарифами: 'Economy'.";
+        String queryVariant1 = "Вывести из таблицы посадочных мест коды воздушных судов с номерами мест: '35K', '39B', '18G', '50A', '31K', '48A'.";
+        String queryVariant2 = "Вывести из таблицы состоявшихся полетов тарифы, суммы с идентификаторами рейсов: '2354'.";
+        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+    }
+
+    static String[] getAnswerTask10() {
+        String answerVariant0 = "select aircraft_code from seats where fare_conditions = 'Economy';";
+        String answerVariant1 = "select aircraft_code from seats where seat_no in ('35K', '39B', '18G', '50A', '31K', '48A')";
+        String answerVariant2 = "select amount, fare_conditions from ticket_flights where flight_id = 2354;";
+        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+    }
+
+    //
+
     static String[] getQueryTask11() {
         String queryVariant0 = "Вывести количество рейсов воздушного судна c кодами воздушных судов '773'. Ответ выдать в виде '773 = 10'.";
         String queryVariant1 = "Вывести количество посадочных мест c кодами воздушных судов 'SU9'. Ответ выдать в виде 'SU9 = 10'.";
