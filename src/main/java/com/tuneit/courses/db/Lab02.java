@@ -493,9 +493,9 @@ public class Lab02 extends Lab {
                     .append(columnNamePL)
                     .append(" которых начинаются на \'")
                     .append(position)
-                    .append("\'. Отсортировать по столбцу \'")
+                    .append("\'. Отсортировать по столбцу ")
                     .append(columnNamePL)
-                    .append("\' в порядке возрастания.");
+                    .append(" в порядке возрастания.");
         }
 
         @Override
@@ -603,7 +603,7 @@ public class Lab02 extends Lab {
                     .append(columnNamePL)
                     .append(" которых заканчиваются на \'")
                     .append(position)
-                    .append("\'. Отсортировать по столбцу 1 в порядке возрастания.");
+                    .append("\'. Отсортировать по столбцу 1 в порядке возрастания.");//TODO add random for ordering
         }
 
         @Override
