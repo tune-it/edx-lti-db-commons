@@ -1,3 +1,5 @@
+package com.tuneit.course;
+
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.DBTaskGeneratorService;
 import com.tuneit.courses.db.LabTaskQA;
