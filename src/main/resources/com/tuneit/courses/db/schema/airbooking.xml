@@ -140,7 +140,7 @@
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="scheduled_arrival" column2="scheduled_departure"
-                         description="время планируемого полёта для каждого воздушного судна">
+                         description="планируемое время каждого полёта для всех воздушных судов">
                     <option05>
                         <time>MONTH</time>
                         <value>(в месяцах)</value>
@@ -159,7 +159,7 @@
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="actual_arrival" column2="actual_departure"
-                         description="реальное время полёта для каждого воздушного судна">
+                         description="реальное время каждого полёта для всех воздушных судов">
                     <option05>
                         <time>MONTH</time>
                         <value>(в месяцах)</value>
