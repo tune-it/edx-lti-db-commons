@@ -2,7 +2,6 @@ package com.tuneit.course;
 
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.DBTaskGeneratorService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.tuneit.course.TaskData.*;
