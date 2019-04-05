@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author serge
  */
 
-@XmlRootElement(name = "com.tuneit.courses.lab2.db.schema")
+@XmlRootElement(name = "schema")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Schema {
 

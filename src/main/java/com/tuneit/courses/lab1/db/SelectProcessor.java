@@ -1,6 +1,7 @@
 package com.tuneit.courses.lab1.db;
 
 import com.tuneit.courses.lab1.db.schema.Schema;
+import org.postgresql.core.SqlCommand;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -70,14 +71,14 @@ public class SelectProcessor {
 
             selectResult.setResultCode(SelectResult.OK);
             selectResult.setErrorMessage("None");
-        } catch (SQLException e) {
+        } catch (SQLException exception) {
             try {
-                selectResult.setResultCode(Integer.parseInt(e.getSQLState()));
-                selectResult.setErrorMessage(e.getMessage().replace('\n', ' '));
+                selectResult.setResultCode(Integer.parseInt(exception.getSQLState()));
+                selectResult.setErrorMessage(exception.getMessage().replace('\n', ' '));
             } catch (NumberFormatException esqlstate) {
                 selectResult.setResultCode(SelectResult.INTERNAL_ERROR);
-                selectResult.setErrorMessage("Unparseable SQLState=" + e.getSQLState() + " Message=" + e.getMessage().replace('\n', ' '));
-                Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage(), e);
+                selectResult.setErrorMessage("Unparseable SQLState=" + exception.getSQLState() + " Message=" + exception.getMessage().replace('\n', ' '));
+                Logger.getLogger(SelectProcessor.class.getName()).log(Level.SEVERE, selectResult.getErrorMessage());
             }
         } catch (NumberFormatException en) {
             selectResult.setErrorMessage("Internal error, cant parse row count or execution time in explain statement");
