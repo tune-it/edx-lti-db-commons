@@ -25,7 +25,7 @@ public class SchemaLoader {
         }
         //System.out.println("Done.");
         
-        schemas.add(Schema.load("airbooking.xml"));
+        schemas.add(Schema.load("lab2.xml", "connection.xml"));
         //TODO add other schemas
     }
     
@@ -37,10 +37,7 @@ public class SchemaLoader {
         int schemaNo = (new Random(seed)).nextInt(schemas.size());
         return SchemaLoader.getSchema(schemaNo);
     }
-    
-    //
-    // below are test methods, do not use in the production code!
-    //
+
     public static Schema getSchema(int index) {
         return schemas.get(index);
     }
@@ -54,17 +51,3 @@ public class SchemaLoader {
     }
 
 }
-
-// old style seed int getSchema generation. hashCode is much more simply
-// keep it hear for posibility to use in future
-//        long seed = 2928;
-//        try {
-//            MessageDigest md = MessageDigest.getInstance("MD5");
-//            md.update(yearOfStudy.toUpperCase().getBytes());
-//            md.update(studentId.toUpperCase().getBytes());
-//            String md5 = DatatypeConverter.printHexBinary(md.digest()).toUpperCase();
-//            seed = Long.parseUnsignedLong(md5.substring(0, 16), 16);
-//            
-//        } catch (NoSuchAlgorithmException|NumberFormatException ex) {
-//            Logger.getLogger(SchemaLoader.class.getName()).log(Level.SEVERE, null, ex);
-//        }

@@ -3,10 +3,8 @@ package com.tuneit.courses.db.schema;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+
 import org.apache.commons.dbcp2.ConnectionFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp2.PoolableConnection;
@@ -20,6 +18,7 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
  *
  * @author serge
  */
+@XmlRootElement(name = "connection")
 @XmlAccessorType(XmlAccessType.FIELD)
 class SchemaConnection {
     

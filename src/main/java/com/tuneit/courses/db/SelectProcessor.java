@@ -1,8 +1,6 @@
 package com.tuneit.courses.db;
 
-import com.tuneit.courses.Task;
 import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.SchemaLoader;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -26,31 +24,6 @@ public class SelectProcessor {
     private static final String HEADER_CLASSES = "header";
     static Pattern rowcount_pattern = Pattern.compile("<Actual-Rows>(.*?)</Actual-Rows>");
     static Pattern executiontime_pattern = Pattern.compile("<Execution-Time>(.*?)</Execution-Time>");
-
-    public static void main(String[] args) throws Exception {
-        Schema s = SchemaLoader.getSchema(0);
-        for (Lab t : s.getLabs()) {
-            System.out.println(t);
-        }
-        DBTaskGeneratorService ds = new DBTaskGeneratorService();
-        Task[] tasks = ds.getTasks("serge@cs.ifmo.ru", "lab02", "01", 0);
-        tasks[0].setAnswer("select * from ticket_flights;").setComplete(true);
-        tasks[1].setAnswer("select fare_conditions from seats;").setComplete(true);
-        tasks[2].setAnswer("select aircraft_code, seat_no from seats;").setComplete(true);
-        tasks[3].setAnswer("select distinct total_amount from bookings;").setComplete(true);
-        tasks[4].setAnswer("select extract(minute from scheduled_departure - scheduled_arrival) from flights;").setComplete(true);
-        tasks[5].setAnswer("select 'Я билетик ' || ticket_no || ' ' || 'id - ' || passenger_id || ' ' || 'имя фамилия - ' || passenger_name || ' ' || 'код брони - ' || book_ref from tickets").setComplete(true);
-        tasks[6].setAnswer("select arrival_airport from flights where status like '%Arr%';").setComplete(true);
-        tasks[7].setAnswer("select aircraft_code from seats where seat_no like '12%' order by seat_no;").setComplete(true);
-        tasks[8].setAnswer("select aircraft_code from aircrafts where model like '%100' order by 1;").setComplete(true);
-        tasks[9].setAnswer("select fare_conditions from seats where seat_no = '50A' OR seat_no = '12A' OR seat_no = '27C';").setComplete(true);
-        tasks[10].setAnswer("select '11C' || ' = ' || count(seat_no) from boarding_passes where seat_no = '11C' group by seat_no;").setComplete(true);
-        tasks[11].setAnswer("select count(seat_no) from boarding_passes group by seat_no order by count(seat_no) asc limit 5;").setComplete(true);
-        ds.checkTasks(tasks);
-        for (Task t : tasks) {
-            System.out.println(t.getRating());
-        }
-    }
 
     public SelectResult executeQuery(Schema schema, String sql) {
         return executeQuery(schema, sql, 100, false);
