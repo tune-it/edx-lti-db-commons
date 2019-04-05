@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema name="Airbookings">
+    <tables>
+        <table sql-name="aircrafts" name="воздушные суда" name-genitive="воздушных судов">
+            <column sql-name="aircraft_code" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="model" name="модель" name-plural="модели" name-genitive-plural="моделей"
+                    name-creative-plural="моделями"/>
+            <column sql-name="range" name="максимально возможная дистанция"
+                    name-plural="максимально возможные дистанции" name-genitive-plural="максимально возможных дистанций"
+                    name-creative-plural="максимально возможными дистанциями"/>
+            <references>seats flights</references>
+        </table>
+        <table sql-name="airports" name="аэропорты" name-genitive="аэропортов">
+            <column sql-name="airport_code" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="airport_name" name="имя" name-plural="имена" name-genitive-plural="имён"
+                    name-creative-plural="именами"/>
+            <column sql-name="city" name="город" name-plural="города" name-genitive-plural="городов"
+                    name-creative-plural="городами"/>
+            <column sql-name="coordinates" name="координаты" name-plural="координаты" name-genitive-plural="координат"
+                    name-creative-plural="координатами"/>
+            <column sql-name="timezone" name="временная зона" name-plural="временные зоны"
+                    name-genitive-plural="временных зон" name-creative-plural="временными зонами"/>
+            <references>flights</references>
+        </table>
+        <table sql-name="boarding_passes" name="посадочный талон" name-genitive="посадочных талонов">
+            <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
+                    name-genitive-plural="номеров билетов" name-creative-plural="номерами билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="boarding_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
+                    name-creative-plural="номерами"/>
+            <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
+                    name-creative-plural="номерами мест"/>
+            <references>ticket_flights</references>
+        </table>
+        <table sql-name="bookings" name="бронирование" name-genitive="бронирований">
+            <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат"
+                    name-creative-plural="датами"/>
+            <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
+                    name-creative-plural="суммами"/>
+            <references>tickets</references>
+        </table>
+        <table sql-name="flights" name="рейс воздушного судна" name-genitive="рейсов воздушного судна">
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="flight_no" name="номер рейса" name-plural="номера рейсов"
+                    name-genitive-plural="номеров рейсов" name-creative-plural="номерами рейсов"/>
+            <column sql-name="scheduled_departure" name="время планируемого отправления"
+                    name-plural="времена планируемых отправлений" name-genitive-plural="времен планируемых отправлений"
+                    name-creative-plural="временами планируемых отправлений"/>
+            <column sql-name="scheduled_arrival" name="время планируемого прибытия"
+                    name-plural="времена планируемых прибытий" name-genitive-plural="времен планируемых прибытий"
+                    name-creative-plural="временами планируемых прибытий"/>
+            <column sql-name="departure_airport" name="аэропорт отправления" name-plural="аэропорты отправления"
+                    name-genitive-plural="аэропортов отправлений" name-creative-plural="аэропортами отправления"/>
+            <column sql-name="arrival_airport" name="аэропорт прибытия" name-plural="аэропорты прибытия"
+                    name-genitive-plural="аэропортов прибытий" name-creative-plural="аэропортами прибытия"/>
+            <column sql-name="status" name="статус" name-plural="статусы" name-genitive-plural="статусов"
+                    name-creative-plural="статусами"/>
+            <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
+                    name-genitive-plural="кодов воздушных судов" name-creative-plural="кодами воздушных судов"/>
+            <column sql-name="actual_departure" name="время отправления" name-plural="времена отправлений"
+                    name-genitive-plural="времён отправлений" name-creative-plural="временами отправлений"/>
+            <column sql-name="actual_arrival" name="время прибытия" name-plural="времена прибытий"
+                    name-genitive-plural="времён отправлений" name-creative-plural="временами прибытий"/>
+            <references>airports aircrafts ticket_flights</references>
+        </table>
+        <table sql-name="seats" name="посадочное место" name-genitive="посадочных мест">
+            <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
+                    name-genitive-plural="кодов воздушных судов" name-creative-plural="кодами воздушных судов"/>
+            <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
+                    name-creative-plural="номерами мест"/>
+            <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
+                    name-creative-plural="тарифами"/>
+            <references>aircrafts</references>
+        </table>
+        <table sql-name="ticket_flights" name="состоявшийся полет" name-genitive="состоявшихся полетов">
+            <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
+                    name-genitive-plural="номеров билетов" name-creative-plural="номерами билетов"/>
+            <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
+                    name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
+            <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
+                    name-creative-plural="тарифами"/>
+            <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
+                    name-creative-plural="суммами"/>
+            <references>flights tickets</references>
+        </table>
+        <table sql-name="tickets" name="проданный билет" name-genitive="проданных билетов">
+            <column sql-name="ticket_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
+                    name-creative-plural="номерами"/>
+            <column sql-name="book_ref" name="код бронирования" name-plural="коды бронирования"
+                    name-genitive-plural="кодов бронирования" name-creative-plural="кодами бронирования"/>
+            <column sql-name="passenger_id" name="идентификатор пассажира" name-plural="идентификаторы пассажиров"
+                    name-genitive-plural="идентификаторов пассажиров"
+                    name-creative-plural="идентификаторами пассажиров"/>
+            <column sql-name="passenger_name" name="имя пассажира" name-plural="имена пассажиров"
+                    name-genitive-plural="имён пассажиров" name-creative-plural="именами пассажиров"/>
+            <column sql-name="contact_data" name="контактная информация" name-plural="контактные данные"
+                    name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
+            <references>bookings ticket_flights</references>
+        </table>
+    </tables>
+</schema>
