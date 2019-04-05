@@ -1,4 +1,4 @@
-package com.tuneit.courses;
+package com.tuneit.courses.lab1;
 
 import java.util.Calendar;
 import java.util.NoSuchElementException;

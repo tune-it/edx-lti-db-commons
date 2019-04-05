@@ -1,7 +1,7 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab1.db.schema;
 
-import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.db.Lab02;
+import com.tuneit.courses.lab1.db.Lab;
+import com.tuneit.courses.lab1.db.Lab02;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author serge
  */
 
-@XmlRootElement(name = "schema")
+@XmlRootElement(name = "com.tuneit.courses.lab2.db.schema")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Schema {
 
@@ -52,7 +52,7 @@ public class Schema {
             JAXBContext jaxbContext = JAXBContext.newInstance(SchemaConnection.class);
             InputStream inputStream = SchemaConnection.class.getResourceAsStream(connectionName);
             if (inputStream == null)
-                throw new JAXBException("Could not get XML schema in application resourses");
+                throw new JAXBException("Could not get XML com.tuneit.courses.lab2.db.schema in application resourses");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             connection = (SchemaConnection) unmarshaller.unmarshal(inputStream);
         } catch (JAXBException ex) {
@@ -68,7 +68,7 @@ public class Schema {
             JAXBContext jc = JAXBContext.newInstance(Schema.class);
             InputStream is = Schema.class.getResourceAsStream(schemaName);
             if (is == null)
-                throw new JAXBException("Could not get XML schema in application resourses");
+                throw new JAXBException("Could not get XML com.tuneit.courses.lab2.db.schema in application resourses");
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             sch = (Schema) unmarshaller.unmarshal(is);
         } catch (JAXBException ex) {

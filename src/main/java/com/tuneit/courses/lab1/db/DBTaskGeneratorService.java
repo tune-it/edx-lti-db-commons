@@ -1,9 +1,9 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.Task;
-import com.tuneit.courses.TaskGeneratorService;
-import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.SchemaLoader;
+import com.tuneit.courses.lab1.Task;
+import com.tuneit.courses.lab1.TaskGeneratorService;
+import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
     @Override
     public Task[] getTasks(String studentId, String labId, String variant, int complexity) {
-        //initial task to get schema
+        //initial task to get com.tuneit.courses.lab2.db.schema
         Task initialTask = new Task();
         initialTask.setStudentId(studentId).setLabId(labId).setVariant(variant);
 
@@ -87,7 +87,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
         if (!optionalLab.isPresent()) {
             throw new IllegalArgumentException("Could not find lab with name="
-                    + initialTask + " in schema " + schema.getName());
+                    + initialTask + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
         }
         Lab lab = optionalLab.get();
 
@@ -113,7 +113,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                 filter(lab -> lab.getId().equalsIgnoreCase(task.getLabId().trim())).findFirst();
         if (!optionalLab.isPresent()) {
             throw new IllegalArgumentException("Could not find lab with name="
-                    + task.getLabId() + " in schema " + schema.getName());
+                    + task.getLabId() + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
         }
         Lab lab = optionalLab.get();
 
@@ -121,7 +121,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                 filter(labTask -> labTask.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
         if (!optionalLabTask.isPresent()) {
             throw new IllegalArgumentException("Could not find lab task with lab name="
-                    + task.getLabId() + " and task " + task.getTaskId() + " in schema " + schema.getName());
+                    + task.getLabId() + " and task " + task.getTaskId() + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
         }
         return optionalLabTask.get();
     }

@@ -1,5 +1,5 @@
 
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab1.db;
 
 import org.apache.commons.collections4.map.LRUMap;
 

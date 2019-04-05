@@ -1,6 +1,6 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.Schema;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -30,7 +30,7 @@ public class SelectProcessor {
     }
 
     /**
-     * @param schema        - schema name to generate queries
+     * @param schema        - com.tuneit.courses.lab2.db.schema name to generate queries
      * @param query         - sql to execute
      * @param maxRowLimit   Limits row in output, 0 - zero rows, -1 unlimited
      * @param hasHtmlOutput - save html output to new StringBuilder in SelectResult

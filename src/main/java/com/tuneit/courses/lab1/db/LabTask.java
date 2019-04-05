@@ -1,9 +1,9 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.Task;
-import com.tuneit.courses.db.schema.Column;
-import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.Table;
+import com.tuneit.courses.lab1.Task;
+import com.tuneit.courses.lab1.db.schema.Column;
+import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;

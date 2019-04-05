@@ -1,4 +1,4 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab1.db;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

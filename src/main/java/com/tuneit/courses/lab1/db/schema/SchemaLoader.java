@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab1.db.schema;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -25,7 +25,7 @@ public class SchemaLoader {
         }
         //System.out.println("Done.");
         
-        schemas.add(Schema.load("lab2.xml", "connection.xml"));
+        schemas.add(Schema.load("lab1.xml", "connection.xml"));
         //TODO add other schemas
     }
     

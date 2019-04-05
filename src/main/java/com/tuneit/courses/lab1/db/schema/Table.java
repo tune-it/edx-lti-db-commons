@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab1.db.schema;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;

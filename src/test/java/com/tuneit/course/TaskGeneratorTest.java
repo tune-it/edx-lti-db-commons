@@ -1,10 +1,10 @@
 package com.tuneit.course;
 
-import com.tuneit.courses.Task;
-import com.tuneit.courses.db.DBTaskGeneratorService;
-import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.SchemaLoader;
+import com.tuneit.courses.lab1.Task;
+import com.tuneit.courses.lab1.db.DBTaskGeneratorService;
+import com.tuneit.courses.lab1.db.LabTaskQA;
+import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
