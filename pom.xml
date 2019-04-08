@@ -68,12 +68,6 @@
            <artifactId>commons-dbcp2</artifactId>
            <version>2.5.0</version>
        </dependency>
-        <!-- for TokenSQLSimilarity only-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.6</version>
-        </dependency>
         <!-- for LabTaskQA only -->
         <dependency>
             <groupId>org.apache.commons</groupId>

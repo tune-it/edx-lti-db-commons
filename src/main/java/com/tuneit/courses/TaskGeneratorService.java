@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1;
+package com.tuneit.courses;
 
 /**
  * Generator of tasks

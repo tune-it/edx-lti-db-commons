@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1;
+package com.tuneit.courses;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

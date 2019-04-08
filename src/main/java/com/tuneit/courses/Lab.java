@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1.db;
+package com.tuneit.courses;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,14 +7,15 @@ import java.util.List;
 
 
 /**
- *
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class Lab { 
-    
-    @XmlAttribute(name="description") protected String description;    
-    @XmlAttribute(name="id") protected String id;
+public abstract class Lab {
+
+    @XmlAttribute(name = "description")
+    protected String description;
+    @XmlAttribute(name = "id")
+    protected String id;
 
     public String getDescription() {
         return description;
@@ -31,14 +32,13 @@ public abstract class Lab {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     @Override
     public String toString() {
         return "Lab{" + "name=" + description + '}';
     }
-    
-    public abstract List<LabTask> getLabTask();
 
+    public abstract <T extends LabTask> List<T> getLabTask();
 
 
 }

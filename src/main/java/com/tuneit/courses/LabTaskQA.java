@@ -1,5 +1,5 @@
 
-package com.tuneit.courses.lab1.db;
+package com.tuneit.courses;
 
 import org.apache.commons.collections4.map.LRUMap;
 
@@ -15,7 +15,7 @@ public class LabTaskQA {
     protected final String id;
     protected final String question;
     protected final String correctAnswer;
-    protected String correct_cksum = "";
+    protected String correctCheckSum = "";
     //cache for store question and md5 for correct answer
     private static LRUMap<String,LabTaskQA> cache = new LRUMap<>(100000);
 
@@ -41,11 +41,11 @@ public class LabTaskQA {
     }
     
     public String getCorrectCheckSum() {
-        return correct_cksum;
+        return correctCheckSum;
     }
 
-    public void setCorrect_cksum(String correct_cksum) {
-        this.correct_cksum = correct_cksum;
+    public void setCorrectCheckSum(String correctCheckSum) {
+        this.correctCheckSum = correctCheckSum;
     }
     
     

@@ -1,4 +1,4 @@
-package com.tuneit.course;
+package com.tuneit.course.lab1;
 
 public class TaskData {
     static String[] getQueryTask1() {

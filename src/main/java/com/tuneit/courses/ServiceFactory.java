@@ -1,6 +1,4 @@
-package com.tuneit.courses.lab1;
-
-import com.tuneit.courses.lab1.db.DBTaskGeneratorService;
+package com.tuneit.courses;
 
 public class ServiceFactory {
 

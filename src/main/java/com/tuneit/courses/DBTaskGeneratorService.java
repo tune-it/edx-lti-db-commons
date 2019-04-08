@@ -1,7 +1,6 @@
-package com.tuneit.courses.lab1.db;
+package com.tuneit.courses;
 
-import com.tuneit.courses.lab1.Task;
-import com.tuneit.courses.lab1.TaskGeneratorService;
+import com.tuneit.courses.lab1.db.*;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.springframework.stereotype.Component;
@@ -20,11 +19,11 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
         Schema schema = SchemaLoader.getSchema(initialTask.getYearOfStudy(), initialTask.getStudentId());
 
-        List<LabTask> labTasks = getLabTasks(schema, initialTask);
-        Task[] tasks = new Task[labTasks.size()];
+        List<LabTask> lab01Tasks = getLabTasks(schema, initialTask);
+        Task[] tasks = new Task[lab01Tasks.size()];
 
         for (int i = 0; i < tasks.length; i++) {
-            tasks[i] = getTaskByInitialTaskAndLabTask(initialTask, labTasks.get(i),schema);
+            tasks[i] = getTaskByInitialTaskAndLabTask(initialTask, lab01Tasks.get(i),schema);
         }
 
         return tasks;
@@ -37,13 +36,13 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
         Schema schema = SchemaLoader.getSchema(initialTask.getYearOfStudy(), initialTask.getStudentId());
 
-        List<LabTask> labTasks = getLabTasks(schema, initialTask);
+        List<LabTask> lab01Tasks = getLabTasks(schema, initialTask);
 
-        if (labTasks.size() <= taskId) {
+        if (lab01Tasks.size() <= taskId) {
             throw new IllegalArgumentException(new ArrayIndexOutOfBoundsException("TaskId more that the number of tasks"));
         }
 
-        return getTaskByInitialTaskAndLabTask(initialTask, labTasks.get(taskId), schema);
+        return getTaskByInitialTaskAndLabTask(initialTask, lab01Tasks.get(taskId), schema);
     }
 
     @Override
@@ -51,11 +50,11 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         for (Task task : tasks) {
             Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
 
-            LabTask labTask = findLabTask(task);
+            LabTask lab01Task = findLabTask(task);
 
             if (task.isComplete()) {
                 try {
-                    LabTaskQA labTaskQA = labTask.generate(schema, task);
+                    LabTaskQA labTaskQA = lab01Task.generate(schema, task);
                     SelectProcessor tester = new SelectProcessor();
 
                     SelectResult answer = tester.executeQuery(schema, task.getAnswer(), 5, false);
@@ -118,7 +117,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         Lab lab = optionalLab.get();
 
         Optional<LabTask> optionalLabTask = lab.getLabTask().stream().
-                filter(labTask -> labTask.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
+                filter(lab01Task -> lab01Task.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
         if (!optionalLabTask.isPresent()) {
             throw new IllegalArgumentException("Could not find lab task with lab name="
                     + task.getLabId() + " and task " + task.getTaskId() + " in schema " + schema.getName());

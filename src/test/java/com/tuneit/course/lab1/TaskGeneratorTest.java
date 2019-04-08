@@ -1,8 +1,8 @@
-package com.tuneit.course;
+package com.tuneit.course.lab1;
 
-import com.tuneit.courses.lab1.Task;
-import com.tuneit.courses.lab1.db.DBTaskGeneratorService;
-import com.tuneit.courses.lab1.db.LabTaskQA;
+import com.tuneit.courses.Task;
+import com.tuneit.courses.DBTaskGeneratorService;
+import com.tuneit.courses.LabTaskQA;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class TaskGeneratorTest {
     @Test
     void tasksValidAnswerTest() {
         for (int i = 0; i < 5; i++) {
-            Task[] tasks = taskGeneratorService.getTasks("student", "lab02", "0" + i, 0);
+            Task[] tasks = taskGeneratorService.getTasks("student", "lab01", "0" + i, 0);
 
             for (Task task : tasks) {
                 Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
@@ -39,7 +39,7 @@ class TaskGeneratorTest {
 
     @Test
     void task1QueryTest() {
-        Task[] tasks = taskGeneratorService.getTasks("student", "lab02", "1", 0);
+        Task[] tasks = taskGeneratorService.getTasks("student", "lab01", "1", 0);
 
         //true
         tasks[0].setAnswer("select * from seats").setComplete(true);
@@ -72,7 +72,7 @@ class TaskGeneratorTest {
 
 
         for (int i = 0; i < 10000; i++) {
-            Task[] tasks = taskGeneratorService.getTasks("student", "lab02", variant, 0);
+            Task[] tasks = taskGeneratorService.getTasks("student", "lab01", variant, 0);
             for (int j = 0; j < tasks.length; j++) {
                 Task task = tasks[j];
 
@@ -87,7 +87,7 @@ class TaskGeneratorTest {
 
     private LabTaskQA[] getLabTaskQAS(String variant) {
         LabTaskQA[] labTaskQAS = new LabTaskQA[12];
-        Task[] tasks = taskGeneratorService.getTasks("student", "lab02", variant, 0);
+        Task[] tasks = taskGeneratorService.getTasks("student", "lab01", variant, 0);
 
         for (int i = 0; i < tasks.length; i++) {
             Task task = tasks[i];

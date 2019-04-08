@@ -1,7 +1,7 @@
 package com.tuneit.courses.lab1.db.schema;
 
-import com.tuneit.courses.lab1.db.Lab;
-import com.tuneit.courses.lab1.db.Lab02;
+import com.tuneit.courses.Lab;
+import com.tuneit.courses.lab1.db.Lab01;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -34,7 +34,7 @@ public class Schema {
 
     @XmlElementWrapper(name = "labs-config")
     @XmlElements({
-            @XmlElement(name = "lab02", type = Lab02.class),
+            @XmlElement(name = "lab02", type = Lab01.class),
 
     })
     private List<Lab> labs;

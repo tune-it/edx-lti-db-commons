@@ -1,6 +1,9 @@
 package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.lab1.Task;
+import com.tuneit.courses.Lab;
+import com.tuneit.courses.LabTask;
+import com.tuneit.courses.LabTaskQA;
+import com.tuneit.courses.Task;
 import com.tuneit.courses.lab1.db.schema.Column;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.Table;
@@ -12,7 +15,7 @@ import java.util.*;
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Lab02 extends Lab {
+public class Lab01 extends Lab {
     @XmlElements({
             @XmlElement(name = "task01", type = Task01.class),
             @XmlElement(name = "task02", type = Task02.class),
@@ -27,19 +30,19 @@ public class Lab02 extends Lab {
             @XmlElement(name = "task11", type = Task11.class),
             @XmlElement(name = "task12", type = Task12.class)
     })
-    private List<LabTask> labTask = new ArrayList<>();
+    private List<Lab01Task> lab01Task = new ArrayList<>();
 
     @Override
-    public List<LabTask> getLabTask() {
-        return labTask;
+    public List<Lab01Task> getLabTask() {
+        return lab01Task;
     }
 
     @Override
     public String toString() {
-        return "Lab02{" + super.toString() + ", labTask=" + labTask + '}';
+        return "Lab01{" + super.toString()+", lab01Task=" + lab01Task + '}';
     }
 
-    public static class Task01 extends LabTask {
+    public static class Task01 extends Lab01Task {
 
         @Override
         public String toString() {
@@ -55,10 +58,10 @@ public class Lab02 extends Lab {
         }
     }
 
-    private static class Task02 extends LabTask {
+    private static class Task02 extends Lab01Task {
     }
 
-    public static class Task03 extends LabTask {
+    public static class Task03 extends Lab01Task {
         @Override
         public String toString() {
             return "Task01{" + super.toString() + ", forbiddenList=" + forbiddenList + '}';
@@ -71,7 +74,7 @@ public class Lab02 extends Lab {
 
     }
 
-    public static class Task04 extends LabTask {
+    public static class Task04 extends Lab01Task {
         @Override
         public String toString() {
             return "Task01{" + super.toString() + ", forbiddenList=" + forbiddenList + '}';
@@ -100,7 +103,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task05 extends LabTask {
+    public static class Task05 extends Lab01Task {
         @XmlElement(name = "subtask05", required = true)
         private List<Subtask05> subtasks05 = new ArrayList<>();
 
@@ -173,7 +176,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task06 extends LabTask {
+    public static class Task06 extends Lab01Task {
         @XmlElement(name = "subtask06", required = true)
         private List<Subtask06> subtasks06;
 
@@ -333,7 +336,7 @@ public class Lab02 extends Lab {
 
     }
 
-    public static class Task07 extends LabTask {
+    public static class Task07 extends Lab01Task {
         @XmlElement(name = "subtask07")
         private List<Subtask07> subtasks07;
 
@@ -441,7 +444,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task08 extends LabTask {
+    public static class Task08 extends Lab01Task {
         @XmlElement(name = "subtask08")
         private List<Subtask08> subtasks08;
 
@@ -552,7 +555,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task09 extends LabTask {
+    public static class Task09 extends Lab01Task {
         @XmlElement(name = "subtask09")
         private List<Subtask09> subtasks09;
 
@@ -660,7 +663,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task10 extends LabTask {
+    public static class Task10 extends Lab01Task {
         @XmlElement(name = "subtask10")
         private List<Subtask10> subtasks10;
 
@@ -802,7 +805,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task11 extends LabTask {
+    public static class Task11 extends Lab01Task {
         @XmlElement(name = "subtask11")
         private List<Subtask11> subtasks11;
 
@@ -897,7 +900,7 @@ public class Lab02 extends Lab {
         }
     }
 
-    public static class Task12 extends LabTask {
+    public static class Task12 extends Lab01Task {
         @XmlElement(name = "subtask12")
         private List<Subtask12> subtasks12 = new ArrayList<>();
 

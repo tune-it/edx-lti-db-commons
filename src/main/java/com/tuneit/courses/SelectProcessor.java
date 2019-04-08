@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1.db;
+package com.tuneit.courses;
 
 import com.tuneit.courses.lab1.db.schema.Schema;
 import org.postgresql.core.SqlCommand;

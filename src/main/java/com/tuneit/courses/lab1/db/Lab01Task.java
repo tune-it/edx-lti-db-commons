@@ -1,6 +1,8 @@
 package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.lab1.Task;
+import com.tuneit.courses.LabTask;
+import com.tuneit.courses.LabTaskQA;
+import com.tuneit.courses.Task;
 import com.tuneit.courses.lab1.db.schema.Column;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.Table;
@@ -9,20 +11,22 @@ import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
- *
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class LabTask {
+public abstract class Lab01Task implements LabTask {
     protected StringBuilder query = new StringBuilder();
     protected StringBuilder answer = new StringBuilder();
 
     @XmlAttribute(name = "description")
     protected String description;
-    @XmlAttribute(name="id") protected String id;
-    
-    @XmlElement(name="prolog") protected String prolog;
-    @XmlElement(name="epilog") protected String epilog;
+    @XmlAttribute(name = "id")
+    protected String id;
+
+    @XmlElement(name = "prolog")
+    protected String prolog;
+    @XmlElement(name = "epilog")
+    protected String epilog;
 
     @XmlElement(name = "forbidden-list")
     protected List<String> forbiddenList = new ArrayList<>();
@@ -53,7 +57,7 @@ public abstract class LabTask {
     public void setEpilog(String epilog) {
         this.epilog = epilog;
     }
-    
+
     protected static List<Table> removeForbiddenElements(Schema s, List<String> forbidenElements) {
         ArrayList<Table> allowed = new ArrayList<>();
         for (Table table : s.getTables()) {
@@ -68,7 +72,7 @@ public abstract class LabTask {
 
     @Override
     public String toString() {
-        return "LabTask{" + "description=" + description + ", id=" + id + 
+        return "Lab01Task{" + "description=" + description + ", id=" + id +
                 ", prolog=" + prolog + ", epilog=" + epilog + '}';
     }
 
@@ -134,7 +138,7 @@ public abstract class LabTask {
         return tables.get(getRandom(task).nextInt(tables.size()));
     }
 
-    protected Table findAllowedTable(Schema schema, String tableName){
+    protected Table findAllowedTable(Schema schema, String tableName) {
         List<Table> tables = allowed.get(schema.getName());
         Optional<Table> tableOptional = tables.stream()
                 .filter(table -> table.getTableName().equalsIgnoreCase(tableName)).findFirst();
