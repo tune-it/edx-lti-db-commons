@@ -4,7 +4,8 @@ import com.tuneit.courses.DBTaskGeneratorService;
 import com.tuneit.courses.Task;
 import org.junit.jupiter.api.Test;
 
-import static com.tuneit.course.lab2.TaskData.*;
+import static com.tuneit.course.lab2.TaskData.getAnswerTask1;
+import static com.tuneit.course.lab2.TaskData.getQueryTask1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskVariantTest {

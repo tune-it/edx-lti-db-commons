@@ -1,6 +1,5 @@
 package com.tuneit.courses;
 
-import com.tuneit.courses.lab1.db.*;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         Task[] tasks = new Task[lab01Tasks.size()];
 
         for (int i = 0; i < tasks.length; i++) {
-            tasks[i] = getTaskByInitialTaskAndLabTask(initialTask, lab01Tasks.get(i),schema);
+            tasks[i] = getTaskByInitialTaskAndLabTask(initialTask, lab01Tasks.get(i), schema);
         }
 
         return tasks;

@@ -1,7 +1,7 @@
 package com.tuneit.course.lab1;
 
-import com.tuneit.courses.Task;
 import com.tuneit.courses.DBTaskGeneratorService;
+import com.tuneit.courses.Task;
 import org.junit.jupiter.api.Test;
 
 import static com.tuneit.course.lab1.TaskData.*;

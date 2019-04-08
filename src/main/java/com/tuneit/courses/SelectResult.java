@@ -6,16 +6,15 @@
 package com.tuneit.courses;
 
 /**
- *
  * @author serge
  */
 public class SelectResult {
-    
+
     public static final int NORESULT = -1;
     public static final int OK = 0;
     public static final int INTERNAL_ERROR = -2;
     public static final int TIMEOUT = 57014;
-    
+
     private boolean hasHtml = false;
     private int resultCode = NORESULT;
     private StringBuilder htmlRows = null;
@@ -84,5 +83,5 @@ public class SelectResult {
     public String toString() {
         return "SelectResult{" + "hasHtml=" + hasHtml + ", resultCode=" + resultCode + ", htmlRows=" + htmlRows + ", errorMessage=" + errorMessage + ", resultCheckSum=" + resultCheckSum + ", rowCount=" + rowCount + ", executionTime=" + executionTime + '}';
     }
-    
+
 }

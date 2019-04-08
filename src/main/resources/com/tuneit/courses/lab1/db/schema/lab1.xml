@@ -16,7 +16,8 @@
                     name-creative-plural="кодами"/>
             <column sql-name="airport_name" name="имя" name-plural="имена" name-genitive-plural="имён"
                     name-creative-plural="именами"/>
-            <column sql-name="city" name="город" name-plural="города" name-genitive-plural="городов" name-creative-plural="городами"/>
+            <column sql-name="city" name="город" name-plural="города" name-genitive-plural="городов"
+                    name-creative-plural="городами"/>
             <column sql-name="coordinates" name="координаты" name-plural="координаты" name-genitive-plural="координат"
                     name-creative-plural="координатами"/>
             <column sql-name="timezone" name="временная зона" name-plural="временные зоны"
@@ -33,8 +34,10 @@
                     name-creative-plural="номерами мест"/>
         </table>
         <table sql-name="bookings" name="бронирование" name-genitive="бронирований">
-            <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов" name-creative-plural="кодами"/>
-            <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат" name-creative-plural="датами"/>
+            <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов"
+                    name-creative-plural="кодами"/>
+            <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат"
+                    name-creative-plural="датами"/>
             <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
                     name-creative-plural="суммами"/>
         </table>
@@ -77,7 +80,8 @@
                     name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
             <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
                     name-creative-plural="тарифами"/>
-            <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм" name-creative-plural="суммами"/>
+            <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
+                    name-creative-plural="суммами"/>
         </table>
         <table sql-name="tickets" name="проданный билет" name-genitive="проданных билетов">
             <column sql-name="ticket_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
@@ -85,38 +89,39 @@
             <column sql-name="book_ref" name="код бронирования" name-plural="коды бронирования"
                     name-genitive-plural="кодов бронирования" name-creative-plural="кодами бронирования"/>
             <column sql-name="passenger_id" name="идентификатор пассажира" name-plural="идентификаторы пассажиров"
-                    name-genitive-plural="идентификаторов пассажиров" name-creative-plural="идентификаторами пассажиров"/>
+                    name-genitive-plural="идентификаторов пассажиров"
+                    name-creative-plural="идентификаторами пассажиров"/>
             <column sql-name="passenger_name" name="имя пассажира" name-plural="имена пассажиров"
                     name-genitive-plural="имён пассажиров" name-creative-plural="именами пассажиров"/>
             <column sql-name="contact_data" name="контактная информация" name-plural="контактные данные"
                     name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
-        </table>       
+        </table>
     </tables>
     <labs-config>
         <lab02 id="lab02" description="Простая выборка из таблицы">
             <task01 id="task01" description="Выборка всех столбцов таблицы">
-                <prolog>Выведите содержимое всех столбцов таблицы </prolog>
+                <prolog>Выведите содержимое всех столбцов таблицы</prolog>
                 <epilog>.</epilog>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task01>
             <task02 id="task02" description="Выборка заданных столбцов таблицы">
-                <prolog>Выведите содержимое столбца (столбцов) </prolog>
-                <epilog> для таблицы </epilog>
+                <prolog>Выведите содержимое столбца (столбцов)</prolog>
+                <epilog>для таблицы</epilog>
             </task02>
             <task03 id="task03" description="Выборка значений столбцов по имени">
-                <prolog>Выведите все </prolog>
-                <epilog> из таблицы </epilog>
+                <prolog>Выведите все</prolog>
+                <epilog>из таблицы</epilog>
                 <!--<forbidden-list>ticket_flights:ticket_no</forbidden-list>-->
             </task03>
             <task04 id="task04" description="Выборка уникальных значений столбцов по имени">
-                <prolog>Выведите все уникальные </prolog>
-                <epilog> для </epilog>
+                <prolog>Выведите все уникальные</prolog>
+                <epilog>для</epilog>
                 <!--<forbidden-list>ticket_flights</forbidden-list>-->
             </task04>
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
                 <subtask05 table="flights" column1="scheduled_arrival" column2="scheduled_departure"
-                         description="планируемое время каждого полёта для всех воздушных судов">
+                           description="планируемое время каждого полёта для всех воздушных судов">
                     <option05>
                         <time>/60/60</time>
                         <value>(в часах)</value>
@@ -127,7 +132,7 @@
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="actual_arrival" column2="actual_departure"
-                         description="реальное время каждого полёта для всех воздушных судов">
+                           description="реальное время каждого полёта для всех воздушных судов">
                     <option05>
                         <time>/60/60</time>
                         <value>(в часах)</value>

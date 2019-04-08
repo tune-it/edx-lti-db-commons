@@ -6,18 +6,20 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Table implements Cloneable {
-    
-    @XmlAttribute(name="sql-name") private String sqlName;
-    @XmlAttribute(name="name") private String name;
-    @XmlAttribute(name="name-genitive") private String nameGenitive; //род.падеж мн.ч.
-    @XmlTransient boolean sqlNameInUpperCase = false;
-    
-    @XmlElement(name="column")
+
+    @XmlTransient
+    boolean sqlNameInUpperCase = false;
+    @XmlAttribute(name = "sql-name")
+    private String sqlName;
+    @XmlAttribute(name = "name")
+    private String name;
+    @XmlAttribute(name = "name-genitive")
+    private String nameGenitive; //род.падеж мн.ч.
+    @XmlElement(name = "column")
     private List<Column> columns;
 
     @Override

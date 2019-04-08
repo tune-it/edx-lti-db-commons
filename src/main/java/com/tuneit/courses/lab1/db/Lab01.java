@@ -1,7 +1,6 @@
 package com.tuneit.courses.lab1.db;
 
 import com.tuneit.courses.Lab;
-import com.tuneit.courses.LabTask;
 import com.tuneit.courses.LabTaskQA;
 import com.tuneit.courses.Task;
 import com.tuneit.courses.lab1.db.schema.Column;
@@ -39,7 +38,7 @@ public class Lab01 extends Lab {
 
     @Override
     public String toString() {
-        return "Lab01{" + super.toString()+", lab01Task=" + lab01Task + '}';
+        return "Lab01{" + super.toString() + ", lab01Task=" + lab01Task + '}';
     }
 
     public static class Task01 extends Lab01Task {

@@ -11,6 +11,10 @@ import java.util.Optional;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Table implements Cloneable {
 
+    @XmlTransient
+    boolean sqlNameInUpperCase = false;
+    @XmlTransient
+    List<Table> refTables = new ArrayList<>();
     @XmlAttribute(name = "sql-name")
     private String sqlName;
     @XmlAttribute(name = "name")
@@ -20,12 +24,6 @@ public class Table implements Cloneable {
     @XmlElement(name = "references")
     @XmlList
     private List<String> namesReferences;
-    @XmlTransient
-    boolean sqlNameInUpperCase = false;
-
-    @XmlTransient
-    List<Table> refTables = new ArrayList<>();
-
     @XmlElement(name = "column")
     private List<Column> columns;
 
@@ -58,12 +56,12 @@ public class Table implements Cloneable {
         return nameGenitive;
     }
 
-    public List<Table> getRefTables() {
-        return refTables;
-    }
-
     public void setNameGenitive(String nameGenitive) {
         this.nameGenitive = nameGenitive;
+    }
+
+    public List<Table> getRefTables() {
+        return refTables;
     }
 
     public List<Column> getColumns() {

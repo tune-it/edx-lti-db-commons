@@ -1,8 +1,8 @@
 package com.tuneit.course.lab1;
 
-import com.tuneit.courses.Task;
 import com.tuneit.courses.DBTaskGeneratorService;
 import com.tuneit.courses.LabTaskQA;
+import com.tuneit.courses.Task;
 import com.tuneit.courses.lab1.db.schema.Schema;
 import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;

@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author serge
  */
 public class SchemaLoader {
@@ -26,9 +25,9 @@ public class SchemaLoader {
     }
 
     public static Schema getSchema(String yearOfStudy, String studentId) {
-        if (yearOfStudy==null || studentId==null)
+        if (yearOfStudy == null || studentId == null)
             throw new IllegalArgumentException("Cant get Schema for student and year of study. Null args.");
-        int seed = (yearOfStudy+"-"+studentId).toUpperCase().hashCode();
+        int seed = (yearOfStudy + "-" + studentId).toUpperCase().hashCode();
         int schemaNo = (new Random(seed)).nextInt(schemas.size());
         return SchemaLoader.getSchema(schemaNo);
     }
@@ -36,12 +35,12 @@ public class SchemaLoader {
     public static Schema getSchema(int index) {
         return schemas.get(index);
     }
-    
+
     public static int getSchemasCount() {
         return schemas.size();
     }
-    
-    public ListIterator<Schema> schemas () {
+
+    public ListIterator<Schema> schemas() {
         return schemas.listIterator();
     }
 

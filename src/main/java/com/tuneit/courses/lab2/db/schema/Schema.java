@@ -38,14 +38,6 @@ public class Schema {
         return schema;
     }
 
-    private void updateRef() {
-        tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
-            table.getRefTables().add(findTable(nameTable));
-        }));
-
-        System.out.println("eze");
-    }
-
     private static SchemaConnection loadConnection(String connectionName) {
         SchemaConnection connection;
         try {
@@ -76,6 +68,14 @@ public class Schema {
             throw new IllegalArgumentException("Schema " + schemaName + " could not be loaded", ex);
         }
         return sch;
+    }
+
+    private void updateRef() {
+        tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
+            table.getRefTables().add(findTable(nameTable));
+        }));
+
+        System.out.println("eze");
     }
 
     public Connection getConnection() throws SQLException {

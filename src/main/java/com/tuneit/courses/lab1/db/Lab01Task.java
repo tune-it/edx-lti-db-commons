@@ -15,24 +15,32 @@ import java.util.*;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Lab01Task implements LabTask {
+    @XmlTransient
+    protected static HashMap<String, List<Table>> allowed = new HashMap<>();
     protected StringBuilder query = new StringBuilder();
     protected StringBuilder answer = new StringBuilder();
-
     @XmlAttribute(name = "description")
     protected String description;
     @XmlAttribute(name = "id")
     protected String id;
-
     @XmlElement(name = "prolog")
     protected String prolog;
     @XmlElement(name = "epilog")
     protected String epilog;
-
     @XmlElement(name = "forbidden-list")
     protected List<String> forbiddenList = new ArrayList<>();
 
-    @XmlTransient
-    protected static HashMap<String, List<Table>> allowed = new HashMap<>();
+    protected static List<Table> removeForbiddenElements(Schema s, List<String> forbidenElements) {
+        ArrayList<Table> allowed = new ArrayList<>();
+        for (Table table : s.getTables()) {
+            if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
+                Table allowedTable = table.clone();
+
+                allowed.add(allowedTable);
+            }
+        }
+        return allowed;
+    }
 
     public String getId() {
         return id;
@@ -56,18 +64,6 @@ public abstract class Lab01Task implements LabTask {
 
     public void setEpilog(String epilog) {
         this.epilog = epilog;
-    }
-
-    protected static List<Table> removeForbiddenElements(Schema s, List<String> forbidenElements) {
-        ArrayList<Table> allowed = new ArrayList<>();
-        for (Table table : s.getTables()) {
-            if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
-                Table allowedTable = table.clone();
-
-                allowed.add(allowedTable);
-            }
-        }
-        return allowed;
     }
 
     @Override

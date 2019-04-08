@@ -11,20 +11,22 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *
  * @author serge
  */
 @XmlRootElement(name = "connection")
 @XmlAccessorType(XmlAccessType.FIELD)
 class SchemaConnection {
-    
-    @XmlElement(name="uri") private String uri;
-    @XmlElement(name="username") private String username;
-    @XmlElement(name="password") private String password;
-    
+
+    @XmlElement(name = "uri")
+    private String uri;
+    @XmlElement(name = "username")
+    private String username;
+    @XmlElement(name = "password")
+    private String password;
+
     @XmlTransient
     private DataSource datasource = null;
-    
+
     public Connection getConnection() throws SQLException {
         if (datasource == null) {
             datasource = setupDataSource();
@@ -58,7 +60,7 @@ class SchemaConnection {
         this.password = password;
         return this;
     }
-    
+
     private DataSource setupDataSource() {
         //
         // First, we'll create a ConnectionFactory that the
@@ -68,7 +70,7 @@ class SchemaConnection {
         // arguments.
         //
         ConnectionFactory connectionFactory =
-            new DriverManagerConnectionFactory(uri,username,password);
+                new DriverManagerConnectionFactory(uri, username, password);
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         config.setMaxIdle(10);
         config.setMinIdle(4);
@@ -80,7 +82,7 @@ class SchemaConnection {
         // the classes that implement the pooling functionality.
         //
         PoolableConnectionFactory poolableConnectionFactory =
-            new PoolableConnectionFactory(connectionFactory, null);
+                new PoolableConnectionFactory(connectionFactory, null);
 
         //
         // Now we'll need a ObjectPool that serves as the
@@ -90,8 +92,8 @@ class SchemaConnection {
         // any ObjectPool implementation will suffice.
         //
         ObjectPool<PoolableConnection> connectionPool =
-                new GenericObjectPool<>(poolableConnectionFactory,config);
-        
+                new GenericObjectPool<>(poolableConnectionFactory, config);
+
         // Set the factory's pool property to the owning pool
         poolableConnectionFactory.setPool(connectionPool);
 
@@ -101,7 +103,7 @@ class SchemaConnection {
         //
         PoolingDataSource<PoolableConnection> dataSource =
                 new PoolingDataSource<>(connectionPool);
-        
+
 
         return dataSource;
     }
