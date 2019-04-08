@@ -14,7 +14,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
     @Override
     public Task[] getTasks(String studentId, String labId, String variant, int complexity) {
-        //initial task to get com.tuneit.courses.lab2.db.schema
+        //initial task to get schema
         Task initialTask = new Task();
         initialTask.setStudentId(studentId).setLabId(labId).setVariant(variant);
 
@@ -87,7 +87,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
         if (!optionalLab.isPresent()) {
             throw new IllegalArgumentException("Could not find lab with name="
-                    + initialTask + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
+                    + initialTask + " in schema " + schema.getName());
         }
         Lab lab = optionalLab.get();
 
@@ -113,7 +113,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                 filter(lab -> lab.getId().equalsIgnoreCase(task.getLabId().trim())).findFirst();
         if (!optionalLab.isPresent()) {
             throw new IllegalArgumentException("Could not find lab with name="
-                    + task.getLabId() + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
+                    + task.getLabId() + " in schema " + schema.getName());
         }
         Lab lab = optionalLab.get();
 
@@ -121,7 +121,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
                 filter(labTask -> labTask.getId().equalsIgnoreCase(task.getTaskId())).findFirst();
         if (!optionalLabTask.isPresent()) {
             throw new IllegalArgumentException("Could not find lab task with lab name="
-                    + task.getLabId() + " and task " + task.getTaskId() + " in com.tuneit.courses.lab2.db.schema " + schema.getName());
+                    + task.getLabId() + " and task " + task.getTaskId() + " in schema " + schema.getName());
         }
         return optionalLabTask.get();
     }

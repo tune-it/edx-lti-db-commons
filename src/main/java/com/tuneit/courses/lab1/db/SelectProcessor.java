@@ -31,7 +31,7 @@ public class SelectProcessor {
     }
 
     /**
-     * @param schema        - com.tuneit.courses.lab2.db.schema name to generate queries
+     * @param schema        - schema name to generate queries
      * @param query         - sql to execute
      * @param maxRowLimit   Limits row in output, 0 - zero rows, -1 unlimited
      * @param hasHtmlOutput - save html output to new StringBuilder in SelectResult

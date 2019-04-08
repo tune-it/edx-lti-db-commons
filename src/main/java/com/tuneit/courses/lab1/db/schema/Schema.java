@@ -52,7 +52,7 @@ public class Schema {
             JAXBContext jaxbContext = JAXBContext.newInstance(SchemaConnection.class);
             InputStream inputStream = SchemaConnection.class.getResourceAsStream(connectionName);
             if (inputStream == null)
-                throw new JAXBException("Could not get XML com.tuneit.courses.lab2.db.schema in application resourses");
+                throw new JAXBException("Could not get XML schema in application resourses");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             connection = (SchemaConnection) unmarshaller.unmarshal(inputStream);
         } catch (JAXBException ex) {
@@ -68,7 +68,7 @@ public class Schema {
             JAXBContext jc = JAXBContext.newInstance(Schema.class);
             InputStream is = Schema.class.getResourceAsStream(schemaName);
             if (is == null)
-                throw new JAXBException("Could not get XML com.tuneit.courses.lab2.db.schema in application resourses");
+                throw new JAXBException("Could not get XML schema in application resourses");
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             sch = (Schema) unmarshaller.unmarshal(is);
         } catch (JAXBException ex) {
