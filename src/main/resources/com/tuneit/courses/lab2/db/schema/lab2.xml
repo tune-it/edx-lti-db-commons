@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<schema name="Airbookings">
+<schema01 name="Airbookings">
     <tables>
         <table sql-name="aircrafts" name="воздушные суда" name-genitive="воздушных судов">
             <column sql-name="aircraft_code" name="код" name-plural="коды" name-genitive-plural="кодов"
@@ -105,4 +105,4 @@
             <references>bookings ticket_flights</references>
         </table>
     </tables>
-</schema>
+</schema01>

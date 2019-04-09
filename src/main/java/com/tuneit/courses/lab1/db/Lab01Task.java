@@ -1,10 +1,10 @@
 package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.LabTask;
-import com.tuneit.courses.LabTaskQA;
 import com.tuneit.courses.Task;
+import com.tuneit.courses.db.LabTask;
+import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.lab1.db.schema.Column;
-import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.Schema01;
 import com.tuneit.courses.lab1.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
@@ -30,7 +30,7 @@ public abstract class Lab01Task implements LabTask {
     @XmlElement(name = "forbidden-list")
     protected List<String> forbiddenList = new ArrayList<>();
 
-    protected static List<Table> removeForbiddenElements(Schema s, List<String> forbidenElements) {
+    protected static List<Table> removeForbiddenElements(Schema01 s, List<String> forbidenElements) {
         ArrayList<Table> allowed = new ArrayList<>();
         for (Table table : s.getTables()) {
             if (forbidenElements.stream().noneMatch(str -> str.equalsIgnoreCase(table.getTableName()))) {
@@ -72,11 +72,11 @@ public abstract class Lab01Task implements LabTask {
                 ", prolog=" + prolog + ", epilog=" + epilog + '}';
     }
 
-    public LabTaskQA generate(Schema schema, Task task) {
+    public LabTaskQA generate(Schema01 schema01, Task task) {
         query = new StringBuilder();
         answer = new StringBuilder();
 
-        Table table = getRandomTable(schema, task).clone();
+        Table table = getRandomTable(schema01, task).clone();
 
         Collections.shuffle(table.getColumns(), getRandom(task));
 
@@ -90,15 +90,25 @@ public abstract class Lab01Task implements LabTask {
     protected void updateQuery(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
+        query.append(" ");
         writeColumnFromTablePL(query, columns, task);
-        query.append(getEpilog()).append(table.getTableName()).append('.');
+        query.append(" ")
+                .append(getEpilog())
+                .append(" ")
+                .append(table.getTableName())
+                .append('.');
     }
 
     protected void updateQueryPL(Table table, Task task) {
         List<Column> columns = table.getColumns();
         query.append(getProlog());
+        query.append(" ");
         writeColumnFromTablePL(query, columns, task);
-        query.append(getEpilog()).append(table.getNameGenitive()).append('.');
+        query.append(" ")
+                .append(getEpilog())
+                .append(" ")
+                .append(table.getNameGenitive())
+                .append('.');
     }
 
     protected void updateAnswer(Table table, Task task) {
@@ -125,17 +135,17 @@ public abstract class Lab01Task implements LabTask {
         }
     }
 
-    protected Table getRandomTable(Schema schema, Task task) {
-        if (!allowed.containsKey(schema.getName())) {
-            allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+    protected Table getRandomTable(Schema01 schema01, Task task) {
+        if (!allowed.containsKey(schema01.getName())) {
+            allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
         }
 
-        List<Table> tables = allowed.get(schema.getName());
+        List<Table> tables = allowed.get(schema01.getName());
         return tables.get(getRandom(task).nextInt(tables.size()));
     }
 
-    protected Table findAllowedTable(Schema schema, String tableName) {
-        List<Table> tables = allowed.get(schema.getName());
+    protected Table findAllowedTable(Schema01 schema01, String tableName) {
+        List<Table> tables = allowed.get(schema01.getName());
         Optional<Table> tableOptional = tables.stream()
                 .filter(table -> table.getTableName().equalsIgnoreCase(tableName)).findFirst();
 

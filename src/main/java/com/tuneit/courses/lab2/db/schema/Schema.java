@@ -49,7 +49,7 @@ public class Schema {
             connection = (SchemaConnection) unmarshaller.unmarshal(inputStream);
         } catch (JAXBException ex) {
             Logger.getLogger(Schema.class.getName()).log(Level.SEVERE, null, ex);
-            throw new IllegalArgumentException("Schema " + connectionName + " could not be loaded", ex);
+            throw new IllegalArgumentException("Schema01 " + connectionName + " could not be loaded", ex);
         }
         return connection;
     }
@@ -65,7 +65,7 @@ public class Schema {
             sch = (Schema) unmarshaller.unmarshal(is);
         } catch (JAXBException ex) {
             Logger.getLogger(Schema.class.getName()).log(Level.SEVERE, null, ex);
-            throw new IllegalArgumentException("Schema " + schemaName + " could not be loaded", ex);
+            throw new IllegalArgumentException("Schema01 " + schemaName + " could not be loaded", ex);
         }
         return sch;
     }
@@ -74,13 +74,11 @@ public class Schema {
         tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
             table.getRefTables().add(findTable(nameTable));
         }));
-
-        System.out.println("eze");
     }
 
     public Connection getConnection() throws SQLException {
         if (connection == null) {
-            throw new SQLException("Schema connection is not properly setup");
+            throw new SQLException("Schema01 connection is not properly setup");
         }
         return connection.getConnection();
     }

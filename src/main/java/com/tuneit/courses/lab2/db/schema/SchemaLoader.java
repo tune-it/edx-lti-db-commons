@@ -26,7 +26,7 @@ public class SchemaLoader {
 
     public static Schema getSchema(String yearOfStudy, String studentId) {
         if (yearOfStudy == null || studentId == null)
-            throw new IllegalArgumentException("Cant get Schema for student and year of study. Null args.");
+            throw new IllegalArgumentException("Cant get Schema01 for student and year of study. Null args.");
         int seed = (yearOfStudy + "-" + studentId).toUpperCase().hashCode();
         int schemaNo = (new Random(seed)).nextInt(schemas.size());
         return SchemaLoader.getSchema(schemaNo);

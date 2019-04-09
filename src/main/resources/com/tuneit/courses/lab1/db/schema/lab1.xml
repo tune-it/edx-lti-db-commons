@@ -98,7 +98,7 @@
         </table>
     </tables>
     <labs-config>
-        <lab02 id="lab02" description="Простая выборка из таблицы">
+        <lab id="lab02" description="Простая выборка из таблицы">
             <task01 id="task01" description="Выборка всех столбцов таблицы">
                 <prolog>Выведите содержимое всех столбцов таблицы</prolog>
                 <epilog>.</epilog>
@@ -615,6 +615,6 @@
                 <subtask12 for="ticket_flights:fare_conditions"/>
                 <subtask12 for="ticket_flights:amount"/>
             </task12>
-        </lab02>
+        </lab>
     </labs-config>
 </schema>

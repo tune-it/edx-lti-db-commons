@@ -1,10 +1,10 @@
 package com.tuneit.courses.lab1.db;
 
-import com.tuneit.courses.Lab;
-import com.tuneit.courses.LabTaskQA;
 import com.tuneit.courses.Task;
+import com.tuneit.courses.db.Lab;
+import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.lab1.db.schema.Column;
-import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.Schema01;
 import com.tuneit.courses.lab1.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
@@ -49,10 +49,10 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        public LabTaskQA generate(Schema schema, Task task) {
-            Table table = getRandomTable(schema, task).clone();
+        public LabTaskQA generate(Schema01 schema01, Task task) {
+            Table table = getRandomTable(schema01, task).clone();
 
-            return new LabTaskQA(task.getId(), getProlog() + table.getTableName() + getEpilog(),
+            return new LabTaskQA(task.getId(), getProlog().trim() + " " + table.getTableName() + getEpilog().trim(),
                     "SELECT * FROM " + table.getTableName() + ";");
         }
     }
@@ -96,9 +96,14 @@ public class Lab01 extends Lab {
         @Override
         protected void updateQueryPL(Table table, Task task) {
             List<Column> columns = table.getColumns();
-            query.append(getProlog());
-            query.append(columns.get(getRandom(task).nextInt(columns.size())).getNamePlural());
-            query.append(getEpilog()).append(table.getNameGenitive()).append('.');
+            query.append(getProlog())
+                    .append(" ")
+                    .append(columns.get(getRandom(task).nextInt(columns.size())).getNamePlural())
+                    .append(" ")
+                    .append(getEpilog())
+                    .append(" ")
+                    .append(table.getNameGenitive())
+                    .append('.');
         }
     }
 
@@ -238,15 +243,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask06 randomSubtask06 = subtasks06.get(getRandom(task).nextInt(subtasks06.size())).clone();
             String tableName = randomSubtask06.table.trim();
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
 
@@ -394,15 +399,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask07 randomSubtask07 = subtasks07.get(getRandom(task).nextInt(subtasks07.size())).clone();
             String tableName = randomSubtask07.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
@@ -500,15 +505,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask08 randomSubtask08 = subtasks08.get(getRandom(task).nextInt(subtasks08.size())).clone();
             String tableName = randomSubtask08.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
@@ -608,15 +613,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask09 randomSubtask09 = subtasks09.get(getRandom(task).nextInt(subtasks09.size())).clone();
             String tableName = randomSubtask09.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
@@ -751,15 +756,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask10 randomSubtask10 = subtasks10.get(getRandom(task).nextInt(subtasks10.size())).clone();
             String tableName = randomSubtask10.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         private boolean isConsonant(char letter) {
@@ -856,15 +861,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask11 randomSubtask11 = subtasks11.get(getRandom(task).nextInt(subtasks11.size())).clone();
             String tableName = randomSubtask11.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)
@@ -945,15 +950,15 @@ public class Lab01 extends Lab {
         }
 
         @Override
-        protected Table getRandomTable(Schema schema, Task task) {
-            if (!allowed.containsKey(schema.getName())) {
-                allowed.put(schema.getName(), removeForbiddenElements(schema, forbiddenList));
+        protected Table getRandomTable(Schema01 schema01, Task task) {
+            if (!allowed.containsKey(schema01.getName())) {
+                allowed.put(schema01.getName(), removeForbiddenElements(schema01, forbiddenList));
             }
 
             Subtask12 randomSubtask12 = subtasks12.get(getRandom(task).nextInt(subtasks12.size())).clone();
             String tableName = randomSubtask12.tableAndColumn.trim().split(":")[0];
 
-            return findAllowedTable(schema, tableName);
+            return findAllowedTable(schema01, tableName);
         }
 
         @XmlAccessorType(XmlAccessType.FIELD)

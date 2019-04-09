@@ -1,9 +1,9 @@
 package com.tuneit.course.lab1;
 
 import com.tuneit.courses.DBTaskGeneratorService;
-import com.tuneit.courses.LabTaskQA;
+import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.Task;
-import com.tuneit.courses.lab1.db.schema.Schema;
+import com.tuneit.courses.lab1.db.schema.Schema01;
 import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ class TaskGeneratorTest {
             Task[] tasks = taskGeneratorService.getTasks("student", "lab01", "0" + i, 0);
 
             for (Task task : tasks) {
-                Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
-                LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema, task);
+                Schema01 schema01 = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+                LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema01, task);
 
                 task.setAnswer(labTaskQA.getCorrectAnswer()).setComplete(true);
             }
@@ -76,8 +76,8 @@ class TaskGeneratorTest {
             for (int j = 0; j < tasks.length; j++) {
                 Task task = tasks[j];
 
-                Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
-                LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema, task);
+                Schema01 schema01 = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+                LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema01, task);
 
                 assertEquals(labTaskQAS[j].getCorrectAnswer(), labTaskQA.getCorrectAnswer());
                 assertEquals(labTaskQAS[j].getQuestion(), labTaskQA.getQuestion());
@@ -91,8 +91,8 @@ class TaskGeneratorTest {
 
         for (int i = 0; i < tasks.length; i++) {
             Task task = tasks[i];
-            Schema schema = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
-            LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema, task);
+            Schema01 schema01 = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+            LabTaskQA labTaskQA = taskGeneratorService.findLabTask(task).generate(schema01, task);
             labTaskQAS[i] = labTaskQA;
         }
 

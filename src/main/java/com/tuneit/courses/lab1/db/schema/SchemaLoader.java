@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * @author serge
  */
 public class SchemaLoader {
-    private static final ArrayList<Schema> schemas = new ArrayList<>();
+    private static final ArrayList<Schema01> SCHEMA_01s = new ArrayList<>();
 
     static {
         //System.out.println("Loading underlying JDBC driver.");
@@ -24,29 +24,29 @@ public class SchemaLoader {
         }
         //System.out.println("Done.");
 
-        schemas.add(Schema.load("lab1.xml", "connection.xml"));
-        //TODO add other schemas
+        SCHEMA_01s.add(new Schema01().load("lab1.xml", "connection.xml"));
+        //TODO add other SCHEMA_01s
     }
 
     // TODO - should refactor this -- need more dependency
-    public static Schema getSchema(String yearOfStudy, String studentId) {
+    public static Schema01 getSchema(String yearOfStudy, String studentId) {
         if (yearOfStudy == null || studentId == null)
-            throw new IllegalArgumentException("Cant get Schema for student and year of study. Null args.");
+            throw new IllegalArgumentException("Cant get Schema01 for student and year of study. Null args.");
         int seed = (yearOfStudy + "-" + studentId).toUpperCase().hashCode();
-        int schemaNo = (new Random(seed)).nextInt(schemas.size());
+        int schemaNo = (new Random(seed)).nextInt(SCHEMA_01s.size());
         return SchemaLoader.getSchema(schemaNo);
     }
 
-    public static Schema getSchema(int index) {
-        return schemas.get(index);
+    public static Schema01 getSchema(int index) {
+        return SCHEMA_01s.get(index);
     }
 
     public static int getSchemasCount() {
-        return schemas.size();
+        return SCHEMA_01s.size();
     }
 
-    public ListIterator<Schema> schemas() {
-        return schemas.listIterator();
+    public ListIterator<Schema01> schemas() {
+        return SCHEMA_01s.listIterator();
     }
 
 }

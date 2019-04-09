@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 @XmlRootElement(name = "connection")
 @XmlAccessorType(XmlAccessType.FIELD)
-class SchemaConnection {
+public class SchemaConnection {
 
     @XmlElement(name = "uri")
     private String uri;
