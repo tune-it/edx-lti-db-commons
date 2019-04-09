@@ -3,8 +3,8 @@ package com.tuneit.courses;
 import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.LabTask;
 import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.SchemaLoader;
 import com.tuneit.courses.lab1.db.schema.Schema01;
-import com.tuneit.courses.lab1.db.schema.SchemaLoader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         Task initialTask = new Task();
         initialTask.setStudentId(studentId).setLabId(labId).setVariant(variant);
 
-        Schema01 schema01 = SchemaLoader.getSchema(initialTask.getYearOfStudy(), initialTask.getStudentId());
+        Schema01 schema01 = (Schema01) SchemaLoader.getSchema(labId);
 
         List<LabTask> lab01Tasks = getLabTasks(schema01, initialTask);
         Task[] tasks = new Task[lab01Tasks.size()];
@@ -36,7 +36,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
         Task initialTask = new Task();
         initialTask.setStudentId(studentId).setLabId(labId).setVariant(variant);
 
-        Schema01 schema01 = SchemaLoader.getSchema(initialTask.getYearOfStudy(), initialTask.getStudentId());
+        Schema01 schema01 = (Schema01) SchemaLoader.getSchema(labId);
 
         List<LabTask> lab01Tasks = getLabTasks(schema01, initialTask);
 
@@ -50,7 +50,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
     @Override
     public Task[] checkTasks(Task... tasks) {
         for (Task task : tasks) {
-            Schema01 schema01 = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+            Schema01 schema01 = (Schema01) SchemaLoader.getSchema(task.getLabId());
 
             LabTask lab01Task = findLabTask(task);
 
@@ -83,7 +83,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
     }
 
     private List<LabTask> getLabTasks(Schema01 schema01, Task initialTask) {
-        Optional<Lab> optionalLab = schema01.getLabs().stream().
+        Optional<? extends Lab> optionalLab = schema01.getLabs().stream().
                 filter(lab -> lab.getId().equalsIgnoreCase(initialTask.getLabId().trim())).findFirst();
 
         if (!optionalLab.isPresent()) {
@@ -108,9 +108,9 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
     }
 
     public LabTask findLabTask(Task task) {
-        Schema01 schema01 = SchemaLoader.getSchema(task.getYearOfStudy(), task.getStudentId());
+        Schema01 schema01 = (Schema01) SchemaLoader.getSchema(task.getLabId());
 
-        Optional<Lab> optionalLab = schema01.getLabs().stream().
+        Optional<? extends Lab> optionalLab = schema01.getLabs().stream().
                 filter(lab -> lab.getId().equalsIgnoreCase(task.getLabId().trim())).findFirst();
         if (!optionalLab.isPresent()) {
             throw new IllegalArgumentException("Could not find lab with name="

@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1.db.schema;
+package com.tuneit.courses.db.schema;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

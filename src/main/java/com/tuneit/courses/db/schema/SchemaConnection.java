@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab2.db.schema;
+package com.tuneit.courses.db.schema;
 
 import org.apache.commons.dbcp2.*;
 import org.apache.commons.pool2.ObjectPool;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 @XmlRootElement(name = "connection")
 @XmlAccessorType(XmlAccessType.FIELD)
-class SchemaConnection {
+public class SchemaConnection {
 
     @XmlElement(name = "uri")
     private String uri;

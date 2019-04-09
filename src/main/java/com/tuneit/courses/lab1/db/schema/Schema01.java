@@ -1,13 +1,21 @@
 package com.tuneit.courses.lab1.db.schema;
 
+import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.db.schema.SchemaConnection;
+import com.tuneit.courses.db.schema.Table;
+import com.tuneit.courses.lab1.db.Lab01;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +24,16 @@ import java.util.logging.Logger;
  */
 
 public class Schema01 extends Schema {
+
+    @XmlElementWrapper(name = "tables")
+    @XmlElement(name = "table")
+    private List<? extends Table> tables;
+
+    @XmlElementWrapper(name = "labs-config")
+    @XmlElements({
+            @XmlElement(name = "lab", type = Lab01.class),
+    })
+    private List<? extends Lab> labs;
 
     public Schema01 load(String schemaName, String connectionName) {
         Schema01 schema01 = loadSchema(schemaName);
@@ -54,5 +72,21 @@ public class Schema01 extends Schema {
             throw new IllegalArgumentException("Schema01 " + schemaName + " could not be loaded", ex);
         }
         return sch;
+    }
+
+    public List<? extends Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<? extends Table> tables) {
+        this.tables = tables;
+    }
+
+    public List<? extends Lab> getLabs() {
+        return labs;
+    }
+
+    public void setLabs(List<? extends Lab> labs) {
+        this.labs = labs;
     }
 }

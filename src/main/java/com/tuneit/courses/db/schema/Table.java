@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab2.db.schema;
+package com.tuneit.courses.db.schema;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -12,20 +12,15 @@ import java.util.Optional;
 public class Table implements Cloneable {
 
     @XmlTransient
-    boolean sqlNameInUpperCase = false;
-    @XmlTransient
-    List<Table> refTables = new ArrayList<>();
+    protected boolean sqlNameInUpperCase = false;
     @XmlAttribute(name = "sql-name")
-    private String sqlName;
+    protected String sqlName;
     @XmlAttribute(name = "name")
-    private String name;
+    protected String name;
     @XmlAttribute(name = "name-genitive")
-    private String nameGenitive; //род.падеж мн.ч.
-    @XmlElement(name = "references")
-    @XmlList
-    private List<String> namesReferences;
+    protected String nameGenitive; //род.падеж мн.ч.
     @XmlElement(name = "column")
-    private List<Column> columns;
+    protected List<Column> columns;
 
     @Override
     public String toString() {
@@ -58,10 +53,6 @@ public class Table implements Cloneable {
 
     public void setNameGenitive(String nameGenitive) {
         this.nameGenitive = nameGenitive;
-    }
-
-    public List<Table> getRefTables() {
-        return refTables;
     }
 
     public List<Column> getColumns() {
@@ -112,9 +103,5 @@ public class Table implements Cloneable {
         }
 
         return columnsClone;
-    }
-
-    public List<String> getNamesReferences() {
-        return namesReferences;
     }
 }

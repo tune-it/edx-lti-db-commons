@@ -1,12 +1,15 @@
 package com.tuneit.courses.lab2.db.schema;
 
+import com.tuneit.courses.db.Lab;
+import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.db.schema.SchemaConnection;
+import com.tuneit.courses.db.schema.Table;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +20,7 @@ import java.util.logging.Logger;
 
 @XmlRootElement(name = "schema")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Schema {
+public class Schema02 extends Schema {
 
     @XmlAttribute(name = "name")
     private String name;
@@ -27,18 +30,34 @@ public class Schema {
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
-    private List<Table> tables;
+    private List<? extends Table> tables;
 
 
-    public static Schema load(String schemaName, String connectionName) {
+    public Schema02 load(String schemaName, String connectionName) {
         SchemaConnection schemaConnection = loadConnection(connectionName);
-        Schema schema = loadSchema(schemaName);
-        schema.connection = schemaConnection;
-        schema.updateRef();
-        return schema;
+        Schema02 schema02 = loadSchema(schemaName);
+        schema02.connection = schemaConnection;
+        schema02.updateReferenceTables();
+        return schema02;
     }
 
-    private static SchemaConnection loadConnection(String connectionName) {
+    public List<? extends Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<? extends Table> tables) {
+        this.tables = tables;
+    }
+
+    public List<? extends Lab> getLabs() {
+        return null;
+    }
+
+    public void setLabs(List<? extends Lab> labs) {
+
+    }
+
+    private SchemaConnection loadConnection(String connectionName) {
         SchemaConnection connection;
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(SchemaConnection.class);
@@ -48,61 +67,32 @@ public class Schema {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             connection = (SchemaConnection) unmarshaller.unmarshal(inputStream);
         } catch (JAXBException ex) {
-            Logger.getLogger(Schema.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Schema02.class.getName()).log(Level.SEVERE, null, ex);
             throw new IllegalArgumentException("Schema01 " + connectionName + " could not be loaded", ex);
         }
         return connection;
     }
 
-    private static Schema loadSchema(String schemaName) {
-        Schema sch;
+    private Schema02 loadSchema(String schemaName) {
+        Schema02 sch;
         try {
-            JAXBContext jc = JAXBContext.newInstance(Schema.class);
-            InputStream is = Schema.class.getResourceAsStream(schemaName);
+            JAXBContext jc = JAXBContext.newInstance(Schema02.class);
+            InputStream is = Schema02.class.getResourceAsStream(schemaName);
             if (is == null)
                 throw new JAXBException("Could not get XML schema in application resourses");
             Unmarshaller unmarshaller = jc.createUnmarshaller();
-            sch = (Schema) unmarshaller.unmarshal(is);
+            sch = (Schema02) unmarshaller.unmarshal(is);
         } catch (JAXBException ex) {
-            Logger.getLogger(Schema.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Schema02.class.getName()).log(Level.SEVERE, null, ex);
             throw new IllegalArgumentException("Schema01 " + schemaName + " could not be loaded", ex);
         }
         return sch;
     }
 
-    private void updateRef() {
-        tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
-            table.getRefTables().add(findTable(nameTable));
+    private void updateReferenceTables() {
+        tables.forEach(table -> ((Table02) table).getNamesReferences().forEach(nameTable -> {
+            ((Table02) table).getRefTables().add((Table02) findTable(nameTable));
         }));
-    }
-
-    public Connection getConnection() throws SQLException {
-        if (connection == null) {
-            throw new SQLException("Schema01 connection is not properly setup");
-        }
-        return connection.getConnection();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the tables
-     */
-    public List<Table> getTables() {
-        return tables;
-    }
-
-    /**
-     * @param tables the tables to set
-     */
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
     }
 
     public Table findTable(String name) {

@@ -1,10 +1,7 @@
 package com.tuneit.courses.db.schema;
 
 import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.lab1.db.Lab01;
 import com.tuneit.courses.lab1.db.schema.Schema01;
-import com.tuneit.courses.lab1.db.schema.SchemaConnection;
-import com.tuneit.courses.lab1.db.schema.Table;
 
 import javax.xml.bind.annotation.*;
 import java.sql.Connection;
@@ -15,7 +12,7 @@ import java.util.List;
 @XmlRootElement(name = "schema")
 @XmlSeeAlso(Schema01.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Schema {
+public abstract class Schema {
 
     @XmlAttribute(name = "name")
     protected String name;
@@ -23,20 +20,16 @@ public class Schema {
     @XmlTransient
     protected SchemaConnection connection;
 
-    @XmlElementWrapper(name = "tables")
-    @XmlElement(name = "table")
-    protected List<Table> tables;
 
-    @XmlElementWrapper(name = "labs-config")
-    @XmlElements({
-            @XmlElement(name = "lab", type = Lab01.class),
-    })
-    protected List<Lab> labs;
+    public abstract Schema load(String schemaName, String connectionName);
 
+    public abstract List<? extends Table> getTables();
 
-    public Schema load(String schemaName, String connectionName){
-        return null;
-    }
+    public abstract void setTables(List<? extends Table> tables);
+
+    public abstract List<? extends Lab> getLabs();
+
+    public abstract void setLabs(List<? extends Lab> labs);
 
     public Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -52,22 +45,6 @@ public class Schema {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Table> getTables() {
-        return tables;
-    }
-
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
-    }
-
-    public List<Lab> getLabs() {
-        return labs;
-    }
-
-    public void setLabs(List<Lab> labs) {
-        this.labs = labs;
     }
 
 }
