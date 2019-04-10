@@ -319,11 +319,11 @@
                         </option06>
                         <option06>
                             <query>V. TIKHONOV</query>
-                            <answer>substr(passenger_name, 0, 0) || '. ' || split_part(passenger_name, ' ', 2)</answer>
+                            <answer>substr(passenger_name, 0, 2) || '. ' || split_part(passenger_name, ' ', 2)</answer>
                         </option06>
                         <option06>
                             <query>name - V. TIKHONOV</query>
-                            <answer>'name - ' || substr(passenger_name, 0, 0) || '. ' || split_part(passenger_name, ' ',
+                            <answer>'name - ' || substr(passenger_name, 0, 2) || '. ' || split_part(passenger_name, ' ',
                                 2)
                             </answer>
                         </option06>
