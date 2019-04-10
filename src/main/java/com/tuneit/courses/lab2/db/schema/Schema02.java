@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +32,7 @@ public class Schema02 extends Schema {
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
-    private List<? extends Table> tables;
+    private List<Table02> tables;
 
 
     public Schema02 load(String schemaName, String connectionName) {
@@ -45,7 +47,7 @@ public class Schema02 extends Schema {
         return tables;
     }
 
-    public void setTables(List<? extends Table> tables) {
+    public void setTables(List tables) {
         this.tables = tables;
     }
 
@@ -53,7 +55,7 @@ public class Schema02 extends Schema {
         return null;
     }
 
-    public void setLabs(List<? extends Lab> labs) {
+    public void setLabs(List labs) {
 
     }
 
@@ -76,12 +78,13 @@ public class Schema02 extends Schema {
     private Schema02 loadSchema(String schemaName) {
         Schema02 sch;
         try {
-            JAXBContext jc = JAXBContext.newInstance(Schema02.class);
-            InputStream is = Schema02.class.getResourceAsStream(schemaName);
-            if (is == null)
+            JAXBContext jaxbContext = JAXBContext.newInstance(Schema02.class);
+            InputStream inputStream = Schema02.class.getResourceAsStream(schemaName);
+            if (inputStream == null)
                 throw new JAXBException("Could not get XML schema in application resourses");
-            Unmarshaller unmarshaller = jc.createUnmarshaller();
-            sch = (Schema02) unmarshaller.unmarshal(is);
+            Source source = new StreamSource(inputStream);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            sch = unmarshaller.unmarshal(source, Schema02.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(Schema02.class.getName()).log(Level.SEVERE, null, ex);
             throw new IllegalArgumentException("Schema01 " + schemaName + " could not be loaded", ex);
@@ -90,8 +93,8 @@ public class Schema02 extends Schema {
     }
 
     private void updateReferenceTables() {
-        tables.forEach(table -> ((Table02) table).getNamesReferences().forEach(nameTable -> {
-            ((Table02) table).getRefTables().add((Table02) findTable(nameTable));
+        tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
+            table.getRefTables().add((Table02) findTable(nameTable));
         }));
     }
 

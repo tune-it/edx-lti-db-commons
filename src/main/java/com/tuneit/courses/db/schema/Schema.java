@@ -25,11 +25,11 @@ public abstract class Schema {
 
     public abstract List<? extends Table> getTables();
 
-    public abstract void setTables(List<? extends Table> tables);
+    public abstract void setTables(List tables);
 
     public abstract List<? extends Lab> getLabs();
 
-    public abstract void setLabs(List<? extends Lab> labs);
+    public abstract void setLabs(List labs);
 
     public Connection getConnection() throws SQLException {
         if (connection == null) {

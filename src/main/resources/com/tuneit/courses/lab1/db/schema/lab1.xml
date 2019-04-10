@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<schema02 name="Airbookings">
+<schema01 name="Airbookings">
     <tables>
         <table sql-name="aircrafts" name="воздушные суда" name-genitive="воздушных судов">
             <column sql-name="aircraft_code" name="код" name-plural="коды" name-genitive-plural="кодов"
@@ -316,7 +316,7 @@
                         </option06>
                         <option06>
                             <query>name - VALERIY TIKHONOV</query>
-                            <answer>'name - ' || passenger_name</answer>
+                            <answer>'name - ' || passeng_er_name</answer>
                         </option06>
                         <option06>
                             <query>имя фамилия - VALERIY TIKHONOV</query>
@@ -617,4 +617,4 @@
             </task12>
         </lab>
     </labs-config>
-</schema02>
+</schema01>

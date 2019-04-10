@@ -27,7 +27,7 @@ public class Schema01 extends Schema {
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
-    private List<? extends Table> tables;
+    private List<Table> tables;
 
     @XmlElementWrapper(name = "labs-config")
     @XmlElements({
@@ -78,7 +78,7 @@ public class Schema01 extends Schema {
         return tables;
     }
 
-    public void setTables(List<? extends Table> tables) {
+    public void setTables(List tables) {
         this.tables = tables;
     }
 
@@ -86,7 +86,7 @@ public class Schema01 extends Schema {
         return labs;
     }
 
-    public void setLabs(List<? extends Lab> labs) {
+    public void setLabs(List labs) {
         this.labs = labs;
     }
 }
