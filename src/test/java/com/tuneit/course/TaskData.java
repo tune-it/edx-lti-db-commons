@@ -60,7 +60,7 @@ public class TaskData {
         String queryVariant0 = "Выведите все уникальные максимально возможные дистанции для воздушных судов.";
         String queryVariant1 = "Выведите все уникальные модели для воздушных судов.";
         String queryVariant2 = "Выведите все уникальные даты для бронирований.";
-        return new String[]{queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0,  queryVariant0,
+        return new String[]{queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0,
                 queryVariant1, queryVariant2};
     }
 
@@ -75,17 +75,39 @@ public class TaskData {
     //
 
     static String[] getQueryTask5() {
-        String queryVariant0 = "Вычислить реальное время каждого полёта для всех воздушных судов (в днях).";
-        String queryVariant1 = "Вычислить количество времени, прошедшего с момента каждой брони билета (в днях).";
-        String queryVariant2 = "Вычислить планируемое время каждого полёта для всех воздушных судов (в днях).";
-        return new String[]{queryVariant0, queryVariant1, queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Вычислить планируемое время каждого полёта для всех воздушных судов (в часах).";
+        String queryVariant1 = "Вычислить реальное время каждого полёта для всех воздушных судов (в минутах).";
+
+        int set1 = 10;
+        int set2 = 69;
+        String[] result = new String[set1 + set2];
+        int counter = 0;
+
+        for (int i = 0; i < set1; i++) {
+            result[counter++] = queryVariant0;
+        }
+        for (int i = 0; i < set2; i++) {
+            result[counter++] = queryVariant1;
+        }
+        return result;
     }
 
     static String[] getAnswerTask5() {
-        String answerVariant0 = "select extract(day from actual_arrival - actual_departure) from flights;";
-        String answerVariant1 = "select extract(day from now() - book_date) from bookings;";
-        String answerVariant2 = "select extract(day from scheduled_arrival - scheduled_departure) from flights;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant0, answerVariant1, answerVariant2};
+        String queryVariant0 = "select extract(EPOCH from scheduled_arrival - scheduled_departure)/60/60 from flights;";
+        String queryVariant1 = "select extract(EPOCH from actual_arrival - actual_departure)/60 from flights;";
+
+        int set1 = 10;
+        int set2 = 69;
+        String[] result = new String[set1 + set2];
+        int counter = 0;
+
+        for (int i = 0; i < set1; i++) {
+            result[counter++] = queryVariant0;
+        }
+        for (int i = 0; i < set2; i++) {
+            result[counter++] = queryVariant1;
+        }
+        return result;
     }
 
     //

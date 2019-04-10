@@ -9,24 +9,23 @@ import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
- *
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class Lab02 extends Lab {
     @XmlElements({
-        @XmlElement(name="task01", type=Task01.class),
-        @XmlElement(name="task02", type=Task02.class),
-        @XmlElement(name="task03", type=Task03.class),
-        @XmlElement(name="task04", type=Task04.class),
-        @XmlElement(name="task05", type=Task05.class),
-        @XmlElement(name="task06", type=Task06.class),
-        @XmlElement(name="task07", type=Task07.class),
-        @XmlElement(name="task08", type=Task08.class),
-        @XmlElement(name="task09", type=Task09.class),
-        @XmlElement(name="task10", type=Task10.class),
-        @XmlElement(name="task11", type=Task11.class),
-        @XmlElement(name="task12", type=Task12.class)
+            @XmlElement(name = "task01", type = Task01.class),
+            @XmlElement(name = "task02", type = Task02.class),
+            @XmlElement(name = "task03", type = Task03.class),
+            @XmlElement(name = "task04", type = Task04.class),
+            @XmlElement(name = "task05", type = Task05.class),
+            @XmlElement(name = "task06", type = Task06.class),
+            @XmlElement(name = "task07", type = Task07.class),
+            @XmlElement(name = "task08", type = Task08.class),
+            @XmlElement(name = "task09", type = Task09.class),
+            @XmlElement(name = "task10", type = Task10.class),
+            @XmlElement(name = "task11", type = Task11.class),
+            @XmlElement(name = "task12", type = Task12.class)
     })
     private List<LabTask> labTask = new ArrayList<>();
 
@@ -37,14 +36,14 @@ public class Lab02 extends Lab {
 
     @Override
     public String toString() {
-        return "Lab02{" + super.toString()+", labTask=" + labTask + '}';
+        return "Lab02{" + super.toString() + ", labTask=" + labTask + '}';
     }
 
     public static class Task01 extends LabTask {
 
         @Override
         public String toString() {
-            return "Task01{" + super.toString()+ ", forbiddenList=" + forbiddenList + '}';
+            return "Task01{" + super.toString() + ", forbiddenList=" + forbiddenList + '}';
         }
 
         @Override
@@ -110,13 +109,13 @@ public class Lab02 extends Lab {
             Subtask05 subtask05 = getRandomType(task);
             Option05 option05 = getRandomSubtype(task, subtask05);
 
-            answer.append("SELECT EXTRACT(")
-                    .append(option05.time.trim())
-                    .append(" FROM ")
+            answer.append("SELECT EXTRACT(EPOCH FROM ")
                     .append(subtask05.column1.trim())
                     .append(" - ")
                     .append(subtask05.column2.trim())
-                    .append(") FROM ")
+                    .append(")")
+                    .append(option05.time.trim())
+                    .append(" FROM ")
                     .append(subtask05.table.trim())
                     .append(";");
         }

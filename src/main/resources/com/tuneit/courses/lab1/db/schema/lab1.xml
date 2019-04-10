@@ -115,60 +115,25 @@
             </task04>
             <task05 id="task05" description="Выборка вычисляемых значений">
                 <prolog>Вычислить</prolog>
-                <subtask05 table="bookings" column1="NOW()" column2="BOOK_DATE"
-                           description="количество времени, прошедшего с момента каждой брони билета">
-                    <option05>
-                        <time>MONTH</time>
-                        <value>(в месяцах)</value>
-                    </option05>
-                    <option05>
-                        <time>DAY</time>
-                        <value>(в днях)</value>
-                    </option05>
-                    <option05>
-                        <time>HOUR</time>
-                        <value>(в часах)</value>
-                    </option05>
-                    <option05>
-                        <time>MINUTE</time>
-                        <value>(в минутах)</value>
-                    </option05>
-                </subtask05>
                 <subtask05 table="flights" column1="scheduled_arrival" column2="scheduled_departure"
                          description="планируемое время каждого полёта для всех воздушных судов">
                     <option05>
-                        <time>MONTH</time>
-                        <value>(в месяцах)</value>
-                    </option05>
-                    <option05>
-                        <time>DAY</time>
-                        <value>(в днях)</value>
-                    </option05>
-                    <option05>
-                        <time>HOUR</time>
+                        <time>/60/60</time>
                         <value>(в часах)</value>
                     </option05>
                     <option05>
-                        <time>MINUTE</time>
+                        <time>/60</time>
                         <value>(в минутах)</value>
                     </option05>
                 </subtask05>
                 <subtask05 table="flights" column1="actual_arrival" column2="actual_departure"
                          description="реальное время каждого полёта для всех воздушных судов">
                     <option05>
-                        <time>MONTH</time>
-                        <value>(в месяцах)</value>
-                    </option05>
-                    <option05>
-                        <time>DAY</time>
-                        <value>(в днях)</value>
-                    </option05>
-                    <option05>
-                        <time>HOUR</time>
+                        <time>/60/60</time>
                         <value>(в часах)</value>
                     </option05>
                     <option05>
-                        <time>MINUTE</time>
+                        <time>/60</time>
                         <value>(в минутах)</value>
                     </option05>
                 </subtask05>
