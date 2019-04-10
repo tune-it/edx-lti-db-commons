@@ -2,39 +2,73 @@ package com.tuneit.course.lab1;
 
 public class TaskData {
     static String[] getQueryTask1() {
-        String queryVariant0 = "Выведите содержимое всех столбцов таблицы BOARDING_PASSES.";
-        String queryVariant1 = "Выведите содержимое всех столбцов таблицы TICKET_FLIGHTS.";
-        String queryVariant2 = "Выведите содержимое всех столбцов таблицы SEATS.";
-        return new String[]{queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0, queryVariant0,
-                queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1,
-                queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1, queryVariant1,
-                queryVariant2};
+        String queryVariant0 = "Выведите содержимое всех столбцов таблицы AIRCRAFTS.";
+        String queryVariant1 = "Выведите содержимое всех столбцов таблицы AIRPORTS.";
+        String queryVariant2 = "Выведите содержимое всех столбцов таблицы TICKETS.";
+
+        int set1 = 10;
+        int set2 = 88;
+        int set3 = 72;
+        int set4 = 1;
+        String[] result = new String[set1 + set2 + set3 + set4];
+        int counter = 0;
+
+        for (int i = 0; i < set1; i++) {
+            result[counter++] = queryVariant0;
+        }
+        for (int i = 0; i < set2; i++) {
+            result[counter++] = queryVariant1;
+        }
+        for (int i = 0; i < set3; i++) {
+            result[counter++] = queryVariant0;
+        }
+        for (int i = 0; i < set4; i++) {
+            result[counter++] = queryVariant2;
+        }
+        return result;
     }
 
     static String[] getAnswerTask1() {
-        String answerVariant0 = "select * from boarding_passes as a;";
-        String answerVariant1 = "select * from ticket_flights;";
-        String answerVariant2 = "select * from seats;";
-        return new String[]{answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0, answerVariant0,
-                answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1,
-                answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1, answerVariant1,
-                answerVariant2};
+        String answerVariant0 = "select * from aircrafts as a;";
+        String answerVariant1 = "select * from airports;";
+        String answerVariant2 = "select * from tickets;";
+
+        int set1 = 10;
+        int set2 = 88;
+        int set3 = 72;
+        int set4 = 1;
+        String[] result = new String[set1 + set2 + set3 + set4];
+        int counter = 0;
+
+        for (int i = 0; i < set1; i++) {
+            result[counter++] = answerVariant0;
+        }
+        for (int i = 0; i < set2; i++) {
+            result[counter++] = answerVariant1;
+        }
+        for (int i = 0; i < set3; i++) {
+            result[counter++] = answerVariant0;
+        }
+        for (int i = 0; i < set4; i++) {
+            result[counter++] = answerVariant2;
+        }
+        return result;
     }
 
     //
     static String[] getQueryTask2() {
-        String queryVariant0 = "Выведите содержимое столбца (столбцов) коды, имена, города, координаты для таблицы AIRPORTS.";
-        String queryVariant1 = "Выведите содержимое столбца (столбцов) временные зоны для таблицы AIRPORTS.";
-        String queryVariant2 = "Выведите содержимое столбца (столбцов) коды, имена, города для таблицы AIRPORTS.";
-        return new String[]{queryVariant0, queryVariant0,
+        String queryVariant0 = "Выведите содержимое столбца (столбцов) контактные данные, коды бронирования, имена пассажиров для таблицы TICKETS.";
+        String queryVariant1 = "Выведите содержимое столбца (столбцов) номера, коды бронирования, идентификаторы пассажиров, имена пассажиров для таблицы TICKETS.";
+        String queryVariant2 = "Выведите содержимое столбца (столбцов) контактные данные, имена пассажиров для таблицы TICKETS.";
+        return new String[]{queryVariant0,
                 queryVariant1, queryVariant2};
     }
 
     static String[] getAnswerTask2() {
-        String answerVariant0 = "select airport_code, airport_name, city, coordinates from airports;";
-        String answerVariant1 = "select timezone from airports;";
-        String answerVariant2 = "select airport_code, airport_name, city from airports;";
-        return new String[]{answerVariant0, answerVariant0,
+        String answerVariant0 = "select contact_data, book_ref, passenger_name from tickets;";
+        String answerVariant1 = "select ticket_no, book_ref, passenger_id, passenger_name from tickets;";
+        String answerVariant2 = "select contact_data, passenger_name from tickets;";
+        return new String[]{answerVariant0,
                 answerVariant1, answerVariant2};
     }
 
