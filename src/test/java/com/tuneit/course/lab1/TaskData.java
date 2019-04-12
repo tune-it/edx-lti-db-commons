@@ -234,9 +234,9 @@ public class TaskData {
     }
 
     static String[] getAnswerTask11() {
-        String answerVariant0 = "select 'Количество найденных рейсов воздушного судна: ' || count(aircraft_code) from flights where aircraft_code = 'CR2' group by aircraft_code;";
-        String answerVariant1 = "select 'Количество найденных рейсов воздушного судна: ' || count(status) from flights where status = 'Departed' group by status;";
-        String answerVariant2 = "select 'Количество найденных рейсов воздушного судна: ' || count(arrival_airport) from flights where arrival_airport = 'AER' group by arrival_airport;";
+        String answerVariant0 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where aircraft_code = 'CR2'";
+        String answerVariant1 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where status = 'Departed'";
+        String answerVariant2 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where arrival_airport = 'AER'";
         return new String[]{answerVariant0, answerVariant1, answerVariant2};
     }
 
