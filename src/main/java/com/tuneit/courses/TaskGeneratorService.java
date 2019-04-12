@@ -11,9 +11,9 @@ public interface TaskGeneratorService {
      * @param complexity count of questions
      * @return array of tasks
      */
-    Task[] getTasks(String studentId, String labId, String variant, int complexity);
+    Task[] getTasks(String studentId, int labId, String variant, int complexity);
 
-    Task getTask(String studentId, String labId, int taskId, String variant, int complexity);
+    Task getTask(String studentId, int labId, int taskId, String variant, int complexity);
 
     /**
      * @param tasks list of tasks for validation

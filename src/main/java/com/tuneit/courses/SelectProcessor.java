@@ -1,6 +1,7 @@
 package com.tuneit.courses;
 
-import com.tuneit.courses.lab1.db.schema.Schema01;
+import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.db.schema.SchemaLoader;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -25,18 +26,18 @@ public class SelectProcessor {
     static Pattern rowcount_pattern = Pattern.compile("<Actual-Rows>(.*?)</Actual-Rows>");
     static Pattern executiontime_pattern = Pattern.compile("<Execution-Time>(.*?)</Execution-Time>");
 
-    public SelectResult executeQuery(Schema01 schema01, String sql) {
-        return executeQuery(schema01, sql, 100, false);
+    public SelectResult executeQuery(Schema schema, String sql) {
+        return executeQuery(schema, sql, 100, false);
     }
 
     /**
-     * @param schema01        - schema01 name to generate queries
+     * @param schema        - schema01 name to generate queries
      * @param query         - sql to execute
      * @param maxRowLimit   Limits row in output, 0 - zero rows, -1 unlimited
      * @param hasHtmlOutput - save html output to new StringBuilder in SelectResult
      * @return SelectResult - object with encapsulated results
      */
-    public SelectResult executeQuery(final Schema01 schema01, final String query,
+    public SelectResult executeQuery(final Schema schema, final String query,
                                      final int maxRowLimit, final boolean hasHtmlOutput) {
 
         SelectResult selectResult = new SelectResult();
@@ -49,7 +50,7 @@ public class SelectProcessor {
         long controlSum = 0;
 
         ResultSet resultSet = null;
-        try (Connection connection = schema01.getConnection();
+        try (Connection connection = SchemaLoader.getSchemaConnection().getConnection();
              Statement statement = connection.createStatement()
         ) {
             statement.setMaxRows(maxRowLimit);

@@ -1,14 +1,21 @@
 package com.tuneit.courses.db.schema;
 
+import com.tuneit.courses.lab1.db.schema.Schema01;
 import org.apache.commons.dbcp2.*;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 import javax.sql.DataSource;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author serge
@@ -16,6 +23,8 @@ import java.sql.SQLException;
 @XmlRootElement(name = "connection")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SchemaConnection {
+    @XmlTransient
+    private DataSource datasource = null;
 
     @XmlElement(name = "uri")
     private String uri;
@@ -24,8 +33,22 @@ public class SchemaConnection {
     @XmlElement(name = "password")
     private String password;
 
-    @XmlTransient
-    private DataSource datasource = null;
+
+    public static SchemaConnection load() {
+        SchemaConnection connection;
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(SchemaConnection.class);
+            InputStream inputStream = SchemaConnection.class.getResourceAsStream("connection.xml");
+            if (inputStream == null)
+                throw new JAXBException("Could not get XML schema in application resourses");
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            connection = (SchemaConnection) unmarshaller.unmarshal(inputStream);
+        } catch (JAXBException ex) {
+            Logger.getLogger(Schema01.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IllegalArgumentException("SchemaConnection could not be loaded", ex);
+        }
+        return connection;
+    }
 
     public Connection getConnection() throws SQLException {
         if (datasource == null) {
@@ -62,13 +85,6 @@ public class SchemaConnection {
     }
 
     private DataSource setupDataSource() {
-        //
-        // First, we'll create a ConnectionFactory that the
-        // pool will use to create Connections.
-        // We'll use the DriverManagerConnectionFactory,
-        // using the connect string passed in the command line
-        // arguments.
-        //
         ConnectionFactory connectionFactory =
                 new DriverManagerConnectionFactory(uri, username, password);
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
@@ -76,31 +92,14 @@ public class SchemaConnection {
         config.setMinIdle(4);
         config.setMaxTotal(100);
 
-        //
-        // Next we'll create the PoolableConnectionFactory, which wraps
-        // the "real" Connections created by the ConnectionFactory with
-        // the classes that implement the pooling functionality.
-        //
         PoolableConnectionFactory poolableConnectionFactory =
                 new PoolableConnectionFactory(connectionFactory, null);
 
-        //
-        // Now we'll need a ObjectPool that serves as the
-        // actual pool of connections.
-        //
-        // We'll use a GenericObjectPool instance, although
-        // any ObjectPool implementation will suffice.
-        //
         ObjectPool<PoolableConnection> connectionPool =
                 new GenericObjectPool<>(poolableConnectionFactory, config);
 
-        // Set the factory's pool property to the owning pool
         poolableConnectionFactory.setPool(connectionPool);
 
-        //
-        // Finally, we create the PoolingDriver itself,
-        // passing in the object pool we created.
-        //
         PoolingDataSource<PoolableConnection> dataSource =
                 new PoolingDataSource<>(connectionPool);
 

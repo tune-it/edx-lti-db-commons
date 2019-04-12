@@ -1,29 +1,36 @@
 package com.tuneit.courses;
 
+import lombok.Getter;
+
 import java.util.Calendar;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 public class Task {
 
     private String id; // yearOfStudy + studentId + labId + taskId + variant
     private String yearOfStudy;
+    @Getter
     private String studentId;
-    private String labId;
-    private String taskId;
+    @Getter
+    private int labId;
+    @Getter
+    private int taskId;
+    @Getter
     private String variant;
+    @Getter
     private String question;
+    @Getter
     private boolean isComplete;
+    @Getter
     private String answer;
+    @Getter
     private float rating;
 
     public String getId() {
         if (id == null) {
-            //regeneration id if something changes
-            //change getYearOfStudy() to yearOfStudy if you dont want default year
-            //generation to current year
-            if (getYearOfStudy() == null || studentId == null ||
-                    labId == null || taskId == null || variant == null) {
+            if (getYearOfStudy() == null || studentId == null || variant == null) {
                 //TODO maybe set up fake or defaults instead of exception
                 throw new RuntimeException("Task ID could not be generated. Please fill required fields in Task");
             }
@@ -32,11 +39,6 @@ public class Task {
         }
         return id;
     }
-
-//    public Task setId(String id) {
-//        this.id = id;
-//        return this;
-//    }
 
     public String getYearOfStudy() {
         if (yearOfStudy == null) {
@@ -60,8 +62,8 @@ public class Task {
 
     public Task setYearOfStudy(String yearOfStudy) {
         StringTokenizer t = new StringTokenizer(yearOfStudy, "/");
-        int year1 = -1;
-        int year2 = -1;
+        int year1;
+        int year2;
         try {
             year1 = Integer.parseInt(t.nextToken());
             year2 = Integer.parseInt(t.nextToken());
@@ -82,38 +84,22 @@ public class Task {
         return this;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
     public Task setStudentId(String studentId) {
         this.studentId = studentId;
         id = null;
         return this;
     }
 
-    public String getLabId() {
-        return labId;
-    }
-
-    public Task setLabId(String labId) {
+    public Task setLabId(int labId) {
         this.labId = labId;
         id = null;
         return this;
     }
 
-    public String getTaskId() {
-        return taskId;
-    }
-
-    public Task setTaskId(String taskId) {
+    public Task setTaskId(int taskId) {
         this.taskId = taskId;
         id = null;
         return this;
-    }
-
-    public String getVariant() {
-        return variant;
     }
 
     public Task setVariant(String variant) {
@@ -122,17 +108,9 @@ public class Task {
         return this;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
     public Task setQuestion(String question) {
         this.question = question;
         return this;
-    }
-
-    public boolean isComplete() {
-        return isComplete;
     }
 
     public Task setComplete(boolean complete) {
@@ -140,22 +118,18 @@ public class Task {
         return this;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
     public Task setAnswer(String answer) {
         this.answer = answer;
         return this;
     }
 
-    public float getRating() {
-        return rating;
-    }
-
     public Task setRating(float rating) {
         this.rating = rating;
         return this;
+    }
+
+    public Random getRandom() {
+        return new Random(getId().toUpperCase().hashCode() * 7);
     }
 
     @Override

@@ -97,28 +97,4 @@
                     name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
         </table>
     </tables>
-    <labs-config>
-        <lab id="lab01" description="Простая выборка из таблицы">
-            <task01 id="task01" description="Выборка всех полей таблицы">
-            </task01>
-            <task02 id="task02" description="Выборка некоторых полей таблицы">
-            </task02>
-            <task03 id="task03" description="Выборка уникальных значений">
-            </task03>
-            <task04 id="task04" description="Сортировка результата">
-            </task04>
-            <task05 id="task05" description="Выборка строк одной таблицы по одному условию">
-            </task05>
-            <task06 id="task06" description="Выборка строк, где значение атрибута не задано">
-            </task06>
-            <task07 id="task07" description="Выборка строк таблицы по нескольким условиям">
-            </task07>
-            <task08 id="task08" description="Функции агрегирования">
-            </task08>
-            <task09 id="task09" description="Ограничение количества выводимых строк при сортировке">
-            </task09>
-            <task10 id="task10" description="Обработка дат и времени.">
-            </task10>
-        </lab>
-    </labs-config>
 </schema01>

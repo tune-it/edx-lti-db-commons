@@ -2,57 +2,11 @@ package com.tuneit.course.lab1;
 
 public class TaskData {
     static String[] getQueryTask1() {
-        String queryVariant0 = "Выведите содержимое всех столбцов таблицы AIRCRAFTS.";
-        String queryVariant1 = "Выведите содержимое всех столбцов таблицы AIRPORTS.";
-        String queryVariant2 = "Выведите содержимое всех столбцов таблицы TICKETS.";
-
-        int set1 = 10;
-        int set2 = 88;
-        int set3 = 72;
-        int set4 = 1;
-        String[] result = new String[set1 + set2 + set3 + set4];
-        int counter = 0;
-
-        for (int i = 0; i < set1; i++) {
-            result[counter++] = queryVariant0;
-        }
-        for (int i = 0; i < set2; i++) {
-            result[counter++] = queryVariant1;
-        }
-        for (int i = 0; i < set3; i++) {
-            result[counter++] = queryVariant0;
-        }
-        for (int i = 0; i < set4; i++) {
-            result[counter++] = queryVariant2;
-        }
-        return result;
+        return new String[]{"Выведите содержимое всех полей таблицы BOARDING_PASSES."};
     }
 
     static String[] getAnswerTask1() {
-        String answerVariant0 = "select * from aircrafts as a;";
-        String answerVariant1 = "select * from airports;";
-        String answerVariant2 = "select * from tickets;";
-
-        int set1 = 10;
-        int set2 = 88;
-        int set3 = 72;
-        int set4 = 1;
-        String[] result = new String[set1 + set2 + set3 + set4];
-        int counter = 0;
-
-        for (int i = 0; i < set1; i++) {
-            result[counter++] = answerVariant0;
-        }
-        for (int i = 0; i < set2; i++) {
-            result[counter++] = answerVariant1;
-        }
-        for (int i = 0; i < set3; i++) {
-            result[counter++] = answerVariant0;
-        }
-        for (int i = 0; i < set4; i++) {
-            result[counter++] = answerVariant2;
-        }
-        return result;
+        return new String[]{"select * from BOARDING_PASSES as a;"};
     }
 
     //
