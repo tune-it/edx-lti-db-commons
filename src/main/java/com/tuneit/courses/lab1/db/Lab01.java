@@ -823,9 +823,9 @@ public class Lab01 extends Lab {
             int randomPosition = getRandom(task).nextInt(randomSubtask11.options.size());
             String options = randomSubtask11.options.get(randomPosition);
 
-            answer.append("SELECT \'")
-                    .append(options)
-                    .append("\' || \' = \' || COUNT(")
+            answer.append("SELECT \'Количество найденных ")
+                    .append(table.getNameGenitive().trim())
+                    .append(": \' || COUNT(")
                     .append(columnName)
                     .append(") FROM ")
                     .append(table.getTableName())
@@ -850,14 +850,14 @@ public class Lab01 extends Lab {
 
             query.append(prolog.trim())
                     .append(" ")
-                    .append(table.getNameGenitive())
+                    .append(table.getNameGenitive().trim())
                     .append(" c ")
                     .append(columnNameCreativePlural)
                     .append(" \'")
                     .append(option)
-                    .append("\'. Ответ выдать в виде \'")
-                    .append(option)
-                    .append(" = 10\'.");
+                    .append("\'. Ответ выдать в виде \'Количество найденных ")
+                    .append(table.getNameGenitive().trim())
+                    .append(": 10\'.");
         }
 
         @Override

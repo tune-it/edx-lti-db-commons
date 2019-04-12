@@ -227,16 +227,16 @@ public class TaskData {
     //
 
     static String[] getQueryTask11() {
-        String queryVariant0 = "Вывести количество рейсов воздушного судна c кодами воздушных судов 'CR2'. Ответ выдать в виде 'CR2 = 10'.";
-        String queryVariant1 = "Вывести количество рейсов воздушного судна c статусами 'Departed'. Ответ выдать в виде 'Departed = 10'.";
-        String queryVariant2 = "Вывести количество рейсов воздушного судна c аэропортами отправления 'AER'. Ответ выдать в виде 'AER = 10'.";
+        String queryVariant0 = "Вывести количество рейсов воздушного судна c кодами воздушных судов 'CR2'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
+        String queryVariant1 = "Вывести количество рейсов воздушного судна c статусами 'Departed'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
+        String queryVariant2 = "Вывести количество рейсов воздушного судна c аэропортами отправления 'AER'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
         return new String[]{queryVariant0, queryVariant1, queryVariant2};
     }
 
     static String[] getAnswerTask11() {
-        String answerVariant0 = "select 'CR2 = ' || count(aircraft_code) from flights where aircraft_code = 'CR2' group by aircraft_code;";
-        String answerVariant1 = "select 'Departed = ' || count(status) from flights where status = 'Departed' group by status;";
-        String answerVariant2 = "select 'AER = ' || count(arrival_airport) from flights where arrival_airport = 'AER' group by arrival_airport;";
+        String answerVariant0 = "select 'Количество найденных рейсов воздушного судна: ' || count(aircraft_code) from flights where aircraft_code = 'CR2' group by aircraft_code;";
+        String answerVariant1 = "select 'Количество найденных рейсов воздушного судна: ' || count(status) from flights where status = 'Departed' group by status;";
+        String answerVariant2 = "select 'Количество найденных рейсов воздушного судна: ' || count(arrival_airport) from flights where arrival_airport = 'AER' group by arrival_airport;";
         return new String[]{answerVariant0, answerVariant1, answerVariant2};
     }
 
