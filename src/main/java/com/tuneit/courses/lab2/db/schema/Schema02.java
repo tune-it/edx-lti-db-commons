@@ -25,10 +25,10 @@ import java.util.logging.Logger;
 public class Schema02 extends Schema {
 
     @XmlAttribute(name = "name")
-    private String name;
+    protected String name;
 
     @XmlTransient
-    private SchemaConnection connection;
+    protected SchemaConnection connection;
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
@@ -93,13 +93,18 @@ public class Schema02 extends Schema {
     }
 
     private void updateReferenceTables() {
-        tables.forEach(table -> table.getNamesReferences().forEach(nameTable -> {
-            table.getRefTables().add((Table02) findTable(nameTable));
+        tables.forEach(table -> table.getRefTables().forEach(referenceToTable -> {
+            referenceToTable.setTable(
+                    findTable(referenceToTable.getTableName()));
+            referenceToTable.setColumnReference(
+                    table.findColumn(referenceToTable.getColumnReferenceName()));
+            referenceToTable.setJoinColumnReference(
+                    referenceToTable.getTable().findColumn(referenceToTable.getJoinColumnReferenceName()));
         }));
     }
 
-    public Table findTable(String name) {
-        for (Table table : tables) {
+    private Table02 findTable(String name) {
+        for (Table02 table : tables) {
             if (table.getTableName().equalsIgnoreCase(name)) {
                 return table;
             }

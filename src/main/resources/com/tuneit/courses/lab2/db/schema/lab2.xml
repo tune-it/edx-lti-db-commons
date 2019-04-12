@@ -10,7 +10,10 @@
             <column sql-name="range" name="максимально возможная дистанция"
                     name-plural="максимально возможные дистанции" name-genitive-plural="максимально возможных дистанций"
                     name-creative-plural="максимально возможными дистанциями"/>
-            <references>seats flights</references>
+            <references>
+                <reference table="seats" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
+                <reference table="flights" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
+            </references>
         </table>
         <table sql-name="airports" name="аэропорты" name-genitive="аэропортов">
             <column sql-name="airport_code" name="код" name-plural="коды" name-genitive-plural="кодов"
@@ -23,7 +26,10 @@
                     name-creative-plural="координатами"/>
             <column sql-name="timezone" name="временная зона" name-plural="временные зоны"
                     name-genitive-plural="временных зон" name-creative-plural="временными зонами"/>
-            <references>flights</references>
+            <references>
+                <reference table="flights" column-ref="airport_code" join-column-ref="arrival_airport"/>
+                <reference table="flights" column-ref="airport_code" join-column-ref="departure_airport"/>
+            </references>
         </table>
         <table sql-name="boarding_passes" name="посадочный талон" name-genitive="посадочных талонов">
             <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
@@ -34,7 +40,10 @@
                     name-creative-plural="номерами"/>
             <column sql-name="seat_no" name="номер места" name-plural="номера мест" name-genitive-plural="номеров мест"
                     name-creative-plural="номерами мест"/>
-            <references>ticket_flights</references>
+            <references>
+                <reference table="ticket_flights" column-ref="ticket_no" join-column-ref="ticket_no"/>
+                <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>
+            </references>
         </table>
         <table sql-name="bookings" name="бронирование" name-genitive="бронирований">
             <column sql-name="book_ref" name="код" name-plural="коды" name-genitive-plural="кодов"
@@ -43,7 +52,9 @@
                     name-creative-plural="датами"/>
             <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
                     name-creative-plural="суммами"/>
-            <references>tickets</references>
+            <references>
+                <reference table="tickets" column-ref="book_ref" join-column-ref="book_ref"/>
+            </references>
         </table>
         <table sql-name="flights" name="рейс воздушного судна" name-genitive="рейсов воздушного судна">
             <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
@@ -68,7 +79,12 @@
                     name-genitive-plural="времён отправлений" name-creative-plural="временами отправлений"/>
             <column sql-name="actual_arrival" name="время прибытия" name-plural="времена прибытий"
                     name-genitive-plural="времён отправлений" name-creative-plural="временами прибытий"/>
-            <references>airports aircrafts ticket_flights</references>
+            <references>
+                <reference table="airports" column-ref="departure_airport" join-column-ref="airport_code"/>
+                <reference table="airports" column-ref="arrival_airport" join-column-ref="airport_code"/>
+                <reference table="aircrafts" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
+                <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>
+            </references>
         </table>
         <table sql-name="seats" name="посадочное место" name-genitive="посадочных мест">
             <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
@@ -77,7 +93,9 @@
                     name-creative-plural="номерами мест"/>
             <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
                     name-creative-plural="тарифами"/>
-            <references>aircrafts</references>
+            <references>
+                <reference table="aircrafts" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
+            </references>
         </table>
         <table sql-name="ticket_flights" name="состоявшийся полет" name-genitive="состоявшихся полетов">
             <column sql-name="ticket_no" name="номер билета" name-plural="номера билетов"
@@ -88,7 +106,10 @@
                     name-creative-plural="тарифами"/>
             <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
                     name-creative-plural="суммами"/>
-            <references>flights tickets</references>
+            <references>
+                <reference table="flights" column-ref="flight_id" join-column-ref="flight_id"/>
+                <reference table="tickets" column-ref="ticket_no" join-column-ref="ticket_no"/>
+            </references>
         </table>
         <table sql-name="tickets" name="проданный билет" name-genitive="проданных билетов">
             <column sql-name="ticket_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
@@ -102,7 +123,67 @@
                     name-genitive-plural="имён пассажиров" name-creative-plural="именами пассажиров"/>
             <column sql-name="contact_data" name="контактная информация" name-plural="контактные данные"
                     name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
-            <references>bookings ticket_flights</references>
+            <references>
+                <reference table="bookings" column-ref="book_ref" join-column-ref="book_ref"/>
+                <reference table="ticket_flights" column-ref="ticket_no" join-column-ref="ticket_no"/>
+            </references>
         </table>
     </tables>
+    <tables-data>
+        <table name="aircrafts">
+            <column name="aircraft_code">
+                <compare-data></compare-data>
+            </column>
+            <column name="model"/>
+            <column name="range"/>
+        </table>
+        <table name="airports">
+            <column name="airport_code"/>
+            <column name="airport_name"/>
+            <column name="city"/>
+            <column name="coordinates"/>
+            <column name="timezone"/>
+        </table>
+        <table name="boarding_passes">
+            <column name="ticket_no"/>
+            <column name="flight_id"/>
+            <column name="boarding_no"/>
+            <column name="seat_no"/>
+        </table>
+        <table name="bookings">
+            <column name="book_ref"/>
+            <column name="book_date"/>
+            <column name="total_amount"/>
+        </table>
+        <table name="flights">
+            <column name="flight_id"/>
+            <column name="flight_no"/>
+            <column name="scheduled_departure"/>
+            <column name="scheduled_arrival"/>
+            <column name="departure_airport"/>
+            <column name="arrival_airport"/>
+            <column name="status"/>
+            <column name="aircraft_code"/>
+            <column name="actual_departure"/>
+            <column name="actual_arrival"/>
+        </table>
+        <table name="seats">
+            <column name="aircraft_code"/>
+            <column name="seat_no"/>
+            <column name="fare_conditions"/>
+        </table>
+        <table name="ticket_flights">
+            <column name="ticket_no"/>
+            <column name="flight_id"/>
+            <column name="fare_conditions"/>
+            <column name="amount"/>
+        </table>
+        <table name="tickets">
+            <column name="ticket_no"/>
+            <column name="book_ref"/>
+            <column name="passenger_id"/>
+            <column name="passenger_name"/>
+            <column name="contact_data"/>
+        </table>
+    </tables-data>
 </schema02>
