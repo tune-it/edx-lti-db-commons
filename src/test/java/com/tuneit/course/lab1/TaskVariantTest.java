@@ -4,8 +4,7 @@ import com.tuneit.courses.DBTaskGeneratorService;
 import com.tuneit.courses.Task;
 import org.junit.jupiter.api.Test;
 
-import static com.tuneit.course.lab1.TaskData.getAnswerTask1;
-import static com.tuneit.course.lab1.TaskData.getQueryTask1;
+import static com.tuneit.course.lab1.TaskData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskVariantTest {
@@ -17,8 +16,21 @@ public class TaskVariantTest {
             task.setAnswer(getAnswerTask1()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
-            assertEquals(task.getQuestion(), getQueryTask1()[i]);
-            assertEquals(task.getRating(), 1);
+            assertEquals(getQueryTask1()[i], task.getQuestion());
+            assertEquals(1, task.getRating());
+        }
+    }
+
+    @Test
+    public void testTask2AllVariants() {
+        for (int i = 0; i < getAnswerTask2().length; i++) {
+            DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
+            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 2, Integer.toString(i), 0);
+            task.setAnswer(getAnswerTask2()[i]).setComplete(true);
+            taskGenerator.checkTasks(task);
+
+            assertEquals(getQueryTask2()[i], task.getQuestion());
+            assertEquals(1, task.getRating());
         }
     }
 }

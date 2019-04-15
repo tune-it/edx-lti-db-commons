@@ -1,9 +1,10 @@
 package com.tuneit.courses.db.schema;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author serge
@@ -16,10 +17,16 @@ public class Table implements Cloneable {
     @XmlAttribute(name = "sql-name")
     protected String sqlName;
     @XmlAttribute(name = "name")
+    @Getter
+    @Setter
     protected String name;
     @XmlAttribute(name = "name-genitive")
+    @Getter
+    @Setter
     protected String nameGenitive; //род.падеж мн.ч.
     @XmlElement(name = "column")
+    @Getter
+    @Setter
     protected List<Column> columns;
 
     @Override
@@ -37,30 +44,6 @@ public class Table implements Cloneable {
     public void setTableName(String sqlName) {
         this.sqlName = sqlName.toUpperCase().trim();
         sqlNameInUpperCase = true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNameGenitive() {
-        return nameGenitive;
-    }
-
-    public void setNameGenitive(String nameGenitive) {
-        this.nameGenitive = nameGenitive;
-    }
-
-    public List<Column> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<Column> columns) {
-        this.columns = columns;
     }
 
     public Column findColumn(String columnName) {
@@ -103,5 +86,23 @@ public class Table implements Cloneable {
         }
 
         return columnsClone;
+    }
+
+    public List<Column> getRandomColumn(Random random, int minColumns) {
+        if (minColumns > columns.size()) {
+            throw new IllegalArgumentException(minColumns + " columns don't exist.");
+        }
+        Collections.shuffle(columns, random);
+
+        List<Column> resultList = new ArrayList<>();
+
+        for (int i = 0; i < minColumns; i++) {
+            resultList.add(columns.get(i));
+        }
+        for (int i = 0; i < random.nextInt(columns.size() - minColumns); i++) {
+            resultList.add(columns.get(i));
+        }
+
+        return resultList;
     }
 }

@@ -11,19 +11,13 @@ public class TaskData {
 
     //
     static String[] getQueryTask2() {
-        String queryVariant0 = "Выведите содержимое столбца (столбцов) контактные данные, коды бронирования, имена пассажиров для таблицы TICKETS.";
-        String queryVariant1 = "Выведите содержимое столбца (столбцов) номера, коды бронирования, идентификаторы пассажиров, имена пассажиров для таблицы TICKETS.";
-        String queryVariant2 = "Выведите содержимое столбца (столбцов) контактные данные, имена пассажиров для таблицы TICKETS.";
-        return new String[]{queryVariant0,
-                queryVariant1, queryVariant2};
+        String queryVariant0 = "Выведите все коды (book_ref), суммы (total_amount) для таблицы BOOKINGS.";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask2() {
-        String answerVariant0 = "select contact_data, book_ref, passenger_name from tickets;";
-        String answerVariant1 = "select ticket_no, book_ref, passenger_id, passenger_name from tickets;";
-        String answerVariant2 = "select contact_data, passenger_name from tickets;";
-        return new String[]{answerVariant0,
-                answerVariant1, answerVariant2};
+        String answerVariant0 = "select book_ref, total_amount from BOOKINGS;";
+        return new String[]{answerVariant0};
     }
 
     //
