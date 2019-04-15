@@ -14,7 +14,6 @@ public abstract class Schema {
     @XmlAttribute(name = "name")
     protected String name;
 
-
     public abstract Schema load(String schemaName, String connectionName);
 
     public abstract Lab getLab();

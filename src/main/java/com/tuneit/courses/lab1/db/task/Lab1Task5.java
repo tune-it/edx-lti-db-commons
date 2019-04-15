@@ -17,11 +17,14 @@ public class Lab1Task5 extends Lab1Task {
 
         Random random = task.getRandom();
 
-        ConditionTable conditionTable = schema01.getRandomConditionTable(random);
+        ConditionTable conditionTable = schema01.getRandomConditionTable(random).clone();
+        conditionTable.getConditions().removeIf(condition -> condition.getCountConditions() != 1);
+
         Condition condition = conditionTable.getRandomCondition(random);
         String option = condition.getRandomOption(random);
-        String signConditionNative = null;
-        String signConditionSql = null;
+
+        String signConditionNative;
+        String signConditionSql;
         if (!condition.getGreater().isEmpty() && random.nextBoolean()) {
             signConditionNative = " " + condition.getGreater() + " ";
             signConditionSql = " > ";
