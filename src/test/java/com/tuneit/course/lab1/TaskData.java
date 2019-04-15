@@ -23,7 +23,7 @@ public class TaskData {
     //
 
     static String[] getQueryTask3() {
-        String queryVariant0 = "Выведите все уникальные значения столбца идентификаторы пассажиров (PASSENGER_ID) из таблицы TICKETS.";
+        String queryVariant0 = "Выведите все уникальные значения столбца идентификаторы пассажиров (passenger_id) из таблицы TICKETS.";
         return new String[]{queryVariant0};
     }
 
@@ -35,17 +35,14 @@ public class TaskData {
     //
 
     static String[] getQueryTask4() {
-        String queryVariant0 = "Выведите все уникальные коды для аэропортов.";
-        String queryVariant1 = "Выведите все уникальные временные зоны для аэропортов.";
-        String queryVariant2 = "Выведите все уникальные имена для аэропортов.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant0, queryVariant2};
+        String queryVariant0 = "Выведите все номера (ticket_no), контактные данные (contact_data), номера (ticket_no) " +
+                "для таблицы TICKETS. Отсортированные по столбцу имена пассажиров (passenger_name) по возрастанию.";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask4() {
-        String answerVariant0 = "select distinct airport_code from airports;";
-        String answerVariant1 = "select distinct timezone from airports;";
-        String answerVariant2 = "select distinct airport_name from airports;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant0, answerVariant2};
+        String answerVariant0 = "select ticket_no, contact_data, ticket_no from TICKETS ORDER BY passenger_name;";
+        return new String[]{answerVariant0};
     }
 
     //

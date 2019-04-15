@@ -22,7 +22,7 @@ public class Lab1Task3 extends Lab1Task {
         query.append("Выведите все уникальные значения столбца ")
                 .append(column.getNamePlural())
                 .append(" (")
-                .append(column.getColumnName())
+                .append(column.getColumnName().toLowerCase())
                 .append(") из таблицы ")
                 .append(table.getTableName())
                 .append(".");
