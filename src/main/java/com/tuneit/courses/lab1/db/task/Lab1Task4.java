@@ -18,7 +18,7 @@ public class Lab1Task4 extends Lab1Task {
         answer = new StringBuilder();
 
         Random random = task.getRandom();
-        Table table = schema01.getRandomTable(random).clone();
+        Table table = schema01.getRandomTable(random);
         Column sortedColumn = table.getRandomColumn(random);
         table.getColumns().remove(sortedColumn);
         List<Column> columns = table.getRandomColumns(task.getRandom(), 2);

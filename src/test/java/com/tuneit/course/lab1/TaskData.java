@@ -60,18 +60,13 @@ public class TaskData {
     //
 
     static String[] getQueryTask6() {
-        String queryVariant0 = "Вывести в один столбец следующие параметры: код, город, временная зона, имя аэропортов. Вывод представить в формате 'Я аэропорт YKS г. Якутск временная зона - Asia/Yakutsk ЯКУТСК'.";
-        String queryVariant1 = "Вывести в один столбец следующие параметры: идентификатор пассажира, имя пассажира, номер, код бронирования проданных билетов. Вывод представить в формате 'Я билет 8149 name - V. TIKHONOV №0005432000987 06B046'.";
-        String queryVariant2 = "Вывести в один столбец следующие параметры: максимально возможная дистанция, код, модель воздушных судов. Вывод представить в формате 'Я самолёт 11100 773 Боинг 777-300'.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетовярют условию. Реальное время вылета самолёта должно быть не задано.";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask6() {
-//        String answerVariant0 = "select 'Я самолёт ' || aircraft_code || ' ' || range || ' ' || split_part(model, ' ', 1) from aircrafts;";
-        String answerVariant0 = "select 'Я аэропорт ' || airport_code || ' г. ' || city || ' временная зона - ' || timezone  || ' ' || upper(airport_name) from airports;";
-        String answerVariant1 = "select 'Я билет ' || split_part(passenger_id, ' ', 1) || ' name - ' || substr(passenger_name, 0, 2) || '. ' || split_part(passenger_name, ' ', 2) || ' №' || ticket_no || ' ' || book_ref from tickets;";
-        String answerVariant2 = "select 'Я самолёт ' || range || ' ' || aircraft_code || ' ' || model from aircrafts;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+        String answerVariant0 = "select * from flights where actual_departure isnull;";
+        return new String[]{answerVariant0};
     }
 
     //
@@ -137,37 +132,5 @@ public class TaskData {
         String answerVariant1 = "select actual_arrival, departure_airport, aircraft_code, actual_departure from flights where arrival_airport in ('OVB', 'VKO')";
         String answerVariant2 = "select arrival_airport, aircraft_code, scheduled_departure, scheduled_arrival from flights where departure_airport in ('TBW', 'KRR', 'EGO', 'REN')";
         return new String[]{answerVariant0, answerVariant1, answerVariant2};
-    }
-
-    //
-
-    static String[] getQueryTask11() {
-        String queryVariant0 = "Вывести количество рейсов воздушного судна c кодами воздушных судов 'CR2'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
-        String queryVariant1 = "Вывести количество рейсов воздушного судна c статусами 'Departed'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
-        String queryVariant2 = "Вывести количество рейсов воздушного судна c аэропортами отправления 'AER'. Ответ выдать в виде 'Количество найденных рейсов воздушного судна: 10'.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
-    }
-
-    static String[] getAnswerTask11() {
-        String answerVariant0 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where aircraft_code = 'CR2'";
-        String answerVariant1 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where status = 'Departed'";
-        String answerVariant2 = "select 'Количество найденных рейсов воздушного судна: ' || count(*) from flights where arrival_airport = 'AER'";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
-    }
-
-    //
-
-    static String[] getQueryTask12() {
-        String queryVariant0 = "Вывести количество различных номеров мест из таблицы посадочных мест. Результат расположить по возрастанию. Привести 5 первых результатов запроса.";
-        String queryVariant1 = "Вывести количество различных кодов воздушных судов из таблицы рейсов воздушного судна. Результат расположить по возрастанию. Привести 5 первых результатов запроса.";
-        String queryVariant2 = "Вывести количество различных кодов воздушных судов из таблицы посадочных мест. Результат расположить по возрастанию. Привести 5 первых результатов запроса.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant1, queryVariant2};
-    }
-
-    static String[] getAnswerTask12() {
-        String answerVariant0 = "select count(seat_no) from seats group by seat_no order by 1 limit 5;";
-        String answerVariant1 = "select count(aircraft_code) from flights group by aircraft_code order by 1 limit 5;";
-        String answerVariant2 = "select count(aircraft_code) from seats group by aircraft_code order by 1 asc limit 5;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant1, answerVariant2};
     }
 }

@@ -12,7 +12,7 @@ public class Lab1Task1 extends Lab1Task {
         query = new StringBuilder();
         answer = new StringBuilder();
 
-        Table table = schema01.getRandomTable(task.getRandom()).clone();
+        Table table = schema01.getRandomTable(task.getRandom());
 
         query.append("Выведите содержимое всех полей таблицы ")
                 .append(table.getTableName())

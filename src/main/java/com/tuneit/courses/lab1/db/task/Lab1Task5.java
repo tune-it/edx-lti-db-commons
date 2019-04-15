@@ -17,7 +17,7 @@ public class Lab1Task5 extends Lab1Task {
 
         Random random = task.getRandom();
 
-        ConditionTable conditionTable = schema01.getRandomConditionTable(random).clone();
+        ConditionTable conditionTable = schema01.getRandomConditionTable(random);
         conditionTable.getConditions().removeIf(condition -> condition.getCountConditions() != 1);
 
         Condition condition = conditionTable.getRandomCondition(random);

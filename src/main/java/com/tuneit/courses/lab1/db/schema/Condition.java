@@ -38,6 +38,9 @@ public class Condition implements Cloneable {
     @XmlAttribute(name = "equals")
     private String equals;
 
+    @XmlAttribute(name = "contains-null")
+    private String containsNull;
+
     public String getRandomOption(Random random) {
         return optionConditions.get(random.nextInt(optionConditions.size()));
     }
@@ -52,7 +55,10 @@ public class Condition implements Cloneable {
             condition.greater = greater;
             condition.below = below;
             condition.equals = equals;
-            condition.optionConditions = cloneList(optionConditions);
+            condition.containsNull = containsNull;
+            if (condition.optionConditions != null) {
+                condition.optionConditions = cloneList(optionConditions);
+            }
             return condition;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();

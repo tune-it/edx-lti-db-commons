@@ -16,7 +16,7 @@ public class Lab1Task3 extends Lab1Task {
         answer = new StringBuilder();
 
         Random random = task.getRandom();
-        Table table = schema01.getRandomTable(random).clone();
+        Table table = schema01.getRandomTable(random);
         Column column = table.getRandomColumn(random);
 
         query.append("Выведите все уникальные значения столбца ")

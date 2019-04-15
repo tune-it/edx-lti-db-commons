@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
  * @author serge
  */
 
-public class Schema01 extends Schema {
+public class Schema01 extends Schema implements Cloneable {
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
@@ -70,4 +71,32 @@ public class Schema01 extends Schema {
         return conditionTables.get(random.nextInt(conditionTables.size()));
     }
 
+    @Override
+    public Schema01 clone() {
+        try {
+            Schema01 schema01 = (Schema01) super.clone();
+            schema01.tables = cloneListTable(schema01.tables);
+            schema01.conditionTables = cloneListConditionTable(schema01.conditionTables);
+            return schema01;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private List<ConditionTable> cloneListConditionTable(List<ConditionTable> conditionTables) {
+        List<ConditionTable> cloneList = new ArrayList<>();
+        for (ConditionTable condition : conditionTables) {
+            cloneList.add(condition.clone());
+        }
+        return cloneList;
+    }
+
+    private List<Table> cloneListTable(List<Table> tables) {
+        List<Table> cloneTables = new ArrayList<>();
+        for (Table table : tables) {
+            cloneTables.add(table.clone());
+        }
+        return cloneTables;
+    }
 }

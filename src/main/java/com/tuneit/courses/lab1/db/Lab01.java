@@ -15,18 +15,18 @@ public class Lab01 implements Lab {
         Schema01 schema = (Schema01) SchemaLoader.getSchema(1);
         switch (task.getTaskId()) {
             case 1:
-                return new Lab1Task1().generate(schema, task);
+                return new Lab1Task1().generate(schema.clone(), task);
             case 2:
-                return new Lab1Task2().generate(schema, task);
+                return new Lab1Task2().generate(schema.clone(), task);
             case 3:
-                return new Lab1Task3().generate(schema, task);
+                return new Lab1Task3().generate(schema.clone(), task);
             case 4:
-                return new Lab1Task4().generate(schema, task);
+                return new Lab1Task4().generate(schema.clone(), task);
             case 5:
-                return new Lab1Task5().generate(schema, task);
-            /*case 6:
-                return new Task6().generate(schema, task);
-            case 7:
+                return new Lab1Task5().generate(schema.clone(), task);
+            case 6:
+                return new Lab1Task6().generate(schema.clone(), task);
+            /*case 7:
                 return new Task7().generate(schema, task);
             case 8:
                 return new Task8().generate(schema, task);
@@ -45,11 +45,12 @@ public class Lab01 implements Lab {
         Schema01 schema = (Schema01) SchemaLoader.getSchema(1);
 
         return new LabTaskQA[]{
-                new Lab1Task1().generate(schema, task),
-                new Lab1Task2().generate(schema, task),
-                new Lab1Task3().generate(schema, task),
-                new Lab1Task4().generate(schema, task),
-                new Lab1Task5().generate(schema, task),
+                new Lab1Task1().generate(schema.clone(), task),
+                new Lab1Task2().generate(schema.clone(), task),
+                new Lab1Task3().generate(schema.clone(), task),
+                new Lab1Task4().generate(schema.clone(), task),
+                new Lab1Task5().generate(schema.clone(), task),
+                new Lab1Task6().generate(schema.clone(), task),
         };
     }
 }
