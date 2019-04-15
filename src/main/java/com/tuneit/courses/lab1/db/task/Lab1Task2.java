@@ -17,7 +17,7 @@ public class Lab1Task2 extends Lab1Task {
         answer = new StringBuilder();
 
         Table table = schema01.getRandomTable(task.getRandom()).clone();
-        List<Column> columns = table.getRandomColumn(task.getRandom(), 2);
+        List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
 
         List<String> columnsRevisedForWrite = new ArrayList<>();
         columns.forEach(

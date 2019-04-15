@@ -88,7 +88,7 @@ public class Table implements Cloneable {
         return columnsClone;
     }
 
-    public List<Column> getRandomColumn(Random random, int minColumns) {
+    public List<Column> getRandomColumns(Random random, int minColumns) {
         if (minColumns > columns.size()) {
             throw new IllegalArgumentException(minColumns + " columns don't exist.");
         }
@@ -104,5 +104,11 @@ public class Table implements Cloneable {
         }
 
         return resultList;
+    }
+
+    public Column getRandomColumn(Random random) {
+        Collections.shuffle(columns, random);
+
+        return columns.get(0);
     }
 }

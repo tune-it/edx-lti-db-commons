@@ -23,17 +23,13 @@ public class TaskData {
     //
 
     static String[] getQueryTask3() {
-        String queryVariant0 = "Выведите все номера билетов из таблицы посадочных талонов.";
-        String queryVariant1 = "Выведите все идентификаторы рейсов из таблицы посадочных талонов.";
-        String queryVariant2 = "Выведите все номера мест из таблицы посадочных талонов.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant0, queryVariant2};
+        String queryVariant0 = "Выведите все уникальные значения столбца идентификаторы пассажиров (PASSENGER_ID) из таблицы TICKETS.";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask3() {
-        String answerVariant0 = "select ticket_no from boarding_passes;";
-        String answerVariant1 = "select flight_id from boarding_passes;";
-        String answerVariant2 = "select seat_no from boarding_passes;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant0, answerVariant2};
+        String answerVariant0 = "select distinct PASSENGER_ID from TICKETS;";
+        return new String[]{answerVariant0};
     }
 
     //
