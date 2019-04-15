@@ -5,10 +5,7 @@ import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.SchemaLoader;
 import com.tuneit.courses.lab1.db.schema.Schema01;
-import com.tuneit.courses.lab1.db.task.Lab1Task1;
-import com.tuneit.courses.lab1.db.task.Lab1Task2;
-import com.tuneit.courses.lab1.db.task.Lab1Task3;
-import com.tuneit.courses.lab1.db.task.Lab1Task4;
+import com.tuneit.courses.lab1.db.task.*;
 
 public class Lab01 implements Lab {
 
@@ -25,9 +22,9 @@ public class Lab01 implements Lab {
                 return new Lab1Task3().generate(schema, task);
             case 4:
                 return new Lab1Task4().generate(schema, task);
-            /*case 5:
-                return new Task5().generate(schema, task);
-            case 6:
+            case 5:
+                return new Lab1Task5().generate(schema, task);
+            /*case 6:
                 return new Task6().generate(schema, task);
             case 7:
                 return new Task7().generate(schema, task);
@@ -52,6 +49,7 @@ public class Lab01 implements Lab {
                 new Lab1Task2().generate(schema, task),
                 new Lab1Task3().generate(schema, task),
                 new Lab1Task4().generate(schema, task),
+                new Lab1Task5().generate(schema, task),
         };
     }
 }

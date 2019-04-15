@@ -48,39 +48,13 @@ public class TaskData {
     //
 
     static String[] getQueryTask5() {
-        String queryVariant0 = "Вычислить планируемое время каждого полёта для всех воздушных судов (в часах).";
-        String queryVariant1 = "Вычислить реальное время каждого полёта для всех воздушных судов (в минутах).";
-
-        int set1 = 200;
-        int set2 = 1;
-        String[] result = new String[set1 + set2];
-        int counter = 0;
-
-        for (int i = 0; i < set1; i++) {
-            result[counter++] = queryVariant0;
-        }
-        for (int i = 0; i < set2; i++) {
-            result[counter++] = queryVariant1;
-        }
-        return result;
+        String queryVariant0 = "Выведите все воздушные судна, которые удовлетовярют условию. Код самолёта должен быть равен \"CR2\".";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask5() {
-        String queryVariant0 = "select extract(EPOCH from scheduled_arrival - scheduled_departure)/60/60 from flights;";
-        String queryVariant1 = "select extract(EPOCH from actual_arrival - actual_departure)/60 from flights;";
-
-        int set1 = 200;
-        int set2 = 1;
-        String[] result = new String[set1 + set2];
-        int counter = 0;
-
-        for (int i = 0; i < set1; i++) {
-            result[counter++] = queryVariant0;
-        }
-        for (int i = 0; i < set2; i++) {
-            result[counter++] = queryVariant1;
-        }
-        return result;
+        String answerVariant0 = "select * from aircrafts where aircraft_code=\'CR2\';";
+        return new String[]{answerVariant0};
     }
 
     //

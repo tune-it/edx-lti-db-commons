@@ -5,6 +5,7 @@ import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.lab1.db.Lab01;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -28,7 +29,14 @@ public class Schema01 extends Schema {
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
     @Getter
+    @Setter
     private List<Table> tables;
+
+    @XmlElementWrapper(name = "conditions")
+    @XmlElement(name = "table")
+    @Getter
+    @Setter
+    private List<ConditionTable> conditionTables;
 
     private Lab01 lab01 = new Lab01();
 
@@ -57,4 +65,9 @@ public class Schema01 extends Schema {
     public Table getRandomTable(Random random) {
         return tables.get(random.nextInt(tables.size()));
     }
+
+    public ConditionTable getRandomConditionTable(Random random) {
+        return conditionTables.get(random.nextInt(conditionTables.size()));
+    }
+
 }

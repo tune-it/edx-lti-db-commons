@@ -59,4 +59,18 @@ public class TaskVariantTest {
             assertEquals(1, task.getRating());
         }
     }
+
+    @Test
+    public void testTask5AllVariants() {
+        for (int i = 0; i < getAnswerTask5().length; i++) {
+            DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
+            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 5, Integer.toString(i), 0);
+            task.setAnswer(getAnswerTask5()[i]).setComplete(true);
+            taskGenerator.checkTasks(task);
+
+            assertEquals(getQueryTask5()[i], task.getQuestion());
+            assertEquals(1, task.getRating());
+        }
+    }
+
 }

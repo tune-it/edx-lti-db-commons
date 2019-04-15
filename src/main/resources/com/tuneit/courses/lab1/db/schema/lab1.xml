@@ -97,4 +97,49 @@
                     name-genitive-plural="контактных данных" name-creative-plural="контактными данными"/>
         </table>
     </tables>
+
+    <conditions>
+        <table sql="aircrafts" native="воздушные судна">
+            <condition native="Код самолёта должен быть" sql="aircraft_code"
+                       count-conditions="1" greater="" below="" equals="равен">
+                <option>320</option>
+                <option>321</option>
+                <option>733</option>
+                <option>763</option>
+                <option>773</option>
+                <option>CN1</option>
+                <option>CR2</option>
+            </condition>
+            <condition native="Название модели самолёта должно быть" sql="model"
+                       count-conditions="1" greater="" below="" equals="равно">
+                <option>Аэробус A320-200</option>
+                <option>Аэробус A321-200</option>
+                <option>Боинг 737-300</option>
+                <option>Боинг 767-300</option>
+                <option>Боинг 777-300</option>
+                <option>Бомбардье CRJ-200</option>
+                <option>Сессна 208 Караван</option>
+            </condition>
+            <condition native="Максимальная дальность полёта самолёта должна быть" sql="range"
+                       count-conditions="1" greater="больше, чем" below="меньше, чем" equals="равна">
+                <option>7900</option>
+                <option>3000</option>
+                <option>5700</option>
+                <option>5600</option>
+                <option>6700</option>
+                <option>4200</option>
+                <option>2700</option>
+            </condition>
+            <condition native="Максимальная дальность полёта самолёта должна быть" sql="range"
+                       count-conditions="1" greater="больше, чем" below="меньше, чем" equals="">
+                <option>8000</option>
+                <option>7000</option>
+                <option>6000</option>
+                <option>5000</option>
+                <option>4000</option>
+                <option>3000</option>
+                <option>2000</option>
+            </condition>
+        </table>
+    </conditions>
 </schema01>
