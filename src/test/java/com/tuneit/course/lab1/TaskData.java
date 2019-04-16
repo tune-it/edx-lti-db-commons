@@ -85,17 +85,13 @@ public class TaskData {
     //
 
     static String[] getQueryTask8() {
-        String queryVariant0 = "Выдать номера билетов из таблицы посадочных талонов, номера мест которых начинаются на '14'. Отсортировать по столбцу номера мест в порядке возрастания.";
-        String queryVariant1 = "Выдать идентификаторы пассажиров из таблицы проданных билетов, имена пассажиров которых начинаются на 'AL'. Отсортировать по столбцу имена пассажиров в порядке возрастания.";
-        String queryVariant2 = "Выдать тарифы из таблицы посадочных мест, номера мест которых начинаются на '12'. Отсортировать по столбцу номера мест в порядке возрастания.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Выведите самый дорогой билет, исходя из условия. Сумма забронированных билетов должна быть равна \"2017-08-12\".";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask8() {
-        String answerVariant0 = "select ticket_no from boarding_passes where seat_no like '14%' order by seat_no asc;";
-        String answerVariant1 = "select passenger_id from tickets where passenger_name like 'AL%' order by passenger_name asc;";
-        String answerVariant2 = "select fare_conditions from seats where seat_no like '12%' order by seat_no;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+        String answerVariant0 = "SELECT max(total_amount) FROM bookings WHERE book_date = '2017-08-12';";
+        return new String[]{answerVariant0};
     }
 
     //

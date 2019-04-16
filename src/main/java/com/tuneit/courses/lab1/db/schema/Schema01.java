@@ -39,6 +39,13 @@ public class Schema01 extends Schema implements Cloneable {
     @Setter
     private List<ConditionTable> conditionTables;
 
+
+    @XmlElementWrapper(name = "aggregations")
+    @XmlElement(name = "aggregation")
+    @Getter
+    @Setter
+    private List<Aggregation> aggregations;
+
     private Lab01 lab01 = new Lab01();
 
     public Schema01 load(String schemaName, String connectionName) {
@@ -71,17 +78,30 @@ public class Schema01 extends Schema implements Cloneable {
         return conditionTables.get(random.nextInt(conditionTables.size()));
     }
 
+    public Aggregation getRandomAggregation(Random random) {
+        return aggregations.get(random.nextInt(aggregations.size()));
+    }
+
     @Override
     public Schema01 clone() {
         try {
             Schema01 schema01 = (Schema01) super.clone();
             schema01.tables = cloneListTable(schema01.tables);
             schema01.conditionTables = cloneListConditionTable(schema01.conditionTables);
+            schema01.aggregations = cloneListAggragation(schema01.aggregations);
             return schema01;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private List<Aggregation> cloneListAggragation(List<Aggregation> aggregations) {
+        List<Aggregation> cloneList = new ArrayList<>();
+        for (Aggregation aggregation : aggregations) {
+            cloneList.add(aggregation.clone());
+        }
+        return cloneList;
     }
 
     private List<ConditionTable> cloneListConditionTable(List<ConditionTable> conditionTables) {
