@@ -21,30 +21,25 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author serge
- */
-
+@Getter
+@Setter
 public class Schema01 extends Schema implements Cloneable {
 
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
-    @Getter
-    @Setter
     private List<Table> tables;
 
     @XmlElementWrapper(name = "conditions")
     @XmlElement(name = "table")
-    @Getter
-    @Setter
     private List<ConditionTable> conditionTables;
-
 
     @XmlElementWrapper(name = "aggregations")
     @XmlElement(name = "aggregation")
-    @Getter
-    @Setter
     private List<Aggregation> aggregations;
+
+    @XmlElementWrapper(name = "dates")
+    @XmlElement(name = "date")
+    private List<DiffDate> diffDates;
 
     private Lab01 lab01 = new Lab01();
 
@@ -82,13 +77,17 @@ public class Schema01 extends Schema implements Cloneable {
         return aggregations.get(random.nextInt(aggregations.size()));
     }
 
+    public DiffDate getRandomDiffDate(Random random) {
+        return diffDates.get(random.nextInt(diffDates.size()));
+    }
+
     @Override
     public Schema01 clone() {
         try {
             Schema01 schema01 = (Schema01) super.clone();
             schema01.tables = cloneListTable(schema01.tables);
             schema01.conditionTables = cloneListConditionTable(schema01.conditionTables);
-            schema01.aggregations = cloneListAggragation(schema01.aggregations);
+            schema01.aggregations = cloneListAggregation(schema01.aggregations);
             return schema01;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -96,7 +95,7 @@ public class Schema01 extends Schema implements Cloneable {
         }
     }
 
-    private List<Aggregation> cloneListAggragation(List<Aggregation> aggregations) {
+    private List<Aggregation> cloneListAggregation(List<Aggregation> aggregations) {
         List<Aggregation> cloneList = new ArrayList<>();
         for (Aggregation aggregation : aggregations) {
             cloneList.add(aggregation.clone());

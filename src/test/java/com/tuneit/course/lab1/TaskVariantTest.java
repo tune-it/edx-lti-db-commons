@@ -125,4 +125,17 @@ public class TaskVariantTest {
         }
     }
 
+    @Test
+    public void testTask10AllVariants() {
+        for (int i = 0; i < getAnswerTask10().length; i++) {
+            DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
+            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 10, Integer.toString(i), 0);
+            task.setAnswer(getAnswerTask10()[i]).setComplete(true);
+            taskGenerator.checkTasks(task);
+
+            assertEquals(getQueryTask10()[i], task.getQuestion());
+            assertEquals(1, task.getRating());
+        }
+    }
+
 }

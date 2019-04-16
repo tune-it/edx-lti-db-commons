@@ -110,16 +110,13 @@ public class TaskData {
     //
 
     static String[] getQueryTask10() {
-        String queryVariant0 = "Вывести из таблицы рейсов воздушного судна времена прибытий, аэропорты отправления, времена отправлений, статусы, аэропорты прибытия с номерами рейсов: 'PG0490'.";
-        String queryVariant1 = "Вывести из таблицы рейсов воздушного судна времена прибытий, аэропорты отправления, коды воздушных судов, времена отправлений с аэропортами прибытия: 'OVB', 'VKO'.";
-        String queryVariant2 = "Вывести из таблицы рейсов воздушного судна аэропорты прибытия, коды воздушных судов, времена планируемых отправлений, времена планируемых прибытий с аэропортами отправления: 'TBW', 'KRR', 'EGO', 'REN'.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Подсчитайте планируемое время каждого полёта для всех воздушных судов(в часах).";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask10() {
-        String answerVariant0 = "select actual_arrival, departure_airport, actual_departure, status, arrival_airport from flights where flight_no = 'PG0490';";
-        String answerVariant1 = "select actual_arrival, departure_airport, aircraft_code, actual_departure from flights where arrival_airport in ('OVB', 'VKO')";
-        String answerVariant2 = "select arrival_airport, aircraft_code, scheduled_departure, scheduled_arrival from flights where departure_airport in ('TBW', 'KRR', 'EGO', 'REN')";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+        String answerVariant0 = "\n" +
+                "SELECT EXTRACT(EPOCH FROM scheduled_arrival - scheduled_departure) /60/60 FROM flights;";
+        return new String[]{answerVariant0};
     }
 }
