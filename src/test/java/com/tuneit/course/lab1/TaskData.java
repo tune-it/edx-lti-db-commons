@@ -72,42 +72,38 @@ public class TaskData {
     //
 
     static String[] getQueryTask7() {
-        String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетовярют условию." +
-                " Идентификатор рейса должен быть больше, чем \"10000\" или реальное время вылета самолёта должно быть равно \"2017-07-16 02:53:00.000000\".";
+        String queryVariant0 = "Выведите все забронированые билеты, которые удовлетовярют условию. " +
+                "Общая сумма покупки должна быть больше, чем \"12000\" или бронь должна быть сделана позже \"2017-07-21\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask7() {
-        String answerVariant0 = "select * from flights where flight_id > 10000 OR actual_departure = \'2017-07-16 02:53:00.000000\'";
+        String answerVariant0 = "select * from bookings where total_amount > 12000 OR book_date > \'2017-07-21\'";
         return new String[]{answerVariant0};
     }
 
     //
 
     static String[] getQueryTask8() {
-        String queryVariant0 = "Выведите самый дорогой билет, исходя из условия. Сумма забронированных билетов должна быть равна \"2017-08-12\".";
+        String queryVariant0 = "Выведите самый дорогой билет, исходя из условия. Бронь должна быть сделана позже \"2017-08-12\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask8() {
-        String answerVariant0 = "SELECT max(total_amount) FROM bookings WHERE book_date = '2017-08-12';";
+        String answerVariant0 = "SELECT max(total_amount) FROM bookings WHERE book_date > '2017-08-12';";
         return new String[]{answerVariant0};
     }
 
     //
 
     static String[] getQueryTask9() {
-        String queryVariant0 = "Выдать номера рейсов, аэропорты отправления, идентификаторы рейсов, времена прибытий, времена планируемых отправлений из таблицы рейсов воздушного судна, статусы которых заканчиваются на 'C'. Отсортировать по столбцу 1 в порядке возрастания.";
-        String queryVariant1 = "Выдать имена из таблицы аэропортов, города которых заканчиваются на 'ово'. Отсортировать по столбцу 1 в порядке возрастания.";
-        String queryVariant2 = "Выдать суммы, номера билетов из таблицы состоявшихся полетов, тарифы которых заканчиваются на 'ess'. Отсортировать по столбцу 1 в порядке возрастания.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Выведите все номера, номера мест для таблицы посадочных талонов. Отсортированные по столбцу идентификаторы рейсов по убыванию. Вывести последние 3 строки.";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask9() {
-        String answerVariant0 = "select flight_no, departure_airport, flight_id, actual_arrival, scheduled_departure from flights where status like '%C' order by 1;";
-        String answerVariant1 = "select airport_name from airports where city like '%ово' order by 1;";
-        String answerVariant2 = "select amount, ticket_no from ticket_flights where fare_conditions like '%ess' order by 1;";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+        String answerVariant0 = "select boarding_no, seat_no from boarding_passes order by flight_id DESC limit 3";
+        return new String[]{answerVariant0};
     }
 
 

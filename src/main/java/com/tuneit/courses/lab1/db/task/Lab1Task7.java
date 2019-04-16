@@ -66,6 +66,7 @@ public class Lab1Task7 extends Lab1Task {
                 .append("'")
                 .append(";");
 
+        System.out.println(answer);
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 

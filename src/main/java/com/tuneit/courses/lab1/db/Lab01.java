@@ -30,9 +30,9 @@ public class Lab01 implements Lab {
                 return new Lab1Task7().generate(schema.clone(), task);
             case 8:
                 return new Lab1Task8().generate(schema.clone(), task);
-            /*case 9:
-                return new Task9().generate(schema, task);
-            case 10:
+            case 9:
+                return new Lab1Task9().generate(schema.clone(), task);
+            /*case 10:
                 return new Task10().generate(schema, task);*/
             default:
                 return null;
@@ -53,6 +53,7 @@ public class Lab01 implements Lab {
                 new Lab1Task6().generate(schema.clone(), task),
                 new Lab1Task7().generate(schema.clone(), task),
                 new Lab1Task8().generate(schema.clone(), task),
+                new Lab1Task9().generate(schema.clone(), task),
         };
     }
 }

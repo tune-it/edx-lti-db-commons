@@ -183,9 +183,9 @@
             </condition>
 
         </table>
-        <table sql="bookings" native="бронирования">
-            <condition native="Сумма забронированных билетов должна быть" sql="book_date"
-                       count-conditions="1" greater="" below="" equals="равна" contains-null="">
+        <table sql="bookings" native="забронированые билеты">
+            <condition native="Бронь должна быть" sql="book_date"
+                       count-conditions="1" greater="сделана позже" below="сделана раньше" equals="" contains-null="">
                 <option>2017-07-30</option>
                 <option>2017-07-25</option>
                 <option>2017-08-09</option>
@@ -205,6 +205,21 @@
                 <option>2017-07-15</option>
                 <option>2017-08-01</option>
                 <option>2017-07-21</option>
+            </condition>
+
+            <condition native="Общая сумма покупки должна быть" sql="total_amount"
+                       count-conditions="1" greater="больше, чем" below="меньше, чем" equals="" contains-null="">
+                <option>10000</option>
+                <option>20000</option>
+                <option>50000</option>
+                <option>60000</option>
+                <option>80000</option>
+                <option>12000</option>
+                <option>15000</option>
+                <option>38000</option>
+                <option>23000</option>
+                <option>27000</option>
+                <option>58000</option>
             </condition>
 
         </table>
