@@ -72,17 +72,14 @@ public class TaskData {
     //
 
     static String[] getQueryTask7() {
-        String queryVariant0 = "Выдать коды из таблицы аэропортов, города которых содержат в названии 'ово'.";
-        String queryVariant1 = "Выдать коды воздушных судов, идентификаторы рейсов, времена прибытий, аэропорты отправления, времена планируемых прибытий, времена отправлений, аэропорты прибытия из таблицы рейсов воздушного судна, статусы которых содержат в названии 'A'.";
-        String queryVariant2 = "Выдать максимально возможные дистанции из таблицы воздушных судов, модели которых содержат в названии '100'.";
-        return new String[]{queryVariant0, queryVariant1, queryVariant2};
+        String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетовярют условию." +
+                " Идентификатор рейса должен быть больше, чем \"10000\" или реальное время вылета самолёта должно быть равно \"2017-07-16 02:53:00.000000\".";
+        return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask7() {
-        String answerVariant0 = "select airport_code from airports where city like '%ово%'";
-        String answerVariant1 = "select aircraft_code, flight_id, actual_arrival, departure_airport, scheduled_arrival, actual_departure, arrival_airport from flights where status like '%A%'";
-        String answerVariant2 = "select range from aircrafts where model like '%100%'";
-        return new String[]{answerVariant0, answerVariant1, answerVariant2};
+        String answerVariant0 = "select * from flights where flight_id > 10000 OR actual_departure = \'2017-07-16 02:53:00.000000\'";
+        return new String[]{answerVariant0};
     }
 
     //

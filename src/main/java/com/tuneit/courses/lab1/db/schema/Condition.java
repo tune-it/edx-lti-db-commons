@@ -1,6 +1,7 @@
 package com.tuneit.courses.lab1.db.schema;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,6 +46,24 @@ public class Condition implements Cloneable {
         return optionConditions.get(random.nextInt(optionConditions.size()));
     }
 
+    public PairSign getConditionSign(Random random) {
+        if (!greater.isEmpty() && random.nextBoolean()) {
+            return new PairSign(" " + greater + " ", " > ");
+        } else if (!below.isEmpty() && random.nextBoolean()) {
+            return new PairSign(" " + below + " ", " < ");
+        } else if (!equals.isEmpty() && random.nextBoolean()) {
+            return new PairSign(" " + equals + " ", " = ");
+        } else {
+            if (!greater.isEmpty()) {
+                return new PairSign(" " + greater + " ", " > ");
+            } else if (!below.isEmpty()) {
+                return new PairSign(" " + below + " ", " < ");
+            } else {
+                return new PairSign(" " + equals + " ", " = ");
+            }
+        }
+    }
+
     @Override
     protected Condition clone() {
         try {
@@ -72,5 +91,13 @@ public class Condition implements Cloneable {
             cloneList.add(condition);
         }
         return cloneList;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class PairSign {
+        String signConditionNative;
+        String signConditionSql;
     }
 }

@@ -18,7 +18,7 @@ public class Lab1Task6 extends Lab1Task {
         Random random = task.getRandom();
 
         schema01.getConditionTables().removeIf(conditionTable ->
-                conditionTable.getConditions().stream().anyMatch(condition -> condition.getContainsNull().isEmpty()));
+                conditionTable.getConditions().stream().allMatch(condition -> condition.getContainsNull().isEmpty()));
 
         ConditionTable conditionTable = schema01.getRandomConditionTable(random);
 

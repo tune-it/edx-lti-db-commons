@@ -143,7 +143,45 @@
         </table>
         <table sql="flights" native="рейсы воздушных судов">
             <condition native="Реальное время вылета самолёта должно быть" sql="actual_departure"
-                       count-conditions="1" greater="" below="" equals="" contains-null="не задано"/>
+                       count-conditions="1" greater="" below="" equals="равно" contains-null="не задано">
+                <option>2017-07-16 02:07:00.000000</option>
+                <option>2017-07-16 02:27:00.000000</option>
+                <option>2017-07-16 02:36:00.000000</option>
+                <option>2017-07-16 02:45:00.000000</option>
+                <option>2017-07-16 02:53:00.000000</option>
+                <option>2017-07-16 03:03:00.000000</option>
+                <option>2017-07-16 03:16:00.000000</option>
+                <option>2017-07-16 03:17:00.000000</option>
+                <option>2017-07-16 03:31:00.000000</option>
+                <option>2017-07-16 03:37:00.000000</option>
+                <option>2017-07-16 03:39:00.000000</option>
+                <option>2017-07-16 03:42:00.000000</option>
+                <option>2017-07-16 03:48:00.000000</option>
+                <option>2017-07-16 03:53:00.000000</option>
+                <option>2017-07-16 03:54:00.000000</option>
+                <option>2017-07-16 04:05:00.000000</option>
+                <option>2017-07-16 04:07:00.000000</option>
+                <option>2017-07-16 04:08:00.000000</option>
+                <option>2017-07-16 04:14:00.000000</option>
+                <option>2017-07-16 04:19:00.000000</option>
+                <option>2017-07-16 04:20:00.000000</option>
+                <option>2017-07-16 04:27:00.000000</option>
+            </condition>
+            <condition native="Идентификатор рейса должен быть" sql="flight_id"
+                       count-conditions="1" greater="больше, чем" below="меньше, чем" equals="" contains-null="">
+                <option>1000</option>
+                <option>2000</option>
+                <option>5000</option>
+                <option>6000</option>
+                <option>8000</option>
+                <option>10000</option>
+                <option>15000</option>
+                <option>20000</option>
+                <option>23000</option>
+                <option>27000</option>
+                <option>30000</option>
+            </condition>
+
         </table>
     </conditions>
 </schema01>
