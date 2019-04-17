@@ -1,11 +1,11 @@
-package com.tuneit.courses.lab1.db;
+package com.tuneit.courses.lab1;
 
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.SchemaLoader;
-import com.tuneit.courses.lab1.db.schema.Schema01;
-import com.tuneit.courses.lab1.db.task.*;
+import com.tuneit.courses.lab1.schema.Schema01;
+import com.tuneit.courses.lab1.task.*;
 
 public class Lab01 implements Lab {
 

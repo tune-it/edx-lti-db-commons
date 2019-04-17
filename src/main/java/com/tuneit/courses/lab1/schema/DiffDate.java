@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1.db.schema;
+package com.tuneit.courses.lab1.schema;
 
 import lombok.Getter;
 import lombok.Setter;

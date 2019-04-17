@@ -211,6 +211,8 @@
                        count-conditions="1" greater="больше, чем" below="меньше, чем" equals="" contains-null="">
                 <option>10000</option>
                 <option>20000</option>
+                select actual_arrival, departure_airport, actual_departure, status, arrival_airport from flights where
+                flight_no = 'PG0490';
                 <option>50000</option>
                 <option>60000</option>
                 <option>80000</option>

@@ -1,6 +1,6 @@
 package com.tuneit.courses.db.schema;
 
-import com.tuneit.courses.lab1.db.schema.Schema01;
+import com.tuneit.courses.lab1.schema.Schema01;
 import org.apache.commons.dbcp2.*;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;

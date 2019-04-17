@@ -4,7 +4,7 @@ import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
-import com.tuneit.courses.lab1.db.schema.Schema01;
+import com.tuneit.courses.lab1.schema.Schema01;
 import org.springframework.stereotype.Component;
 
 @Component

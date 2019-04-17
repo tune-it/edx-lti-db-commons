@@ -1,9 +1,9 @@
-package com.tuneit.courses.lab1.db.schema;
+package com.tuneit.courses.lab1.schema;
 
 import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
-import com.tuneit.courses.lab1.db.Lab01;
+import com.tuneit.courses.lab1.Lab01;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,6 +43,7 @@ public class Schema01 extends Schema implements Cloneable {
 
     private Lab01 lab01 = new Lab01();
 
+    @Override
     public Schema01 load(String schemaName, String connectionName) {
         Schema01 schema;
         try {
@@ -109,13 +110,5 @@ public class Schema01 extends Schema implements Cloneable {
             cloneList.add(condition.clone());
         }
         return cloneList;
-    }
-
-    private List<Table> cloneListTable(List<Table> tables) {
-        List<Table> cloneTables = new ArrayList<>();
-        for (Table table : tables) {
-            cloneTables.add(table.clone());
-        }
-        return cloneTables;
     }
 }
