@@ -100,35 +100,35 @@
     </tables>
 
     <references>
-        <table sql-name="aircrafts">
+        <table sql-name="aircrafts" join2Table="false">
             <reference table="seats" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
             <reference table="flights" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
         </table>
-        <table sql-name="airports">
+        <table sql-name="airports" join2Table="false">
             <reference table="flights" column-ref="airport_code" join-column-ref="arrival_airport"/>
             <reference table="flights" column-ref="airport_code" join-column-ref="departure_airport"/>
         </table>
-        <table sql-name="boarding_passes">
+        <table sql-name="boarding_passes" join2Table="true">
             <reference table="ticket_flights" column-ref="ticket_no" join-column-ref="ticket_no"/>
             <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>
         </table>
-        <table sql-name="bookings">
+        <table sql-name="bookings" join2Table="true">
             <reference table="tickets" column-ref="book_ref" join-column-ref="book_ref"/>
         </table>
-        <table sql-name="flights">
+        <table sql-name="flights" join2Table="false">
             <reference table="airports" column-ref="departure_airport" join-column-ref="airport_code"/>
             <reference table="airports" column-ref="arrival_airport" join-column-ref="airport_code"/>
             <reference table="aircrafts" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
             <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>
         </table>
-        <table sql-name="seats">
+        <table sql-name="seats" join2Table="true">
             <reference table="aircrafts" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
         </table>
-        <table sql-name="ticket_flights">
+        <table sql-name="ticket_flights" join2Table="false">
             <reference table="flights" column-ref="flight_id" join-column-ref="flight_id"/>
             <reference table="tickets" column-ref="ticket_no" join-column-ref="ticket_no"/>
         </table>
-        <table sql-name="tickets">
+        <table sql-name="tickets" join2Table="false">
             <reference table="bookings" column-ref="book_ref" join-column-ref="book_ref"/>
             <reference table="ticket_flights" column-ref="ticket_no" join-column-ref="ticket_no"/>
         </table>

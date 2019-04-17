@@ -4,10 +4,10 @@ import com.tuneit.courses.DBTaskGeneratorService;
 import com.tuneit.courses.Task;
 import org.junit.jupiter.api.Test;
 
-import static com.tuneit.course.lab1.TaskData.*;
+import static com.tuneit.course.lab1.Lab1Data.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TaskVariantTest {
+public class Lab1VariantTest {
     @Test
     public void testTask1AllVariants() {
         for (int i = 0; i < getAnswerTask1().length; i++) {

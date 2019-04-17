@@ -1,6 +1,7 @@
 package com.tuneit.courses.db.schema;
 
 import com.tuneit.courses.lab1.schema.Schema01;
+import com.tuneit.courses.lab2.schema.Schema02;
 
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -35,6 +36,7 @@ public class SchemaLoader {
 
     private static void loadSchemas() {
         schemas.put(1, new Schema01().load("lab1.xml", "connection.xml"));
+        schemas.put(2, new Schema02().load("lab2.xml", "connection.xml"));
     }
 
     public static Schema getSchema(Integer labId) {

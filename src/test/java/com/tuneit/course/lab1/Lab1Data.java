@@ -1,6 +1,6 @@
 package com.tuneit.course.lab1;
 
-public class TaskData {
+public class Lab1Data {
     static String[] getQueryTask1() {
         return new String[]{"Выведите содержимое всех полей таблицы BOARDING_PASSES."};
     }
@@ -24,6 +24,7 @@ public class TaskData {
 
     static String[] getQueryTask3() {
         String queryVariant0 = "Выведите все уникальные значения столбца идентификаторы пассажиров (passenger_id) из таблицы TICKETS.";
+        //Выведите все уникальные идентификаторы пассажиров (passenger_id) из таблицы TICKETS.
         return new String[]{queryVariant0};
     }
 
@@ -35,8 +36,8 @@ public class TaskData {
     //
 
     static String[] getQueryTask4() {
-        String queryVariant0 = "Выведите все номера (ticket_no), контактные данные (contact_data), номера (ticket_no) " +
-                "для таблицы TICKETS. Отсортированные по столбцу имена пассажиров (passenger_name) по возрастанию.";
+        String queryVariant0 = "Выведите все номера (ticket_no), контактные данные (contact_data), номера (ticket_no) для таблицы TICKETS. Отсортированные по столбцу имена пассажиров (passenger_name) по возрастанию.";
+        //Выведите все номера (ticket_no), контактные данные (contact_data) из таблицы TICKETS. Отсортировать результат по столбцу имена пассажиров (passenger_name) в порядке возрастания.
         return new String[]{queryVariant0};
     }
 
@@ -49,6 +50,7 @@ public class TaskData {
 
     static String[] getQueryTask5() {
         String queryVariant0 = "Выведите все воздушные судна, которые удовлетовярют условию. Код самолёта должен быть равен \"CR2\".";
+        //Выведите все воздушные судна, которые удовлетворяют условию: код самолёта должен быть равен \"CR2\".
         return new String[]{queryVariant0};
     }
 
@@ -61,6 +63,7 @@ public class TaskData {
 
     static String[] getQueryTask6() {
         String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетовярют условию. Реальное время вылета самолёта должно быть не задано.";
+        //Выведите все рейсы воздушных судов, которые удовлетворяют условию: реальное время вылета самолёта должно быть не задано.
         return new String[]{queryVariant0};
     }
 
@@ -72,8 +75,8 @@ public class TaskData {
     //
 
     static String[] getQueryTask7() {
-        String queryVariant0 = "Выведите все забронированые билеты, которые удовлетовярют условию. " +
-                "Общая сумма покупки должна быть больше, чем \"12000\" или бронь должна быть сделана позже \"2017-07-21\".";
+        String queryVariant0 = "Выведите все забронированые билеты, которые удовлетовярют условию. Общая сумма покупки должна быть больше, чем \"12000\" или бронь должна быть сделана позже \"2017-07-21\".";
+        //Выведите все забронированые билеты, которые удовлетворяют условию: общая сумма покупки должна быть больше, чем "12000" или бронь должна быть сделана позже "2017-07-21".
         return new String[]{queryVariant0};
     }
 
@@ -86,6 +89,7 @@ public class TaskData {
 
     static String[] getQueryTask8() {
         String queryVariant0 = "Выведите самый дорогой билет, исходя из условия. Бронь должна быть сделана позже \"2017-08-12\".";
+        //Выведите самый дорогой билет, соответствующий условию: бронь должна быть сделана позже "2017-08-12".
         return new String[]{queryVariant0};
     }
 
@@ -98,6 +102,7 @@ public class TaskData {
 
     static String[] getQueryTask9() {
         String queryVariant0 = "Выведите все номера, номера мест для таблицы посадочных талонов. Отсортированные по столбцу идентификаторы рейсов по убыванию. Вывести последние 3 строки.";
+        //Выведите все номера, номера мест из таблицы посадочных талонов. Отсортировать результат по столбцу идентификаторы рейсов в порядке убывания. Вывести последние 3 строки.
         return new String[]{queryVariant0};
     }
 

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
@@ -39,5 +40,9 @@ public class TableReferences implements Cloneable {
             cloneList.add(reference.clone());
         }
         return cloneList;
+    }
+
+    public Reference getRandomReference(Random random) {
+        return references.get(random.nextInt(references.size()));
     }
 }

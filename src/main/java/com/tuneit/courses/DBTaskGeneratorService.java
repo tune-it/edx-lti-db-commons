@@ -4,7 +4,6 @@ import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.SchemaLoader;
-import com.tuneit.courses.lab1.schema.Schema01;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,7 +30,7 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
 
     @Override
     public Task getTask(String studentId, int labId, int taskId, String variant, int complexity) {
-        Schema01 schema = (Schema01) SchemaLoader.getSchema(labId);
+        Schema schema = SchemaLoader.getSchema(labId);
 
         Lab lab = schema.getLab();
 
