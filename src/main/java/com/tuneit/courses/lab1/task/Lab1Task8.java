@@ -28,7 +28,7 @@ public class Lab1Task8 extends Lab1Task {
 
         query.append("Выведите ")
                 .append(aggregation.getColumnFunctionNativeName())
-                .append(", исходя из условия. ")
+                .append(": ")
                 .append(condition.getNativeColumnName())
                 .append(sign.getSignConditionNative())
                 .append("\"")

@@ -18,9 +18,11 @@ public class Lab1Task4 extends Lab1Task {
         answer = new StringBuilder();
 
         Random random = task.getRandom();
+
         Table table = schema01.getRandomTable(random);
         Column sortedColumn = table.getRandomColumn(random);
         table.getColumns().remove(sortedColumn);
+
         List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
         boolean isDirectionSortedASC = random.nextBoolean();
 
@@ -32,15 +34,15 @@ public class Lab1Task4 extends Lab1Task {
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" для таблицы ")
                 .append(table.getTableName())
-                .append(". Отсортированные по столбцу ")
+                .append(". Отсортировать результат по столбцу ")
                 .append(sortedColumn.getNamePlural())
                 .append(" (")
                 .append(sortedColumn.getColumnName().toLowerCase())
-                .append(") по ");
+                .append(") в порядке ");
         if (isDirectionSortedASC) {
-            query.append("возрастанию.");
+            query.append("возрастания.");
         } else {
-            query.append("убыванию.");
+            query.append("убывания.");
         }
 
         columnsRevisedForWrite.clear();

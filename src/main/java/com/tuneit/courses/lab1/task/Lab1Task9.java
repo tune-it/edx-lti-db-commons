@@ -32,15 +32,15 @@ public class Lab1Task9 extends Lab1Task {
 
         query.append("Выведите все ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
-        query.append(" для таблицы ")
+        query.append(" из таблицы ")
                 .append(table.getNameGenitive())
-                .append(". Отсортированные по столбцу ")
+                .append(". Отсортировать результат по столбцу ")
                 .append(sortedColumn.getNamePlural())
-                .append(" по ");
+                .append(" в порядке ");
         if (isDirectionSortedASC) {
-            query.append("возрастанию.");
+            query.append("возрастания.");
         } else {
-            query.append("убыванию.");
+            query.append("убывания.");
         }
         query.append(" Вывести последние 3 строки.");
 

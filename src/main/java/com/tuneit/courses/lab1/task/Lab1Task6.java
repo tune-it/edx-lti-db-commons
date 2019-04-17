@@ -29,7 +29,7 @@ public class Lab1Task6 extends Lab1Task {
 
         query.append("Выведите все ")
                 .append(conditionTable.getNativeTableName())
-                .append(", которые удовлетовярют условию. ")
+                .append(", которые удовлетворяют условию: ")
                 .append(condition.getNativeColumnName())
                 .append(" ")
                 .append(condition.getContainsNull())

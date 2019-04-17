@@ -19,7 +19,7 @@ public class Lab1Task3 extends Lab1Task {
         Table table = schema01.getRandomTable(random);
         Column column = table.getRandomColumn(random);
 
-        query.append("Выведите все уникальные значения столбца ")
+        query.append("Выведите все уникальные ")
                 .append(column.getNamePlural())
                 .append(" (")
                 .append(column.getColumnName().toLowerCase())

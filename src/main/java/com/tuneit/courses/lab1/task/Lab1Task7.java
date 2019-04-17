@@ -37,7 +37,7 @@ public class Lab1Task7 extends Lab1Task {
 
         query.append("Выведите все ")
                 .append(conditionTable.getNativeTableName())
-                .append(", которые удовлетовярют условию. ")
+                .append(", которые удовлетворяют условию: ")
                 .append(condition1.getNativeColumnName())
                 .append(conditionSign1.getSignConditionNative())
                 .append("\"")
@@ -66,7 +66,6 @@ public class Lab1Task7 extends Lab1Task {
                 .append("'")
                 .append(";");
 
-        System.out.println(answer);
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 

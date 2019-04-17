@@ -99,8 +99,10 @@ public class Table implements Cloneable {
         for (int i = 0; i < minColumns; i++) {
             resultList.add(columns.get(i));
         }
-        for (int i = 0; i < random.nextInt(columns.size() - minColumns); i++) {
-            resultList.add(columns.get(i));
+        if (columns.size() - minColumns > 0) {
+            for (int i = 0; i < random.nextInt(columns.size() - minColumns); i++) {
+                resultList.add(columns.get(i));
+            }
         }
 
         return resultList;

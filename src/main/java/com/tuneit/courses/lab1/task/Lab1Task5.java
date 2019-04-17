@@ -26,7 +26,7 @@ public class Lab1Task5 extends Lab1Task {
 
         query.append("Выведите все ")
                 .append(conditionTable.getNativeTableName())
-                .append(", которые удовлетовярют условию. ")
+                .append(", которые удовлетворяют условию: ")
                 .append(condition.getNativeColumnName())
                 .append(conditionSign.getSignConditionNative())
                 .append("\"")
