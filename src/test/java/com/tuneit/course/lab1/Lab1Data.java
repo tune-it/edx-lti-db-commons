@@ -62,13 +62,13 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask6() {
-        String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетовярют условию. Реальное время вылета самолёта должно быть не задано.";
+        String queryVariant0 = "Выведите все рейсы воздушных судов, которые удовлетворяют условию: реальное время вылета самолёта должно быть не задано.";
         //Выведите все рейсы воздушных судов, которые удовлетворяют условию: реальное время вылета самолёта должно быть не задано.
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask6() {
-        String answerVariant0 = "select * from flights where actual_departure isnull;";
+        String answerVariant0 = "select * from flights where actual_departure is null;";
         return new String[]{answerVariant0};
     }
 

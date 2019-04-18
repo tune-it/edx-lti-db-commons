@@ -1,5 +1,8 @@
 package com.tuneit.courses.db.schema;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -9,6 +12,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@Setter
 public class Column implements Cloneable {
 
     @XmlTransient
@@ -41,22 +46,6 @@ public class Column implements Cloneable {
         this.sqlName = sqlName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNamePlural() {
-        return namePlural;
-    }
-
-    public void setNamePlural(String namePlural) {
-        this.namePlural = namePlural;
-    }
-
     @Override
     public Column clone() {
         try {
@@ -69,21 +58,5 @@ public class Column implements Cloneable {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public String getNameGenitivePlural() {
-        return nameGenitivePlural;
-    }
-
-    public void setNameGenitivePlural(String nameGenitivePlural) {
-        this.nameGenitivePlural = nameGenitivePlural;
-    }
-
-    public String getNameCreativePlural() {
-        return nameCreativePlural;
-    }
-
-    public void setNameCreativePlural(String nameCreativePlural) {
-        this.nameCreativePlural = nameCreativePlural;
     }
 }

@@ -26,6 +26,7 @@ public class TableReferences implements Cloneable {
     public TableReferences clone() {
         try {
             TableReferences tableReferences = (TableReferences) super.clone();
+            tableReferences.sqlTableName = sqlTableName;
             tableReferences.references = cloneListReference(references);
             return tableReferences;
         } catch (CloneNotSupportedException e) {

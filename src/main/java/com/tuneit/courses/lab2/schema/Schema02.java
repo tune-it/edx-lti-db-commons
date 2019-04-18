@@ -28,9 +28,13 @@ public class Schema02 extends Schema implements Cloneable {
     @XmlElement(name = "table")
     private List<Table> tables;
 
-    @XmlElementWrapper(name = "referebces")
+    @XmlElementWrapper(name = "references")
     @XmlElement(name = "table")
     private List<TableReferences> tablesReferences;
+
+    @XmlElementWrapper(name = "substrings")
+    @XmlElement(name = "table")
+    private List<TableSubstring> tablesSubstrings;
 
     private Lab02 lab02 = new Lab02();
 
@@ -63,6 +67,7 @@ public class Schema02 extends Schema implements Cloneable {
             Schema02 schema02 = (Schema02) super.clone();
             schema02.tables = cloneListTable(schema02.tables);
             schema02.tablesReferences = cloneListTableReference(schema02.tablesReferences);
+            schema02.tablesSubstrings = cloneListTableSubstring(schema02.tablesSubstrings);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -85,15 +90,6 @@ public class Schema02 extends Schema implements Cloneable {
         return resultChain;
     }
 
-    private Table findTableBySqlName(String sqlTableName) {
-        Optional<Table> first = tables.stream().filter(table -> table.getTableName().equals(sqlTableName)).findFirst();
-        if (first.isPresent()) {
-            return first.get();
-        } else {
-            throw new IllegalArgumentException("Table with name " + sqlTableName + " not found");
-        }
-    }
-
     private List<TableReferences> cloneListTableReference(List<TableReferences> references) {
         List<TableReferences> cloneList = new ArrayList<>();
         for (TableReferences tableReferences : references) {
@@ -102,7 +98,24 @@ public class Schema02 extends Schema implements Cloneable {
         return cloneList;
     }
 
+    private List<TableSubstring> cloneListTableSubstring(List<TableSubstring> substrings) {
+        List<TableSubstring> cloneList = new ArrayList<>();
+        for (TableSubstring tableSubstring : substrings) {
+            cloneList.add(tableSubstring.clone());
+        }
+        return cloneList;
+    }
+
     private TableReferences getRandomTableReference(Random random) {
         return tablesReferences.get(random.nextInt(tablesReferences.size()));
+    }
+
+    public TableSubstring getRandomTableSubstring(Random random) {
+        return tablesSubstrings.get(random.nextInt(tablesSubstrings.size()));
+    }
+
+    public Table findTableBySqlName(String string) {
+        return tables.stream().filter(table -> table.getTableName().equalsIgnoreCase(string)).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Table with name \"" + string + "\" not exist"));
     }
 }
