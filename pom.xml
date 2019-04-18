@@ -7,7 +7,7 @@
 
     <groupId>com.tuneit</groupId>
     <artifactId>task-generator</artifactId>
-    <version>1.2.0.RELEASE</version>
+    <version>1.2.1.RELEASE</version>
 
     <name>Task generator</name>
     <packaging>jar</packaging>

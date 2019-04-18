@@ -25,7 +25,7 @@ public class Lab1VariantTest {
     public void testTask2AllVariants() {
         for (int i = 0; i < getAnswerTask2().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 2, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("student", 1, 2, Integer.toString(i), 0);
             System.out.println(task.getQuestion());
             task.setAnswer(getAnswerTask2()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
@@ -104,7 +104,7 @@ public class Lab1VariantTest {
     public void testTask8AllVariants() {
         for (int i = 0; i < getAnswerTask8().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 8, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("student", 1, 8, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask8()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 

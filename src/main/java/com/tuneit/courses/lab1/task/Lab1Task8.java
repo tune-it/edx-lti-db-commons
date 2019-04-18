@@ -48,6 +48,7 @@ public class Lab1Task8 extends Lab1Task {
                 .append(option)
                 .append("';");
 
+
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 

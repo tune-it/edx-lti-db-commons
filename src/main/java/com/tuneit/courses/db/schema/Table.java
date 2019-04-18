@@ -96,8 +96,10 @@ public class Table implements Cloneable {
 
         List<Column> resultList = new ArrayList<>();
 
-        for (int i = 0; i < minColumns; i++) {
+        for (int i = 0; minColumns > 0; minColumns--) {
             resultList.add(columns.get(i));
+            columns.remove(i);
+
         }
         if (columns.size() - minColumns > 0) {
             for (int i = 0; i < random.nextInt(columns.size() - minColumns); i++) {
