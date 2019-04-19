@@ -199,43 +199,19 @@
         </table>
     </cases>
 
-    <!-- "select flight_no, departure_airport, flight_id, actual_arrival,
-    scheduled_departure from flights where status like '%C' order by 1;"; -->
-
-    <!-- Выдать номера рейсов, аэропорты отправления, идентификаторы рейсов, времена прибытий,
-    времена планируемых отправлений из таблицы рейсов воздушного судна, статусы которых заканчиваются на 'C'.
-    Отсортировать по столбцу 1 в порядке возрастания. -->
-
-    <!--
-     select seat_no, case
-        when fare_conditions in ('Business', 'Comfort') then 'Дорого'
-        else 'Дешёво'
-     end, fare_conditions from seats
-     -->
-
-    <!-- Выведите номера мест, тарифы из таблицы посадочных мест,
-    но вместо значений тарифов выведите 'Дорого', если значение тарифа 'Comfort' или 'Business'
-    и выведите 'Дёшево', если значение тарифа 'Economy'-->
-
-
-    <!-- Вложенные подзапросы и JOIN -->
-    <!-- select bookings.book_date
-         from bookings
-                  join tickets on bookings.book_ref = tickets.book_ref
-         where tickets.passenger_id = '6667 324555'
-         limit 3;
-
-         select book_date
-         from bookings
-         where exists(
-            select * from tickets where tickets.book_ref = bookings.book_ref and tickets.passenger_id = '6667 324555'
-         )  -->
-
-    <!-- Выведите максимальный код воздушного судна каждого тарифа для воздушного судна с условием,
-    что максимальная дальность полёта самолёта должна быть меньш, чем 8000
-
-
-
-         Выведите самое дешёвое бронирование, соответствующее условию: имя человека, сделавшего броннирование должно быть равно "NURIYA PETROVA" -->
+    <subqueries>
+        <table sql="flights">
+            <subquery column="aircraft_code" join-table="seats" join-column="aircraft_code" condition-column="seat_no"
+                      native-query="которые совершались на самолётах с количеством мест" function="count">
+                <option>50</option>
+                <option>97</option>
+                <option>116</option>
+                <option>130</option>
+                <option>140</option>
+                <option>170</option>
+                <option>222</option>
+            </subquery>
+        </table>
+    </subqueries>
 
 </schema02>

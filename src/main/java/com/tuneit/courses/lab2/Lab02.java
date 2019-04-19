@@ -7,6 +7,7 @@ import com.tuneit.courses.db.schema.SchemaLoader;
 import com.tuneit.courses.lab2.schema.Schema02;
 import com.tuneit.courses.lab2.task.Lab2Task1;
 import com.tuneit.courses.lab2.task.Lab2Task2;
+import com.tuneit.courses.lab2.task.Lab2Task3;
 
 public class Lab02 implements Lab {
 
@@ -19,22 +20,12 @@ public class Lab02 implements Lab {
                 return new Lab2Task1().generate(schema.clone(), task);
             case 2:
                 return new Lab2Task2().generate(schema.clone(), task);
-            /*case 3:
-                return new Lab1Task3().generate(schema.clone(), task);
-            case 4:
+            case 3:
+                return new Lab2Task3().generate(schema.clone(), task);
+            /*case 4:
                 return new Lab1Task4().generate(schema.clone(), task);
             case 5:
-                return new Lab1Task5().generate(schema.clone(), task);
-            case 6:
-                return new Lab1Task6().generate(schema.clone(), task);
-            case 7:
-                return new Lab1Task7().generate(schema.clone(), task);
-            case 8:
-                return new Lab1Task8().generate(schema.clone(), task);
-            case 9:
-                return new Lab1Task9().generate(schema.clone(), task);
-            case 10:
-                return new Lab1Task10().generate(schema.clone(), task);*/
+                return new Lab1Task5().generate(schema.clone(), task);*/
             default:
                 return null;
         }
@@ -48,6 +39,7 @@ public class Lab02 implements Lab {
         return new LabTaskQA[]{
                 new Lab2Task1().generate(schema.clone(), task),
                 new Lab2Task2().generate(schema.clone(), task),
+                new Lab2Task3().generate(schema.clone(), task),
         };
     }
 }

@@ -40,6 +40,10 @@ public class Schema02 extends Schema implements Cloneable {
     @XmlElement(name = "table")
     private List<TableCases> tablesCases;
 
+    @XmlElementWrapper(name = "subqueries")
+    @XmlElement(name = "table")
+    private List<TableSubquery> tablesSubqueries;
+
     private Lab02 lab02 = new Lab02();
 
     @Override
@@ -73,6 +77,7 @@ public class Schema02 extends Schema implements Cloneable {
             schema02.tablesReferences = cloneListTableReference(tablesReferences);
             schema02.tablesSubstrings = cloneListTableSubstring(tablesSubstrings);
             schema02.tablesCases = cloneListTableCases(tablesCases);
+            schema02.tablesSubqueries = cloneListTableSubqueries(tablesSubqueries);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -93,6 +98,14 @@ public class Schema02 extends Schema implements Cloneable {
         resultChain.put(secondTable, secondTable.findColumn(referenceToSecondTable.getNameJoinColumnReference()));
 
         return resultChain;
+    }
+
+    private List<TableSubquery> cloneListTableSubqueries(List<TableSubquery> tablesSubqueries) {
+        List<TableSubquery> cloneList = new ArrayList<>();
+        for (TableSubquery tableSubquery : tablesSubqueries) {
+            cloneList.add(tableSubquery.clone());
+        }
+        return cloneList;
     }
 
     private List<TableCases> cloneListTableCases(List<TableCases> tablesCases) {
@@ -129,6 +142,10 @@ public class Schema02 extends Schema implements Cloneable {
 
     public TableCases getRandomTableCases(Random random) {
         return tablesCases.get(random.nextInt(tablesCases.size()));
+    }
+
+    public TableSubquery getRandomTableSubquery(Random random) {
+        return tablesSubqueries.get(random.nextInt(tablesSubqueries.size()));
     }
 
     public Table findTableBySqlName(String string) {
