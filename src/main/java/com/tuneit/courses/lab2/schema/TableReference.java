@@ -14,7 +14,7 @@ import java.util.Random;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class TableReferences implements Cloneable {
+public class TableReference implements Cloneable {
 
     @XmlElement(name = "reference")
     private List<Reference> references;
@@ -23,12 +23,12 @@ public class TableReferences implements Cloneable {
     private String sqlTableName;
 
     @Override
-    public TableReferences clone() {
+    public TableReference clone() {
         try {
-            TableReferences tableReferences = (TableReferences) super.clone();
-            tableReferences.sqlTableName = sqlTableName;
-            tableReferences.references = cloneListReference(references);
-            return tableReferences;
+            TableReference tableReference = (TableReference) super.clone();
+            tableReference.sqlTableName = sqlTableName;
+            tableReference.references = cloneListReference(references);
+            return tableReference;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;

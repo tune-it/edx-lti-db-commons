@@ -30,11 +30,15 @@ public class Schema02 extends Schema implements Cloneable {
 
     @XmlElementWrapper(name = "references")
     @XmlElement(name = "table")
-    private List<TableReferences> tablesReferences;
+    private List<TableReference> tablesReferences;
 
     @XmlElementWrapper(name = "substrings")
     @XmlElement(name = "table")
     private List<TableSubstring> tablesSubstrings;
+
+    @XmlElementWrapper(name = "cases")
+    @XmlElement(name = "table")
+    private List<TableCases> tablesCases;
 
     private Lab02 lab02 = new Lab02();
 
@@ -65,9 +69,10 @@ public class Schema02 extends Schema implements Cloneable {
     public Schema02 clone() {
         try {
             Schema02 schema02 = (Schema02) super.clone();
-            schema02.tables = cloneListTable(schema02.tables);
-            schema02.tablesReferences = cloneListTableReference(schema02.tablesReferences);
-            schema02.tablesSubstrings = cloneListTableSubstring(schema02.tablesSubstrings);
+            schema02.tables = cloneListTable(tables);
+            schema02.tablesReferences = cloneListTableReference(tablesReferences);
+            schema02.tablesSubstrings = cloneListTableSubstring(tablesSubstrings);
+            schema02.tablesCases = cloneListTableCases(tablesCases);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -78,7 +83,7 @@ public class Schema02 extends Schema implements Cloneable {
     public Map<Table, Column> getRandomChainTable(Random random) {
         Map<Table, Column> resultChain = new HashMap<>();
 
-        TableReferences firstTableReference = getRandomTableReference(random);
+        TableReference firstTableReference = getRandomTableReference(random);
         Table firstTable = findTableBySqlName(firstTableReference.getSqlTableName());
 
         Reference referenceToSecondTable = firstTableReference.getRandomReference(random);
@@ -90,10 +95,18 @@ public class Schema02 extends Schema implements Cloneable {
         return resultChain;
     }
 
-    private List<TableReferences> cloneListTableReference(List<TableReferences> references) {
-        List<TableReferences> cloneList = new ArrayList<>();
-        for (TableReferences tableReferences : references) {
-            cloneList.add(tableReferences.clone());
+    private List<TableCases> cloneListTableCases(List<TableCases> tablesCases) {
+        List<TableCases> cloneList = new ArrayList<>();
+        for (TableCases tableCases : tablesCases) {
+            cloneList.add(tableCases.clone());
+        }
+        return cloneList;
+    }
+
+    private List<TableReference> cloneListTableReference(List<TableReference> references) {
+        List<TableReference> cloneList = new ArrayList<>();
+        for (TableReference tableReference : references) {
+            cloneList.add(tableReference.clone());
         }
         return cloneList;
     }
@@ -106,12 +119,16 @@ public class Schema02 extends Schema implements Cloneable {
         return cloneList;
     }
 
-    private TableReferences getRandomTableReference(Random random) {
+    private TableReference getRandomTableReference(Random random) {
         return tablesReferences.get(random.nextInt(tablesReferences.size()));
     }
 
     public TableSubstring getRandomTableSubstring(Random random) {
         return tablesSubstrings.get(random.nextInt(tablesSubstrings.size()));
+    }
+
+    public TableCases getRandomTableCases(Random random) {
+        return tablesCases.get(random.nextInt(tablesCases.size()));
     }
 
     public Table findTableBySqlName(String string) {

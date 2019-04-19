@@ -191,6 +191,14 @@
         </table>
     </substrings>
 
+    <cases>
+        <table sql="seats">
+            <case sql-column="fare_conditions"
+                  native-query="'Comfort' и 'Business' на 'Дорого', а 'Economy' на 'Дёшево'"
+                  sql-query="case when fare_conditions in ('Business', 'Comfort') then 'Дорого' else 'Дешёво' end"/>
+        </table>
+    </cases>
+
     <!-- "select flight_no, departure_airport, flight_id, actual_arrival,
     scheduled_departure from flights where status like '%C' order by 1;"; -->
 

@@ -75,29 +75,6 @@ public class Lab2Task1 extends Lab2Task {
         System.out.println(query);
         System.out.println(answer);
 
-//        Table table = schema02.getRandomTable(task.getRandom());
-//        List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
-//
-//        List<String> columnsRevisedForWrite = new ArrayList<>();
-//        columns.forEach(
-//                column -> columnsRevisedForWrite.add(column.getNamePlural() + " (" + column.getColumnName().toLowerCase() + ")"));
-//
-//        query.append("Выведите все ");
-//        writeColumnToQuery(columnsRevisedForWrite, ", ", query);
-//        query.append(" для таблицы ")
-//                .append(table.getTableName())
-//                .append(".");
-//
-//        columnsRevisedForWrite.clear();
-//        columns.forEach(
-//                column -> columnsRevisedForWrite.add(column.getColumnName()));
-//
-//        answer.append("SELECT ");
-//        writeColumnToQuery(columnsRevisedForWrite, ", ", answer);
-//        answer.append(" FROM ")
-//                .append(table.getTableName())
-//                .append(";");
-//
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 
