@@ -33,4 +33,17 @@ public class Lab2Data {
                 "GROUP BY aircraft_code\n" +
                 "HAVING COUNT(seat_no)<116 ); "};
     }
+
+    static String[] getQueryTask4() {
+        return new String[]{"Сделать запрос для получения атрибутов из указанных таблиц, применив фильтры по указанным условиям." +
+                " Таблицы: посадочных мест, воздушных судов." +
+                " Атрибуты: все номера мест из таблицы посадочных мест." +
+                " Фильтры: максимальная дальность полёта самолёта должна быть больше, чем \"3000\"." +
+                " В запросе должен использоваться INNER JOIN."};
+    }
+
+    static String[] getAnswerTask4() {
+        return new String[]{"select seat_no from SEATS join AIRCRAFTS on SEATS.AIRCRAFT_CODE = AIRCRAFTS.AIRCRAFT_CODE " +
+                "where range > 3000;"};
+    }
 }

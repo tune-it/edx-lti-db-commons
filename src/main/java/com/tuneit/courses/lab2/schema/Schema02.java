@@ -4,6 +4,7 @@ import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
+import com.tuneit.courses.lab1.schema.ConditionTable;
 import com.tuneit.courses.lab2.Lab02;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +30,10 @@ public class Schema02 extends Schema implements Cloneable {
     @XmlElementWrapper(name = "tables")
     @XmlElement(name = "table")
     private List<Table> tables;
+
+    @XmlElementWrapper(name = "conditions")
+    @XmlElement(name = "table")
+    private List<ConditionTable> conditionTables;
 
     @XmlElementWrapper(name = "references")
     @XmlElement(name = "table")
@@ -78,6 +85,7 @@ public class Schema02 extends Schema implements Cloneable {
             schema02.tablesSubstrings = cloneListTableSubstring(tablesSubstrings);
             schema02.tablesCases = cloneListTableCases(tablesCases);
             schema02.tablesSubqueries = cloneListTableSubqueries(tablesSubqueries);
+            schema02.conditionTables = cloneListConditionTable(conditionTables);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -85,19 +93,17 @@ public class Schema02 extends Schema implements Cloneable {
         }
     }
 
-    public Map<Table, Column> getRandomChainTable(Random random) {
-        Map<Table, Column> resultChain = new HashMap<>();
-
+    public Reference.ChainTable getRandomChainTable(Random random) {
         TableReference firstTableReference = getRandomTableReference(random);
-        Table firstTable = findTableBySqlName(firstTableReference.getSqlTableName());
+        Table leftTable = findTableBySqlName(firstTableReference.getSqlTableName());
 
         Reference referenceToSecondTable = firstTableReference.getRandomReference(random);
-        Table secondTable = findTableBySqlName(referenceToSecondTable.getTableReference());
+        Table rightTable = findTableBySqlName(referenceToSecondTable.getTableReference());
 
-        resultChain.put(firstTable, firstTable.findColumn(referenceToSecondTable.getNameColumnReference()));
-        resultChain.put(secondTable, secondTable.findColumn(referenceToSecondTable.getNameJoinColumnReference()));
+        Column leftColumn = leftTable.findColumn(referenceToSecondTable.getNameColumnReference());
+        Column rightColumn = rightTable.findColumn(referenceToSecondTable.getNameJoinColumnReference());
 
-        return resultChain;
+        return new Reference.ChainTable(leftTable, leftColumn, rightTable, rightColumn);
     }
 
     private List<TableSubquery> cloneListTableSubqueries(List<TableSubquery> tablesSubqueries) {
@@ -128,6 +134,14 @@ public class Schema02 extends Schema implements Cloneable {
         List<TableSubstring> cloneList = new ArrayList<>();
         for (TableSubstring tableSubstring : substrings) {
             cloneList.add(tableSubstring.clone());
+        }
+        return cloneList;
+    }
+
+    private List<ConditionTable> cloneListConditionTable(List<ConditionTable> conditionTables) {
+        List<ConditionTable> cloneList = new ArrayList<>();
+        for (ConditionTable condition : conditionTables) {
+            cloneList.add(condition.clone());
         }
         return cloneList;
     }

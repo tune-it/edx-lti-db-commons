@@ -1,5 +1,9 @@
 package com.tuneit.courses.lab2.schema;
 
+import com.tuneit.courses.db.schema.Column;
+import com.tuneit.courses.db.schema.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,5 +37,14 @@ public class Reference implements Cloneable {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class ChainTable {
+        Table leftTable;
+        Column leftColumn;
+        Table rightTable;
+        Column rightColumn;
     }
 }

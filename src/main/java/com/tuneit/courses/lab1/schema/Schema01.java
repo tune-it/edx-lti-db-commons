@@ -88,7 +88,7 @@ public class Schema01 extends Schema implements Cloneable {
             Schema01 schema01 = (Schema01) super.clone();
             schema01.tables = cloneListTable(schema01.tables);
             schema01.conditionTables = cloneListConditionTable(schema01.conditionTables);
-            schema01.aggregations = cloneListAggregation(schema01.aggregations);
+            schema01.aggregations = cloneListAggregation(schema01.aggregations);//todo copy diff table
             return schema01;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
