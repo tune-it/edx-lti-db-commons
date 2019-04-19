@@ -46,4 +46,15 @@ public class Lab2Data {
         return new String[]{"select seat_no from SEATS join AIRCRAFTS on SEATS.AIRCRAFT_CODE = AIRCRAFTS.AIRCRAFT_CODE " +
                 "where range > 3000;"};
     }
+
+    static String[] getQueryTask5() {
+        return new String[]{"Выведите самое дешёвое бронирование, соответствующее условию: " +
+                "идентификатор пассажира должен быть равен \"3293 031739\"" +
+                "(данные из таблицы проданных билетов). " +
+                "В запросе должен использоваться INNER JOIN."};
+    }
+
+    static String[] getAnswerTask5() {
+        return new String[]{"select min(BOOKINGS.total_amount) from BOOKINGS inner join TICKETS on BOOKINGS.BOOK_REF = TICKETS.BOOK_REF where TICKETS.passenger_id = '3293 031739';"};
+    }
 }
