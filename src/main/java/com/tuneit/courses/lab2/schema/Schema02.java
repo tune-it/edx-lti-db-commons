@@ -4,8 +4,6 @@ import com.tuneit.courses.db.Lab;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.schema.Table;
-import com.tuneit.courses.lab1.schema.Aggregation;
-import com.tuneit.courses.lab1.schema.ConditionTable;
 import com.tuneit.courses.lab2.Lab02;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +26,6 @@ import java.util.logging.Logger;
 @Setter
 public class Schema02 extends Schema implements Cloneable {
 
-    @XmlElementWrapper(name = "tables")
-    @XmlElement(name = "table")
-    private List<Table> tables;
-
-    @XmlElementWrapper(name = "conditions")
-    @XmlElement(name = "table")
-    private List<ConditionTable> conditionTables;
-
     @XmlElementWrapper(name = "references")
     @XmlElement(name = "table")
     private List<TableReference> tablesReferences;
@@ -52,15 +42,18 @@ public class Schema02 extends Schema implements Cloneable {
     @XmlElement(name = "table")
     private List<TableSubquery> tablesSubqueries;
 
-    @XmlElementWrapper(name = "aggregations")
-    @XmlElement(name = "aggregation")
-    private List<Aggregation> aggregations;
-
     private Lab02 lab02 = new Lab02();
 
     @Override
-    public Schema02 load(String schemaName, String connectionName) {
-        Schema02 schema;
+    public Schema02 load(String schemaName) {
+        Schema02 schema02 = loadSchema02(schemaName);
+        Schema schema = super.load("lab.xml");
+        schema.update(schema02);
+        return schema02;
+    }
+
+    private Schema02 loadSchema02(String schemaName) {
+        Schema02 schema02;
         try {
             JAXBContext jc = JAXBContext.newInstance(Schema02.class);
             InputStream inputStream = Schema02.class.getResourceAsStream(schemaName);
@@ -68,12 +61,12 @@ public class Schema02 extends Schema implements Cloneable {
                 throw new JAXBException("Could not get XML schema in application resourses");
             Source source = new StreamSource(inputStream);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
-            schema = unmarshaller.unmarshal(source, Schema02.class).getValue();
+            schema02 = unmarshaller.unmarshal(source, Schema02.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(Schema02.class.getName()).log(Level.SEVERE, null, ex);
-            throw new IllegalArgumentException("Schema01 " + schemaName + " could not be loaded", ex);
+            throw new IllegalArgumentException("Schema02 " + schemaName + " could not be loaded", ex);
         }
-        return schema;
+        return schema02;
     }
 
     @Override
@@ -85,13 +78,10 @@ public class Schema02 extends Schema implements Cloneable {
     public Schema02 clone() {
         try {
             Schema02 schema02 = (Schema02) super.clone();
-            schema02.tables = cloneListTable(tables);
             schema02.tablesReferences = cloneListTableReference(tablesReferences);
             schema02.tablesSubstrings = cloneListTableSubstring(tablesSubstrings);
             schema02.tablesCases = cloneListTableCases(tablesCases);
             schema02.tablesSubqueries = cloneListTableSubqueries(tablesSubqueries);
-            schema02.conditionTables = cloneListConditionTable(conditionTables);
-            schema02.aggregations = cloneListAggregation(aggregations);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -147,23 +137,6 @@ public class Schema02 extends Schema implements Cloneable {
         }
         return cloneList;
     }
-
-    private List<ConditionTable> cloneListConditionTable(List<ConditionTable> conditionTables) {
-        List<ConditionTable> cloneList = new ArrayList<>();
-        for (ConditionTable condition : conditionTables) {
-            cloneList.add(condition.clone());
-        }
-        return cloneList;
-    }
-
-    private List<Aggregation> cloneListAggregation(List<Aggregation> aggregations) {
-        List<Aggregation> cloneList = new ArrayList<>();
-        for (Aggregation aggregation : aggregations) {
-            cloneList.add(aggregation.clone());
-        }
-        return cloneList;
-    }
-
     private TableReference getRandomTableReference(Random random) {
         return tablesReferences.get(random.nextInt(tablesReferences.size()));
     }
@@ -172,25 +145,12 @@ public class Schema02 extends Schema implements Cloneable {
         return tablesSubstrings.get(random.nextInt(tablesSubstrings.size()));
     }
 
-    public Aggregation getRandomAggregation(Random random) {
-        return aggregations.get(random.nextInt(aggregations.size()));
-    }
-
-    public Table getRandomTable(Random random) {
-        return tables.get(random.nextInt(tables.size()));
-    }
-
     public TableCases getRandomTableCases(Random random) {
         return tablesCases.get(random.nextInt(tablesCases.size()));
     }
 
     public TableSubquery getRandomTableSubquery(Random random) {
         return tablesSubqueries.get(random.nextInt(tablesSubqueries.size()));
-    }
-
-    public Table findTableBySqlName(String string) {
-        return tables.stream().filter(table -> table.getTableName().equalsIgnoreCase(string)).findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Table with name \"" + string + "\" not exist"));
     }
 
     public TableReference findTableReferenceBySqlTableName(String tableName) {

@@ -1,4 +1,4 @@
-package com.tuneit.courses.lab1.schema;
+package com.tuneit.courses.db.schema;
 
 
 import lombok.AllArgsConstructor;

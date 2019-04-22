@@ -2,9 +2,9 @@ package com.tuneit.courses.lab2.task;
 
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.lab1.schema.Aggregation;
-import com.tuneit.courses.lab1.schema.Condition;
-import com.tuneit.courses.lab1.schema.ConditionTable;
+import com.tuneit.courses.db.schema.Aggregation;
+import com.tuneit.courses.db.schema.Condition;
+import com.tuneit.courses.db.schema.ConditionTable;
 import com.tuneit.courses.lab2.Lab2Task;
 import com.tuneit.courses.lab2.schema.Reference;
 import com.tuneit.courses.lab2.schema.Schema02;

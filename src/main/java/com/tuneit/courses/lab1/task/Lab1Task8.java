@@ -2,10 +2,10 @@ package com.tuneit.courses.lab1.task;
 
 import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.Aggregation;
+import com.tuneit.courses.db.schema.Condition;
+import com.tuneit.courses.db.schema.ConditionTable;
 import com.tuneit.courses.lab1.Lab1Task;
-import com.tuneit.courses.lab1.schema.Aggregation;
-import com.tuneit.courses.lab1.schema.Condition;
-import com.tuneit.courses.lab1.schema.ConditionTable;
 import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;

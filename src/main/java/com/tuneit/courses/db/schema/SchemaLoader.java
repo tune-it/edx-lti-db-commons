@@ -35,8 +35,8 @@ public class SchemaLoader {
     }
 
     private static void loadSchemas() {
-        schemas.put(1, new Schema01().load("lab1.xml", "connection.xml"));
-        schemas.put(2, new Schema02().load("lab2.xml", "connection.xml"));
+        schemas.put(1, new Schema01().load("lab1.xml"));
+        schemas.put(2, new Schema02().load("lab2.xml"));
     }
 
     public static Schema getSchema(Integer labId) {

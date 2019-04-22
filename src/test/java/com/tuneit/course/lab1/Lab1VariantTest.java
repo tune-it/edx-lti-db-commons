@@ -26,7 +26,6 @@ public class Lab1VariantTest {
         for (int i = 0; i < getAnswerTask2().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
             Task task = taskGenerator.getTask("student", 1, 2, Integer.toString(i), 0);
-            System.out.println(task.getQuestion());
             task.setAnswer(getAnswerTask2()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 

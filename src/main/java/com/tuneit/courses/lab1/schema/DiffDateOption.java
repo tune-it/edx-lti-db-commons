@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class DiffDateOption {
+public class DiffDateOption implements Cloneable {
 
     @XmlAttribute(name = "sql")
     private String sqlOption;
