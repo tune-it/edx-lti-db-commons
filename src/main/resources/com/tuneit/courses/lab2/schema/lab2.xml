@@ -45,7 +45,7 @@
             </substring>
             <substring sql="city">
                 <left-position>Ба Бар Бел Че Ч Ус Сара</left-position>
-                <right-position>ово ск</right-position>
+                <right-position>ово ый</right-position>
             </substring>
             <substring sql="timezone">
                 <left-position>Asia Europe</left-position>
@@ -55,34 +55,34 @@
         <table sql="boarding_passes">
             <substring sql="seat_no">
                 <left-position>10 11 12 13 14</left-position>
-                <right-position>A C D F</right-position>
+                <right-position>A G D F</right-position>
             </substring>
         </table>
         <table sql="flights">
             <substring sql="status">
                 <left-position>Arr Schedul De On Cancel</left-position>
-                <right-position>A C D F</right-position>
+                <right-position>yed led ime</right-position>
             </substring>
         </table>
         <table sql="seats">
             <substring sql="fare_conditions">
-                <left-position>Eco Bus Co</left-position>
+                <left-position>Eco Bus Com</left-position>
                 <right-position>my ort ess</right-position>
             </substring>
             <substring sql="seat_no">
                 <left-position>10 11 12 13 14</left-position>
-                <right-position>A C D F</right-position>
+                <right-position>A G D F</right-position>
             </substring>
         </table>
         <table sql="ticket_flights">
             <substring sql="fare_conditions">
-                <left-position>Eco Bus Co</left-position>
+                <left-position>Eco Bus Com</left-position>
                 <right-position>my ort ess</right-position>
             </substring>
         </table>
         <table sql="tickets">
             <substring sql="passenger_name">
-                <left-position>ALEKS AL VIK VI VA TATY TA TAM SVET</left-position>
+                <left-position>ALEKS AL VIK VI VA TATY SVET IRI</left-position>
                 <right-position>OVA EVA ROV DEV</right-position>
             </substring>
         </table>
