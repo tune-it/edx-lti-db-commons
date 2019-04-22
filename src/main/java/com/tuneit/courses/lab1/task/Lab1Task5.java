@@ -4,6 +4,7 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Condition;
 import com.tuneit.courses.db.schema.ConditionTable;
+import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
@@ -20,14 +21,15 @@ public class Lab1Task5 extends Lab1Task {
         Random random = task.getRandom();
 
         ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
+        Table table = schema01.findTableBySqlName(conditionTable.getSqlTableName());
 
         Condition condition = getRandomElement(random, conditionTable.getConditions());
         String option = getRandomElement(random, condition.getOptionConditions());
 
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
-        query.append("Выведите все ")
-                .append(conditionTable.getNativeTableName())
+        query.append("Выведите содержимое всех полей из таблицы ")
+                .append(table.getNameGenitive())
                 .append(", которые удовлетворяют условию: ")
                 .append(condition.getNativeColumnName())
                 .append(conditionSign.getSignConditionNative())
@@ -36,7 +38,7 @@ public class Lab1Task5 extends Lab1Task {
                 .append("\".");
 
         answer.append("SELECT * FROM ")
-                .append(conditionTable.getSqlTableName())
+                .append(table.getTableName())
                 .append(" WHERE ")
                 .append(condition.getSqlColumnName())
                 .append(conditionSign.getSignConditionSql())

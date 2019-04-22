@@ -37,7 +37,7 @@ public class Lab2Task2 extends Lab2Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural()));
 
-        query.append("Выведите ");
+        query.append("Выведите содержимое полей: ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(", ")
                 .append(caseColumn.getNamePlural())

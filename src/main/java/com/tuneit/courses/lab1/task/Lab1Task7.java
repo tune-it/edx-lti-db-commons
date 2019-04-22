@@ -4,6 +4,7 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Condition;
 import com.tuneit.courses.db.schema.ConditionTable;
+import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
@@ -20,6 +21,7 @@ public class Lab1Task7 extends Lab1Task {
         Random random = task.getRandom();
 
         ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
+        Table table = schema01.findTableBySqlName(conditionTable.getSqlTableName());
 
         Condition condition1 = getRandomElement(random, conditionTable.getConditions());
         conditionTable.getConditions().remove(condition1);
@@ -35,8 +37,8 @@ public class Lab1Task7 extends Lab1Task {
         Condition.PairSign conditionSign1 = condition1.getConditionSign(random);
         Condition.PairSign conditionSign2 = condition2.getConditionSign(random);
 
-        query.append("Выведите все ")
-                .append(conditionTable.getNativeTableName())
+        query.append("Выведите содержимое всех полей из таблицы ")
+                .append(table.getNameGenitive())
                 .append(", которые удовлетворяют условию: ")
                 .append(condition1.getNativeColumnName())
                 .append(conditionSign1.getSignConditionNative())

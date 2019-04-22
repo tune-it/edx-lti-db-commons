@@ -52,7 +52,7 @@ public class Lab2Task1 extends Lab2Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural()));
 
-        query.append("Выдать ");
+        query.append("Выведите содержимое полей: ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" из таблицы ")
                 .append(table.getNameGenitive())
@@ -74,8 +74,6 @@ public class Lab2Task1 extends Lab2Task {
                 .append(likeColumn.getColumnName())
                 .append(" like ")
                 .append(sqlSubstring);
-        System.out.println(query);
-        System.out.println(answer);
 
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }

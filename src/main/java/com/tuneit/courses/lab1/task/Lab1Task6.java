@@ -4,6 +4,7 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Condition;
 import com.tuneit.courses.db.schema.ConditionTable;
+import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
@@ -23,14 +24,14 @@ public class Lab1Task6 extends Lab1Task {
                 conditionTable.getConditions().stream().allMatch(condition -> condition.getContainsNull().isEmpty()));
 
         ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
+        Table table = schema01.findTableBySqlName(conditionTable.getSqlTableName());
 
         conditionTable.getConditions().removeIf(condition -> condition.getContainsNull().isEmpty());
 
         Condition condition = getRandomElement(random, conditionTable.getConditions());
 
-
-        query.append("Выведите все ")
-                .append(conditionTable.getNativeTableName())
+        query.append("Выведите содержимое всех полей из таблицы ")
+                .append(table.getNameGenitive())
                 .append(", которые удовлетворяют условию: ")
                 .append(condition.getNativeColumnName())
                 .append(" ")
@@ -38,7 +39,7 @@ public class Lab1Task6 extends Lab1Task {
                 .append(".");
 
         answer.append("SELECT * FROM ")
-                .append(conditionTable.getSqlTableName())
+                .append(table.getTableName())
                 .append(" WHERE ")
                 .append(condition.getSqlColumnName())
                 .append(" ISNULL");

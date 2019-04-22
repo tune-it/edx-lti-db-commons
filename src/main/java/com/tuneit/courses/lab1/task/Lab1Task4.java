@@ -32,7 +32,7 @@ public class Lab1Task4 extends Lab1Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural() + " (" + column.getColumnName().toLowerCase() + ")"));
 
-        query.append("Выведите все ");
+        query.append("Выведите содержимое полей: ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" для таблицы ")
                 .append(table.getTableName())

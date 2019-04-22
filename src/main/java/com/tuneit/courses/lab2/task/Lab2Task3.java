@@ -9,8 +9,6 @@ import com.tuneit.courses.lab2.schema.Schema02;
 import com.tuneit.courses.lab2.schema.Subquery;
 import com.tuneit.courses.lab2.schema.TableSubquery;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static com.tuneit.courses.db.schema.Schema.getRandomElement;
@@ -47,28 +45,20 @@ public class Lab2Task3 extends Lab2Task {
 
         leftTable.getColumns().remove(leftJoinColumn);
 
-        List<Column> columns = leftTable.getRandomColumns(task.getRandom(), 1);
+        Column column = getRandomElement(random, leftTable.getColumns());
 
-        List<String> columnsRevisedForWrite = new ArrayList<>();
-        columns.forEach(
-                column -> columnsRevisedForWrite.add(column.getNamePlural()));
-
-        query.append("Выведите все ");
-        writeColumnToQuery(columnsRevisedForWrite, ", ", query);
-        query.append(" из таблицы ")
+        query.append("Выведите все уникальные значения ")
+                .append(column.getNameGenitivePlural())
+                .append(" из таблицы ")
                 .append(leftTable.getNameGenitive())
                 .append(", ")
                 .append(subquery.getNativeQuery())
                 .append(nativeOption)
                 .append(".");
 
-        columnsRevisedForWrite.clear();
-        columns.forEach(
-                column -> columnsRevisedForWrite.add(column.getColumnName()));
-
-        answer.append("select ");
-        writeColumnToQuery(columnsRevisedForWrite, ", ", answer);
-        answer.append(" from ")
+        answer.append("select distinct ")
+                .append(column.getColumnName())
+                .append(" from ")
                 .append(leftTable.getTableName())
                 .append(" where ")
                 .append(leftJoinColumn.getColumnName())

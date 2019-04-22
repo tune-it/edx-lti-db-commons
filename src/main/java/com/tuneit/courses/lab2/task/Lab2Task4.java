@@ -8,8 +8,6 @@ import com.tuneit.courses.lab2.Lab2Task;
 import com.tuneit.courses.lab2.schema.Reference;
 import com.tuneit.courses.lab2.schema.Schema02;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static com.tuneit.courses.db.schema.Schema.getRandomElement;
@@ -31,19 +29,16 @@ public class Lab2Task4 extends Lab2Task {
         String option = getRandomElement(random, condition.getOptionConditions());
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
-        List<Column> columns = chainTable.getLeftTable().getRandomColumns(random, 1);
-        List<String> columnsRevisedForWrite = new ArrayList<>();
-        columns.forEach(
-                column -> columnsRevisedForWrite.add(column.getNamePlural()));
+        Column column = getRandomElement(random, chainTable.getLeftTable().getColumns());
 
         query.append("Сделать запрос для получения атрибутов из указанных таблиц, " +
                 "применив фильтры по указанным условиям. Таблицы: ")
                 .append(chainTable.getLeftTable().getNameGenitive())
                 .append(", ")
                 .append(chainTable.getRightTable().getNameGenitive())
-                .append(". Атрибуты: все ");
-        writeColumnToQuery(columnsRevisedForWrite, ", ", query);
-        query.append(" из таблицы ")
+                .append(". Атрибуты: все уникальные значения ")
+                .append(column.getNameGenitivePlural())
+                .append(" из таблицы ")
                 .append(chainTable.getLeftTable().getNameGenitive())
                 .append(". Фильтры: ")
                 .append(condition.getNativeColumnName())
@@ -52,13 +47,11 @@ public class Lab2Task4 extends Lab2Task {
                 .append(option)
                 .append("\". В запросе должен использоваться INNER JOIN.");
 
-        columnsRevisedForWrite.clear();
-        columns.forEach(
-                column -> columnsRevisedForWrite.add(chainTable.getLeftTable().getTableName() + "." + column.getColumnName()));
-
-        answer.append("select ");
-        writeColumnToQuery(columnsRevisedForWrite, ", ", answer);
-        answer.append(" from ")
+        answer.append("select distinct ")
+                .append(chainTable.getLeftTable().getTableName())
+                .append(".")
+                .append(column.getColumnName())
+                .append(" from ")
                 .append(chainTable.getLeftTable().getTableName())
                 .append(" inner join ")
                 .append(chainTable.getRightTable().getTableName())

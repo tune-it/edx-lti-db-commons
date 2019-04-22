@@ -71,9 +71,6 @@ public class Lab2Task5 extends Lab2Task {
                 .append(option)
                 .append("';");
 
-        System.out.println(query);
-        System.out.println(answer);
-
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }
 
