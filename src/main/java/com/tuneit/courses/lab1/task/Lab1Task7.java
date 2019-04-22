@@ -19,8 +19,6 @@ public class Lab1Task7 extends Lab1Task {
 
         Random random = task.getRandom();
 
-        boolean isUniteWordAnd = random.nextBoolean();
-
         ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
 
         Condition condition1 = getRandomElement(random, conditionTable.getConditions());
@@ -45,7 +43,7 @@ public class Lab1Task7 extends Lab1Task {
                 .append("\"")
                 .append(option1)
                 .append("\"")
-                .append(isUniteWordAnd ? " и " : " или ")
+                .append(" или ")
                 .append(condition2.getNativeColumnName())
                 .append(conditionSign2.getSignConditionNative())
                 .append("\"")
@@ -60,7 +58,7 @@ public class Lab1Task7 extends Lab1Task {
                 .append("'")
                 .append(option1)
                 .append("'")
-                .append(isUniteWordAnd ? " AND " : " OR ")
+                .append(" OR ")
                 .append(condition2.getSqlColumnName())
                 .append(conditionSign2.getSignConditionSql())
                 .append("'")
