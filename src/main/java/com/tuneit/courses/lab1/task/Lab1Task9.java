@@ -42,7 +42,7 @@ public class Lab1Task9 extends Lab1Task {
         } else {
             query.append("убывания.");
         }
-        query.append(" Вывести первые 3 строки.");
+        query.append(" Выведите первые 3 строки.");
 
         columnsRevisedForWrite.clear();
         columns.forEach(

@@ -39,7 +39,7 @@ public class Lab1Task7 extends Lab1Task {
 
         query.append("Выведите содержимое всех полей из таблицы ")
                 .append(table.getNameGenitive())
-                .append(", которые удовлетворяют условию: ")
+                .append(", которые удовлетворяют следующему условию: ")
                 .append(condition1.getNativeColumnName())
                 .append(conditionSign1.getSignConditionNative())
                 .append("\"")
