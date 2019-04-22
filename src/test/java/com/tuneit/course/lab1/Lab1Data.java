@@ -11,7 +11,7 @@ public class Lab1Data {
 
     //
     static String[] getQueryTask2() {
-        String queryVariant0 = "Выведите содержимое полей: коды воздушных судов (aircraft_code), номера мест (seat_no) для таблицы SEATS.";
+        String queryVariant0 = "Выведите содержимое полей коды воздушных судов (aircraft_code), номера мест (seat_no) для таблицы SEATS.";
         return new String[]{queryVariant0};
     }
 
@@ -35,7 +35,7 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask4() {
-        String queryVariant0 = "Выведите содержимое полей: города (city), имена (airport_name) для таблицы AIRPORTS. Отсортируйте результат по столбцу временные зоны (timezone) в порядке убывания.";
+        String queryVariant0 = "Выведите содержимое полей города (city), имена (airport_name) для таблицы AIRPORTS. Отсортируйте результат по столбцу временные зоны (timezone) в порядке убывания.";
         return new String[]{queryVariant0};
     }
 
@@ -95,7 +95,7 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask9() {
-        String queryVariant0 = "Выведите содержимое полей: тарифы, номера билетов из таблицы состоявшихся полетов. Отсортируйте результат по столбцу идентификаторы рейсов в порядке убывания. Выведите первые 3 строки.";
+        String queryVariant0 = "Выведите содержимое полей тарифы, номера билетов из таблицы состоявшихся полетов. Отсортируйте результат по столбцу идентификаторы рейсов в порядке убывания. Выведите первые 3 строки.";
         return new String[]{queryVariant0};
     }
 
@@ -108,7 +108,7 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask10() {
-        String queryVariant0 = "Подсчитайте планируемое время каждого полёта для всех воздушных судов(в минутах).";
+        String queryVariant0 = "Подсчитайте планируемое время каждого полёта для всех воздушных судов (в минутах).";
         return new String[]{queryVariant0};
     }
 

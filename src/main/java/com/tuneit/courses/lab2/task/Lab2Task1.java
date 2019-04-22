@@ -52,7 +52,7 @@ public class Lab2Task1 extends Lab2Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural()));
 
-        query.append("Выведите содержимое полей: ");
+        query.append("Выведите содержимое полей ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" из таблицы ")
                 .append(table.getNameGenitive())

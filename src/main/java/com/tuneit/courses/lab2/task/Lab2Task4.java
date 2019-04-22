@@ -31,7 +31,7 @@ public class Lab2Task4 extends Lab2Task {
 
         Column column = getRandomElement(random, chainTable.getLeftTable().getColumns());
 
-        query.append("Сделать запрос для получения атрибутов из указанных таблиц, " +
+        query.append("Напишите запрос для получения атрибутов из указанных таблиц, " +
                 "применив фильтры по указанным условиям. Таблицы: ")
                 .append(chainTable.getLeftTable().getNameGenitive())
                 .append(", ")

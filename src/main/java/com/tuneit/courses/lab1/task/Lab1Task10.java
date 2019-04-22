@@ -25,6 +25,7 @@ public class Lab1Task10 extends Lab1Task {
 
         query.append("Подсчитайте ")
                 .append(diffDate.getNativeDescription())
+                .append(" ")
                 .append(option.getNativeOption())
                 .append(".");
 

@@ -40,7 +40,7 @@ public class Lab2Task5 extends Lab2Task {
                 .append(conditionSign.getSignConditionNative())
                 .append("\"")
                 .append(option)
-                .append("\"(данные из таблицы ")
+                .append("\" (данные из таблицы ")
                 .append(chainTable.getRightTable().getNameGenitive())
                 .append("). В запросе должен использоваться INNER JOIN.");
 
