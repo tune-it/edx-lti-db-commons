@@ -11,6 +11,8 @@ import com.tuneit.courses.lab2.schema.Schema02;
 
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab2Task5 extends Lab2Task {
     @Override
     public LabTaskQA generate(Schema02 schema02, Task task) {
@@ -19,7 +21,7 @@ public class Lab2Task5 extends Lab2Task {
 
         Random random = task.getRandom();
 
-        Aggregation aggregation = schema02.getRandomAggregation(random);
+        Aggregation aggregation = getRandomElement(random, schema02.getAggregations());
         Reference.ChainTable chainTable = schema02.getRandomChainTable(random,
                 schema02.findTableBySqlName(aggregation.getTableSqlName()));
 
@@ -28,8 +30,8 @@ public class Lab2Task5 extends Lab2Task {
         ConditionTable conditionTable = schema02.getConditionTables().get(0);
         conditionTable.getConditions().removeIf(condition ->
                 condition.getSqlColumnName().equalsIgnoreCase(chainTable.getRightColumn().getColumnName()));
-        Condition condition = conditionTable.getRandomCondition(random);
-        String option = condition.getRandomOption(random);
+        Condition condition = getRandomElement(random, conditionTable.getConditions());
+        String option = getRandomElement(random, condition.getOptionConditions());
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
         query.append("Выведите ")

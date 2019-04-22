@@ -14,9 +14,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,28 +58,15 @@ public class Schema01 extends Schema implements Cloneable {
         return lab01;
     }
 
-    public DiffDate getRandomDiffDate(Random random) {
-        return diffDates.get(random.nextInt(diffDates.size()));
-    }
-
     @Override
     public Schema01 clone() {
         try {
             Schema01 schema01 = (Schema01) super.clone();
-            schema01.diffDates = cloneListDiffDate(diffDates);
+            schema01.diffDates = cloneList(diffDates);
             return schema01;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
     }
-
-    private List<DiffDate> cloneListDiffDate(List<DiffDate> diffDates) {
-        List<DiffDate> cloneList = new ArrayList<>();
-        for (DiffDate diffDate : diffDates) {
-            cloneList.add(diffDate.clone());
-        }
-        return cloneList;
-    }
-
 }

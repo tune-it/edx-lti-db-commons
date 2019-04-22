@@ -9,6 +9,9 @@ import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
 
 public class Lab1Task2 extends Lab1Task {
     @Override
@@ -16,8 +19,10 @@ public class Lab1Task2 extends Lab1Task {
         query = new StringBuilder();
         answer = new StringBuilder();
 
-        Table table = schema01.getRandomTable(task.getRandom());
-        List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
+        Random random = task.getRandom();
+
+        Table table = getRandomElement(random, schema01.getTables());
+        List<Column> columns = table.getRandomColumns(random, 2);
 
         List<String> columnsRevisedForWrite = new ArrayList<>();
         columns.forEach(

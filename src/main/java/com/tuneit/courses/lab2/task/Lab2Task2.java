@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab2Task2 extends Lab2Task {
     @Override
     public LabTaskQA generate(Schema02 schema02, Task task) {
@@ -21,10 +23,10 @@ public class Lab2Task2 extends Lab2Task {
 
         Random random = task.getRandom();
 
-        TableCases tableCases = schema02.getRandomTableCases(random);
+        TableCases tableCases = getRandomElement(random, schema02.getTablesCases());
         Table table = schema02.findTableBySqlName(tableCases.getSqlTableName());
 
-        Case randomCase = tableCases.getRandomCases(random);
+        Case randomCase = getRandomElement(random, tableCases.getCases());
         Column caseColumn = table.findColumn(randomCase.getSqlNameColumn());
         table.getColumns().remove(caseColumn);
 

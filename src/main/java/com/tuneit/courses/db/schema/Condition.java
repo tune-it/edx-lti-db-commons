@@ -16,7 +16,7 @@ import java.util.Random;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class Condition implements Cloneable {
+public class Condition implements Cloneable, Clone<Condition> {
 
     @XmlElement(name = "option")
     private List<String> optionConditions;
@@ -42,10 +42,6 @@ public class Condition implements Cloneable {
     @XmlAttribute(name = "contains-null")
     private String containsNull;
 
-    public String getRandomOption(Random random) {
-        return optionConditions.get(random.nextInt(optionConditions.size()));
-    }
-
     public PairSign getConditionSign(Random random) {
         if (!greater.isEmpty() && random.nextBoolean()) {
             return new PairSign(" " + greater + " ", " > ");
@@ -65,7 +61,7 @@ public class Condition implements Cloneable {
     }
 
     @Override
-    protected Condition clone() {
+    public Condition clone() {
         try {
             Condition condition = (Condition) super.clone();
             condition.nativeColumnName = nativeColumnName;
@@ -75,22 +71,12 @@ public class Condition implements Cloneable {
             condition.below = below;
             condition.equals = equals;
             condition.containsNull = containsNull;
-            if (condition.optionConditions != null) {
-                condition.optionConditions = cloneList(optionConditions);
-            }
+            condition.optionConditions = new ArrayList<>(optionConditions);
             return condition;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<String> cloneList(List<String> options) {
-        List<String> cloneList = new ArrayList<>();
-        for (String condition : options) {
-            cloneList.add(condition);
-        }
-        return cloneList;
     }
 
     @Getter

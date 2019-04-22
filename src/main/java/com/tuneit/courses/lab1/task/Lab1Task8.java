@@ -4,11 +4,12 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.schema.Aggregation;
 import com.tuneit.courses.db.schema.Condition;
-import com.tuneit.courses.db.schema.ConditionTable;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
 
 public class Lab1Task8 extends Lab1Task {
     @Override
@@ -18,13 +19,13 @@ public class Lab1Task8 extends Lab1Task {
 
         Random random = task.getRandom();
 
-        Aggregation aggregation = schema01.getRandomAggregation(random);
+        Aggregation aggregation = getRandomElement(random, schema01.getAggregations());
 
         String conditionName = aggregation.getConditionColumnName();
-        Condition condition = findCondition(schema01, conditionName);
+        Condition condition = schema01.findCondition(conditionName);
         Condition.PairSign sign = condition.getConditionSign(random);
 
-        String option = condition.getRandomOption(random);
+        String option = getRandomElement(random, condition.getOptionConditions());
 
         query.append("Выведите ")
                 .append(aggregation.getColumnFunctionNativeName())
@@ -50,17 +51,6 @@ public class Lab1Task8 extends Lab1Task {
 
 
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
-    }
-
-    private Condition findCondition(Schema01 schema01, String conditionName) {
-        for (ConditionTable conditionTable : schema01.getConditionTables()) {
-            for (Condition condition : conditionTable.getConditions()) {
-                if (condition.getSqlColumnName().equals(conditionName)) {
-                    return condition;
-                }
-            }
-        }
-        return null;
     }
 
 }

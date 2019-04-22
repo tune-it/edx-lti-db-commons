@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab1.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class DiffDateOption implements Cloneable {
+public class DiffDateOption implements Cloneable, Clone<DiffDateOption> {
 
     @XmlAttribute(name = "sql")
     private String sqlOption;

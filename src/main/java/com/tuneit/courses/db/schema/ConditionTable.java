@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ConditionTable implements Cloneable {
+public class ConditionTable implements Cloneable, Clone<ConditionTable> {
     @XmlElement(name = "condition")
     @Getter
     @Setter
@@ -29,10 +29,6 @@ public class ConditionTable implements Cloneable {
     @Setter
     private String nativeTableName;
 
-    public Condition getRandomCondition(Random random) {
-        return conditions.get(random.nextInt(conditions.size()));
-    }
-
     @Override
     public ConditionTable clone() {
         try {
@@ -45,13 +41,5 @@ public class ConditionTable implements Cloneable {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<Condition> cloneList(List<Condition> conditions) {
-        List<Condition> cloneList = new ArrayList<>();
-        for (Condition condition : conditions) {
-            cloneList.add(condition.clone());
-        }
-        return cloneList;
     }
 }

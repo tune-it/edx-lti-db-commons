@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class Aggregation implements Cloneable {
+public class Aggregation implements Cloneable, Clone<Aggregation> {
     @XmlAttribute(name = "table-sql")
     private String tableSqlName;
 

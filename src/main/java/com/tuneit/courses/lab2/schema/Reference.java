@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab2.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Table;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class Reference implements Cloneable {
+public class Reference implements Cloneable, Clone<Reference> {
 
     @XmlAttribute(name = "table")
     private String tableReference;

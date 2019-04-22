@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab2.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +10,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class Subquery implements Cloneable {
+public class Subquery implements Cloneable, Clone<Subquery> {
     @XmlAttribute(name = "column")
     private String sqlNameColumn;
 
@@ -46,23 +46,11 @@ public class Subquery implements Cloneable {
             substring.nativeQuery = nativeQuery;
             substring.sqlFunction = sqlFunction;
             substring.sqlNameConditionColumn = sqlNameConditionColumn;
-            substring.options = cloneListString(options);
+            substring.options = new ArrayList<>(options);
             return substring;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<String> cloneListString(List<String> strings) {
-        List<String> cloneList = new ArrayList<>();
-        for (String string : strings) {
-            cloneList.add(string);
-        }
-        return cloneList;
-    }
-
-    public String getRandomOption(Random random) {
-        return options.get(random.nextInt(options.size()));
     }
 }

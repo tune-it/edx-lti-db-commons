@@ -9,6 +9,8 @@ import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task3 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
@@ -16,8 +18,8 @@ public class Lab1Task3 extends Lab1Task {
         answer = new StringBuilder();
 
         Random random = task.getRandom();
-        Table table = schema01.getRandomTable(random);
-        Column column = table.getRandomColumn(random);
+        Table table = getRandomElement(random, schema01.getTables());
+        Column column = getRandomElement(random, table.getColumns());
 
         query.append("Выведите все уникальные ")
                 .append(column.getNamePlural())

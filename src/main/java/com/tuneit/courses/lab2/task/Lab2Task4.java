@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab2Task4 extends Lab2Task {
     @Override
     public LabTaskQA generate(Schema02 schema02, Task task) {
@@ -24,8 +26,9 @@ public class Lab2Task4 extends Lab2Task {
 
         schema02.getConditionTables().removeIf(conditionTable ->
                 !conditionTable.getSqlTableName().equalsIgnoreCase(chainTable.getRightTable().getTableName()));
-        Condition condition = schema02.getConditionTables().get(0).getRandomCondition(random);
-        String option = condition.getRandomOption(random);
+
+        Condition condition = getRandomElement(random, schema02.getConditionTables().get(0).getConditions());
+        String option = getRandomElement(random, condition.getOptionConditions());
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
         List<Column> columns = chainTable.getLeftTable().getRandomColumns(random, 1);

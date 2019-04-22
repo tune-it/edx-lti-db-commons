@@ -9,6 +9,8 @@ import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task6 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
@@ -20,11 +22,11 @@ public class Lab1Task6 extends Lab1Task {
         schema01.getConditionTables().removeIf(conditionTable ->
                 conditionTable.getConditions().stream().allMatch(condition -> condition.getContainsNull().isEmpty()));
 
-        ConditionTable conditionTable = schema01.getRandomConditionTable(random);
+        ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
 
         conditionTable.getConditions().removeIf(condition -> condition.getContainsNull().isEmpty());
 
-        Condition condition = conditionTable.getRandomCondition(random);
+        Condition condition = getRandomElement(random, conditionTable.getConditions());
 
 
         query.append("Выведите все ")

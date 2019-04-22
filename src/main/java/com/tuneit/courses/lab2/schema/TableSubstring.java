@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab2.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,14 +8,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class TableSubstring implements Cloneable {
+public class TableSubstring implements Cloneable, Clone<TableSubstring> {
 
     @XmlElement(name = "substring")
     private List<Substring> substring;
@@ -27,23 +28,11 @@ public class TableSubstring implements Cloneable {
         try {
             TableSubstring tableSubstring = (TableSubstring) super.clone();
             tableSubstring.sqlTableName = sqlTableName;
-            tableSubstring.substring = cloneListSubstring(substring);
+            tableSubstring.substring = cloneList(substring);
             return tableSubstring;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<Substring> cloneListSubstring(List<Substring> substrings) {
-        List<Substring> cloneList = new ArrayList<>();
-        for (Substring substring : substrings) {
-            cloneList.add(substring.clone());
-        }
-        return cloneList;
-    }
-
-    public Substring getRandomSubstring(Random random) {
-        return substring.get(random.nextInt(substring.size()));
     }
 }

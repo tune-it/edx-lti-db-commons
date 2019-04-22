@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Setter
-public class Column implements Cloneable {
+public class Column implements Cloneable, Clone<Column> {
 
     @XmlTransient
     boolean sqlNameInUpperCase = false;

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab2Task3 extends Lab2Task {
     @Override
     public LabTaskQA generate(Schema02 schema02, Task task) {
@@ -23,10 +25,10 @@ public class Lab2Task3 extends Lab2Task {
 
         boolean isGreaterOption = random.nextBoolean();
 
-        TableSubquery tableSubquery = schema02.getRandomTableSubquery(random);
+        TableSubquery tableSubquery = getRandomElement(random, schema02.getTablesSubqueries());
         Table leftTable = schema02.findTableBySqlName(tableSubquery.getSqlTableName());
 
-        Subquery subquery = tableSubquery.getRandomSubquery(random);
+        Subquery subquery = getRandomElement(random, tableSubquery.getSubqueries());
         Column leftJoinColumn = leftTable.findColumn(subquery.getSqlNameColumn());
         Column rightJoinColumn = leftTable.findColumn(subquery.getSqlNameJoinColumn());
         Table rightTable = schema02.findTableBySqlName(subquery.getSqlNameJoinTable());
@@ -34,11 +36,11 @@ public class Lab2Task3 extends Lab2Task {
         String nativeOption;
         String sqlOption;
         if (isGreaterOption) {
-            String option = subquery.getRandomOption(random);
+            String option = getRandomElement(random, subquery.getOptions());
             nativeOption = " более " + option;
             sqlOption = ">" + option;
         } else {
-            String option = subquery.getRandomOption(random);
+            String option = getRandomElement(random, subquery.getOptions());
             nativeOption = " менее " + option;
             sqlOption = "<" + option;
         }

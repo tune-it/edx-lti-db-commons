@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -78,10 +77,10 @@ public class Schema02 extends Schema implements Cloneable {
     public Schema02 clone() {
         try {
             Schema02 schema02 = (Schema02) super.clone();
-            schema02.tablesReferences = cloneListTableReference(tablesReferences);
-            schema02.tablesSubstrings = cloneListTableSubstring(tablesSubstrings);
-            schema02.tablesCases = cloneListTableCases(tablesCases);
-            schema02.tablesSubqueries = cloneListTableSubqueries(tablesSubqueries);
+            schema02.tablesReferences = cloneList(tablesReferences);
+            schema02.tablesSubstrings = cloneList(tablesSubstrings);
+            schema02.tablesCases = cloneList(tablesCases);
+            schema02.tablesSubqueries = cloneList(tablesSubqueries);
             return schema02;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -90,67 +89,20 @@ public class Schema02 extends Schema implements Cloneable {
     }
 
     public Reference.ChainTable getRandomChainTable(Random random) {
-        TableReference reference = getRandomTableReference(random);
+        TableReference reference = getRandomElement(random, getTablesReferences());
         return getRandomChainTable(random, findTableBySqlName(reference.getSqlTableName()));
     }
 
     public Reference.ChainTable getRandomChainTable(Random random, Table table) {
         TableReference firstTableReference = findTableReferenceBySqlTableName(table.getTableName());
 
-        Reference referenceToSecondTable = firstTableReference.getRandomReference(random);
+        Reference referenceToSecondTable = getRandomElement(random, firstTableReference.getReferences());
         Table rightTable = findTableBySqlName(referenceToSecondTable.getTableReference());
 
         Column leftColumn = table.findColumn(referenceToSecondTable.getNameColumnReference());
         Column rightColumn = rightTable.findColumn(referenceToSecondTable.getNameJoinColumnReference());
 
         return new Reference.ChainTable(table, leftColumn, rightTable, rightColumn);
-    }
-
-    private List<TableSubquery> cloneListTableSubqueries(List<TableSubquery> tablesSubqueries) {
-        List<TableSubquery> cloneList = new ArrayList<>();
-        for (TableSubquery tableSubquery : tablesSubqueries) {
-            cloneList.add(tableSubquery.clone());
-        }
-        return cloneList;
-    }
-
-    private List<TableCases> cloneListTableCases(List<TableCases> tablesCases) {
-        List<TableCases> cloneList = new ArrayList<>();
-        for (TableCases tableCases : tablesCases) {
-            cloneList.add(tableCases.clone());
-        }
-        return cloneList;
-    }
-
-    private List<TableReference> cloneListTableReference(List<TableReference> references) {
-        List<TableReference> cloneList = new ArrayList<>();
-        for (TableReference tableReference : references) {
-            cloneList.add(tableReference.clone());
-        }
-        return cloneList;
-    }
-
-    private List<TableSubstring> cloneListTableSubstring(List<TableSubstring> substrings) {
-        List<TableSubstring> cloneList = new ArrayList<>();
-        for (TableSubstring tableSubstring : substrings) {
-            cloneList.add(tableSubstring.clone());
-        }
-        return cloneList;
-    }
-    private TableReference getRandomTableReference(Random random) {
-        return tablesReferences.get(random.nextInt(tablesReferences.size()));
-    }
-
-    public TableSubstring getRandomTableSubstring(Random random) {
-        return tablesSubstrings.get(random.nextInt(tablesSubstrings.size()));
-    }
-
-    public TableCases getRandomTableCases(Random random) {
-        return tablesCases.get(random.nextInt(tablesCases.size()));
-    }
-
-    public TableSubquery getRandomTableSubquery(Random random) {
-        return tablesSubqueries.get(random.nextInt(tablesSubqueries.size()));
     }
 
     public TableReference findTableReferenceBySqlTableName(String tableName) {

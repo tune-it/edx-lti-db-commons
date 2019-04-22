@@ -39,6 +39,18 @@ public class Schema {
     @XmlElement(name = "table")
     private List<Table> tables;
 
+    public static <T extends Clone<T>> List<T> cloneList(List<T> tables) {
+        List<T> cloneTables = new ArrayList<>();
+        for (Clone<T> clone : tables) {
+            cloneTables.add(clone.clone());
+        }
+        return cloneTables;
+    }
+
+    public static <T> T getRandomElement(Random random, List<T> listElement) {
+        return listElement.get(random.nextInt(listElement.size()));
+    }
+
     public Schema load(String schemaName) {
         Schema schema;
         try {
@@ -64,9 +76,9 @@ public class Schema {
     protected Schema clone() throws CloneNotSupportedException {
         Schema schema = (Schema) super.clone();
         schema.name = name;
-        schema.tables = cloneListTable(tables);
-        schema.aggregations = cloneListAggregation(aggregations);
-        schema.conditionTables = cloneListConditionTable(conditionTables);
+        schema.tables = cloneList(tables);
+        schema.aggregations = cloneList(aggregations);
+        schema.conditionTables = cloneList(conditionTables);
         return schema;
     }
 
@@ -82,39 +94,14 @@ public class Schema {
                 .orElseThrow(() -> new IllegalArgumentException("Table with name \"" + string + "\" not exist"));
     }
 
-    public ConditionTable getRandomConditionTable(Random random) {
-        return conditionTables.get(random.nextInt(conditionTables.size()));
-    }
-
-    public Aggregation getRandomAggregation(Random random) {
-        return aggregations.get(random.nextInt(aggregations.size()));
-    }
-
-    public Table getRandomTable(Random random) {
-        return tables.get(random.nextInt(tables.size()));
-    }
-
-    protected List<Table> cloneListTable(List<Table> tables) {
-        List<Table> cloneTables = new ArrayList<>();
-        for (Table table : tables) {
-            cloneTables.add(table.clone());
+    public Condition findCondition(String conditionName) {
+        for (ConditionTable conditionTable : getConditionTables()) {
+            for (Condition condition : conditionTable.getConditions()) {
+                if (condition.getSqlColumnName().equals(conditionName)) {
+                    return condition;
+                }
+            }
         }
-        return cloneTables;
-    }
-
-    private List<Aggregation> cloneListAggregation(List<Aggregation> aggregations) {
-        List<Aggregation> cloneList = new ArrayList<>();
-        for (Aggregation aggregation : aggregations) {
-            cloneList.add(aggregation.clone());
-        }
-        return cloneList;
-    }
-
-    private List<ConditionTable> cloneListConditionTable(List<ConditionTable> conditionTables) {
-        List<ConditionTable> cloneList = new ArrayList<>();
-        for (ConditionTable condition : conditionTables) {
-            cloneList.add(condition.clone());
-        }
-        return cloneList;
+        throw new IllegalArgumentException("Condition with name " + conditionName + " not found");
     }
 }

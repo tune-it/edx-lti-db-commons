@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab2Task1 extends Lab2Task {
     @Override
     public LabTaskQA generate(Schema02 schema02, Task task) {
@@ -22,11 +24,11 @@ public class Lab2Task1 extends Lab2Task {
         Random random = task.getRandom();
 
 
-        TableSubstring tableSubstring = schema02.getRandomTableSubstring(random);
+        TableSubstring tableSubstring = getRandomElement(random, schema02.getTablesSubstrings());
 
         Table table = schema02.findTableBySqlName(tableSubstring.getSqlTableName());
 
-        Substring substringType = tableSubstring.getRandomSubstring(random);
+        Substring substringType = getRandomElement(random, tableSubstring.getSubstring());
 
         Column likeColumn = table.findColumn(substringType.getSqlNameColumn());
         table.getColumns().remove(likeColumn);
@@ -36,11 +38,11 @@ public class Lab2Task1 extends Lab2Task {
         String nativeSubstring;
         String sqlSubstring;
         if (isLeftSubstring) {
-            String substring = substringType.getRandomLeftSubstring(random);
+            String substring = getRandomElement(random, substringType.getLeftSubstrings());
             nativeSubstring = "начинаются на \"" + substring + "\"";
             sqlSubstring = "'" + substring + "%'";
         } else {
-            String substring = substringType.getRandomRightSubstring(random);
+            String substring = getRandomElement(random, substringType.getRightSubstrings());
             nativeSubstring = "заканчиваются на \"" + substring + "\"";
             sqlSubstring = "'%" + substring + "'";
         }

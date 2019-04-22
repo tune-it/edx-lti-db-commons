@@ -9,6 +9,8 @@ import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task5 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
@@ -17,10 +19,10 @@ public class Lab1Task5 extends Lab1Task {
 
         Random random = task.getRandom();
 
-        ConditionTable conditionTable = schema01.getRandomConditionTable(random);
+        ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
 
-        Condition condition = conditionTable.getRandomCondition(random);
-        String option = condition.getRandomOption(random);
+        Condition condition = getRandomElement(random, conditionTable.getConditions());
+        String option = getRandomElement(random, condition.getOptionConditions());
 
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 

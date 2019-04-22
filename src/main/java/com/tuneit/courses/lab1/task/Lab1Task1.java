@@ -6,13 +6,15 @@ import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task1 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
         query = new StringBuilder();
         answer = new StringBuilder();
 
-        Table table = schema01.getRandomTable(task.getRandom());
+        Table table = getRandomElement(task.getRandom(), schema01.getTables());
 
         query.append("Выведите содержимое всех полей таблицы ")
                 .append(table.getTableName())

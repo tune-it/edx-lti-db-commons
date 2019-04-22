@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab2.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,14 +8,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class TableSubquery implements Cloneable {
+public class TableSubquery implements Cloneable, Clone<TableSubquery> {
 
     @XmlElement(name = "subquery")
     private List<Subquery> subqueries;
@@ -27,23 +28,11 @@ public class TableSubquery implements Cloneable {
         try {
             TableSubquery tableReference = (TableSubquery) super.clone();
             tableReference.sqlTableName = sqlTableName;
-            tableReference.subqueries = cloneListSubquery(subqueries);
+            tableReference.subqueries = cloneList(subqueries);
             return tableReference;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<Subquery> cloneListSubquery(List<Subquery> subqueries) {
-        List<Subquery> cloneList = new ArrayList<>();
-        for (Subquery subquery : subqueries) {
-            cloneList.add(subquery.clone());
-        }
-        return cloneList;
-    }
-
-    public Subquery getRandomSubquery(Random random) {
-        return subqueries.get(random.nextInt(subqueries.size()));
     }
 }

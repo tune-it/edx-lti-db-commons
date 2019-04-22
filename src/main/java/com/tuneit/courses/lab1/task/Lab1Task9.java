@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task9 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
@@ -18,8 +20,8 @@ public class Lab1Task9 extends Lab1Task {
         answer = new StringBuilder();
 
         Random random = task.getRandom();
-        Table table = schema01.getRandomTable(random);
-        Column sortedColumn = table.getRandomColumn(random);
+        Table table = getRandomElement(random, schema01.getTables());
+        Column sortedColumn = getRandomElement(random, table.getColumns());
         table.getColumns().remove(sortedColumn);
         List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
         boolean isDirectionSortedASC = random.nextBoolean();

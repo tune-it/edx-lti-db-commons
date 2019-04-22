@@ -9,6 +9,8 @@ import com.tuneit.courses.lab1.schema.Schema01;
 
 import java.util.Random;
 
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+
 public class Lab1Task7 extends Lab1Task {
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
@@ -19,18 +21,18 @@ public class Lab1Task7 extends Lab1Task {
 
         boolean isUniteWordAnd = random.nextBoolean();
 
-        ConditionTable conditionTable = schema01.getRandomConditionTable(random);
+        ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
 
-        Condition condition1 = conditionTable.getRandomCondition(random);
+        Condition condition1 = getRandomElement(random, conditionTable.getConditions());
         conditionTable.getConditions().remove(condition1);
-        Condition condition2 = conditionTable.getRandomCondition(random);
+        Condition condition2 = getRandomElement(random, conditionTable.getConditions());
 
         char[] nativeColumnName = condition2.getNativeColumnName().toCharArray();
         nativeColumnName[0] = Character.toLowerCase(nativeColumnName[0]);
         condition2.setNativeColumnName(String.valueOf(nativeColumnName));
 
-        String option1 = condition1.getRandomOption(random);
-        String option2 = condition2.getRandomOption(random);
+        String option1 = getRandomElement(random, condition1.getOptionConditions());
+        String option2 = getRandomElement(random, condition2.getOptionConditions());
 
         Condition.PairSign conditionSign1 = condition1.getConditionSign(random);
         Condition.PairSign conditionSign2 = condition2.getConditionSign(random);

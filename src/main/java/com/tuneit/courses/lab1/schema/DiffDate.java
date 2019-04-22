@@ -1,5 +1,6 @@
 package com.tuneit.courses.lab1.schema;
 
+import com.tuneit.courses.db.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,14 +8,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import static com.tuneit.courses.db.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
-public class DiffDate implements Cloneable {
+public class DiffDate implements Cloneable, Clone<DiffDate> {
 
     @XmlElement(name = "option")
     private List<DiffDateOption> diffDateOptions;
@@ -31,10 +32,6 @@ public class DiffDate implements Cloneable {
     @XmlAttribute(name = "description")
     private String nativeDescription;
 
-    public DiffDateOption getRandomDiffDateOption(Random random) {
-        return diffDateOptions.get(random.nextInt(diffDateOptions.size()));
-    }
-
     @Override
     public DiffDate clone() {
         try {
@@ -43,19 +40,11 @@ public class DiffDate implements Cloneable {
             diffDate.sqlNameColumn1 = sqlNameColumn1;
             diffDate.sqlNameColumn2 = sqlNameColumn2;
             diffDate.nativeDescription = nativeDescription;
-            diffDate.diffDateOptions = cloneListDiffDateOptions(diffDateOptions);
+            diffDate.diffDateOptions = cloneList(diffDateOptions);
             return diffDate;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<DiffDateOption> cloneListDiffDateOptions(List<DiffDateOption> diffDateOptions) {
-        List<DiffDateOption> cloneList = new ArrayList<>();
-        for (DiffDateOption diffDateOption : diffDateOptions) {
-            cloneList.add(diffDateOption.clone());
-        }
-        return cloneList;
     }
 }

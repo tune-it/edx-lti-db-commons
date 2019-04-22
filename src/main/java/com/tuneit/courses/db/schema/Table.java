@@ -6,11 +6,13 @@ import lombok.Setter;
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
+import static com.tuneit.courses.db.schema.Schema.cloneList;
+
 /**
  * @author serge
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Table implements Cloneable {
+public class Table implements Cloneable, Clone<Table> {
 
     @XmlTransient
     protected boolean sqlNameInUpperCase = false;
@@ -58,12 +60,6 @@ public class Table implements Cloneable {
         }
     }
 
-    public Column findColumnAndDelete(String columnName) {
-        Column column = findColumn(columnName);
-        columns.remove(column);
-        return column;
-    }
-
     @Override
     public Table clone() {
         try {
@@ -71,21 +67,12 @@ public class Table implements Cloneable {
             tableClone.setName(name);
             tableClone.setNameGenitive(nameGenitive);
             tableClone.setTableName(getTableName());
-            tableClone.setColumns(copyColumn(this.columns));
+            tableClone.setColumns(cloneList(columns));
             return tableClone;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private List<Column> copyColumn(List<Column> columns) {
-        ArrayList<Column> columnsClone = new ArrayList<>();
-        for (Column column : columns) {
-            columnsClone.add(column.clone());
-        }
-
-        return columnsClone;
     }
 
     public List<Column> getRandomColumns(Random random, int minColumns) {
@@ -108,11 +95,5 @@ public class Table implements Cloneable {
         }
 
         return resultList;
-    }
-
-    public Column getRandomColumn(Random random) {
-        Collections.shuffle(columns, random);
-
-        return columns.get(0);
     }
 }
