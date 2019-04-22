@@ -100,7 +100,8 @@ public class Schema02 extends Schema implements Cloneable {
     }
 
     public Reference.ChainTable getRandomChainTable(Random random) {
-        return getRandomChainTable(random, getRandomTable(random));
+        TableReference reference = getRandomTableReference(random);
+        return getRandomChainTable(random, findTableBySqlName(reference.getSqlTableName()));
     }
 
     public Reference.ChainTable getRandomChainTable(Random random, Table table) {

@@ -197,11 +197,11 @@
 
             <case sql-column="fare_conditions"
                   native-query="'Comfort' на 'Средняя цена', 'Business' на 'Дорого', а 'Economy' на 'Дёшево'"
-                  sql-query="case when fare_conditions 'Business' then 'Дорого' where 'Comfort' then 'Средняя цена' else 'Дёшево' end"/>
+                  sql-query="case when fare_conditions = 'Business' then 'Дорого' when fare_conditions = 'Comfort' then 'Средняя цена' else 'Дёшево' end"/>
 
             <case sql-column="fare_conditions"
                   native-query="'Comfort' на 'Комфорт', 'Business' на 'Бизнес', а 'Economy' на 'Эконом'"
-                  sql-query="case when fare_conditions 'Business' then 'Бизнес' where 'Comfort' then 'Комфорт' else 'Эконом' end"/>
+                  sql-query="case when fare_conditions = 'Business' then 'Бизнес' when fare_conditions = 'Comfort' then 'Комфорт' else 'Эконом' end"/>
         </table>
         <table sql="ticket_flights">
             <case sql-column="fare_conditions"
@@ -214,22 +214,22 @@
 
             <case sql-column="fare_conditions"
                   native-query="'Comfort' на 'Средняя цена', 'Business' на 'Дорого', а 'Economy' на 'Дёшево'"
-                  sql-query="case when fare_conditions 'Business' then 'Дорого' where 'Comfort' then 'Средняя цена' else 'Дёшево' end"/>
+                  sql-query="case when fare_conditions = 'Business' then 'Дорого' when fare_conditions = 'Comfort' then 'Средняя цена' else 'Дёшево' end"/>
 
             <case sql-column="fare_conditions"
                   native-query="'Comfort' на 'Комфорт', 'Business' на 'Бизнес', а 'Economy' на 'Эконом'"
-                  sql-query="case when fare_conditions 'Business' then 'Бизнес' where 'Comfort' then 'Комфорт' else 'Эконом' end"/>
+                  sql-query="case when fare_conditions = 'Business' then 'Бизнес' when fare_conditions = 'Comfort' then 'Комфорт' else 'Эконом' end"/>
         </table>
         <table sql="flights">
             <case sql-column="status"
                   native-query="'Departed' на 'Вылетел', 'Arrived' на 'Прибыл', а остальные на 'Неизвестно'"
-                  sql-query="case when fare_conditions 'Departed' then 'Вылетел' where 'Arrived' then 'Прибыл' else 'Неизвестно' end"/>
+                  sql-query="case when status = 'Departed' then 'Вылетел' when status = 'Arrived' then 'Прибыл' else 'Неизвестно' end"/>
             <case sql-column="status"
                   native-query="'Cancelled' на 'Отменён', 'Delayed' на 'Задержен', а остальные на 'В обработке'"
-                  sql-query="case when fare_conditions 'Cancelled' then 'Отменён' where 'Delayed' then 'Задержен' else 'В обработке' end"/>
+                  sql-query="case when status = 'Cancelled' then 'Отменён' when status = 'Delayed' then 'Задержен' else 'В обработке' end"/>
             <case sql-column="status"
                   native-query="'Arrived' на 'Прибыл', а остальные на 'Не прибыл'"
-                  sql-query="case when fare_conditions 'Arrived' then 'Прибыл' else 'Не прибыл' end"/>
+                  sql-query="case when status  = 'Arrived' then 'Прибыл' else 'Не прибыл' end"/>
         </table>
     </cases>
 

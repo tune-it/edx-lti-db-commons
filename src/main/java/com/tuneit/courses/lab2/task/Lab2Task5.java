@@ -4,6 +4,7 @@ import com.tuneit.courses.Task;
 import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.lab1.schema.Aggregation;
 import com.tuneit.courses.lab1.schema.Condition;
+import com.tuneit.courses.lab1.schema.ConditionTable;
 import com.tuneit.courses.lab2.Lab2Task;
 import com.tuneit.courses.lab2.schema.Reference;
 import com.tuneit.courses.lab2.schema.Schema02;
@@ -24,7 +25,10 @@ public class Lab2Task5 extends Lab2Task {
 
         schema02.getConditionTables().removeIf(conditionTable ->
                 !conditionTable.getSqlTableName().equalsIgnoreCase(chainTable.getRightTable().getTableName()));
-        Condition condition = schema02.getConditionTables().get(0).getRandomCondition(random);
+        ConditionTable conditionTable = schema02.getConditionTables().get(0);
+        conditionTable.getConditions().removeIf(condition ->
+                condition.getSqlColumnName().equalsIgnoreCase(chainTable.getRightColumn().getColumnName()));
+        Condition condition = conditionTable.getRandomCondition(random);
         String option = condition.getRandomOption(random);
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
@@ -64,6 +68,9 @@ public class Lab2Task5 extends Lab2Task {
                 .append("'")
                 .append(option)
                 .append("';");
+
+        System.out.println(query);
+        System.out.println(answer);
 
         return new LabTaskQA(task.getId(), query.toString(), answer.toString());
     }

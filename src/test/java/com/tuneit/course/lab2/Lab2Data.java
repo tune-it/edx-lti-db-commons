@@ -23,11 +23,11 @@ public class Lab2Data {
     }
 
     static String[] getQueryTask3() {
-        return new String[]{"Выведите все времена планируемых отправлений, номера рейсов из таблицы рейсов воздушного судна, которые совершались на самолётах с количеством мест менее 116."};
+        return new String[]{"Выведите все времена планируемых прибытий, идентификаторы рейсов, времена прибытий, номера рейсов из таблицы рейсов воздушного судна, которые совершались на самолётах с количеством мест менее 130."};
     }
 
     static String[] getAnswerTask3() {
-        return new String[]{"SELECT SCHEDULED_DEPARTURE, FLIGHT_NO FROM Flights\n" +
+        return new String[]{"SELECT SCHEDULED_Arrival, FLIGHT_NO FROM Flights\n" +
                 "WHERE Flights.aircraft_code IN (\n" +
                 "SELECT aircraft_code FROM Seats\n" +
                 "GROUP BY aircraft_code\n" +
