@@ -12,7 +12,7 @@ public class Lab1VariantTest {
     public void testTask1AllVariants() {
         for (int i = 0; i < getAnswerTask1().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 1, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 1, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask1()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -25,7 +25,7 @@ public class Lab1VariantTest {
     public void testTask2AllVariants() {
         for (int i = 0; i < getAnswerTask2().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("student", 1, 2, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 2, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask2()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -38,7 +38,7 @@ public class Lab1VariantTest {
     public void testTask3AllVariants() {
         for (int i = 0; i < getAnswerTask3().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 3, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 3, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask3()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -51,7 +51,7 @@ public class Lab1VariantTest {
     public void testTask4AllVariants() {
         for (int i = 0; i < getAnswerTask4().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 4, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 4, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask4()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -64,7 +64,7 @@ public class Lab1VariantTest {
     public void testTask5AllVariants() {
         for (int i = 0; i < getAnswerTask5().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 5, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 5, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask5()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -77,7 +77,7 @@ public class Lab1VariantTest {
     public void testTask6AllVariants() {
         for (int i = 0; i < getAnswerTask6().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("0d1f1c66cf4559ae6e88e8d8df7269d8", 1, 6, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 6, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask6()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -90,7 +90,7 @@ public class Lab1VariantTest {
     public void testTask7AllVariants() {
         for (int i = 0; i < getAnswerTask7().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 7, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 7, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask7()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -103,7 +103,7 @@ public class Lab1VariantTest {
     public void testTask8AllVariants() {
         for (int i = 0; i < getAnswerTask8().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("student", 1, 8, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 8, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask8()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -116,7 +116,7 @@ public class Lab1VariantTest {
     public void testTask9AllVariants() {
         for (int i = 0; i < getAnswerTask9().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 9, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 9, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask9()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 
@@ -129,7 +129,7 @@ public class Lab1VariantTest {
     public void testTask10AllVariants() {
         for (int i = 0; i < getAnswerTask10().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("serge@cs.ifmo.ru", 1, 10, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 10, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask10()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
 

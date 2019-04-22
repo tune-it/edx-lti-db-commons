@@ -18,8 +18,6 @@
                     name-creative-plural="именами"/>
             <column sql-name="city" name="город" name-plural="города" name-genitive-plural="городов"
                     name-creative-plural="городами"/>
-            <column sql-name="coordinates" name="координаты" name-plural="координаты" name-genitive-plural="координат"
-                    name-creative-plural="координатами"/>
             <column sql-name="timezone" name="временная зона" name-plural="временные зоны"
                     name-genitive-plural="временных зон" name-creative-plural="временными зонами"/>
         </table>
