@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Lab1Task9 extends Lab1Task {
-    private String[] usortableColumn; //TODO add point in this array
-
     @Override
     public LabTaskQA generate(Schema01 schema01, Task task) {
         query = new StringBuilder();
@@ -21,7 +19,7 @@ public class Lab1Task9 extends Lab1Task {
 
         Random random = task.getRandom();
         Table table = schema01.getRandomTable(random);
-        Column sortedColumn = table.getRandomColumn(random);    //TODO add find sortColumn without unsortable column
+        Column sortedColumn = table.getRandomColumn(random);
         table.getColumns().remove(sortedColumn);
         List<Column> columns = table.getRandomColumns(task.getRandom(), 2);
         boolean isDirectionSortedASC = random.nextBoolean();

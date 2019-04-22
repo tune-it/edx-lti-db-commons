@@ -67,7 +67,7 @@ public class Schema01 extends Schema implements Cloneable {
     @Override
     public Schema01 clone() {
         try {
-            Schema01 schema01 = (Schema01) super.clone();//todo copy diff table
+            Schema01 schema01 = (Schema01) super.clone();
             schema01.diffDates = cloneListDiffDate(diffDates);
             return schema01;
         } catch (CloneNotSupportedException e) {
