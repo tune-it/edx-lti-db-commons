@@ -34,7 +34,7 @@ public class Lab1Task9 extends Lab1Task {
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" из таблицы ")
                 .append(table.getNameGenitive())
-                .append(". Отсортировать результат по столбцу ")
+                .append(". Отсортируйте результат по столбцу ")
                 .append(sortedColumn.getNamePlural())
                 .append(" в порядке ");
         if (isDirectionSortedASC) {

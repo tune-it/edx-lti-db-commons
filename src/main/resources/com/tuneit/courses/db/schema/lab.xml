@@ -201,38 +201,36 @@
             </condition>
             <condition native="название города должно быть" sql="city"
                        count-conditions="1" greater="" below="" equals="равно" contains-null="">
-                <option>Воронеж</option>
-                <option>Геленджик</option>
-                <option>Горно-Алтайск</option>
-                <option>Грозный</option>
-                <option>Кольцово</option>
-                <option>Иваново-Южный</option>
-                <option>Ижевск</option>
-                <option>Иркутск</option>
-                <option>Йошкар-Ола</option>
-                <option>Казань</option>
-                <option>Храброво</option>
-                <option>Калуга</option>
-                <option>Кемерово</option>
-                <option>Победилово</option>
-                <option>Когалым</option>
-                <option>Хурба</option>
-                <option>Краснодар</option>
-                <option>Емельяново</option>
-                <option>Курган</option>
-                <option>Курск-Восточный</option>
-                <option>Кызыл</option>
-                <option>Липецк</option>
-                <option>Магадан</option>
-                <option>Магнитогорск</option>
-                <option>Уйташ</option>
-                <option>Минеральные Воды</option>
+                <option>Якутск</option>
                 <option>Мирный</option>
-                <option>Домодедово</option>
-                <option>Внуково</option>
-                <option>Шереметьево</option>
-                <option>Мурманск</option>
-                <option>Надым</option>
+                <option>Хабаровск</option>
+                <option>Петропавловск-Камчатский</option>
+                <option>Южно-Сахалинск</option>
+                <option>Владивосток</option>
+                <option>Санкт-Петербург</option>
+                <option>Калининград</option>
+                <option>Кемерово</option>
+                <option>Челябинск</option>
+                <option>Магнитогорск</option>
+                <option>Пермь</option>
+                <option>Сургут</option>
+                <option>Брянск</option>
+                <option>Минеральные Воды</option>
+                <option>Ставрополь</option>
+                <option>Астрахань</option>
+                <option>Нижневартовск</option>
+                <option>Екатеринбург</option>
+                <option>Москва</option>
+                <option>Воронеж</option>
+                <option>Москва</option>
+                <option>Сыктывкар</option>
+                <option>Самара</option>
+                <option>Москва</option>
+                <option>Тюмень</option>
+                <option>Нижний Новгород</option>
+                <option>Томск</option>
+                <option>Усть-Илимск</option>
+                <option>Норильск</option>
             </condition>
             <condition native="временная зона должна быть" sql="timezone"
                        count-conditions="1" greater="" below="" equals="равна" contains-null="">

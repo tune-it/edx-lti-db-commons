@@ -36,7 +36,7 @@ public class Lab1Task4 extends Lab1Task {
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(" для таблицы ")
                 .append(table.getTableName())
-                .append(". Отсортировать результат по столбцу ")
+                .append(". Отсортируйте результат по столбцу ")
                 .append(sortedColumn.getNamePlural())
                 .append(" (")
                 .append(sortedColumn.getColumnName().toLowerCase())
