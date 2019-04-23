@@ -30,11 +30,11 @@ public class Lab1Task9 extends Lab1Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural()));
 
-        query.append("Выведите содержимое полей ");
-        writeColumnToQuery(columnsRevisedForWrite, ", ", query);
-        query.append(" из таблицы ")
+        query.append("Выведите содержимое следующих полей из таблицы ")
                 .append(table.getNameGenitive())
-                .append(". Отсортируйте результат по столбцу ")
+                .append(": ");
+        writeColumnToQuery(columnsRevisedForWrite, ", ", query);
+        query.append(". Отсортируйте результат по столбцу ")
                 .append(sortedColumn.getNamePlural())
                 .append(" в порядке ");
         if (isDirectionSortedASC) {
