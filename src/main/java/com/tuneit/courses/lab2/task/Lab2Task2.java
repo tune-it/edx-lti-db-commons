@@ -37,13 +37,13 @@ public class Lab2Task2 extends Lab2Task {
         columns.forEach(
                 column -> columnsRevisedForWrite.add(column.getNamePlural()));
 
-        query.append("Выведите содержимое полей ");
+        query.append("Выведите содержимое следующих полей из таблицы ")
+                .append(table.getNameGenitive())
+                .append(": ");
         writeColumnToQuery(columnsRevisedForWrite, ", ", query);
         query.append(", ")
                 .append(caseColumn.getNamePlural())
-                .append(" из таблицы ")
-                .append(table.getNameGenitive())
-                .append(", заменив значения ")
+                .append(". Замените значения ")
                 .append(caseColumn.getNameGenitivePlural())
                 .append(" ")
                 .append(randomCase.getNativeQuery())
