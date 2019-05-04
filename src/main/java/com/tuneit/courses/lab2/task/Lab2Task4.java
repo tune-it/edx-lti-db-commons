@@ -31,16 +31,16 @@ public class Lab2Task4 extends Lab2Task {
 
         Column column = getRandomElement(random, chainTable.getLeftTable().getColumns());
 
-        query.append("Напишите запрос для получения атрибутов из указанных таблиц, " +
-                "применив фильтры по указанным условиям. Таблицы: ")
+        query.append("Напишите запрос для получения полей из объединённых таблиц, " +
+                "удовлетворяющих указанным условиям. Таблицы: ")
                 .append(chainTable.getLeftTable().getNameGenitive())
                 .append(", ")
                 .append(chainTable.getRightTable().getNameGenitive())
-                .append(". Атрибуты: все уникальные значения ")
+                .append(". Поля: все уникальные значения ")
                 .append(column.getNameGenitivePlural())
                 .append(" из таблицы ")
                 .append(chainTable.getLeftTable().getNameGenitive())
-                .append(". Фильтры: ")
+                .append(". Условия: ")
                 .append(condition.getNativeColumnName())
                 .append(conditionSign.getSignConditionNative())
                 .append("\"")

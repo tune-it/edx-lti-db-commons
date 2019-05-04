@@ -15,7 +15,7 @@ public class Lab2VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 2, 1, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask1()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println("Выведите все уникальные значения статусов из таблицы рейсов воздушных судов, максимальная дальность полёта которых превышает \"4200\". Для выборки использовать данные из объединения таблиц рейсов воздушных судов и воздушных судов.");
 
             assertEquals(getQueryTask1()[i], task.getQuestion());
             assertEquals(1, task.getRating());
