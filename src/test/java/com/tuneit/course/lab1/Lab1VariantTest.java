@@ -15,7 +15,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 1, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask1()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask1()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -29,7 +29,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 2, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask2()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask2()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -43,7 +43,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 3, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask3()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask3()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -57,7 +57,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 4, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask4()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask4()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -71,7 +71,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 5, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask5()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask5()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -85,7 +85,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 6, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask6()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask6()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -99,7 +99,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 7, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask7()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask7()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -113,7 +113,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 8, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask8()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask8()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -127,7 +127,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 9, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask9()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask9()[i], task.getQuestion());
             assertEquals(1, task.getRating());
@@ -141,7 +141,7 @@ public class Lab1VariantTest {
             Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 1, 10, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask10()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
-            System.out.println(task.getQuestion());
+            System.out.println(task.getTaskId() + ") " + task.getQuestion());
 
             assertEquals(getQueryTask10()[i], task.getQuestion());
             assertEquals(1, task.getRating());

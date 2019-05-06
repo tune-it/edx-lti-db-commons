@@ -647,44 +647,44 @@
 
     <aggregations>
         <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="max"
-                     column-function-native="самое дорогое бронирование (все поля таблицы), соответствующее следующему условию"
+                     column-function-native="стоимость самого дорогого бронирования, соответствующего следующему условию"
                      condition="book_date"/>
 
         <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="min"
-                     column-function-native="самое дешёвое бронирование (все поля таблицы), соответствующее следующему условию"
+                     column-function-native="стоимость самого дешёвого бронирования, соответствующего следующему условию"
                      condition="book_date"/>
 
         <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="sum"
-                     column-function-native="сумму всех бронирований (все поля таблицы), соответствующую следующему условию"
+                     column-function-native="суммарную стоимость всех бронирований, соответствующих следующему условию"
                      condition="book_date"/>
 
 
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="min"
-                     column-function-native="самый дешёвый билет (все поля таблицы), соответствующий следующему условию"
+                     column-function-native="стоимость самого дешёвого перелёта, соответствующего следующему условию"
                      condition="fare_conditions"/>
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="min"
-                     column-function-native="самый дешёвый билет (все поля таблицы), соответствующий следующему условию"
+                     column-function-native="стоимость самого дешёвого перелёта, соответствующего следующему условию"
                      condition="flight_id"/>
 
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="avg"
-                     column-function-native="среднюю стоимость билета (все поля таблицы), соответствующую следующему условию"
+                     column-function-native="среднюю стоимость перелётов, соответствующих следующему условию"
                      condition="flight_id"/>
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="avg"
-                     column-function-native="среднюю стоимость билета (все поля таблицы), соответствующую следующему условию"
+                     column-function-native="среднюю стоимость перелётов, соответствующих следующему условию"
                      condition="fare_conditions"/>
 
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="max"
-                     column-function-native="самый дорогой билет (все поля таблицы), соответствующий следующему условию"
+                     column-function-native="стоимость самого дорогого перелёта, соответствующего следующему условию"
                      condition="fare_conditions"/>
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="max"
-                     column-function-native="самый дорогой билет (все поля таблицы), соответствующий следующему условию"
+                     column-function-native="стоимость самого дорогого перелёта, соответствующего следующему условию"
                      condition="flight_id"/>
 
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="sum"
-                     column-function-native="сумму всех билетов (все поля таблицы), соответствующую следующему условию"
+                     column-function-native="суммарную стоимость всех перелётов, соответствующих следующему условию"
                      condition="fare_conditions"/>
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="sum"
-                     column-function-native="сумму всех билетов (все поля таблицы), соответствующую следующему условию"
+                     column-function-native="суммарную стоимость всех перелётов, соответствующих следующему условию"
                      condition="flight_id"/>
     </aggregations>
 </schema>
