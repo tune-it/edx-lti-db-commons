@@ -36,8 +36,8 @@
                     name-creative-plural="кодами"/>
             <column sql-name="book_date" name="дата" name-plural="даты" name-genitive-plural="дат"
                     name-creative-plural="датами"/>
-            <column sql-name="total_amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
-                    name-creative-plural="суммами"/>
+            <column sql-name="total_amount" name="стоимость брони" name-plural="стоимости бронирований" name-genitive-plural="стоимостей бронирований"
+                    name-creative-plural="стоимостями бронирований"/>
         </table>
         <table sql-name="flights" name="рейс воздушного судна" name-genitive="рейсов воздушного судна">
             <column sql-name="flight_id" name="идентификатор рейса" name-plural="идентификаторы рейсов"
@@ -78,8 +78,8 @@
                     name-genitive-plural="идентификаторов рейсов" name-creative-plural="идентификаторами рейсов"/>
             <column sql-name="fare_conditions" name="тариф" name-plural="тарифы" name-genitive-plural="тарифов"
                     name-creative-plural="тарифами"/>
-            <column sql-name="amount" name="сумма" name-plural="суммы" name-genitive-plural="сумм"
-                    name-creative-plural="суммами"/>
+            <column sql-name="amount" name="стоимость билета" name-plural="стоимости билетов" name-genitive-plural="стоимостей билетов"
+                    name-creative-plural="стоимостями билетов"/>
         </table>
         <table sql-name="tickets" name="проданный билет" name-genitive="проданных билетов">
             <column sql-name="ticket_no" name="номер" name-plural="номера" name-genitive-plural="номеров"
