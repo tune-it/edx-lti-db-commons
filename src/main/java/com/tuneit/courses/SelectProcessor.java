@@ -1,7 +1,7 @@
 package com.tuneit.courses;
 
-import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.SchemaLoader;
+import com.tuneit.courses.lab.schema.Schema;
+import com.tuneit.courses.lab.schema.SchemaLoader;
 
 import java.sql.*;
 import java.util.logging.Level;

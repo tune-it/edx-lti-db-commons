@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab.schema;
 
 public interface Clone<T> {
     T clone();

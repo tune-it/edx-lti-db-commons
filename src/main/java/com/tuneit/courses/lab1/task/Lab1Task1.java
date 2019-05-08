@@ -1,12 +1,12 @@
 package com.tuneit.courses.lab1.task;
 
 import com.tuneit.courses.Task;
-import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.db.schema.Table;
+import com.tuneit.courses.lab.LabTaskQA;
+import com.tuneit.courses.lab.schema.Table;
 import com.tuneit.courses.lab1.Lab1Task;
 import com.tuneit.courses.lab1.schema.Schema01;
 
-import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+import static com.tuneit.courses.lab.schema.Schema.getRandomElement;
 
 public class Lab1Task1 extends Lab1Task {
     @Override

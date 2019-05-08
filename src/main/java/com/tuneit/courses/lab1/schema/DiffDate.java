@@ -1,6 +1,6 @@
 package com.tuneit.courses.lab1.schema;
 
-import com.tuneit.courses.db.schema.Clone;
+import com.tuneit.courses.lab.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
-import static com.tuneit.courses.db.schema.Schema.cloneList;
+import static com.tuneit.courses.lab.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Setter

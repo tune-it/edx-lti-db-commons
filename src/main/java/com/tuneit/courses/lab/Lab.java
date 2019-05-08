@@ -1,4 +1,4 @@
-package com.tuneit.courses.db;
+package com.tuneit.courses.lab;
 
 import com.tuneit.courses.Task;
 

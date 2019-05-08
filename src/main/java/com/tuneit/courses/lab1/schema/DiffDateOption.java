@@ -1,6 +1,6 @@
 package com.tuneit.courses.lab1.schema;
 
-import com.tuneit.courses.db.schema.Clone;
+import com.tuneit.courses.lab.schema.Clone;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab.schema;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
-import static com.tuneit.courses.db.schema.Schema.cloneList;
+import static com.tuneit.courses.lab.schema.Schema.cloneList;
 
 /**
  * @author serge

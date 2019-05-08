@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.schema;
+package com.tuneit.courses.lab.schema;
 
 import com.tuneit.courses.lab1.schema.Schema01;
 import org.apache.commons.dbcp2.*;

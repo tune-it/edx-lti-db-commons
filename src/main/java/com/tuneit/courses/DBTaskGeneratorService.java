@@ -1,9 +1,9 @@
 package com.tuneit.courses;
 
-import com.tuneit.courses.db.Lab;
-import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.db.schema.Schema;
-import com.tuneit.courses.db.schema.SchemaLoader;
+import com.tuneit.courses.lab.Lab;
+import com.tuneit.courses.lab.LabTaskQA;
+import com.tuneit.courses.lab.schema.Schema;
+import com.tuneit.courses.lab.schema.SchemaLoader;
 import org.springframework.stereotype.Component;
 
 @Component

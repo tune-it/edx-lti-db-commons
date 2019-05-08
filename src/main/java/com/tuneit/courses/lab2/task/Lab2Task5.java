@@ -1,17 +1,17 @@
 package com.tuneit.courses.lab2.task;
 
 import com.tuneit.courses.Task;
-import com.tuneit.courses.db.LabTaskQA;
-import com.tuneit.courses.db.schema.Aggregation;
-import com.tuneit.courses.db.schema.Condition;
-import com.tuneit.courses.db.schema.ConditionTable;
+import com.tuneit.courses.lab.LabTaskQA;
+import com.tuneit.courses.lab.schema.Aggregation;
+import com.tuneit.courses.lab.schema.Condition;
+import com.tuneit.courses.lab.schema.ConditionTable;
 import com.tuneit.courses.lab2.Lab2Task;
 import com.tuneit.courses.lab2.schema.Reference;
 import com.tuneit.courses.lab2.schema.Schema02;
 
 import java.util.Random;
 
-import static com.tuneit.courses.db.schema.Schema.getRandomElement;
+import static com.tuneit.courses.lab.schema.Schema.getRandomElement;
 
 public class Lab2Task5 extends Lab2Task {
     @Override
