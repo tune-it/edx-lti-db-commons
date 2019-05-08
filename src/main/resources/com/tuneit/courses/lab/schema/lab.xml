@@ -464,7 +464,6 @@
                 <option>Departed</option>
                 <option>Arrived</option>
                 <option>On Time</option>
-                <option>Cancelled</option>
                 <option>Delayed</option>
                 <option>Scheduled</option>
             </condition>
