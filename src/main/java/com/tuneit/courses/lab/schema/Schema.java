@@ -55,7 +55,7 @@ public class Schema {
         Schema schema;
         try {
             JAXBContext jc = JAXBContext.newInstance(Schema.class);
-            InputStream inputStream = Schema.class.getResourceAsStream(schemaName);
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(schemaName);
             if (inputStream == null)
                 throw new JAXBException("Could not get XML schema in application resourses");
             Source source = new StreamSource(inputStream);

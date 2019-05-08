@@ -55,7 +55,7 @@ public class Schema02 extends Schema implements Cloneable {
         Schema02 schema02;
         try {
             JAXBContext jc = JAXBContext.newInstance(Schema02.class);
-            InputStream inputStream = Schema02.class.getResourceAsStream(schemaName);
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(schemaName);
             if (inputStream == null)
                 throw new JAXBException("Could not get XML schema in application resourses");
             Source source = new StreamSource(inputStream);

@@ -38,7 +38,7 @@ public class SchemaConnection {
         SchemaConnection connection;
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(SchemaConnection.class);
-            InputStream inputStream = SchemaConnection.class.getResourceAsStream("connection.xml");
+            InputStream inputStream = SchemaConnection.class.getClassLoader().getResourceAsStream("connection.xml");
             if (inputStream == null)
                 throw new JAXBException("Could not get XML schema in application resourses");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
