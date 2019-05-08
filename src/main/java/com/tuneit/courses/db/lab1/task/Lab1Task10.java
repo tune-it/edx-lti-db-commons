@@ -1,7 +1,7 @@
 package com.tuneit.courses.db.lab1.task;
 
 import com.tuneit.courses.db.Task;
-import com.tuneit.courses.db.lab.LabTaskQA;
+import com.tuneit.courses.db.LabTaskQA;
 import com.tuneit.courses.db.lab1.Lab1Task;
 import com.tuneit.courses.db.lab1.schema.DiffDate;
 import com.tuneit.courses.db.lab1.schema.DiffDateOption;
@@ -9,7 +9,7 @@ import com.tuneit.courses.db.lab1.schema.Schema01;
 
 import java.util.Random;
 
-import static com.tuneit.courses.db.lab.schema.Schema.getRandomElement;
+import static com.tuneit.courses.db.schema.Schema.getRandomElement;
 
 public class Lab1Task10 extends Lab1Task {
 

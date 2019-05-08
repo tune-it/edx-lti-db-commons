@@ -1,9 +1,9 @@
 package com.tuneit.courses.db.lab1;
 
 import com.tuneit.courses.db.Task;
-import com.tuneit.courses.db.lab.Lab;
-import com.tuneit.courses.db.lab.LabTaskQA;
-import com.tuneit.courses.db.lab.schema.SchemaLoader;
+import com.tuneit.courses.db.Lab;
+import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.SchemaLoader;
 import com.tuneit.courses.db.lab1.schema.Schema01;
 import com.tuneit.courses.db.lab1.task.*;
 

@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.lab.schema;
+package com.tuneit.courses.db.schema;
 
 import com.tuneit.courses.db.lab1.schema.Schema01;
 import com.tuneit.courses.db.lab2.schema.Schema02;

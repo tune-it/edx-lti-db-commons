@@ -1,7 +1,6 @@
-package com.tuneit.courses.db.lab;
+package com.tuneit.courses.db;
 
-import com.tuneit.courses.db.Task;
-import com.tuneit.courses.db.lab.schema.Schema;
+import com.tuneit.courses.db.schema.Schema;
 
 import java.util.List;
 

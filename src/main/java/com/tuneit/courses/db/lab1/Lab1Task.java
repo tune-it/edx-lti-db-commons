@@ -1,9 +1,9 @@
 package com.tuneit.courses.db.lab1;
 
 import com.tuneit.courses.db.Task;
-import com.tuneit.courses.db.lab.LabTask;
-import com.tuneit.courses.db.lab.LabTaskQA;
-import com.tuneit.courses.db.lab.schema.Schema;
+import com.tuneit.courses.db.LabTask;
+import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.Schema;
 import com.tuneit.courses.db.lab1.schema.Schema01;
 
 import javax.xml.bind.annotation.XmlAccessType;

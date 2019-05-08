@@ -1,9 +1,9 @@
 package com.tuneit.courses.db.lab2.schema;
 
-import com.tuneit.courses.db.lab.Lab;
-import com.tuneit.courses.db.lab.schema.Column;
-import com.tuneit.courses.db.lab.schema.Schema;
-import com.tuneit.courses.db.lab.schema.Table;
+import com.tuneit.courses.db.Lab;
+import com.tuneit.courses.db.schema.Column;
+import com.tuneit.courses.db.schema.Schema;
+import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.db.lab2.Lab02;
 import lombok.Getter;
 import lombok.Setter;

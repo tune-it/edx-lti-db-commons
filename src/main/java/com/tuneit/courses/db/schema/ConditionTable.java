@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.lab.schema;
+package com.tuneit.courses.db.schema;
 
 
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
-import static com.tuneit.courses.db.lab.schema.Schema.cloneList;
+import static com.tuneit.courses.db.schema.Schema.cloneList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ConditionTable implements Cloneable, Clone<ConditionTable> {

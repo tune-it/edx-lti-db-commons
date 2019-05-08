@@ -1,4 +1,4 @@
-package com.tuneit.courses.db.lab;
+package com.tuneit.courses.db;
 
 import org.apache.commons.collections4.map.LRUMap;
 

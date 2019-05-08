@@ -1,6 +1,4 @@
-package com.tuneit.courses.db.lab;
-
-import com.tuneit.courses.db.Task;
+package com.tuneit.courses.db;
 
 public interface Lab {
     LabTaskQA generate(Task task);
