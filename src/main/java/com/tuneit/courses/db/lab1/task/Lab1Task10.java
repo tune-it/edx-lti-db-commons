@@ -27,7 +27,7 @@ public class Lab1Task10 extends Lab1Task {
                 .append(diffDate.getNativeDescription())
                 .append(" ")
                 .append(option.getNativeOption())
-                .append(". Важно: в postgresql результат вычитания двух дат имеет тип interval. Для перевода значения типа interval в минуты, можно воспользоваться функцией extract.");
+                .append(". Важно: в postgresql результат вычитания двух дат имеет тип interval. Для извлечения количества минут из данных типа interval можно воспользоваться функцией extract.");
 
         answer.append("SELECT ")
                 .append("EXTRACT(EPOCH FROM ")
