@@ -7,11 +7,6 @@
             <option sql="/60/60" native="(в часах)"/>
             <option sql="/60" native="(в минутах)"/>
         </date>
-        <date table="flights" column1="actual_arrival" column2="actual_departure"
-              description="реальное время каждого полёта для всех воздушных судов">
-            <option sql="/60/60" native="(в часах)"/>
-            <option sql="/60" native="(в минутах)"/>
-        </date>
         <epilog/>
     </dates>
 </schema01>
