@@ -678,12 +678,5 @@
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="max"
                      column-function-native="стоимость самого дорогого перелёта, соответствующего следующему условию"
                      condition="flight_id"/>
-
-        <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="sum"
-                     column-function-native="суммарную стоимость всех перелётов, соответствующих следующему условию"
-                     condition="fare_conditions"/>
-        <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="sum"
-                     column-function-native="суммарную стоимость всех перелётов, соответствующих следующему условию"
-                     condition="flight_id"/>
     </aggregations>
 </schema>

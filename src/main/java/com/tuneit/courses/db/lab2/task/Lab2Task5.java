@@ -25,12 +25,16 @@ public class Lab2Task5 extends Lab2Task {
         Reference.ChainTable chainTable = schema02.getRandomChainTable(random,
                 schema02.findTableBySqlName(aggregation.getTableSqlName()));
 
+        //find conditions for right table
         schema02.getConditionTables().removeIf(conditionTable ->
                 !conditionTable.getSqlTableName().equalsIgnoreCase(chainTable.getRightTable().getTableName()));
         ConditionTable conditionTable = schema02.getConditionTables().get(0);
+
+        //delete condition for join column
         conditionTable.getConditions().removeIf(condition ->
                 condition.getSqlColumnName().equalsIgnoreCase(chainTable.getRightColumn().getColumnName()));
         Condition condition = getRandomElement(random, conditionTable.getConditions());
+
         String option = getRandomElement(random, condition.getOptionConditions());
         Condition.PairSign conditionSign = condition.getConditionSign(random);
 
