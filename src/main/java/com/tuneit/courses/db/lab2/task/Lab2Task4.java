@@ -20,14 +20,21 @@ public class Lab2Task4 extends Lab2Task {
 
         Random random = task.getRandom();
 
+        //get 2 table for join
         Reference.ChainTable chainTable = schema02.getRandomChainTable(random);
 
+        //get condition for right table
         schema02.getConditionTables().removeIf(conditionTable ->
                 !conditionTable.getSqlTableName().equalsIgnoreCase(chainTable.getRightTable().getTableName()));
-
         Condition condition = getRandomElement(random, schema02.getConditionTables().get(0).getConditions());
+
         String option = getRandomElement(random, condition.getOptionConditions());
         Condition.PairSign conditionSign = condition.getConditionSign(random);
+
+        //delete equals columns for 2 tables
+        chainTable.getLeftTable().getColumns().removeIf(column ->
+                chainTable.getRightTable().getColumns().stream()
+                        .anyMatch(column1 -> column1.getColumnName().equals(column.getColumnName())));
 
         Column column = getRandomElement(random, chainTable.getLeftTable().getColumns());
 

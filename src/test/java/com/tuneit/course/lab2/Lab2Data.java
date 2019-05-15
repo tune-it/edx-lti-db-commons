@@ -37,13 +37,13 @@ public class Lab2Data {
     static String[] getQueryTask4() {
         return new String[]{"Напишите запрос для получения полей из объединённых таблиц, удовлетворяющих указанным условиям. " +
                 "Таблицы: рейсов воздушного судна, воздушных судов. " +
-                "Поля: все уникальные значения статусов из таблицы рейсов воздушного судна. " +
+                "Поля: все уникальные значения времен планируемых прибытий из таблицы рейсов воздушного судна. " +
                 "Условия: максимальная дальность полёта самолёта должна быть больше, чем \"4200\". " +
                 "В запросе должен использоваться INNER JOIN."};
     }
 
     static String[] getAnswerTask4() {
-        return new String[]{"select distinct status from flights join AIRCRAFTS on flights.AIRCRAFT_CODE = AIRCRAFTS.AIRCRAFT_CODE " +
+        return new String[]{"select distinct scheduled_arrival from flights join AIRCRAFTS on flights.AIRCRAFT_CODE = AIRCRAFTS.AIRCRAFT_CODE " +
                 "where range > 4200;"};
     }
 
