@@ -23,15 +23,18 @@ public class Lab2Data {
     }
 
     static String[] getQueryTask3() {
-        return new String[]{"Выведите все уникальные значения номеров рейсов из таблицы рейсов воздушного судна, которые совершались на самолётах с количеством мест более 97."};
+        return new String[]{"Выведите все уникальные значения времён прибытий из таблицы рейсов воздушного судна, " +
+                "которые совершались на самолётах с количеством мест менее 50."};
     }
 
     static String[] getAnswerTask3() {
-        return new String[]{"SELECT distinct flight_no FROM flights\n" +
-                "WHERE Flights.aircraft_code IN (\n" +
-                "SELECT aircraft_code FROM Seats\n" +
+        return new String[]{"SELECT DISTINCT actual_arrival \n" +
+                "FROM flights\n" +
+                "WHERE aircraft_code IN (\n" +
+                "SELECT aircraft_code\n" +
+                "FROM seats\n" +
                 "GROUP BY aircraft_code\n" +
-                "HAVING COUNT(seat_no)>97 ); "};
+                "HAVING count(seat_no)<50)"};
     }
 
     static String[] getQueryTask4() {

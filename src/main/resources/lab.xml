@@ -61,7 +61,7 @@
             <column sql-name="actual_departure" name="время отправления" name-plural="времена отправлений"
                     name-genitive-plural="времён отправлений" name-creative-plural="временами отправлений"/>
             <column sql-name="actual_arrival" name="время прибытия" name-plural="времена прибытий"
-                    name-genitive-plural="времён отправлений" name-creative-plural="временами прибытий"/>
+                    name-genitive-plural="времён прибытий" name-creative-plural="временами прибытий"/>
         </table>
         <table sql-name="seats" name="посадочное место" name-genitive="посадочных мест">
             <column sql-name="aircraft_code" name="код воздушного судна" name-plural="коды воздушных судов"
