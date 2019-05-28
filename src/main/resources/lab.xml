@@ -645,19 +645,6 @@
     </conditions>
 
     <aggregations>
-        <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="max"
-                     column-function-native="стоимость самого дорогого бронирования, соответствующего следующему условию"
-                     condition="book_date"/>
-
-        <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="min"
-                     column-function-native="стоимость самого дешёвого бронирования, соответствующего следующему условию"
-                     condition="book_date"/>
-
-        <aggregation table-sql="bookings" table-native="бронирований" column="total_amount" function="sum"
-                     column-function-native="суммарную стоимость всех бронирований, соответствующих следующему условию"
-                     condition="book_date"/>
-
-
         <aggregation table-sql="ticket_flights" table-native="состоявшихся полётов" column="amount" function="min"
                      column-function-native="стоимость самого дешёвого перелёта, соответствующего следующему условию"
                      condition="fare_conditions"/>

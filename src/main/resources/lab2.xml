@@ -7,13 +7,6 @@
             <reference table="seats" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
             <reference table="flights" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
         </table>
-        <table sql-name="boarding_passes" join2Table="true">
-            <reference table="ticket_flights" column-ref="ticket_no" join-column-ref="ticket_no"/>
-            <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>
-        </table>
-        <table sql-name="bookings" join2Table="true">
-            <reference table="tickets" column-ref="book_ref" join-column-ref="book_ref"/>
-        </table>
         <table sql-name="flights" join2Table="false">
             <reference table="aircrafts" column-ref="aircraft_code" join-column-ref="aircraft_code"/>
             <reference table="ticket_flights" column-ref="flight_id" join-column-ref="flight_id"/>

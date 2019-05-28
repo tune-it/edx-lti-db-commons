@@ -39,15 +39,17 @@ public class Lab2Data {
 
     static String[] getQueryTask4() {
         return new String[]{"Напишите запрос для получения полей из объединённых таблиц, удовлетворяющих указанным условиям. " +
-                "Таблицы: рейсов воздушного судна, воздушных судов. " +
-                "Поля: все уникальные значения времен планируемых прибытий из таблицы рейсов воздушного судна. " +
-                "Условия: максимальная дальность полёта самолёта должна быть больше, чем \"4200\". " +
+                "Таблицы: проданных билетов, состоявшихся полетов. " +
+                "Поля: все уникальные значения контактных данных из таблицы проданных билетов. " +
+                "Условия: тариф должен быть равен \"Economy\". " +
                 "В запросе должен использоваться INNER JOIN."};
     }
 
     static String[] getAnswerTask4() {
-        return new String[]{"select distinct scheduled_arrival from flights join AIRCRAFTS on flights.AIRCRAFT_CODE = AIRCRAFTS.AIRCRAFT_CODE " +
-                "where range > 4200;"};
+        return new String[]{"select distinct contact_data " +
+                "from tickets inner join TICKET_FLIGHTS " +
+                "on tickets.ticket_no = TICKET_FLIGHTS.ticket_no " +
+                "where TICKET_FLIGHTS.fare_conditions = 'Economy';\n"};
     }
 
     static String[] getQueryTask5() {

@@ -54,7 +54,7 @@ public class Lab2VariantTest {
     public void testTask4AllVariants() {
         for (int i = 0; i < getAnswerTask4().length; i++) {
             DBTaskGeneratorService taskGenerator = new DBTaskGeneratorService();
-            Task task = taskGenerator.getTask("1db56a451774ae25e5d2788a78f5863a", 2, 4, Integer.toString(i), 0);
+            Task task = taskGenerator.getTask("9d70783eaa12c377b158086b78dabb2c", 2, 4, Integer.toString(i), 0);
             task.setAnswer(getAnswerTask4()[i]).setComplete(true);
             taskGenerator.checkTasks(task);
             System.out.println(task.getTaskId() + ") " + task.getQuestion());
