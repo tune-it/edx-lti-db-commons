@@ -61,7 +61,7 @@ public class SelectProcessor {
                         Integer.toString(SelectResult.TIMEOUT), SelectResult.TIMEOUT);
             }
 
-            resultSet = statement.executeQuery(query);
+            resultSet = statement.executeQuery(addOrder(query));
 
             if (hasHtmlOutput) {
                 setHtmlHeaderForSelectResult(selectResult, resultSet);
@@ -110,6 +110,19 @@ public class SelectProcessor {
         return selectResult;
     }
 
+    private String addOrder(String query) {
+        query = query.trim();
+        if (!query.toUpperCase().contains("ORDER BY")) {
+            if (query.charAt(query.length() - 1) == ';') {
+                return query.substring(0, query.length() - 1) + " ORDER BY 1";
+            } else {
+                return query + " ORDER BY 1";
+            }
+        } else {
+            return query;
+        }
+    }
+
     private void setHtmlHeaderForSelectResult(SelectResult selectResult, ResultSet resultSet) throws SQLException {
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int numberColumns = resultSetMetaData.getColumnCount();
@@ -142,7 +155,6 @@ public class SelectProcessor {
             if (hasHtmlOutput)
                 selectResult.getHtmlRows().append("</tr>\n");
         }
-
         return controlSum;
     }
 

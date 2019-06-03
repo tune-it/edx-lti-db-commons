@@ -2,11 +2,11 @@ package com.tuneit.course.lab2;
 
 public class Lab2Data {
     static String[] getQueryTask1() {
-        return new String[]{"Выведите содержимое полей коды, максимально возможные дистанции из таблицы воздушных судов, модели которых заканчиваются на \"100\"."};
+        return new String[]{"Выведите содержимое полей коды бронирования, идентификаторы пассажиров из таблицы проданных билетов, имена пассажиров которых заканчиваются на \"OVA\"."};
     }
 
     static String[] getAnswerTask1() {
-        return new String[]{"select aircraft_code, range from aircrafts as a where model like '%100';"};
+        return new String[]{"select b.book_ref, t.passenger_id from bookings b join tickets t on b.book_ref = t.book_ref where t.passenger_name like '%OVA'"};
     }
 
     static String[] getQueryTask2() {

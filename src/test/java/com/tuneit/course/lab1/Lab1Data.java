@@ -71,12 +71,12 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask7() {
-        String queryVariant0 = "Выведите содержимое всех полей из таблицы рейсов воздушного судна, которые удовлетворяют следующему условию: время планируемого отправления рейса должно быть равно \"2017-09-10 12:00:00.000000\" или номер рейса должен быть равен \"PG0667\".";
+        String queryVariant0 = "Выведите содержимое всех полей из таблицы проданных билетов, которые удовлетворяют следующему условию: имя пассажира должно быть равно \"IRINA SIDOROVA\" или код бронирования должен быть равен \"E7537C\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask7() {
-        String answerVariant0 = "select * from flights where flight_no = 'PG0667' OR scheduled_departure = '2017-09-10 12:00:00.000000'";
+        String answerVariant0 = "select * from tickets where passenger_name='IRINA SIDOROVA' OR book_ref='E7537C'";
         return new String[]{answerVariant0};
     }
 
