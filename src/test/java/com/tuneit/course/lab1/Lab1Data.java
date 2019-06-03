@@ -83,12 +83,12 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask8() {
-        String queryVariant0 = "Выведите стоимость самого дешёвого перелёта, соответствующего следующему условию: идентификатор рейса должен быть равен \"25223\".";
+        String queryVariant0 = "Выведите среднюю стоимость перелётов, соответствующих следующему условию: тариф должен быть равен \"Economy\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask8() {
-        String answerVariant0 = "SELECT min(amount) FROM ticket_flights WHERE flight_id = '25223';";
+        String answerVariant0 = "SELECT avg(amount) FROM ticket_flights WHERE fare_conditions = 'Economy';";
         return new String[]{answerVariant0};
     }
 

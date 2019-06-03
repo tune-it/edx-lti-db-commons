@@ -53,12 +53,12 @@ public class Lab2Data {
     }
 
     static String[] getQueryTask5() {
-        return new String[]{"Выведите стоимость самого дорогого перелёта, соответствующего следующему условию: " +
+        return new String[]{"Выведите среднюю стоимость перелётов, соответствующих следующему условию: " +
                 "код бронирования должен быть равен \"044F42\" (данные из таблицы проданных билетов). " +
                 "В запросе должен использоваться INNER JOIN."};
     }
 
     static String[] getAnswerTask5() {
-        return new String[]{"select max(TICKET_FLIGHTS.amount) from TICKET_FLIGHTS inner join TICKETS on TICKET_FLIGHTS.ticket_no = TICKETS.ticket_no where TICKETS.book_ref = '044F42';"};
+        return new String[]{"select avg(TICKET_FLIGHTS.amount) from TICKET_FLIGHTS inner join TICKETS on TICKET_FLIGHTS.ticket_no = TICKETS.ticket_no where TICKETS.book_ref = '044F42';"};
     }
 }
