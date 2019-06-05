@@ -55,9 +55,8 @@ public class DBTaskGeneratorService implements TaskGeneratorService {
             if (task.isComplete()) {
                 try {
                     LabTaskQA labTaskQA = lab.generate(task);
-
-                    SelectResult answer = tester.executeQuery(schema, task.getAnswer(), 5, false);
-                    SelectResult correct = tester.executeQuery(schema, labTaskQA.getCorrectAnswer(), 5, false);
+                    SelectResult answer = tester.executeQuery(schema, task.getAnswer(), labTaskQA.getColumnToSort(), 5, false);
+                    SelectResult correct = tester.executeQuery(schema, labTaskQA.getCorrectAnswer(), labTaskQA.getColumnToSort(), 5, false);
 
                     if (answer.getResultCode() != SelectResult.OK) {
                         task.setRating(0);

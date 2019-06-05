@@ -2,6 +2,7 @@ package com.tuneit.courses.db.lab1.task;
 
 import com.tuneit.courses.db.Task;
 import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Condition;
 import com.tuneit.courses.db.schema.ConditionTable;
 import com.tuneit.courses.db.schema.Table;
@@ -22,6 +23,7 @@ public class Lab1Task5 extends Lab1Task {
 
         ConditionTable conditionTable = getRandomElement(random, schema01.getConditionTables());
         Table table = schema01.findTableBySqlName(conditionTable.getSqlTableName());
+        Column columnToSort = getRandomElement(random, table.getColumns());
 
         Condition condition = getRandomElement(random, conditionTable.getConditions());
         String option = getRandomElement(random, condition.getOptionConditions());
@@ -46,7 +48,7 @@ public class Lab1Task5 extends Lab1Task {
                 .append(option)
                 .append("';");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), columnToSort.getColumnName());
     }
 
 }

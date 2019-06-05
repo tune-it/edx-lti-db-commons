@@ -62,7 +62,7 @@ public class Lab1Task9 extends Lab1Task {
 
         answer.append(" LIMIT 3;");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), null);
     }
 
 }

@@ -63,7 +63,7 @@ public class Lab1Task4 extends Lab1Task {
             answer.append(" DESC;");
         }
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), null);
     }
 
 }

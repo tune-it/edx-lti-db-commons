@@ -79,7 +79,7 @@ public class Lab2Task4 extends Lab2Task {
                 .append(option)
                 .append("';");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), column.getColumnName());
     }
 
 }

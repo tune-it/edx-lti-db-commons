@@ -75,7 +75,7 @@ public class Lab2Task1 extends Lab2Task {
                 .append(" like ")
                 .append(sqlSubstring);
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), columns.get(0).getColumnName());
     }
 
 }

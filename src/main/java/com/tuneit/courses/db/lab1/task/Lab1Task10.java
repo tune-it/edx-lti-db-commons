@@ -40,7 +40,7 @@ public class Lab1Task10 extends Lab1Task {
                 .append(diffDate.getSqlTableName())
                 .append(";");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), "1");
     }
 
 }

@@ -44,7 +44,7 @@ public class Lab1Task2 extends Lab1Task {
                 .append(table.getTableName())
                 .append(";");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), columns.get(0).getColumnName());
     }
 
 }

@@ -54,7 +54,9 @@ public class SchemaConnection {
         if (datasource == null) {
             datasource = setupDataSource();
         }
-        return datasource.getConnection();
+        Connection connection = datasource.getConnection();
+        connection.setAutoCommit(true);
+        return connection;
     }
 
     public String getUri() {

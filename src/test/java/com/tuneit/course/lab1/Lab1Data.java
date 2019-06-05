@@ -16,7 +16,7 @@ public class Lab1Data {
     }
 
     static String[] getAnswerTask2() {
-        String answerVariant0 = "select aircraft_code, seat_no from SEATS;";
+        String answerVariant0 = "select seat_no, aircraft_code from SEATS;";
         return new String[]{answerVariant0};
     }
 
@@ -47,36 +47,40 @@ public class Lab1Data {
     //
 
     static String[] getQueryTask5() {
-        String queryVariant0 = "Выведите содержимое всех полей из таблицы аэропортов, которые удовлетворяют следующему условию: название города должно быть равно \"Сыктывкар\".";
+        String queryVariant0 = "Выведите содержимое всех полей из таблицы аэропортов, которые удовлетворяют следующему условию: временная зона должна быть равна \"Asia/Yakutsk\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask5() {
-        String answerVariant0 = "select * from airports where city=\'Сыктывкар\';";
+        String answerVariant0 = "select * from airports where timezone='Asia/Yakutsk';";
         return new String[]{answerVariant0};
     }
 
     //
 
     static String[] getQueryTask6() {
-        String queryVariant0 = "Выведите содержимое всех полей из таблицы рейсов воздушного судна, которые удовлетворяют следующему условию: реальное время прибытия самолёта должно быть не задано.";
+        String queryVariant0 = "Выведите содержимое всех полей из таблицы рейсов воздушного судна, " +
+                "которые удовлетворяют следующему условию: реальное время вылета самолёта должно быть не задано.";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask6() {
-        String answerVariant0 = "select * from flights where actual_arrival is null;";
+        String answerVariant0 = "select * from flights where actual_departure is null;";
         return new String[]{answerVariant0};
     }
 
     //
 
     static String[] getQueryTask7() {
-        String queryVariant0 = "Выведите содержимое всех полей из таблицы проданных билетов, которые удовлетворяют следующему условию: имя пассажира должно быть равно \"IRINA SIDOROVA\" или код бронирования должен быть равен \"E7537C\".";
+        String queryVariant0 = "Выведите содержимое всех полей из таблицы проданных билетов, " +
+                "которые удовлетворяют следующему условию: номер билета должен быть больше, " +
+                "чем \"0005434825368\" или имя пассажира должно быть равно \"DENIS ALEKSANDROV\".";
         return new String[]{queryVariant0};
     }
 
     static String[] getAnswerTask7() {
-        String answerVariant0 = "select * from tickets where passenger_name='IRINA SIDOROVA' OR book_ref='E7537C'";
+        String answerVariant0 = "SELECT * FROM tickets WHERE ticket_no > '0005434825368' OR " +
+                "passenger_name = 'DENIS ALEKSANDROV';";
         return new String[]{answerVariant0};
     }
 

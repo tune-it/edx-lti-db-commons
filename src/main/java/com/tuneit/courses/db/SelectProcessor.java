@@ -27,8 +27,8 @@ public class SelectProcessor {
     static Pattern executiontime_pattern = Pattern.compile("<Execution-Time>(.*?)</Execution-Time>");
 
     public SelectResult executeQuery(Schema schema, String sql) {
-        return executeQuery(schema, sql, 100, false);
-    }
+        return executeQuery(schema, sql, null, 100, false);
+    } //TODO
 
     /**
      * @param schema        - schema01 name to generate queries
@@ -37,8 +37,8 @@ public class SelectProcessor {
      * @param hasHtmlOutput - save html output to new StringBuilder in SelectResult
      * @return SelectResult - object with encapsulated results
      */
-    public SelectResult executeQuery(final Schema schema, final String query,
-                                     final int maxRowLimit, final boolean hasHtmlOutput) {
+    public SelectResult executeQuery(Schema schema, String query, String columnToSort,
+                                     int maxRowLimit, boolean hasHtmlOutput) {
 
         SelectResult selectResult = new SelectResult();
         if (hasHtmlOutput) {
@@ -60,8 +60,8 @@ public class SelectProcessor {
                 throw new SQLException("ERROR: proactive canceling statement due to possible timeout exceeding",
                         Integer.toString(SelectResult.TIMEOUT), SelectResult.TIMEOUT);
             }
-
-            resultSet = statement.executeQuery(addOrder(query));
+            String queryWithOrder = addOrder(query, columnToSort);
+            resultSet = statement.executeQuery(queryWithOrder);
 
             if (hasHtmlOutput) {
                 setHtmlHeaderForSelectResult(selectResult, resultSet);
@@ -110,13 +110,13 @@ public class SelectProcessor {
         return selectResult;
     }
 
-    private String addOrder(String query) {
+    private String addOrder(String query, String columnToSort) {
         query = query.trim();
-        if (!query.toUpperCase().contains("ORDER BY")) {
+        if (columnToSort != null && !query.toUpperCase().contains("ORDER BY")) {
             if (query.charAt(query.length() - 1) == ';') {
-                return query.substring(0, query.length() - 1) + " ORDER BY 1";
+                return query.substring(0, query.length() - 1) + " ORDER BY " + columnToSort;
             } else {
-                return query + " ORDER BY 1";
+                return query + " ORDER BY " + columnToSort;
             }
         } else {
             return query;

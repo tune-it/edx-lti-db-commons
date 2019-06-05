@@ -75,7 +75,7 @@ public class Lab2Task5 extends Lab2Task {
                 .append(option)
                 .append("';");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), "1");
     }
 
 }

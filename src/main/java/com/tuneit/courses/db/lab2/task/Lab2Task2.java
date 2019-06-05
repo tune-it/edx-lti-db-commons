@@ -60,7 +60,8 @@ public class Lab2Task2 extends Lab2Task {
                 .append(" from ")
                 .append(table.getTableName());
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), columns.get(0).getColumnName());
+
     }
 
 }

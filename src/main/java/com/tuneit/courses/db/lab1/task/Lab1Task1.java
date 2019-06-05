@@ -2,6 +2,7 @@ package com.tuneit.courses.db.lab1.task;
 
 import com.tuneit.courses.db.Task;
 import com.tuneit.courses.db.LabTaskQA;
+import com.tuneit.courses.db.schema.Column;
 import com.tuneit.courses.db.schema.Table;
 import com.tuneit.courses.db.lab1.Lab1Task;
 import com.tuneit.courses.db.lab1.schema.Schema01;
@@ -15,6 +16,7 @@ public class Lab1Task1 extends Lab1Task {
         answer = new StringBuilder();
 
         Table table = getRandomElement(task.getRandom(), schema01.getTables());
+        Column columnToSort = getRandomElement(task.getRandom(), table.getColumns());
 
         query.append("Выведите содержимое всех полей таблицы ")
                 .append(table.getTableName())
@@ -24,7 +26,7 @@ public class Lab1Task1 extends Lab1Task {
                 .append(table.getTableName())
                 .append(";");
 
-        return new LabTaskQA(task.getId(), query.toString(), answer.toString());
+        return new LabTaskQA(task.getId(), query.toString(), answer.toString(), columnToSort.getColumnName());
     }
 
 }
