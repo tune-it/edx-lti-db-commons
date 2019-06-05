@@ -38,14 +38,4 @@ public class LabTaskQA {
         this.columnToSort = columnToSort;
     }
 
-    public LabTaskQA(String id, String question, String correctAnswer) { //TODO deleteme
-        if (id == null || question == null || correctAnswer == null) {
-            throw new IllegalArgumentException("Could not instantiate LabTaskQA with null values in constructor");
-        }
-        this.id = id;
-        this.question = question;
-        this.correctAnswer = correctAnswer;
-    }
-
-
 }

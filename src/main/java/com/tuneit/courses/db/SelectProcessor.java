@@ -26,10 +26,6 @@ public class SelectProcessor {
     static Pattern rowcount_pattern = Pattern.compile("<Actual-Rows>(.*?)</Actual-Rows>");
     static Pattern executiontime_pattern = Pattern.compile("<Execution-Time>(.*?)</Execution-Time>");
 
-    public SelectResult executeQuery(Schema schema, String sql) {
-        return executeQuery(schema, sql, null, 100, false);
-    } //TODO
-
     /**
      * @param schema        - schema01 name to generate queries
      * @param query         - sql to execute
